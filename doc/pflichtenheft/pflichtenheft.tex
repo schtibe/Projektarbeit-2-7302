@@ -62,17 +62,20 @@
 
 \section{Disposition}
 
-\subsection{Problemdescription}
+\subsection{Problem description}
 %We have to implement an event driven traffic simulation.
 Our task is to implement an event driven traffic simulation based upon a driver model, an environmental model and a vehicle model.
 %Im Rahmen des Projektfachs der Berner Fachhochschule ist unsere Aufgabe, eine
 %Event-Gesteuerten Verkehrssimulation basierend auf einem Fahrermodell, Strassenmodell
 %und Fahrzeugmodell zu implementieren.
 
-\subsection{Target}
-We have to provide models and simulate street traffic. The simulation is divided in three models
+%\subsection{Target}
+We have to provide models and simulate street traffic. 
+The simulation is divided in three models:
+
 %In unserem Projekt geht es um Modellierung und Simulation von Strassenverkehr.
 %Die Simulation ist in drei Modelle aufgeteilt
+
 \begin{enumerate}
  \item Environmental Model%Umgebungsmodell
  \item Driver Model%Fahrermodell
@@ -85,20 +88,26 @@ The environmental and vehicle models have been mostly implemented already in our
 \includegraphics[width=5.5cm]{skizze.png}
 \end{center}
 
-\subsubsection{Objectives}
-\begin{enumerate}
- \item Driver Model
-\begin{description}
- \item Create a parametrisised driver model to be able to implement different driver characters. We are trying to achieve a high complexity in this field.
+\subsection{Objectives}
+\subsubsection{Driver model}
+ Create a parametrisised driver model to be able to implement different 
+ driver characters. These characters will be able to drive around autonomously 
+ and make decisions based on the circumstances that they see and will be 
+ influenced by parameters such as ``riskyness'' and temperament or drug intake.
+ We are trying to achieve a high complexity in this field.
+
+
+
 %Realisierung eines parametrisierbaren Fahrermodells (um den %
 %unterschiedlichen Fahrertypen gerecht zu werden) bestehend aus einer %
 %Vielzahl von Basisfahrmustern, hohe komplexität angestrebt}
-\item Display the actual state of the traffic situation.%Graphische Darstellung der Verkehrssituation
-\end{description}
-\end{enumerate}
+
+\subsubsection{Display}
+
+Display the actual state of the traffic situation. %Graphische Darstellung der Verkehrssituation
 \newpage
 
-\subsubsection{Optional Objectives}
+\subsection{Optional Objectives}
 \begin{enumerate}
  \item Changing the behaviour of the drivers by showing them road signs. %Weitere Standardsituationen wie kompliziertere Kreuzungen, Kreisel oder Ampeln
  \item Obstruction of the view by buildings etc. %Physikalisch komplexere Modelle (3D, Reibung, Kurvenfahrt)
@@ -109,12 +118,15 @@ The environmental and vehicle models have been mostly implemented already in our
   %\caption{Beispiel eines Kreisels}
 %\end{center}
 
-\subsubsection{Learning Goals}
-Creation of an event driven Simulation, applying basic principles of ai in the driver model.
+\subsection{Learning Goals}
+Creation of an event driven Simulation, applying basic principles of AI. in the driver model.
 %Aufbau einer Event-Gesteuerten Simulation. Verständnis der zugrundeliegenden
 %Algorithmen.
 
-\subsubsection{Used Software}
+
+\section{Organisation}
+
+\subsection{Used Software}
 \begin{tabular}{ll}
 Programming Language & Java 6 \\
 & \\
@@ -122,11 +134,14 @@ IDE & Eclipse \\
 & \\
 Documentation & \LaTeX \\
 & \\
-Versioncontrol & git \\
+Version control & git \\
 \end{tabular}
 
-\section{Organisation}
-\subsection{Versioncontrol}
+\subsection{Version control}
+The version control is done with the free Tool Git\footnote[1]{http://git-scm.com}.
+An online repository is hosted on github: \newline
+http://github.com/schtibe/Projektarbeit-2-7302
+
 %Die Versionskontrolle erfolgt über das freie Tool Subversion\footnote[1]{http://subversion.tigris.org/}.\newline 
 %Das Subversion Repository befindet sich unter \newline
 %https://svn.bfh.ch/repos/projects/projektarbeit7301r.\newline\newline
@@ -187,7 +202,7 @@ The final results will be delivered in a zipped file.
  \item Set up instructions
 \end{enumerate}
 
-All documents and all inline documentation in code will be written in english.
+All documents and all in-line documentation in code will be written in English.
 
 %Alle Dokumente werden in deutscher Sprache verfasst. Die Dokumentation
 %innerhalb des Sourcecodes erfolgt in Englischer Sprache.\footnote[2]{blah} \newline\newline
