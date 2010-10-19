@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty>
+	
+	<useStyles filename="nifty-default-styles.xml"/>
+	<useControls filename="nifty-default-controls.xml"/>
+
+  <!-- one simple screen for this example  -->
+  <screen id="start" controller="gui.GameStateResolution">
+
+    <!-- this layer shows three boxes that shake when triggered from java -->
+    <layer id="boxes" childLayout="center">
+    		<effect>
+			<onStartScreen name="move" timeType="exp" factor="3.5" direction="top" mode="in" length="500" inherit="true"/>
+			<onEndScreen name="move" timeType="exp" factor="3.5" direction="bottom" mode="out" length="500" inherit="true"/>
+		</effect>
+      <panel style="nifty-panel" height="90%" width="90%"  align="center" valign="center" childLayout="vertical">
+
+		
+		<label style="nifty-label" id="text" text="resolution" />
+		
+         <control id="dropDownControlResolution" name="dropDownControl" align="center" width="40%" label="change map">
+         	
+         </control>
+         
+         <panel align="center" valign="center" childLayout="horizontal" width="40%">
+	         <panel align="center" valign="center" childLayout="horizontal">
+	     		<label style="nifty-label" id="text" text="fullscreen  "  align="left" />
+	         	<control id="checkFullScreen" name="checkbox" align="right" />
+	         </panel>
+         </panel>
+         
+         
+         <panel align="center" valign="center" childLayout="horizontal" width="40%">
+	         <panel align="center" valign="center" childLayout="horizontal">
+	     		<control id="back" name="button" label="back" align="center" width="50%" >
+                	<interact onClick="exit()" />
+         		</control>
+	     		
+	     		<control id="apply" name="button" label="apply" align="center" width="50%" >
+                	<interact onClick="applyResolution()" />
+         		</control>
+
+	         </panel>
+         </panel>
+
+   		
+      </panel>
+    </layer>
+
+  </screen>
+</nifty>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<world >
+	<road id="1" startX="0" startY="7">
+		<leftlanes>
+		
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="1" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="50" endY="16" />
+			<roadsegment order="2" startX="60" startY="40" endX="60" endY="55" />
+		</roadsegments>
+	</road>
+	<road id="2" startX="50" startY="60">
+		<leftlanes>
+		</leftlanes>
+		<rightlanes>
+			<lane id="1" width="1" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endY="0" endX="-30" />
+		</roadsegments>
+	</road>
+	<junction id="1" type="CrossRoad">
+		<roads>
+			<road id="1" />
+			<road id="2" />
+		</roads>
+	</junction>
+</world>

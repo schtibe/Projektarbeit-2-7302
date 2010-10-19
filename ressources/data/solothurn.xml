@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<world 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="file:ressources/data/worldschema.xsd" scale="1.0">
+	<!--<world 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:noNamespaceSchemaLocation="file:worldschema.xsd" scale="1.0">-->
+	<road id="1" startX="690" startY="180" name="Werkhofstrasse">
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="-90" endY="-130"/>
+ 			<roadsegment order="2" startX="-170" startY="-150" endX="-320" endY="-70" />
+		</roadsegments>
+	</road> 
+	<road id="2" startX="330" startY="130" name="Werkhofstrasse">
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="-130" endY="70" />
+		</roadsegments>
+	</road>
+	<road id="3" startX="160" startY="220" name="Werkhofstrasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="-90" endY="50" />
+		</roadsegments>
+	</road>
+	<road id="4" startX="60" startY="300" name="Wengistrasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="20" endY="120" />
+		</roadsegments>
+	</road>
+	<road id="5" startX="100" startY="450" name="Wengistrasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="50" endY="60" />
+		</roadsegments>
+	</road>
+	<road id="6" startX="190" startY="540" name="Wengistrasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="30" endY="30" />
+		</roadsegments>
+	</road>
+	<road id="7" startX="240" startY="570" name="Poststrasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="-10" endY="-70" />
+		</roadsegments>
+	</road>
+	<road id="8" startX="220" startY="460" name="Poststrasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="-10" endY="-90" />
+		</roadsegments>
+	</road>
+	<road id="9" startX="190" startY="350" name="Straesschen" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="-10" endY="0" />
+		</roadsegments>
+	</road>
+	<road id="10" startX="140" startY="340" name="Straesschen" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="-70" endY="-50" />
+		</roadsegments>
+	</road>
+	<road id="11" startX="150" startY="370" name="Straesschen" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="-50" endY="60" />
+		</roadsegments>
+	</road>
+	<road id="12" startX="190" startY="230" name="Straesschen" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="20" endY="30" />
+		</roadsegments>
+	</road>
+	<road id="13" startX="210" startY="290" name="Straesschen" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="0" endY="40" />
+		</roadsegments>
+	</road>
+	<road id="14" startX="240" startY="270" name="Straesschen" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="130" endY="-50" />
+		</roadsegments>
+	</road>
+	<road id="15" startX="360" startY="140" name="Straesschen" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="10" endY="50" />
+		</roadsegments>
+	</road>
+	<road id="16" startX="210" startY="490" name="Straesschen" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="-20" endY="20" />
+		</roadsegments>
+	</road>
+	<road id="17" startX="260" startY="590" name="Straesschen" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="10" endY="0" />
+		</roadsegments>
+	</road>
+	<road id="18" startX="280" startY="540" name="Stalden" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="10" endY="30" />
+		</roadsegments>
+	</road>
+	<road id="19" startX="240" startY="490" name="Stalden" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="20" endY="10" />
+		</roadsegments>
+	</road>
+	<road id="20" startX="290" startY="500" name="Stalden" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="50" endY="-60" />
+		</roadsegments>
+	</road>
+	<road id="21" startX="340" startY="410" name="Stalden" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="-20" endY="-10" />
+			<roadsegment order="2" startX="-20" startY="-30" endX="10" endY="-100" />
+		</roadsegments>
+	</road>
+	<road id="23" startX="230" startY="350" name="Stalden" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="10" endY="0" />
+			<roadsegment order="2" startX="20" startY="-10" endX="20" endY="-20" />
+			<roadsegment order="3" startX="30" startY="-40" endX="90" endY="-50" />
+		</roadsegments>
+	</road>
+	<road id="24" startX="360" startY="280" name="Barfuessergasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="40" endY="-20" />
+		</roadsegments>
+	</road>
+	<road id="25" startX="430" startY="270" name="Stalden" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="50" endY="60" />
+		</roadsegments>
+	</road>
+	<road id="26" startX="400" startY="230" name="Stalden" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="-10" endY="-10" />
+		</roadsegments>
+	</road>
+	<road id="27" startX="370" startY="420" name="Hauptgasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="110" endY="-50" />
+		</roadsegments>
+	</road>
+	<road id="28" startX="370" startY="440" name="Goldgasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="40" endY="50" />
+		</roadsegments>
+	</road>
+	<road id="29" startX="310" startY="580" name="Landhausquai" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="100" endY="-50" />
+		</roadsegments>
+	</road>
+	<road id="30" startX="440" startY="510" name="Ritterquai" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="80" endY="-40" />
+		</roadsegments>
+	</road>
+	<road id="31" startX="510" startY="370" name="Kronengasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="20" endY="80" />
+		</roadsegments>
+	</road>
+	<road id="32" startX="560" startY="460" name="Ritterquai" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="50" endY="-10" />
+		</roadsegments>
+	</road>
+	<road id="33" startX="630" startY="440" name="Straesschen" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="0" endY="-10" />
+		</roadsegments>
+	</road>
+	<road id="34" startX="650" startY="410" name="regioenergie" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="70" endY="-20" />
+		</roadsegments>
+	</road>
+	<road id="35" startX="650" startY="440" name="Ritterquai" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="90" endY="-10" />
+			<roadsegment order="2" startX="180" startY="-50" endX="170" endY="-90" />
+			<roadsegment order="3" startX="130" startY="-110" endX="100" endY="-100" />
+		</roadsegments>
+	</road>
+	<road id="36" startX="740" startY="360" name="Roetistrasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="0" endY="10" />
+		</roadsegments>
+	</road>
+	<road id="37" startX="710" startY="220" name="Roetistrasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="20" endY="100" />
+		</roadsegments>
+	</road>
+	<road id="38" startX="600" startY="270" name="Hauptgasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="90" endY="-60" />
+		</roadsegments>
+	</road>
+	<road id="39" startX="590" startY="310" name="Nictumgasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="30" endY="80" />
+		</roadsegments>
+	</road>
+	<road id="40" startX="520" startY="340" name="Straesschen" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="50" endY="-40" />
+		</roadsegments>
+	</road>
+	<road id="41" startX="740" startY="410" name="Roetibruecke" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="40" endY="190" />
+		</roadsegments>
+	</road>
+	<road id="42" startX="550" startY="490" name="Kreuzackerbruecke" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="80" endY="140" />
+		</roadsegments>
+	</road>
+	<road id="43" startX="300" startY="600" name="Wengibruecke" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="50" endY="130" />
+		</roadsegments>
+	</road>
+	<road id="44" startX="380" startY="730" name="Strasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="230" endY="-70" />
+		</roadsegments>
+	</road>
+	<road id="46" startX="780" startY="640" name="Rötistrasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="10" endY="90" />
+			<roadsegment order="2" startX="0" startY="120" endX="-10" endY="120" />
+		</roadsegments>
+	</road>
+	<road id="49" startX="650" startY="660" name="Strasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="80" endY="70" />
+		</roadsegments>
+	</road>
+	<road id="50" startX="640" startY="670" name="Strasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="10" endY="40" />
+		</roadsegments>
+	</road>
+	<road id="51" startX="670" startY="770" name="Dornacherstrasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="60" endY="-20" />
+		</roadsegments>
+	</road>
+	<road id="52" startX="370" startY="760" name="Dornacherstrasse" >
+		<leftlanes>
+			<lane id="1" width="3" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="3" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="10" endY="20" />
+			<roadsegment order="1" startX="60" startY="50" endX="170" endY="20" />
+		</roadsegments>
+	</road>
+	<junction type="CrossRoad" id="1">
+		<roads>
+			<road id="1" />
+			<road id="2" />
+			<road id="15" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="2">
+		<roads>
+			<road id="2" />
+			<road id="3" />
+			<road id="12" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="3">
+		<roads>
+			<road id="3" />
+			<road id="4" />
+			<road id="10"/>
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="4">
+		<roads>
+			<road id="4" />
+			<road id="5" />
+			<road id="11"/>
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="5">
+		<roads>
+			<road id="5" />
+			<road id="6" />
+			<road id="16" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="6">
+		<roads>
+			<road id="6" />
+			<road id="7" />
+			<road id="17" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="7">
+		<roads>
+			<road id="7" />
+			<road id="8" />
+			<road id="16"/>
+			<road id="19"/>
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="8">
+		<roads>
+			<road id="8" />
+			<road id="9" />
+			<road id="13" />
+			<road id="23" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="9">
+		<roads>
+			<road id="9" />
+			<road id="10" />
+			<road id="11" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="10">
+		<roads>
+			<road id="12" />
+			<road id="13" />
+			<road id="14" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id ="11">
+		<roads>
+			<road id="17" />
+			<road id="18" />
+			<road id="29" />
+			<road id="43" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id ="12">
+		<roads>
+			<road id="18" />
+			<road id="20" />
+			<road id="19" />
+		</roads>
+		</junction>
+	<junction type="CrossRoad" id ="13">
+		<roads>
+			<road id="20" />
+			<road id="21" />
+			<road id="27" />
+			<road id="28" />
+		</roads>
+	</junction>
+	<!--
+	<junction type="CrossRoad" id ="14">
+		<roads>
+			<road id="21" />
+			<road id="22" />
+		</roads>
+	</junction>
+	-->
+	<junction type="CrossRoad" id ="15">
+		<roads>
+			<road id="21" />
+			<road id="23" />
+			<road id="24" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id ="16">
+		<roads>
+			<road id="24" />
+			<road id="26" />
+			<road id="25" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id ="17">
+		<roads>
+			<road id="14" />
+			<road id="15" />
+			<road id="26" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id ="18">
+		<roads>
+			<road id="27" />
+			<road id="31" />
+			<road id="40" />
+			<road id="25" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id ="19">
+		<roads>
+			<road id="30" />
+			<road id="31" />
+			<road id="32" />
+			<road id="42" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id ="20">
+		<roads>
+			<road id="29" />
+			<road id="30" />
+			<road id="28" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id ="21">
+		<roads>
+			<road id="32" />
+			<road id="33" />
+			<road id="35" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id ="22">
+		<roads>
+			<road id="33" />
+			<road id="34" />
+			<road id="39" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id ="23">
+		<roads>
+			<road id="38" />
+			<road id="39" />
+			<road id="40" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id ="24">
+		<roads>
+			<road id="1" />
+			<road id="37" />
+			<road id="38" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id ="25">
+		<roads>
+			<road id="37" />
+			<road id="35" />
+			<road id="36" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id ="26">
+		<roads>
+			<road id="34" />
+			<road id="36" />
+			<road id="41" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id ="27">
+		<roads>
+			<road id="41" />
+			<road id="46" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id ="28">
+		<roads>
+			<road id="42" />
+			<road id="50" />
+			<road id="49" />
+			<road id="44" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id ="29">
+		<roads>
+			<road id="43" />
+			<road id="44" />
+			<road id="52" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id ="30">
+		<roads>
+			<road id="52" />
+			<road id="50" />
+			<road id="51" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id ="31">
+		<roads>
+			<road id="46" />
+			<road id="51" />
+			<road id="49" />
+		</roads>
+	</junction>
+</world>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty>
+
+	<useStyles filename="nifty-default-styles.xml" />
+	<useControls filename="nifty-default-controls.xml" />
+
+	<screen id="mainMenu" controller="gui.GameStateMainMenu">
+
+		<layer id="mainLayer" childLayout="center">
+
+
+			<panel id="mainPanel" style="nifty-panel" height="90%" width="90%" align="center" valign="center" childLayout="vertical">
+				<effect oneShot="true">
+					<!-- <onCustom name="hide" targetElement="mainLayer" inherit="true" /> -->
+					<onCustom name="move" mode="out" direction="bottom" length="600" startDelay="0" inherit="true" />
+				</effect>
+				
+				<label style="nifty-label" id="text" text="traffic simulation" />
+
+				<panel height="100%" width="100%" align="center" valign="center"
+					childLayout="center">
+
+					<panel height="40%" width="60%" align="center" valign="center"
+						childLayout="vertical">
+
+						<control id="startButton" name="button" label="start"
+							align="center" width="100%">
+							<interact onClick="startSimulation()" />
+						</control>
+
+						<control id="changeMapButton" name="button" label="change map"
+							align="center" width="100%">
+							<interact onClick="startChangeMap()" />
+						</control>
+						<!--
+						<control id="resolutionButton" name="button" label="change resolution"
+							align="center" width="100%">
+							<interact onClick="startChangeResolution()" />
+						</control>
+ 						
+						<control id="infoButton" name="button" label="about"
+							align="center" width="100%">
+							<interact onClick="startChangeResolution()" />
+						</control>
+						-->
+						<control id="exitButton" name="button" label="exit" align="center"
+							width="100%">
+							<interact onClick="quit()" />
+						</control>
+
+					</panel>
+
+				</panel>
+
+			</panel>
+		</layer>
+		<!-- ****************************** -->
+		<!-- Error Box -->
+		<!-- ****************************** -->
+		<layer id="errorLayer" height="100%" width="100%" childLayout="center" />
+
+	</screen>
+</nifty>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty>
+	<useStyles filename="nifty-default-styles.xml" />
+	<useControls filename="nifty-default-controls.xml" />
+
+	<screen id="simMenu" controller="gui.GameStateSimRun">
+		<!-- ****************************** -->
+		<!-- Menu -->
+		<!-- ****************************** -->
+		<layer id="mainMenu" childLayout="vertical">
+
+			<effect>
+				<onStartScreen name="move" timeType="exp" factor="3.5"
+					direction="top" mode="in" length="500" inherit="true" />
+				<onEndScreen name="move" timeType="exp" factor="3.5"
+					direction="bottom" mode="out" length="500" inherit="true" />
+			</effect>
+
+			<panel style="nifty-panel" height="100%" width="150px" align="right"
+				valign="top" childLayout="horizontal">
+				<panel align="right" valign="top" height="100%" width="90%"
+					childLayout="vertical">
+					>
+					<panel height="10px" />
+
+
+
+					<panel height="90%" id="topPanel" width="80%" align="center"
+						valign="top" childLayout="vertical">
+						<label style="nifty-label" id="text" text="options" />
+
+						<panel id="optionPanel" width="100%" align="center" valign="top"
+							childLayout="horizontal">
+
+							<control id="showgrid" name="button" label="grid" width="50%"
+								height="20px">
+								<interact onClick="showGrid()" />
+							</control>
+
+							<control id="showFPS" name="button" label="fps" width="50%"
+								height="20px">
+								<interact onClick="showFPS()" />
+							</control>
+						</panel>
+
+						<label style="nifty-label" id="text" text="vehicles" />
+
+						<control id="slider" name="horizontalScrollbar" label="fps"
+							width="100%" height="20px">
+							<control name="scrollposition"></control>
+						</control>
+
+						<control id="back" name="button" label="add" align="center"
+							valigne="center" width="100%" height="20px" value="0.5">
+							<interact onClick="addVehicle" />
+						</control>
+
+
+
+					</panel>
+
+
+
+					<panel id="bottomPanel" align="center" valign="bottom"
+						childLayout="vertical">
+
+						<control id="back" name="button" label="exit" align="center"
+							valigne="center" width="90%" height="20px" value="0.5">
+							<interact onClick="exit()" />
+						</control>
+
+					</panel>
+				</panel>
+			</panel>
+
+		</layer>
+
+		<!-- ****************************** -->
+		<!-- Error Box -->
+		<!-- ****************************** -->
+		<!--
+		<layer id="errorLayer" height="100%" width="100%" childLayout="center">
+
+			<effect overlay="true">
+				<onStartScreen name="hide" targetElement="errorPanel" />
+				<onCustom name="show" targetElement="error" />
+			</effect>
+
+			<panel style="nifty-panel-red" id="errorPanel" height="150px"
+				width="300px" align="center" valign="center" childLayout="vertical">
+				<effect overlay="true">
+					<onShow name="hide" targetElement="mainMenuPanel" />
+				</effect>
+
+				<label style="nifty-label" text="Error" />
+
+				<control id="errorButton" name="button" label="ok" align="center"
+					width="100px">
+					<interact onClick="errorClick()" />
+				</control>
+
+			</panel>
+		</layer>
+		-->
+
+	</screen>
+</nifty>

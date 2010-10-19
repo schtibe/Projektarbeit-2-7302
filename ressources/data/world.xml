@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<world xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="file:ressources/data/worldschema.xsd" scale="1.0">
+<!--<world xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="file:worldschema.xsd" scale="1.0">
+	<road id="1" startX="500" startY="500">
+		<leftlanes>
+			<lane id="1" width="20"/>
+		</leftlanes>
+		<rightlanes>
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="0" endY="-300"/>
+			<roadsegment order="2" startX="-100" startY="-400" endX="-400" endY="-400"/>
+		</roadsegments>
+	</road>
+	<road id="2" startX="0" startY="200">
+		<leftlanes>
+			<lane id="1" width="20"/>   
+		</leftlanes>
+		<rightlanes>
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="0" endY="300"/>
+		</roadsegments>
+	</road>
+	<road id="3" startX="500" startY="700">
+		<leftlanes>
+			<lane id="1" width="20"/>
+		</leftlanes>
+		<rightlanes>
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="0" endY="300" />
+			<roadsegment order="2" startX="100" startY="400" endX="400" endY="400"/>
+		</roadsegments>
+	</road>
+	<road id="4" startX="1000" startY="1000">
+		<leftlanes>
+			<lane id="1" width="20"/>
+		</leftlanes>
+		<rightlanes>
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="0" endY="-300" />
+			<roadsegment order="2" startX="-100" startY="-400" endX="-400" endY="-400"/>
+		</roadsegments>
+	</road>
+	<junction type="CrossRoad" id="1">
+		<roads>
+			<road id="1" />
+			<road id="2" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="2">
+		<roads>
+			<road id="3" />
+			<road id="4" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="3">
+		<roads>
+			<road id="2" />
+			<road id="4" />
+			<road id="1" />
+			<road id="3" />
+		</roads>
+	</junction>-->
+
+	<road id="1" startX="500" startY="0">
+		<leftlanes>
+			<lane id="1" width="5"/>
+		</leftlanes>
+		<rightlanes>
+			<lane id="1" width="5" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="-400" endY="0" /> 	
+		</roadsegments>
+	</road>
+	<road id="2" startX="0" startY="100">
+		<leftlanes>
+			<lane id="1" width="5"/>
+		</leftlanes>
+		<rightlanes>
+			<lane id="1" width="5" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="2" startX="0" startY="0" endX="0" endY="400" />
+		</roadsegments>
+	</road>
+	<road id="3" startX="100" startY="600">
+		<leftlanes>
+			<lane id="1" width="5"/>
+		</leftlanes>
+		<rightlanes>
+			<lane id="1" width="5" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="2" startX="0" startY="0" endX="400" endY="0" />
+		</roadsegments>
+	</road>	
+	<road id="4" startX="600" startY="400" >
+		<leftlanes>
+			<lane id="1" width="5"/>
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="5" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="0" endY="-300" />
+		</roadsegments>
+	</road>
+	<road id="5" startX="700" startY="550" >
+		<leftlanes>
+			<lane id="1" width="5"/>
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="5" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="400" endY="-250" />
+			<roadsegment order="2" startX="400" startY="-350" endX="0" endY="-500" />
+		</roadsegments>
+	</road>
+	<road id="6" startX="100" startY="700" >
+		<leftlanes>
+			<lane id="1" width="5" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="5" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="150" endY="150"/>
+			<roadsegment order="2" startX="250" startY="150" endX="400" endY="0"/>
+		</roadsegments>
+	</road>
+	<junction type="CrossRoad" id="1">
+		<roads>
+			<road id="1" />
+			<road id="2" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="2">
+		<roads>
+			<road id="2" />
+			<road id="3" />
+			<road id="6" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="3">
+		<roads>
+			<road id="3" />
+			<road id="4" />
+			<road id="5" />
+			<road id="6" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="4">
+		<roads>
+			<road id="4" />
+			<road id="1" />
+			<road id="5" />
+		</roads>
+	</junction>
+</world>

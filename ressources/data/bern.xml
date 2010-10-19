@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<world 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="file:../ressources/data/worldschema.xsd">
+	<road id="1" startX="1325" startY="400" name="Brunngasse">
+		<leftlanes>
+			<lane id="1" width="25" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="25" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="0" endY="-200" /> 
+			<roadsegment order="2" startX="-325" startY="-300" endX="-1000" endY="-300" />
+			<roadsegment order="3" startX="-1200" startY="-200" endX="-1250" endY="0" />
+		</roadsegments>
+	</road> 
+	<road id="2" startX="50" startY="450" name="Hotelgasse">
+		<leftlanes>
+			<lane id="1" width="25" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="25" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="-50" endY="300" />
+		</roadsegments>
+	</road>
+	<road id="3" startX="0" startY="800" name="Hotelgasse" >
+		<leftlanes>
+			<lane id="1" width="25" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="25" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="0" endY="400" />
+		</roadsegments>
+	</road>
+	<road id="4" startX="0" startY="1250" name="Hotelgasse" >
+		<leftlanes>
+			<lane id="1" width="25" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="25" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="0" endY="200" />
+		</roadsegments>
+	</road>
+	<road id="4" startX="125" startY="425" name="Rathausgasse" >
+		<leftlanes>
+			<lane id="1" width="25" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="25" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="1150" endY="0" />
+		</roadsegments>
+	</road>
+	<road id="5" startX="1375" startY="450" name="Rathausgasse" >
+		<leftlanes>
+			<lane id="1" width="25" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="25" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="950" endY="0" />
+		</roadsegments>
+	</road>
+	<road id="6" startX="2400" startY="400" name="Postgasse" >
+		<leftlanes>
+			<lane id="1" width="25" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="25" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="1875" endY="-400" />
+		</roadsegments>
+	</road>
+	<road id="7" startX="4325" startY="100" name="Postgasshalde" >
+		<leftlanes>
+			<lane id="1" width="25" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="25" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="75" endY="150" />
+		</roadsegments>
+	</road>
+	<road id="8" startX="4375" startY="275" name="Gerechtigkeitsgasse" >
+		<leftlanes>
+			<lane id="1" width="25" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="25" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="-1900" endY="550" />
+		</roadsegments>
+	</road>
+	<road id="9" startX="4450" startY="350" name="Junkerngasse" >
+		<leftlanes>
+			<lane id="1" width="25" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="25" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="50" endY="100" />
+			<roadsegment order="1" startX="-200" startY="300" endX="-2000" endY="800" />
+		</roadsegments>
+	</road>
+	<road id="10" startX="2375" startY="500" name="Gässchen" >
+		<leftlanes>
+			<lane id="1" width="25" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="25" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="50" endY="275" />
+		</roadsegments>
+	</road>
+	<road id="11" startX="2375" startY="850" name="Kramgasse" >
+		<leftlanes>
+			<lane id="1" width="25" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="25" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="-2300" endY="-75" />
+		</roadsegments>
+	</road>
+	<road id="12" startX="2425" startY="900" name="Gässchen" >
+		<leftlanes>
+			<lane id="1" width="25" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="25" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="0" endY="225" />
+		</roadsegments>
+	</road>
+	<road id="13" startX="2400" startY="1150" name="Münstergasse" >
+		<leftlanes>
+			<lane id="1" width="25" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="25" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="-2350" endY="75" />
+		</roadsegments>
+	</road>
+	<junction type="CrossRoad" id="1">
+		<roads>
+			<road id="1" />
+			<road id="2" />
+			<road id="4" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="2">
+		<roads>
+			<road id="2" />
+			<road id="3" />
+			<road id="11" />
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="3">
+		<roads>
+			<road id="1"/>
+			<road id="5"/>
+			<road id="4"/>
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="4">
+		<roads>
+			<road id="5"/>
+			<road id="6"/>
+			<road id="10"/>
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="5">
+		<roads>
+			<road id="7"/>
+			<road id="8"/>
+			<road id="9"/>
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="6">
+		<roads>
+			<road id="6"/>
+			<road id="7"/>
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="7">
+		<roads>
+			<road id="8"/>
+			<road id="10"/>
+			<road id="11"/>
+			<road id="12"/>
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="8">
+		<roads>
+			<road id="9"/>
+			<road id="12"/>
+			<road id="13"/>
+		</roads>
+	</junction>
+	<junction type="CrossRoad" id="9">
+		<roads>
+			<road id="3"/>
+			<road id="13"/>
+		</roads>
+	</junction>
+</world>

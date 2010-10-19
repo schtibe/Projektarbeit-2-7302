@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty>
+	
+	<useStyles filename="nifty-default-styles.xml"/>
+	<useControls filename="nifty-default-controls.xml"/>
+
+  <screen id="aboutMenu" controller="gui.GameStateMainMenu">
+
+    <layer id="boxes" childLayout="center">
+	  <!--  <effect>
+	  	<onStartScreen name="move" timeType="exp" factor="3.5" direction="top" mode="in" length="500" inherit="true"/>
+	  	<onEndScreen name="move" timeType="exp" factor="3.5" direction="bottom" mode="out" length="500" inherit="true"/>
+	  </effect>-->
+	 
+      <panel style="nifty-panel" height="90%" width="90%"  align="center" valign="center" childLayout="vertical">
+		<label style="nifty-label" id="text" text="traffic simulation" />
+		 
+		 <panel height="100%" width="100%" align="center" valign="center" childLayout="center">	
+			
+			<panel height="40%" width="60%" align="center" valign="center" childLayout="vertical">		
+				
+				<control id="startButton" name="button" label="start" align="center" width="100%">
+					<interact onClick="startSimulation()" />
+				</control>
+				
+				<control id="changeMapButton" name="button" label="change map"  align="center" width="100%">
+		         	<interact onClick="startChangeMap()" />
+		         </control>
+		         
+		         <control id="resolutionButton" name="button" label="change resolution" align="center" width="100%">
+		         	<interact onClick="startChangeResolution()" />
+		         </control>
+		         
+		         <control id="infoButton" name="button" label="about" align="center" width="100%">
+		         	<interact onClick="startChangeResolution()" />
+		         </control>
+		         
+		         <control id="exitButton" name="button" label="exit" align="center" width="100%">
+		                <interact onClick="quit()" />
+		         </control>	
+		
+			</panel>
+
+   		</panel>
+   		
+      </panel>
+    </layer>
+
+  </screen>
+</nifty>

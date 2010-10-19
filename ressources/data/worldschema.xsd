@@ -1,0 +1,127 @@
+<?xml version="1.0" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" >
+	<xs:element name="world" type="world"/>
+		
+	<!-- Definition of type world -->
+	
+	<xs:complexType name="world">
+		<xs:sequence>
+			<xs:element name="road" maxOccurs="unbounded" minOccurs="1" type="road" />
+			<xs:element name="junction" maxOccurs="unbounded" minOccurs="1" type="junction"/>
+		</xs:sequence>
+		<xs:attribute name="scale" type="xs:float"></xs:attribute>
+	</xs:complexType>
+	
+	<!-- Definition of type road -->
+	
+	<xs:complexType name="road">
+		<xs:sequence>
+			<xs:element name="leftlanes" maxOccurs="1" minOccurs="1" type="lane_collection"/>
+			<xs:element name="rightlanes" maxOccurs="1" minOccurs="1" type="lane_collection"/>
+			<xs:element name="roadsegments" maxOccurs="1" minOccurs="1" type="segment_collection"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:integer" use="required" />
+		<xs:attribute name="name" type="xs:string" use="optional" />
+		<xs:attribute name="startX" type="xs:integer" use="required" />
+		<xs:attribute name="startY" type="xs:integer" use="required" />
+	</xs:complexType>
+	
+	<!-- Definition of type junction -->
+	
+	<xs:complexType name="junction">
+		<xs:sequence>
+			<xs:element name="roads" minOccurs="1" maxOccurs="1" type="road_collection"/>
+		</xs:sequence>
+		<xs:attribute name="type" type="xs:string" use="required" />
+		<xs:attribute name="name" type="xs:string" use="optional" />
+		<xs:attribute name="id" type="xs:integer" use="required" />
+	</xs:complexType>
+	
+	<!-- Definition of type lane_collection -->
+	
+	<xs:complexType name="lane_collection">
+		<xs:sequence>
+			<xs:element name="lane" type="lane" minOccurs="0" maxOccurs="unbounded"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Definition of type lane -->
+	
+	<xs:complexType name="lane">
+		<xs:sequence minOccurs="0" maxOccurs="1">
+			<xs:element name="waypoints" type="waypoint_collection" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:integer" use="required"/>
+		<xs:attribute name="width" type="xs:integer" use="required"/>
+	</xs:complexType>
+	
+	<!-- Definition of type segment_collection -->
+	
+	<xs:complexType name="segment_collection">
+		<xs:sequence>
+			<xs:element name="roadsegment" type="segment" minOccurs="1" maxOccurs="unbounded"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Definition of type segment -->
+	
+	<xs:complexType name="segment">
+		<xs:attribute name="order" type="xs:integer" use="required"/>
+		<xs:attribute name="startX" type="xs:integer" use="required"/>
+		<xs:attribute name="startY" type="xs:integer" use="required"/>
+		<xs:attribute name="endX" type="xs:integer" use="required"/>
+		<xs:attribute name="endY" type="xs:integer" use="required"/>
+	</xs:complexType>
+	
+	<!-- Defintion of type wayppoint_collection -->
+	
+	<xs:complexType name="waypoint_collection">
+		<xs:sequence>
+			<xs:element name="SpeedWaypoint" type="SpeedWaypoint" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Definition of type SpeeWaypoint -->
+	
+	<xs:complexType name="SpeedWaypoint">
+		<!--<xs:attribute name="direction" type="direction" use="required"/>-->
+		<xs:attribute name="id" type="xs:integer" use="required"/>
+		<xs:attribute name="value" type="xs:integer" use="required"/>
+		<xs:attribute name="position" type="float" use="required"/>
+	</xs:complexType>
+	
+	<!-- Definittion of simple type direction -->
+	
+	<!--<xs:simpleType name="direction">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="left"/>
+			<xs:enumeration value="right"/>
+			<xs:enumeration value="both"/>
+		</xs:restriction>
+	</xs:simpleType>
+	-->
+	
+	<!-- Defintion of simple type float -->
+	
+	<xs:simpleType name="float">
+		<xs:restriction base="xs:float">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Definition of type road_collection -->
+	
+	<xs:complexType name="road_collection">
+		<xs:sequence>
+			<xs:element name="road" type="junction_road" minOccurs="2" maxOccurs="4"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Definition of type junction_road -->
+	
+	<xs:complexType name="junction_road">
+		<xs:attribute name="id" type="xs:integer" use="required"/>
+	</xs:complexType>
+	
+</xs:schema>

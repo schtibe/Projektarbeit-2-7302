@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty>
+	
+	<useStyles filename="nifty-default-styles.xml"/>
+	<useControls filename="nifty-default-controls.xml"/>
+
+  <screen id="changeMap" controller="gui.GameStateChangeMap">
+  
+	<!-- ****************************** -->
+    <!-- Menu -->
+    <!-- ****************************** -->
+    
+    <layer id="boxes" childLayout="center">
+	  <!--  <effect>
+	  	<onStartScreen name="move" timeType="exp" factor="3.5" direction="top" mode="in" length="500" inherit="true"/>
+	  	<onEndScreen name="move" timeType="exp" factor="3.5" direction="bottom" mode="out" length="500" inherit="true"/>
+	  </effect>-->
+	 
+	 
+      <panel style="nifty-panel" height="90%" width="90%"  align="center" valign="center" childLayout="vertical">
+		<label style="nifty-label" id="text" text="change map" />
+		 
+		 <panel height="100%" width="100%" align="center" valign="center" childLayout="center">	
+			
+			<panel height="40%" width="60%" align="center" valign="center" childLayout="vertical">		
+				
+			
+			<control id="dropDownControl" name="dropDownControl" type="dropDownControl">
+            	
+            </control>
+            	         
+
+		    <panel align="center" valign="center" childLayout="horizontal">
+		     
+		    	<control id="exitButton" name="button" label="cancel" align="center" width="50%">
+		    		<interact onClick="quit()" />
+		        </control>	
+		     	
+		     	<control id="changeMapButton" name="button" label="apply"  align="center" width="50%">
+		        	<interact onClick="apply()" />
+		        </control>
+
+			</panel>    		         
+		         
+		
+			</panel>
+
+   		</panel>
+   		
+      </panel>
+    </layer>
+
+  </screen>
+</nifty>
