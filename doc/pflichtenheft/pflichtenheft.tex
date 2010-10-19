@@ -59,9 +59,9 @@ The simulation is divided in three models:
 
 
 \begin{enumerate}
- \item Environmental Model%Umgebungsmodell
- \item Driver Model%Fahrermodell
- \item Vehicle Model%Fahrzeugmodell
+ \item Environmental Model
+ \item Driver Model
+ \item Vehicle Model
 \end{enumerate}
 The environmental and vehicle models have been mostly implemented already in our work in module 7301r. This project is based on that work.
 
@@ -76,6 +76,45 @@ The environmental and vehicle models have been mostly implemented already in our
  and make decisions based on the circumstances that they see and will be 
  influenced by parameters such as ``riskyness'' and temperament or drug intake.
  We are trying to achieve a high complexity in this field.
+
+ The driver action cycle is divided in four sub parts:
+ 
+ \begin{itemize}
+	\item \textbf{Environment recognition}\newline
+				The driver looks at the environment with a certain field of view (given by distance and angle), which
+				may be influenced by other factors like age, soberness and sight. The environment then returns the set 
+				of seen objects like junctions, other drivers, road signs generically referred to as ``way points''
+				in the defined field of view.
+
+				The following three way point types are to be implemented:
+				\begin{itemize}
+					\item Junction way point
+					\item Moving way point (e.g. other vehicles)
+					\item Road signs
+				\end{itemize}
+
+	\item \textbf{Analysis of the way points}\newline
+				Assessment of relevancy of the way points in relation to the driver's current situation.
+
+	\item \textbf{Decision making}\newline
+				Based on the relevant way points the driver decides whether to accelerate or break. This
+				decision is influenced by the personality of the driver.
+
+	\item \textbf{Execute the decision}\newline
+				The driver influences the vehicle according to his decision.
+
+ \end{itemize}
+
+ To achieve a certain degree of realism decisions are executed with a time delay to simulate human response time,
+ which can be parametrised.
+
+ We want to achieve the following driving situations, from highest to lowest priority:
+ \begin{enumerate}
+	\item Driveaway
+	\item React to speed restrictions
+	\item Follow another vehicle
+	\item Drive through a junction
+ \end{enumerate}
 
 \subsubsection{Display}
 
