@@ -42,9 +42,7 @@
 
 \end{titlepage}
 
-
 \tableofcontents
-
 
 \newpage
 
@@ -52,7 +50,6 @@
 
 \subsection{Problem description}
 Our task is to implement an event driven traffic simulation based upon a driver model, an environmental model and a vehicle model.
-
 
 We have to provide models and simulate street traffic. 
 The simulation is divided in three models:
@@ -75,7 +72,7 @@ The environmental and vehicle models have been mostly implemented already in our
  driver characters. These characters will be able to drive around autonomously 
  and make decisions based on the circumstances that they see and will be 
  influenced by parameters such as ``riskyness'' and temperament or drug intake.
- We are trying to achieve a high complexity in this field.
+ We are trying to achieve a high complexity in this field.\\
 
  The driver action cycle is divided in four sub parts:
  
@@ -103,10 +100,10 @@ The environmental and vehicle models have been mostly implemented already in our
 	\item \textbf{Execute the decision}\newline
 				The driver influences the vehicle according to his decision.
 
- \end{itemize}
+ \end{itemize}\\
 
  To achieve a certain degree of realism decisions are executed with a time delay to simulate human response time,
- which can be parametrised.
+ which can be parametrised.\\
 
  We want to achieve the following driving situations, from highest to lowest priority:
  \begin{enumerate}
@@ -122,11 +119,13 @@ Display the current state of the traffic situation.
 \newpage
 
 \subsection{Optional Objectives}
-\begin{enumerate}
- \item Changing the behaviour of the drivers by showing them road signs. 
+\begin{itemize}
+ \item Direction indication of the vehicles
  \item Obstruction of the view by buildings etc. 
-\end{enumerate}
+\end{itemize}
+
 \subsection{Learning Goals}
+
 Creation of an event driven simulation, applying basic principles of AI in the driver model.
 
 
