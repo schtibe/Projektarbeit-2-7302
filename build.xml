@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Projekt2">
+    <property environment="env"/>
+    <property name="src_git.link" value="src"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+    <path id="Projekt2.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="/usr/share/java/jdom1.jar"/>
+				<pathelement location="lib/slick/lwjgl.jar"/>
+        <pathelement location="lib/slick/nifty-style-black-1.0.jar"/>
+        <pathelement location="lib/slick/nifty-default-controls-1.0.jar"/>
+        <pathelement location="lib/slick/nifty-1.0-complete-with-dependencies.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="${src_git.link}">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="${src_git.link}"/>
+            <classpath refid="Projekt2.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+
+    <target name="GUISimulation">
+        <java classname="gui.GUISimulation" failonerror="true" fork="yes">
+            <classpath refid="Projekt2.classpath"/>
+            <jvmarg value="-Djava.library.path=lib/slick/native/linux"/>
+        </java>
+    </target>
+
+		<target name="run">
+        <java classname="gui.GUISimulationMenu" failonerror="true" fork="yes">
+            <classpath refid="Projekt2.classpath"/>
+            <jvmarg value="-Djava.library.path=lib/slick/native/linux"/>
+        </java>
+    </target>
+</project>
