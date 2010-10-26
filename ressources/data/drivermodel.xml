@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<world xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="file:ressources/data/worldschema.xsd" scale="1.0">
+	<!-- first road is single lane, used to simulate the starting procedure of a vehicle -->
+	<road id="1" startX="20" startY="0">
+		<leftlanes>
+
+		</leftlanes>
+		<rightlanes>
+			<lane id="1" width="1" >
+				<waypoints>
+					<SpeedWaypoint id="1" value="30" position="0.0"/>
+				</waypoints>
+			</lane>
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="380" endY="0" />
+			<roadsegment order="2" startX="400" startY="20" endX="400" endY="460"/>
+		</roadsegments>
+	</road>
+	<!-- second road is double line, model allows that but how is the builder reacting to this -->
+	<road id="2" startX="400" startY="480">
+		<leftlanes>
+			<lane id="1" width="1" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="1" width="1" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="-380" endY="0" />
+		</roadsegments>
+	</road>
+	<road id="3" startX="0" startY="460">
+		<leftlanes>
+			<lane id="1" width="1" />
+		</leftlanes>
+		<rightlanes>
+			<lane id="1" width="1" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="0" endY="-440"/>
+		</roadsegments>
+	</road>
+	<junction id="1" type="CrossRoad">
+		<roads>
+			<road id="1" />
+			<road id="2" />
+		</roads>
+	</junction>
+	<junction id="2" type="CrossRoad">
+		<roads>
+			<road id="2" />
+			<road id="3" />
+		</roads>
+	</junction>
+	<junction id="3" type="CrossRoad">
+		<roads>
+			<road id="3" />
+			<road id="1" />
+		</roads>
+	</junction>
+</world>
