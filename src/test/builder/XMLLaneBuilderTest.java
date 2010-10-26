@@ -112,13 +112,16 @@ public class XMLLaneBuilderTest {
 			
 			@Override
 			public void setEndPoint(IVector endPoint) {
+
 				
 			}
-			
+			/*
 			@Override
 			public List<SignWayPoint> getWayPoints(directionType direction) {
 				return null;
 			}
+			// obviously doesn't exist anymore
+			*/
 			
 			@Override
 			public IVector getStartPoint() {
@@ -151,10 +154,13 @@ public class XMLLaneBuilderTest {
 						return new Vector(new float[]{10, 20});
 					}
 					
+					/* doesn't exist anymore apparently
 					@Override
 					public List<SignWayPoint> getSignWayPoints(float distance) {
 						return null;
 					}
+					
+					*/
 					
 					@Override
 					public LaneSegmentQuadratic getNextLaneSegment() {
@@ -176,11 +182,14 @@ public class XMLLaneBuilderTest {
 						return 0;
 					}
 					
+					/*
+					 apparently doesn't exist anymore
 					@Override
 					public void addSignWayPoints(
 							List<SignWayPoint> signWayPoints) {
 						
 					}
+					*/
 
 					@Override
 					public void setNextLaneSegment(
@@ -205,6 +214,12 @@ public class XMLLaneBuilderTest {
 
 					@Override
 					public List<SignWayPoint> getAllWayPoints() {
+						return null;
+					}
+
+					@Override
+					public IVector getPointOnCurve(float middle) {
+						// TODO Auto-generated method stub
 						return null;
 					}
 				};
@@ -251,16 +266,14 @@ public class XMLLaneBuilderTest {
 		laneSegments.add(
 			new LaneSegmentLinear(3, 
 				new Vector(new float[] {10.0f, 30.2f}), 
-				new Vector(new float[] {20.0f, 50f}),
-				null 
+				new Vector(new float[] {20.0f, 50f}) 
 			)
 		);
 		
 		laneSegments.add(
 				new LaneSegmentLinear(3, 
 					new Vector(new float[] {50f, 40f}), 
-					new Vector(new float[] {80f, 10f}),
-					null 
+					new Vector(new float[] {80f, 10f})
 				)
 			);
 		
@@ -320,11 +333,13 @@ public class XMLLaneBuilderTest {
 								return null;
 							}
 
+							/*
 							@SuppressWarnings("unchecked")
 							@Override
 							public List getSignWayPoints(float distance) {
 								return null;
 							}
+							*/
 
 							@Override
 							public IVector getStartPoint() {
@@ -346,11 +361,13 @@ public class XMLLaneBuilderTest {
 								
 							}
 
+							/*
 							@Override
 							public void addSignWayPoints(
 									List<SignWayPoint> signWayPoints) {
 								
 							}
+							*/
 
 							@Override
 							public void setNextLaneSegment(
@@ -377,14 +394,22 @@ public class XMLLaneBuilderTest {
 								return null;
 							}
 
+							@Override
+							public IVector getPointOnCurve(float middle) {
+								// TODO Auto-generated method stub
+								return null;
+							}
+
 						}, 
 						new ILaneSegmentLinear() {
 
+							/*
 							@Override
 							public void addSignWayPoints(
 									List<SignWayPoint> signWayPoints) {
 								
 							}
+							*/
 
 							@Override
 							public float getDistanceOnLane() {
@@ -409,11 +434,13 @@ public class XMLLaneBuilderTest {
 								return null;
 							}
 
+							/*
 							@Override
 							public List<SignWayPoint> getSignWayPoints(
 									float distance) {
 								return null;
 							}
+							*/
 
 							@Override
 							public IVector getStartPoint() {
@@ -456,6 +483,12 @@ public class XMLLaneBuilderTest {
 
 							@Override
 							public List<SignWayPoint> getAllWayPoints() {
+								return null;
+							}
+
+							@Override
+							public IVector getPointOnCurve(float middle) {
+								// TODO Auto-generated method stub
 								return null;
 							}
 						}
@@ -503,11 +536,13 @@ public class XMLLaneBuilderTest {
 							return null;
 						}
 
+						/*
 						@SuppressWarnings("unchecked")
 						@Override
 						public List getSignWayPoints(float distance) {
 							return null;
 						}
+						*/
 
 						@Override
 						public IVector getStartPoint() {
@@ -529,11 +564,13 @@ public class XMLLaneBuilderTest {
 							
 						}
 
+						/*
 						@Override
 						public void addSignWayPoints(
 								List<SignWayPoint> signWayPoints) {
 							
 						}
+						*/
 
 						@Override
 						public void setNextLaneSegment(
@@ -560,14 +597,22 @@ public class XMLLaneBuilderTest {
 							return null;
 						}
 
+						@Override
+						public IVector getPointOnCurve(float middle) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
 					}, 
 					new ILaneSegmentLinear() {
 
+						/*
 						@Override
 						public void addSignWayPoints(
 								List<SignWayPoint> signWayPoints) {
 							
 						}
+						*/
 
 						@Override
 						public float getDistanceOnLane() {
@@ -592,11 +637,13 @@ public class XMLLaneBuilderTest {
 							return null;
 						}
 
+						/*
 						@Override
 						public List<SignWayPoint> getSignWayPoints(
 								float distance) {
 							return null;
 						}
+						*/
 
 						@Override
 						public IVector getStartPoint() {
@@ -641,6 +688,12 @@ public class XMLLaneBuilderTest {
 						public List<SignWayPoint> getAllWayPoints() {
 							return null;
 						}
+
+						@Override
+						public IVector getPointOnCurve(float middle) {
+							// TODO Auto-generated method stub
+							return null;
+						}
 					}
 			);
 	}
@@ -676,11 +729,13 @@ public class XMLLaneBuilderTest {
 							return null;
 						}
 
+						/*
 						@SuppressWarnings("unchecked")
 						@Override
 						public List getSignWayPoints(float distance) {
 							return null;
 						}
+						*/
 
 						@Override
 						public IVector getStartPoint() {
@@ -702,11 +757,13 @@ public class XMLLaneBuilderTest {
 							
 						}
 
+						/*
 						@Override
 						public void addSignWayPoints(
 								List<SignWayPoint> signWayPoints) {
 							
 						}
+						*/
 
 						@Override
 						public void setNextLaneSegment(
@@ -733,14 +790,22 @@ public class XMLLaneBuilderTest {
 							return null;
 						}
 
+						@Override
+						public IVector getPointOnCurve(float middle) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
 					}, 
 					new ILaneSegmentLinear() {
 
+						/*
 						@Override
 						public void addSignWayPoints(
 								List<SignWayPoint> signWayPoints) {
 							
 						}
+						*/
 
 						@Override
 						public float getDistanceOnLane() {
@@ -765,11 +830,13 @@ public class XMLLaneBuilderTest {
 							return null;
 						}
 
+						/*
 						@Override
 						public List<SignWayPoint> getSignWayPoints(
 								float distance) {
 							return null;
 						}
+						*/
 
 						@Override
 						public IVector getStartPoint() {
@@ -812,6 +879,12 @@ public class XMLLaneBuilderTest {
 
 						@Override
 						public List<SignWayPoint> getAllWayPoints() {
+							return null;
+						}
+
+						@Override
+						public IVector getPointOnCurve(float middle) {
+							// TODO Auto-generated method stub
 							return null;
 						}
 					}

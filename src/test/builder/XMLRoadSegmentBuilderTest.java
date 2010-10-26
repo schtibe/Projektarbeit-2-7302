@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
+import java.util.List;
 
 import org.jdom.Document;
 import org.jdom.Element;
@@ -11,11 +12,16 @@ import org.jdom.input.SAXBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
+import simulation.builder.IXMLWorldBuilder;
+import simulation.builder.XMLLaneBuilder.directionType;
 import simulation.builder.XMLRoadSegmentBuilder;
 
 import common.IVector;
 import common.Vector;
 
+import environment.IJunction;
+import environment.IRoad;
+import environment.IWayPoint;
 import environment.LaneSegmentLinear;
 
 public class XMLRoadSegmentBuilderTest {
@@ -47,7 +53,58 @@ public class XMLRoadSegmentBuilderTest {
 				10, 20
 		});
 		
-		this.rsBuilder = new XMLRoadSegmentBuilder(elem, roadPosition);
+		IXMLWorldBuilder wb = new IXMLWorldBuilder() {
+			
+			@Override
+			public void setWayPoint(IWayPoint wayPoint) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void setCoordinates(IVector coordinates) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public IVector[] getWorldBoundaries() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public float getScale() {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+			@Override
+			public List<IRoad> getRoads() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public List<IJunction> getJunctions() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public List<IWayPoint> getAllWayPoints() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public void generate() throws Exception {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+		
+		this.rsBuilder = new XMLRoadSegmentBuilder(elem, wb, roadPosition);
 	}
 	
 	@Test
@@ -72,7 +129,7 @@ public class XMLRoadSegmentBuilderTest {
 
 	@Test
 	public void testCreateLaneSegment() throws Exception {
-		LaneSegmentLinear lane = this.rsBuilder.createLaneSegment(2);
+		LaneSegmentLinear lane = this.rsBuilder.createLaneSegment(2, directionType.right); // will this work?
 		
 		assertTrue(lane instanceof LaneSegmentLinear);
 		

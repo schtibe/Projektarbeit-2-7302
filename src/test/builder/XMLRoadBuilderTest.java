@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import simulation.builder.IXMLRoadSegmentBuilder;
+import simulation.builder.IXMLWorldBuilder;
 import simulation.builder.InvalidXMLException;
 import simulation.builder.XMLLeftLaneBuilder;
 import simulation.builder.XMLRightLaneBuilder;
@@ -20,7 +21,9 @@ import simulation.builder.XMLRoadBuilder;
 
 import common.IVector;
 
+import environment.IJunction;
 import environment.IRoad;
+import environment.IWayPoint;
 
 /**
  * readRoadSegments() is deliberately not tested.
@@ -30,10 +33,9 @@ public class XMLRoadBuilderTest {
 	
 	private class TestRoadBuilder extends XMLRoadBuilder { 
 	
-		public TestRoadBuilder(Element e)
+		public TestRoadBuilder(Element e, IXMLWorldBuilder worldBuilder)
 				throws InvalidXMLException {
-			super(e);
-			// 
+			super(e, worldBuilder);
 		}
 		
 		public IVector getRoadPositionWrapper() {
@@ -91,7 +93,58 @@ public class XMLRoadBuilderTest {
 		Element root = document.getRootElement();
 		Element elem = root.getChild("road");
 		
-		this.rBuilder = new TestRoadBuilder(elem);
+		IXMLWorldBuilder wb = new IXMLWorldBuilder() {
+			
+			@Override
+			public void setWayPoint(IWayPoint wayPoint) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void setCoordinates(IVector coordinates) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public IVector[] getWorldBoundaries() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public float getScale() {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+			@Override
+			public List<IRoad> getRoads() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public List<IJunction> getJunctions() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public List<IWayPoint> getAllWayPoints() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public void generate() throws Exception {
+				// TODO Auto-generated method stub
+				
+			}
+		}; 
+		
+		this.rBuilder = new TestRoadBuilder(elem, wb);
 	}
 
 	@Test
