@@ -21,7 +21,11 @@
 	<!-- second road is double line, model allows that but how is the builder reacting to this -->
 	<road id="2" startX="400" startY="480">
 		<leftlanes>
-			<lane id="1" width="1" />
+			<lane id="1" width="1" >
+				<waypoints>
+					<SpeedWaypoint id="1" value="50" position="0.1"/>
+				</waypoints>
+			</lane>
 		</leftlanes>
 		<rightlanes>
 			<lane id="1" width="1" />
@@ -35,7 +39,11 @@
 			<lane id="1" width="1" />
 		</leftlanes>
 		<rightlanes>
-			<lane id="1" width="1" />
+			<lane id="1" width="1" >
+				<waypoints>
+					<SpeedWaypoint id="1" value="80" position="0.1"/>
+				</waypoints>
+			</lane>
 		</rightlanes>
 		<roadsegments>
 			<roadsegment order="1" startX="0" startY="0" endX="0" endY="-440"/>
