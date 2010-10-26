@@ -110,7 +110,7 @@ public final class GlobalConstants {
 	/*
 	 * The default street schema xml
 	 */
-	private String streetXMLSchema = "ressources/data/solothurn.xml";
+	private String streetXMLSchema = "ressources/data/drivermodel.xml";
 
 	/**
 	 * getter for street schema

@@ -96,7 +96,7 @@ public class LaneBuilder {
 						* vector2.getComponent(0));
 
 		if (t <= 1.0 && t >= 0.0) {
-			throw new InvalidXMLException("lanes cross each other");
+			throw new InvalidXMLException("lanes cross each other\n"+laneSegment1.toString()+":\n"+laneSegment2.toString());
 		}
 
 		// is u even necessary?
@@ -109,7 +109,7 @@ public class LaneBuilder {
 				/ (vector2.getComponent(1));
 
 		if (u <= 1.0 && u >= 0.0) {
-			throw new InvalidXMLException("lanes cross each other");
+			throw new InvalidXMLException("lanes cross each other\n"+laneSegment1.toString()+":\n"+laneSegment2.toString());
 		}
 
 		float bendPointX = startPoint1.getComponent(0) + t
