@@ -241,17 +241,12 @@ public class Gaia implements IGaia {
 			IVehicle vehicle) {
 		IDriver driver =  new Driver(vehicle, character, physics);
 
-		EventQueue.getInstance().addEvent(new DriverEvent(
+		EventQueue.getInstance().addEvent(
+			new DriverEvent(
 				1,
 				(IEventTarget<DriverEvent>)driver
-		).setMonitoring(true));
-		
-		// zum testen
-		EventQueue.getInstance().addEvent(new VehicleEvent(
-				GlobalConstants.getInstance().getInitialTimestamp() + 
-				physics.getUpdateInterval(),  
-				(IEventTarget<VehicleEvent>)vehicle, 1
-		));
+			).setMonitoring(true)
+		);
 	}
 
 	/**
