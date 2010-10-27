@@ -4,6 +4,7 @@ package test.builder;
 import static org.junit.Assert.assertEquals;
 
 import java.io.ByteArrayInputStream;
+import java.util.List;
 
 import org.jdom.Document;
 import org.jdom.Element;
@@ -11,17 +12,21 @@ import org.jdom.input.SAXBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
+import simulation.builder.IXMLWorldBuilder;
 import simulation.builder.XMLObjectBuilder;
 
 import common.IVector;
 import common.Vector;
+import environment.IJunction;
+import environment.IRoad;
+import environment.IWayPoint;
 
 public class XMLObjectBuilderTest {
 	
 	private class TestObjectBuilder extends XMLObjectBuilder {
 
-		public TestObjectBuilder(Element e) {
-			super(e);
+		public TestObjectBuilder(Element e, IXMLWorldBuilder worldBuilder) {
+			super(e, worldBuilder);
 		}
 		
 		public IVector getPerpVectorWrapper(IVector direction) {
@@ -39,8 +44,58 @@ public class XMLObjectBuilderTest {
 				new ByteArrayInputStream(data.getBytes())
 		);
 		
+		IXMLWorldBuilder wb = new IXMLWorldBuilder() {
+			
+			@Override
+			public void setWayPoint(IWayPoint wayPoint) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void setCoordinates(IVector coordinates) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public IVector[] getWorldBoundaries() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public float getScale() {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+			@Override
+			public List<IRoad> getRoads() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public List<IJunction> getJunctions() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public List<IWayPoint> getAllWayPoints() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public void generate() throws Exception {
+				// TODO Auto-generated method stub
+				
+			}
+		};
 		
-		this.oBuilder = new TestObjectBuilder(document.getRootElement());
+		this.oBuilder = new TestObjectBuilder(document.getRootElement(), wb);
 	}
 
 	@Test
