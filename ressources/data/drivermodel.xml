@@ -9,7 +9,7 @@
 		<rightlanes>
 			<lane id="1" width="1" >
 				<waypoints>
-					<SpeedWaypoint id="1" value="30" position="0.0"/>
+					<SpeedWaypoint id="1" value="30" position="0.0" direction="right"/>
 				</waypoints>
 			</lane>
 		</rightlanes>

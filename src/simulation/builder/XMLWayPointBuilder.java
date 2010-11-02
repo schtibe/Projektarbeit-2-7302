@@ -20,11 +20,16 @@ public abstract class XMLWayPointBuilder extends XMLObjectBuilder implements
 	 * 
 	 * @param e
 	 * @param wBuilder
+	 * @throws InvalidXMLException 
 	 */
-	public XMLWayPointBuilder(Element e, IXMLWorldBuilder wBuilder) {
+	public XMLWayPointBuilder(Element e, IXMLWorldBuilder wBuilder) throws InvalidXMLException {
 		super(e, wBuilder);
 
 		String direction = this.elem.getAttributeValue("direction");
+		if (direction == null) {
+			throw new InvalidXMLException("Way point in the XML must have a direction"); // TODO not sure
+		}
+		
 		if (direction.equals("right")) {
 			this.direction = XMLWayPointBuilderFactory.direction.right;
 		} else if (direction.equals("left")) {

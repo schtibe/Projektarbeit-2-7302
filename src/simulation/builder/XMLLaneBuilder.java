@@ -43,17 +43,22 @@ public abstract class XMLLaneBuilder extends LaneBuilder implements
 	 * The XML element
 	 */
 	protected Element elem;
+	
+	/**
+	 * The world builder object
+	 */
+	protected IXMLWorldBuilder worldBuilder;
 
 	/**
 	 * Construct
 	 * 
-	 * @param e
-	 *            The XML element
+	 * @param e The XML element
 	 * @param roadPosition
 	 */
-	public XMLLaneBuilder(Element e, IVector roadPosition) {
+	public XMLLaneBuilder(Element e, IVector roadPosition, IXMLWorldBuilder wb) {
 		this.elem = e;
 		this.roadPosition = (IVector) roadPosition.clone();
+		this.worldBuilder = wb;
 
 		this.laneWidth = Float.parseFloat(this.elem.getAttributeValue("width"));
 	}
@@ -92,8 +97,12 @@ public abstract class XMLLaneBuilder extends LaneBuilder implements
 		// build all the linear right lane segments
 		for (IXMLRoadSegmentBuilder segment : roadSegments) {
 			try {
-				laneSegments.add(segment.createLaneSegment(counter
-						+ this.laneWidth / 2, this.direction));
+				laneSegments.add(
+					segment.createLaneSegment(
+						counter	+ this.laneWidth / 2, 
+						this.direction
+					)
+				);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -101,7 +110,44 @@ public abstract class XMLLaneBuilder extends LaneBuilder implements
 		// this lane has to have the start point of the road
 		ILaneSegmentLinear startSegment = this
 				.getCompleteLaneSegmentList(laneSegments);
-		return new Lane(startSegment.getStartPoint().clone(), startSegment,
-				this.laneWidth);
+		
+		Lane lane = new Lane(
+			startSegment.getStartPoint().clone(), 
+			startSegment,
+			this.laneWidth
+		);
+		
+		for (IXMLWayPointBuilder wp: this.readWayPoints()) {
+			lane.addWayPoint(wp.createWayPoint(lane));
+		}
+		
+		return lane;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @return
+	 * @throws InvalidXMLException 
+	 */
+	public List<IXMLWayPointBuilder> readWayPoints() throws InvalidXMLException {
+		List<IXMLWayPointBuilder> wayPoints = new ArrayList<IXMLWayPointBuilder>();
+		List<?> wayPointElems = new ArrayList<Element>();
+
+		try {
+			wayPointElems = this.elem.getChild("waypoints").getChildren();
+		} catch (NullPointerException e) {
+			// if there are no waypoints - doesn't matter
+		}
+
+		for (int i = 0; i < wayPointElems.size(); i++) {
+			wayPoints.add(
+				XMLWayPointBuilderFactory.getWayPointBuilder(
+					(Element) wayPointElems.get(i), 
+					this.worldBuilder
+				)
+			);
+		}
+		return wayPoints;
 	}
 }

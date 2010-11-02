@@ -22,8 +22,9 @@ public class XMLSpeedWayPointBuilder extends XMLWayPointBuilder {
 	 * 
 	 * @param e
 	 * @param wBuilder
+	 * @throws InvalidXMLException 
 	 */
-	public XMLSpeedWayPointBuilder(Element e, IXMLWorldBuilder wBuilder) {
+	public XMLSpeedWayPointBuilder(Element e, IXMLWorldBuilder wBuilder) throws InvalidXMLException {
 		super(e, wBuilder);
 	}
 
@@ -32,6 +33,6 @@ public class XMLSpeedWayPointBuilder extends XMLWayPointBuilder {
 	 */
 	@Override
 	public SignWayPoint createWayPoint(ILane lane) {
-		return new SpeedWayPoint(lane, this.speed);
+		return new SpeedWayPoint(lane, this.speed, null); // TODO the position?
 	}
 }

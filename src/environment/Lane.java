@@ -16,11 +16,9 @@ public class Lane implements ILane {
 	 */
 	private ILaneSegmentLinear startSegment;
 	
-	
 	/**
 	 * if needed the last segment can be found and put in this property variable
 	 */
-	
 	private LaneSegment endSegment;
 	
 	/**
@@ -70,6 +68,8 @@ public class Lane implements ILane {
 	
 	
 	private IJunction junction;
+
+	private ArrayList<SignWayPoint> wayPoints;
 	
 	/**
 	 * Construct
@@ -86,6 +86,7 @@ public class Lane implements ILane {
 		this.initializeLaneSegments();
 		this.laneWidth = laneWidth;
 		
+		this.wayPoints = new ArrayList<SignWayPoint>();
 	}
 	
 	/**
@@ -251,7 +252,6 @@ public class Lane implements ILane {
 	 * returns the start segment
 	 * @return ILaneSegment<?>
 	 */
-	
 	@Override
 	public ILaneSegment<?> getFirstILaneSegment() {
 		return this.startSegment;
@@ -261,7 +261,6 @@ public class Lane implements ILane {
 	 * get the last segment
 	 * @return ILaneSegment<?>
 	 */
-	
 	public ILaneSegment<?> getLastILaneSegment(){
 		if (this.endSegment == null){
 			Boolean hasNext = true;
@@ -281,7 +280,6 @@ public class Lane implements ILane {
 	/**
 	 * setter for this lanes junction
 	 */
-	
 	@Override
 	public void setJunction(IJunction junction) {
 		this.junction = junction;
@@ -290,9 +288,7 @@ public class Lane implements ILane {
 	/**
 	 * getter for this lanes junction
 	 * @return IJunction 
-	 */
-	
-	@Override
+	 */	@Override
 	public IJunction getJunction() {
 		return this.junction;
 	}
@@ -300,7 +296,6 @@ public class Lane implements ILane {
 	/**
 	 * {@inheritDoc}
 	 */
-	
 	public List<IVector[]> getLanePath (){
 		ArrayList<IVector[]> output = new ArrayList<IVector[]> ();
 		LaneSegment<?> actualSegment = (LaneSegment<?>) startSegment;
@@ -314,9 +309,22 @@ public class Lane implements ILane {
 	/**
 	 * {@inheritDoc}
 	 */
-	
 	@Override
 	public float getLength() {
 		return this.length;
+	}
+
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void addWayPoint(SignWayPoint wp) {
+		this.wayPoints.add(wp);
+		try {
+			WayPointManager.getInstance().add(wp);
+		} catch (Exception e) {
+			e.printStackTrace(); // not sure what this exception is about
+		}
 	}
 }

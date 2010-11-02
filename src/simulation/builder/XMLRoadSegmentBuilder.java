@@ -108,29 +108,6 @@ public class XMLRoadSegmentBuilder extends XMLObjectBuilder implements
 
 	/**
 	 * {@inheritDoc}
-	 * 
-	 * @return
-	 */
-	public List<IXMLWayPointBuilder> readWayPoints() {
-
-		List<IXMLWayPointBuilder> wayPoints = new ArrayList<IXMLWayPointBuilder>();
-		List<?> wayPointElems = new ArrayList<Element>();
-
-		try {
-			wayPointElems = this.elem.getChild("waypoints").getChildren();
-		} catch (NullPointerException e) {
-			// if there are no waypoints - doesn't matter
-		}
-
-		for (int i = 0; i < wayPointElems.size(); i++) {
-			wayPoints.add(XMLWayPointBuilderFactory.getWayPointBuilder(
-					(Element) wayPointElems.get(i), this.getWorldBuilder()));
-		}
-		return wayPoints;
-	}
-
-	/**
-	 * {@inheritDoc}
 	 */
 	public LaneSegmentLinear createLaneSegment(float offset,
 			directionType direction) throws Exception {

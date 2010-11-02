@@ -24,12 +24,6 @@ public interface ILane {
 	//public List<IWayPoint> getWayPointsAtPosition(float lanePosition, float viewField);
 	
 	/**
-	 * Return the start position
-	 * @return the start position
-	 */
-	//public IVector getStartPosition();
-	
-	/**
 	 * Returns the first lane segment
 	 * @return Returns the first lane segment
 	 */
@@ -41,13 +35,7 @@ public interface ILane {
 	 */
 	
 	public ILaneSegment<?> getLastILaneSegment();
-	
-	/**
-	 * Returns an ordered Array
-	 * @return an Array full of polygon corners of this lane
-	 */
-	
-	
+		
 	/**
 	 * sets the junction to which this lane is connected
 	 */
@@ -78,6 +66,12 @@ public interface ILane {
 	 * get the lanes length
 	 * @return the length 
 	 */
-	
 	public float getLength();
+	
+	/**
+	 * Add a way point to the lane
+	 * 
+	 * @param wp
+	 */
+	public void addWayPoint(SignWayPoint wp);
 }
