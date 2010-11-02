@@ -159,8 +159,13 @@ public class XMLRoadBuilder extends XMLObjectBuilder {
 		List<XMLRightLaneBuilder> rightLanes = new ArrayList<XMLRightLaneBuilder>();
 
 		for (int i = 0; i < rightLanesElem.size(); i++) {
-			rightLanes.add(new XMLRightLaneBuilder((Element) rightLanesElem
-					.get(i), position));
+			rightLanes.add(
+				new XMLRightLaneBuilder(
+					(Element) rightLanesElem.get(i), 
+					position,
+					this.worldBuilder
+				)
+			);
 		}
 
 		return rightLanes;
@@ -177,8 +182,13 @@ public class XMLRoadBuilder extends XMLObjectBuilder {
 		List<XMLLeftLaneBuilder> leftLanes = new ArrayList<XMLLeftLaneBuilder>();
 
 		for (int i = 0; i < leftLanesElem.size(); i++) {
-			leftLanes.add(new XMLLeftLaneBuilder(
-					(Element) leftLanesElem.get(i), position));
+			leftLanes.add(
+				new XMLLeftLaneBuilder(
+					(Element) leftLanesElem.get(i), 
+					position,
+					this.worldBuilder
+				)
+			);
 		}
 
 		return leftLanes;

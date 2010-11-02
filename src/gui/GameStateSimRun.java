@@ -104,7 +104,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 				ArrayList<MouseInputEvent> result = new ArrayList<MouseInputEvent>(
 						mouseEvents);
 				mouseEvents.clear();
-				return result;
+				 return result;
 			}
 		}, new TimeProvider());
 		nifty.fromXml("ressources/gui/simMenu.xml", "simMenu", this);

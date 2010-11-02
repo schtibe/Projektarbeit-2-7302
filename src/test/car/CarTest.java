@@ -42,7 +42,7 @@ public class CarTest {
 								}
 						);
 			}
-
+/*
 			@Override
 			public List<IWayPoint> getWayPointsAtPosition(float lanePosition,
 					float viewField) {
@@ -50,6 +50,7 @@ public class CarTest {
 				// probably should return some way points
 				return new ArrayList<IWayPoint>();
 			}
+			*/
 
 			@Override
 			public ILaneSegment<?> getFirstILaneSegment() {

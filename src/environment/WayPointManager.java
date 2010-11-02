@@ -47,9 +47,8 @@ public class WayPointManager implements IPlacableManager {
 	/**
 	 * {@inheritDoc}
 	 */
-	
 	@Override
-	public void add(IPlacable placable) throws Exception{
+	public void add(IPlacable placable) throws Exception {
 		if (this.root != null){
 			this.root.add(placable);
 		}else{
@@ -140,12 +139,18 @@ public class WayPointManager implements IPlacableManager {
 	 * @throws Exception
 	 */
 	
-	public void setWayPoints() throws Exception{
-		
+	public void setWayPoints() throws Exception {
 		IVector[] minMax = GlobalConstants.getInstance().getWorldBoundaries();
 		IVector max = minMax[1].sub(minMax[0]);
-		this.root = new PlacableTreeNode(minMax[0].getComponent(0), minMax[0]
-				.getComponent(1), max.getComponent(0),max.getComponent(1), 6);
+		
+		this.root = new PlacableTreeNode(
+			minMax[0].getComponent(0), 
+			minMax[0].getComponent(1), 
+			max.getComponent(0),
+			max.getComponent(1), 
+			6
+		);
+		
 		if (!stack.isEmpty()){
 			IPlacable placable = stack.pop();
 			while (placable != null){

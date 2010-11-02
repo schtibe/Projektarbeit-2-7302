@@ -23,7 +23,6 @@ public class Animus {
 	/**
 	 * instance variables
 	 */
-	
 	protected Physics physics;
 	protected Character character;
 	protected IVehicle vehicle;
@@ -36,7 +35,6 @@ public class Animus {
 	 * @param physics
 	 * @param character
 	 */
-	
 	public Animus (Physics physics, Character character){
 		this.physics = physics;
 		this.character = character;
@@ -49,7 +47,6 @@ public class Animus {
 	 * @param event
 	 * @throws Exception
 	 */
-	
 	public void assessSituation (IVehicle vehicle, DriverEvent event) throws Exception{
 		this.vehicle = vehicle;
 		this.event = event;
@@ -65,7 +62,6 @@ public class Animus {
 	 * handles a speed waypoint
 	 * @param waypoint
 	 */
-	
 	public void handleWayPoint (SpeedWayPoint waypoint){
 	//System.out.println("speedy goncalez");
 	}
@@ -74,7 +70,6 @@ public class Animus {
 	 * handles a sign way point
 	 * @param waypoint
 	 */
-	
 	public void handleWayPoint (SignWayPoint waypoint){
 	//System.out.println("signy signal drawer");
 	}
@@ -83,8 +78,6 @@ public class Animus {
 	 * handles any waypoint
 	 * @param waypoint
 	 */
-	
-	
 	public void handleWayPoint (JunctionWayPoint waypoint) {
 		if (this.vehicle.getLanes().size() < Vehicle.queueSize) {
  			if (this.checkWayPoint(vehicle, waypoint)) {
@@ -102,7 +95,6 @@ public class Animus {
 	 * get a reference on this physics object
 	 * @return
 	 */
-	
 	public Physics getPhysics() {
 		return this.physics;
 	}
@@ -111,7 +103,6 @@ public class Animus {
 	 * get a reference on this character project
 	 * @return
 	 */
-	
 	public Character getCharacter() {
 		return this.character;
 	}
@@ -122,8 +113,6 @@ public class Animus {
 	 * @param waypoint
 	 * @return
 	 */
-	
-	
 	protected boolean checkWayPoint(IVehicle vehicle, IWayPoint waypoint)  {
 		for (ILane lane: vehicle.getLanes()) {
 			if (lane == waypoint.getLane()) {

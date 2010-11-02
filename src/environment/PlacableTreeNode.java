@@ -53,7 +53,7 @@ public class PlacableTreeNode implements IPlacableManager {
 	 */
 	
 	@Override
-	public void add(IPlacable placable) throws Exception{
+	public void add(IPlacable placable) throws Exception {
 		if (this.maxDepth > 0){
 			if (subNodes == null){
 				subNodes = new PlacableTreeNode[4];
@@ -148,7 +148,6 @@ public class PlacableTreeNode implements IPlacableManager {
 	 * @param maxY
 	 * @return
 	 */
-	
 	public List<IPlacable> findInArea(float minX,float minY,float maxX,float maxY){
 		if (this.maxDepth > 0){
 			List<IPlacable> output = new ArrayList<IPlacable>();

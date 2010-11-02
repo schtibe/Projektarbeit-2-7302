@@ -139,13 +139,11 @@ public abstract class LaneSegment<E> implements ILaneSegment<E> {
 	 *
 	 * {@inheritDoc}
 	 */
-	
 	public abstract IVector[] getBezierPoints();
 	
 	/**
 	 * {@inheritDoc}
 	 */
-	
 	public int getId() {
 		return id;
 	}
@@ -153,7 +151,6 @@ public abstract class LaneSegment<E> implements ILaneSegment<E> {
 	/**
 	 * {@inheritDoc}
 	 */
-	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -161,7 +158,6 @@ public abstract class LaneSegment<E> implements ILaneSegment<E> {
 	/**
 	 * {@inheritDoc}
 	 */
-	
 	public String toString() {
 		String ret = "LaneSegment id: " + this.id + "\n";
 		ret += "Startpoint: " + this.startPoint + "\n";

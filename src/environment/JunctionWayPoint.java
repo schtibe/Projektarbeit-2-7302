@@ -9,7 +9,6 @@ public class JunctionWayPoint extends WayPoint {
 	/**
 	 * instance variables
 	 */
-	
 	protected IJunction junction;
 	protected IVector position;
 	
@@ -18,8 +17,7 @@ public class JunctionWayPoint extends WayPoint {
 	 * @param lane
 	 * @param junction
 	 */
-	
-	public JunctionWayPoint (ILane lane,IJunction junction){
+	public JunctionWayPoint (ILane lane, IJunction junction){
 		super(lane);
 		this.lane = lane;
 		this.junction = junction;
@@ -29,7 +27,6 @@ public class JunctionWayPoint extends WayPoint {
 	/**
 	 * {@inheritDoc}
 	 */
-	
 	@Override
 	public int compareTo(IWayPoint o) {
 		// TODO Auto-generated method stub
@@ -40,7 +37,6 @@ public class JunctionWayPoint extends WayPoint {
 	 * return the corresponding junction
 	 * @return IJunction
 	 */
-	
 	public IJunction getJunction(){
 		return this.junction;
 	}
@@ -48,10 +44,10 @@ public class JunctionWayPoint extends WayPoint {
 	/**
 	 * {@inheritDoc}
 	 */	
-	
 	@Override
 	public float getXPos () throws Exception{
 		if (this.position == null){
+			// TODO what does that do?? seems very strange
 			this.position = this.lane.getVehiclePosition((float)(this.lane.getLength()*0.8f));
 		}
 		return this.position.getComponent(0);
@@ -60,7 +56,6 @@ public class JunctionWayPoint extends WayPoint {
 	/**
 	 * {@inheritDoc}
 	 */	
-	
 	@Override
 	public float getYPos () throws Exception{
 		if (this.position == null){
@@ -71,8 +66,7 @@ public class JunctionWayPoint extends WayPoint {
 
 	/**
 	 * {@inheritDoc}
-	 */	
-	
+	 */
 	@Override
 	public void visitHandleWayPoint(Animus animus) {
 		animus.handleWayPoint(this);
