@@ -2,6 +2,8 @@ package simulation.builder;
 
 import org.jdom.Element;
 
+import common.Vector;
+
 import environment.ILane;
 import environment.SignWayPoint;
 import environment.SpeedWayPoint;
@@ -33,6 +35,6 @@ public class XMLSpeedWayPointBuilder extends XMLWayPointBuilder {
 	 */
 	@Override
 	public SignWayPoint createWayPoint(ILane lane) {
-		return new SpeedWayPoint(lane, this.speed, null); // TODO the position?
+		return new SpeedWayPoint(lane, this.speed, new Vector(new float[] {1.0f, 1.0f})); // TODO the position?
 	}
 }
