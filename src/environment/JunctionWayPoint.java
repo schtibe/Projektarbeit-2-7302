@@ -41,13 +41,21 @@ public class JunctionWayPoint extends WayPoint {
 		return this.junction;
 	}
 	
+	/*
+	* the next two methods are inconsistent as far as they call a method getVehiclePosition() when they actually
+	* are on a WayPoint. Nevertheless the method is the correct one as it gets the coordinates according to a percentage
+	* on the lane.
+	* the value of 0.8 indicates that you see the junction as early as you have passed 79% percent of the lanes length
+	* before the junction.
+	*/
+	
 	/**
 	 * {@inheritDoc}
 	 */	
+	
 	@Override
 	public float getXPos () throws Exception{
 		if (this.position == null){
-			// TODO what does that do?? seems very strange
 			this.position = this.lane.getVehiclePosition((float)(this.lane.getLength()*0.8f));
 		}
 		return this.position.getComponent(0);
