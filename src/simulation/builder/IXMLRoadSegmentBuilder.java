@@ -1,7 +1,5 @@
 package simulation.builder;
 
-import java.util.List;
-
 import simulation.builder.XMLLaneBuilder.directionType;
 
 import common.IVector;

@@ -3,7 +3,6 @@ package simulation.builder;
 import org.jdom.Element;
 
 import common.IVector;
-import common.Vector;
 
 import environment.ILane;
 import environment.LaneLengthExceededException;

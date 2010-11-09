@@ -1,6 +1,5 @@
 package simulation.builder;
 
-import simulation.builder.XMLWayPointBuilderFactory.direction;
 import environment.ILane;
 import environment.SignWayPoint;
 
