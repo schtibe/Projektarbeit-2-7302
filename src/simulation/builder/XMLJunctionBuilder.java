@@ -36,8 +36,8 @@ public class XMLJunctionBuilder extends XMLObjectBuilder {
 	 * @param e
 	 * @param wBuilder
 	 */
-	public XMLJunctionBuilder(Element e, IXMLWorldBuilder wBuilder) {
-		super(e, wBuilder);
+	public XMLJunctionBuilder(Element e) {
+		super(e);
 
 		this.roads = this.readRoads();
 

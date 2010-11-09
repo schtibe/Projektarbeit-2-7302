@@ -21,12 +21,13 @@ public class XMLWayPointBuilderFactory {
 	 * @return
 	 * @throws InvalidXMLException 
 	 */
-	public static IXMLWayPointBuilder getWayPointBuilder(Element elem,
-			IXMLWorldBuilder wBuilder) throws InvalidXMLException {
+	public static IXMLWayPointBuilder getWayPointBuilder(Element elem) 
+			throws InvalidXMLException {
+		
 		String name = elem.getName();
 		IXMLWayPointBuilder wayPoint = null;
 		if (name.equals("SpeedWaypoint")) {
-			wayPoint = new XMLSpeedWayPointBuilder(elem, wBuilder);
+			wayPoint = new XMLSpeedWayPointBuilder(elem);
 		}
 
 		return wayPoint;

@@ -2,6 +2,8 @@ package simulation.builder;
 
 import java.util.List;
 
+import org.jdom.Document;
+
 import common.IVector;
 
 import environment.IJunction;
@@ -16,11 +18,29 @@ import environment.IWayPoint;
 public interface IXMLWorldBuilder {
 
 	/**
-	 * Read the XML, build the world and put it into the Gaia
+	 * Generate the world from the global XML
 	 * 
-	 * @throws InvalidXMLException
+	 * @throws Exception
 	 */
 	public abstract void generate() throws Exception;
+
+	/**
+	 * Generate the world from a given file
+	 * @param filename
+	 * @throws InvalidXMLException
+	 * @throws Exception
+	 */
+	public abstract void generate(String filename) 
+		throws InvalidXMLException, Exception;
+	
+	/**
+	 * Generate the world directly from a DOM document
+	 * @param document
+	 * @throws InvalidXMLException
+	 * @throws Exception
+	 */
+	public abstract void generate(Document document) 
+		throws InvalidXMLException, Exception;
 
 	/**
 	 * Return the built roads

@@ -1,6 +1,5 @@
 package simulation.builder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom.Element;
@@ -44,9 +43,8 @@ public class XMLRoadSegmentBuilder extends XMLObjectBuilder implements
 	 * @param roadPosition
 	 *            The position of the road
 	 */
-	public XMLRoadSegmentBuilder(Element e, IXMLWorldBuilder wBuilder,
-			IVector roadPosition) {
-		super(e, wBuilder);
+	public XMLRoadSegmentBuilder(Element e,	IVector roadPosition) {
+		super(e);
 
 		this.setStartPoint(new Vector(new float[] {
 				Float.parseFloat(e.getAttributeValue("startX")),
@@ -118,8 +116,8 @@ public class XMLRoadSegmentBuilder extends XMLObjectBuilder implements
 		startPoint = startPoint.add(perp);
 		endPoint = endPoint.add(perp);
 
-		this.getWorldBuilder().setCoordinates(startPoint);
-		this.getWorldBuilder().setCoordinates(endPoint);
+		XMLWorldBuilder.getInstance().setCoordinates(startPoint);
+		XMLWorldBuilder.getInstance().setCoordinates(endPoint);
 		return new LaneSegmentLinear(this.id, startPoint, endPoint);
 	}
 

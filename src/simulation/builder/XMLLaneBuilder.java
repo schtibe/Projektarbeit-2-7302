@@ -143,8 +143,7 @@ public abstract class XMLLaneBuilder extends LaneBuilder implements
 		for (int i = 0; i < wayPointElems.size(); i++) {
 			wayPoints.add(
 				XMLWayPointBuilderFactory.getWayPointBuilder(
-					(Element) wayPointElems.get(i), 
-					this.worldBuilder
+					(Element) wayPointElems.get(i)
 				)
 			);
 		}

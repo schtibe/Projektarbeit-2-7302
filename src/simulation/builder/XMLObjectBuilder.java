@@ -18,27 +18,12 @@ public abstract class XMLObjectBuilder implements IXMLObjectBuilder {
 	protected Element elem;
 
 	/**
-	 * Reference to the world builder
-	 */
-	protected IXMLWorldBuilder worldBuilder;
-
-	/**
-	 * Save the XML element adn the world builder reference
+	 * Save the XML element and the world builder reference
 	 * 
 	 * @param e
 	 */
-	public XMLObjectBuilder(Element e, IXMLWorldBuilder wBuilder) {
+	public XMLObjectBuilder(Element e) {
 		this.elem = e;
-		this.worldBuilder = wBuilder;
-	}
-
-	/**
-	 * Return the world builder
-	 * 
-	 * @return the world builder
-	 */
-	public IXMLWorldBuilder getWorldBuilder() {
-		return this.worldBuilder;
 	}
 
 	/**

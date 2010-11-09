@@ -7,7 +7,6 @@ import simulation.DriverEvent;
 import simulation.EventQueue;
 import simulation.IEventTarget;
 import simulation.Simulator;
-import simulation.VehicleEvent;
 import simulation.builder.IXMLWorldBuilder;
 import simulation.builder.XMLWorldBuilder;
 import car.CarCannotReverseException;
@@ -150,16 +149,14 @@ public class Gaia implements IGaia {
 	/**
 	 * The world builder call to action
 	 */
-	
 	public void rebuildWorld() throws Exception {
-		IXMLWorldBuilder world = new XMLWorldBuilder(
-				GlobalConstants.getInstance().getStreetXMLSchema());
+		IXMLWorldBuilder world = XMLWorldBuilder.getInstance(); 
+			
+		XMLWorldBuilder.getInstance().generate(GlobalConstants.getInstance().getStreetXMLSchema());
 		
-		world.generate();
-		
-		Gaia.roads = world.getRoads();
-		Gaia.junctions = world.getJunctions();
-		Gaia.waypoints = world.getAllWayPoints();
+		Gaia.roads = XMLWorldBuilder.getInstance().getRoads();
+		Gaia.junctions = XMLWorldBuilder.getInstance().getJunctions();
+		Gaia.waypoints = XMLWorldBuilder.getInstance().getAllWayPoints();
 		
 		GlobalConstants.getInstance().setWorldBoundaries(
 				world.getWorldBoundaries());

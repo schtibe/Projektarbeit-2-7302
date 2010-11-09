@@ -9,7 +9,6 @@ import java.util.Map.Entry;
 
 import org.jdom.Document;
 import org.jdom.Element;
-import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
 import common.GlobalConstants;
@@ -22,6 +21,9 @@ import environment.IRoad;
 import environment.IWayPoint;
 
 /**
+ * This is implemented as a Singleton, because it is used several times all over the place
+ * and it would be required to pass down the instance quite often
+ * 
  * {@inheritDoc}
  */
 public class XMLWorldBuilder implements IXMLWorldBuilder {
@@ -30,12 +32,14 @@ public class XMLWorldBuilder implements IXMLWorldBuilder {
 	/**
 	 * The roads from the XML
 	 */
-	private HashMap<Integer, XMLRoadBuilder> roads = new HashMap<Integer, XMLRoadBuilder>();
+	private HashMap<Integer, XMLRoadBuilder> roads = 
+		new HashMap<Integer, XMLRoadBuilder>();
 
 	/**
 	 * The junctions from the XML
 	 */
-	private HashMap<Integer, XMLJunctionBuilder> junctions = new HashMap<Integer, XMLJunctionBuilder>();
+	private HashMap<Integer, XMLJunctionBuilder> junctions = 
+		new HashMap<Integer, XMLJunctionBuilder>();
 
 	/**
 	 * All Way Points
@@ -58,15 +62,33 @@ public class XMLWorldBuilder implements IXMLWorldBuilder {
 	 * The XML document object
 	 */
 	private Document document;
+	
+	/**
+	 * The singleton instance
+	 */
+	private static IXMLWorldBuilder instance = null;
 
 	/**
-	 * Construct with a file
-	 * 
-	 * @param filename
-	 *            The file to read
-	 * @throws Exception
+	 * Private constructor
 	 */
-	public XMLWorldBuilder(String filename) throws JDOMException {
+	private XMLWorldBuilder() {}
+	
+	/**
+	 * Return the singleton instance
+	 * @return
+	 */
+	public static IXMLWorldBuilder getInstance() {
+		if (XMLWorldBuilder.instance == null) {
+			XMLWorldBuilder.instance = new XMLWorldBuilder();
+		}
+		
+		return XMLWorldBuilder.instance;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public void generate(String filename) throws InvalidXMLException, Exception {
 		this.file = new File(filename);
 
 		SAXBuilder builder = new SAXBuilder(true);
@@ -78,25 +100,23 @@ public class XMLWorldBuilder implements IXMLWorldBuilder {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		doGenerate();
 	}
-
+	
 	/**
-	 * Construct with the direct dom object
-	 * 
-	 * @param document
-	 *            JDom Document object
-	 * @throws Exception
+	 * {@inheritDoc}
 	 */
-	public XMLWorldBuilder(Document document) {
+	public void generate(Document document) throws InvalidXMLException, Exception {
 		this.document = document;
+		
+		doGenerate();
 	}
-
+	
 	/**
-	 * Construct with the file name of global constants
-	 * 
-	 * @throws JDOMException
+	 * {@inheritDoc}
 	 */
-	public XMLWorldBuilder() throws JDOMException {
+	public void generate() throws Exception {
 		this.file = new File(GlobalConstants.getInstance().getStreetXMLSchema());
 
 		SAXBuilder builder = new SAXBuilder(true);
@@ -108,12 +128,17 @@ public class XMLWorldBuilder implements IXMLWorldBuilder {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		doGenerate();
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Do the real generation of the world 
+	 *
+	 * @throws InvalidXMLException
+	 * @throws Exception
 	 */
-	public void generate() throws Exception {
+	private void doGenerate() throws InvalidXMLException, Exception {
 		Element root = this.document.getRootElement();
 
 		List<?> roads = root.getChildren("road");
@@ -122,13 +147,13 @@ public class XMLWorldBuilder implements IXMLWorldBuilder {
 		for (int i = 0; i < roads.size(); i++) {
 			Element e = (Element) roads.get(i);
 			Integer id = Integer.parseInt(e.getAttributeValue("id"));
-			this.roads.put(id, new XMLRoadBuilder(e, this));
+			this.roads.put(id, new XMLRoadBuilder(e));
 		}
 
 		for (int i = 0; i < junctions.size(); i++) {
 			Element e = (Element) junctions.get(i);
 			Integer id = Integer.parseInt(e.getAttributeValue("id"));
-			this.junctions.put(id, new XMLJunctionBuilder(e, this));
+			this.junctions.put(id, new XMLJunctionBuilder(e));
 		}
 
 		this.scale = Float.parseFloat(root.getAttributeValue("scale"));

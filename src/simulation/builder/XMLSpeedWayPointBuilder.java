@@ -26,8 +26,8 @@ public class XMLSpeedWayPointBuilder extends XMLWayPointBuilder {
 	 * @param wBuilder
 	 * @throws InvalidXMLException 
 	 */
-	public XMLSpeedWayPointBuilder(Element e, IXMLWorldBuilder wBuilder) throws InvalidXMLException {
-		super(e, wBuilder);
+	public XMLSpeedWayPointBuilder(Element e) throws InvalidXMLException {
+		super(e);
 	}
 
 	/**

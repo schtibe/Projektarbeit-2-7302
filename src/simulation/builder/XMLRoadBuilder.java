@@ -37,9 +37,8 @@ public class XMLRoadBuilder extends XMLObjectBuilder {
 	/**
 	 * Initialize
 	 */
-	public XMLRoadBuilder(Element e, IXMLWorldBuilder wBuilder)
-			throws InvalidXMLException {
-		super(e, wBuilder);
+	public XMLRoadBuilder(Element e) throws InvalidXMLException {
+		super(e);
 		this.position = this.getRoadPosition();
 		this.road = this.createRoad();
 	}
@@ -139,8 +138,9 @@ public class XMLRoadBuilder extends XMLObjectBuilder {
 		List<IXMLRoadSegmentBuilder> roadSegments = new ArrayList<IXMLRoadSegmentBuilder>();
 		for (int i = 0; i < roadSegmentsElem.size(); i++) {
 			roadSegments.add(new XMLRoadSegmentBuilder(
-					(Element) roadSegmentsElem.get(i), this.getWorldBuilder(),
-					this.position));
+				(Element) roadSegmentsElem.get(i), 
+				this.position)
+			);
 		}
 
 		Collections.sort(roadSegments);
@@ -163,7 +163,7 @@ public class XMLRoadBuilder extends XMLObjectBuilder {
 				new XMLRightLaneBuilder(
 					(Element) rightLanesElem.get(i), 
 					position,
-					this.worldBuilder
+					XMLWorldBuilder.getInstance()
 				)
 			);
 		}
@@ -186,7 +186,7 @@ public class XMLRoadBuilder extends XMLObjectBuilder {
 				new XMLLeftLaneBuilder(
 					(Element) leftLanesElem.get(i), 
 					position,
-					this.worldBuilder
+					XMLWorldBuilder.getInstance()
 				)
 			);
 		}
