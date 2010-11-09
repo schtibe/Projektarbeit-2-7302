@@ -2,9 +2,11 @@ package simulation.builder;
 
 import org.jdom.Element;
 
+import common.IVector;
 import common.Vector;
 
 import environment.ILane;
+import environment.LaneLengthExceededException;
 import environment.SignWayPoint;
 import environment.SpeedWayPoint;
 
@@ -14,11 +16,6 @@ import environment.SpeedWayPoint;
  * Currently not in use due to missing time
  */
 public class XMLSpeedWayPointBuilder extends XMLWayPointBuilder {
-	/**
-	 * The speed limit of the way point
-	 */
-	int speed;
-
 	/**
 	 * Initialize
 	 * 
@@ -37,10 +34,42 @@ public class XMLSpeedWayPointBuilder extends XMLWayPointBuilder {
 	public SignWayPoint createWayPoint(ILane lane) {
 		return new SpeedWayPoint(
 				lane, 
-				this.speed, 
-				new Vector(
-						new float[] {1.0f, 1.0f}
-				)
+				this.readSpeed(), 
+				this.getWayPointPosition(lane)
 		); 
+	}
+	
+	/**
+	 * Calculate the position of the way point
+	 * @param lane
+	 * @return
+	 */
+	private IVector getWayPointPosition(ILane lane) {
+		float pos = this.readPosition();
+		
+		IVector position = null;
+		try {
+			position = lane.getVehiclePosition(pos);
+		} catch (LaneLengthExceededException e) {
+			// forget it, it is already checked by the XSD
+		}
+		
+		return position;
+	}
+	
+	/**
+	 * Return the position given by the XML
+	 * @return
+	 */
+	private float readPosition() {
+		return Float.parseFloat(this.elem.getAttributeValue("position"));
+	}
+	
+	/**
+	 * Return the road speed given by the XML
+	 * @return
+	 */
+	private int readSpeed() {
+		return Integer.parseInt(this.elem.getAttributeValue("value"));
 	}
 }
