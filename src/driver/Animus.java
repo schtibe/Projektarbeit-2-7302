@@ -7,6 +7,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import simulation.DriverEvent;
 import simulation.EventQueue;
 import simulation.IEventTarget;
+import simulation.VehicleEvent;
 import car.IVehicle;
 import car.Vehicle;
 import environment.IJunctionDecision;
@@ -27,6 +28,7 @@ public class Animus {
 	protected Character character;
 	protected IVehicle vehicle;
 	protected DriverEvent event;
+	protected int targetSpeed;
 	
 	private Queue<IWayPoint> seenWayPoints;
 	
@@ -63,7 +65,15 @@ public class Animus {
 	 * @param waypoint
 	 */
 	public void handleWayPoint (SpeedWayPoint waypoint){
-	//System.out.println("speedy goncalez");
+		System.out.println("handling speed wayPoint");
+		System.out.println("original target speed: "+targetSpeed);
+		System.out.println("car speed at this point:"+vehicle.getSpeed());
+		System.out.println("new target speed: "+waypoint.getSpeedLimit());
+		targetSpeed = waypoint.getSpeedLimit();
+		if (vehicle.getSpeed() > (float)targetSpeed){
+			VehicleEvent evt = new VehicleEvent(event.getTimeStamp()+physics.getUpdateInterval(),vehicle,-0.5f);
+			EventQueue.getInstance().addEvent(evt);
+		}
 	}
 	
 	/**
