@@ -88,19 +88,7 @@
 		<xs:attribute name="id" type="xs:integer" use="required"/>
 		<xs:attribute name="value" type="xs:integer" use="required"/>
 		<xs:attribute name="position" type="float" use="required"/>
-		<xs:attribute name="direction" type="xs:string" use="required"/> <!-- should probably something else that string to restrict to right, left, both -->
 	</xs:complexType>
-	
-	<!-- Definition of simple type direction -->
-	
-	<!--<xs:simpleType name="direction">
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="left"/>
-			<xs:enumeration value="right"/>
-			<xs:enumeration value="both"/>
-		</xs:restriction>
-	</xs:simpleType>
-	-->
 	
 	<!-- Defintion of simple type float -->
 	

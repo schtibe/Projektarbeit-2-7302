@@ -35,6 +35,12 @@ public class XMLSpeedWayPointBuilder extends XMLWayPointBuilder {
 	 */
 	@Override
 	public SignWayPoint createWayPoint(ILane lane) {
-		return new SpeedWayPoint(lane, this.speed, new Vector(new float[] {1.0f, 1.0f})); // TODO the position?
+		return new SpeedWayPoint(
+				lane, 
+				this.speed, 
+				new Vector(
+						new float[] {1.0f, 1.0f}
+				)
+		); 
 	}
 }
