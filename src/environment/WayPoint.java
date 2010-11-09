@@ -33,14 +33,14 @@ public abstract class WayPoint implements IWayPoint {
 	 */
 
 	@Override
-	public abstract float getXPos() throws Exception;
+	public abstract float getXPos();
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	
 	@Override
-	public abstract float getYPos() throws Exception;
+	public abstract float getYPos();
 	
 	
 	public String toString(){
