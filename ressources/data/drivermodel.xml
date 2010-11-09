@@ -23,7 +23,7 @@
 		<leftlanes>
 			<lane id="1" width="1" >
 				<waypoints>
-					<SpeedWaypoint id="1" value="50" position="0.1"/>
+					<SpeedWaypoint id="1" value="50" position="0.1" direction="right"/>
 				</waypoints>
 			</lane>
 		</leftlanes>
@@ -41,7 +41,7 @@
 		<rightlanes>
 			<lane id="1" width="1" >
 				<waypoints>
-					<SpeedWaypoint id="1" value="80" position="0.1"/>
+					<SpeedWaypoint id="1" value="80" position="0.1" direction="right"/>
 				</waypoints>
 			</lane>
 		</rightlanes>

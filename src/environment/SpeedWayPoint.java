@@ -44,7 +44,7 @@ public class SpeedWayPoint extends SignWayPoint {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public float getXPos() throws Exception {
+	public float getXPos(){
 		return this.position.getComponent(0);
 	}
 
@@ -52,7 +52,7 @@ public class SpeedWayPoint extends SignWayPoint {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public float getYPos() throws Exception {
+	public float getYPos(){
 		return this.position.getComponent(1);
 	}
 }
