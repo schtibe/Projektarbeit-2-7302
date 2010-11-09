@@ -53,7 +53,7 @@ public class PlacableTreeNode implements IPlacableManager {
 	 */
 	
 	@Override
-	public void add(IPlacable placable) throws Exception {
+	public void add(IPlacable placable){
 		if (this.maxDepth > 0){
 			if (subNodes == null){
 				subNodes = new PlacableTreeNode[4];

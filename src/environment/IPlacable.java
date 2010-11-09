@@ -5,16 +5,14 @@ public interface IPlacable {
 	/**
 	 * the actual x coordinate of the IPlacable element
 	 * @return float
-	 * @throws Exception
 	 */
 	
-	float getXPos() throws Exception;
+	float getXPos();
 	
 	/**
 	 * the actual y coordinate of the IPlacable element
-	 * @return
-	 * @throws Exception
+	 * @return float
 	 */
 	
-	float getYPos() throws Exception;
+	float getYPos();
 }
