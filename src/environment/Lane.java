@@ -167,7 +167,6 @@ public class Lane implements ILane {
 	 * - Add the lane positions to the association hash map (see {@link #lanePositions})
 	 */
 	private void initializeLaneSegments() {
-		List<Float> segments = new ArrayList<Float>();
 		
 		ILaneSegment<?> curSeg = this.startSegment;
 		List<Float> laneSegmentDistances = new ArrayList<Float>();

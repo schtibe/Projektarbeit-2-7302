@@ -9,13 +9,6 @@ import environment.SignWayPoint;
  */
 public interface IXMLWayPointBuilder {
 	/**
-	 * Return the direction
-	 * 
-	 * @return the direction
-	 */
-	public direction getDirection();
-
-	/**
 	 * Return the position
 	 * 
 	 * @return position
