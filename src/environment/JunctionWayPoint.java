@@ -1,5 +1,8 @@
 package environment;
 
+import gui.IUIAdapterWayPoint;
+import gui.UIElementFactory;
+
 import common.IVector;
 
 import driver.Animus;
@@ -86,6 +89,19 @@ public class JunctionWayPoint extends WayPoint {
 	@Override
 	public void visitHandleWayPoint(Animus animus) {
 		animus.handleWayPoint(this);
+	}
+
+
+	
+	/**
+	 * {@inheritDoc}
+	 * @throws Exception 
+	 */
+	public IUIAdapterWayPoint<?> visitUIFactory(
+			float scale,
+			IVector offsetVector
+	) throws Exception {
+		return UIElementFactory.getUIElement(this, scale, offsetVector);
 	}
 
 }

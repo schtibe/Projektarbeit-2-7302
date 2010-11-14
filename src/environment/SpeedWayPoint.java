@@ -1,5 +1,8 @@
 package environment;
 
+import gui.IUIAdapterWayPoint;
+import gui.UIElementFactory;
+
 import common.IVector;
 
 import driver.Animus;
@@ -55,4 +58,13 @@ public class SpeedWayPoint extends SignWayPoint {
 	public float getYPos(){
 		return this.position.getComponent(1);
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 * @throws Exception 
+	 */
+	public IUIAdapterWayPoint<SpeedWayPoint> visitUIFactory(float scale, IVector offsetVector) throws Exception {
+		return UIElementFactory.getUIElement(this, scale, offsetVector);
+	}
+
 }

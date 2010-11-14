@@ -1,14 +1,16 @@
 package gui;
 
-import driver.IDriverView;
+import car.IVehicle;
+
+import common.IVector;
+
 import environment.IGaia;
 import environment.ILane;
 import environment.ILaneSegment;
 import environment.ITrafficCarrier;
 import environment.IWayPoint;
-import car.IVehicle;
-
-import common.IVector;
+import environment.JunctionWayPoint;
+import environment.SpeedWayPoint;
 
 
 /**
@@ -39,7 +41,8 @@ public class UIElementFactory {
 	}
 	
 	/**
-	 * generates a new IUIAdapterGAIA
+	 * Generates a new IUIAdapterGAIA
+	 * b
 	 * @param GAIA
 	 * @param xMax
 	 * @param yMax
@@ -51,7 +54,8 @@ public class UIElementFactory {
 	}
 	
 	/**
-	 * generates a new IUIAdapterVehicle
+	 * Generates a new IUIAdapterVehicle
+	 * 
 	 * @param vehicle
 	 * @param scale
 	 * @param offsetVector
@@ -63,7 +67,8 @@ public class UIElementFactory {
 	}
 	
 	/**
-	 * generates a new IUIAdapterLaneSegment
+	 * Generates a new IUIAdapterLaneSegment
+	 * 
 	 * @param laneSegment
 	 * @return a new IUIAdapterLaneSegment
 	 * @throws Exception
@@ -73,14 +78,52 @@ public class UIElementFactory {
 	}
 	
 	/**
-	 * generates a new IUIAdapterWayPoint
+	 * Generates a new IUIAdapterWayPoint
+	 * 
 	 * @param wayPoint
 	 * @param scale
 	 * @param offsetVector
 	 * @return a new IUIAdapterWayPoint
 	 * @throws Exception
 	 */
-	public static IUIAdapterWayPoint<?> getUIElement(IWayPoint wayPoint, float scale, IVector offsetVector) throws Exception {
-		return new UIAdapterWayPoint(wayPoint, scale, offsetVector);
+	public static IUIAdapterWayPoint<?> getUIElement(
+			IWayPoint wayPoint, 
+			float scale, 
+			IVector offsetVector
+	) throws Exception {
+		return wayPoint.visitUIFactory(scale, offsetVector); 
+	}
+	
+	/**
+	 * Create an adapter for 
+	 * 
+	 * @param wayPoint
+	 * @param scale
+	 * @param offsetVector
+	 * @return
+	 * @throws Exception 
+	 */
+	public static IUIAdapterSpeedWayPoint getUIElement(
+			SpeedWayPoint wayPoint,
+			float scale,
+			IVector offsetVector
+	) throws Exception {
+		return new UIAdapterSpeedWayPoint(wayPoint, scale, offsetVector);
+	}
+	
+	/**
+	 * 
+	 * @param wayPoint
+	 * @param scale
+	 * @param offsetVector
+	 * @return
+	 * @throws Exception 
+	 */
+	public static IUIAdapterJunctionWayPoint getUIElement(
+			JunctionWayPoint wayPoint,
+			float scale,
+			IVector offsetVector
+	) throws Exception {
+		return new UIAdapterJunctionWayPoint(wayPoint, scale, offsetVector);
 	}
 }
