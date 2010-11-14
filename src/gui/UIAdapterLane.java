@@ -1,8 +1,5 @@
 package gui;
 
-import environment.ILane;
-import environment.ILaneSegment;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +7,9 @@ import org.newdawn.slick.geom.Path;
 
 import common.IVector;
 import common.Vector;
+
+import environment.ILane;
+import environment.ILaneSegment;
 
 
 /**

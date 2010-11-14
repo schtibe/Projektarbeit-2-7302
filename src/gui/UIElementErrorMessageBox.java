@@ -49,11 +49,13 @@ public class UIElementErrorMessageBox {
 		//Hide GUI
 		//hide.disable();
 	    hide.startEffect(EffectEventId.onCustom);
+	    /*
 	    for(Element e1 : hide.getElements()) {
 	    	//e1.setFocusable(false);
 	    	//e1.setVisible(false);
 	    	//e1.disable();
 	    }
+	    */
 		Element1.setVisibleToMouseEvents(true);
 	}
 }

@@ -1,13 +1,13 @@
 package gui;
-import environment.ILane;
-import environment.ITrafficCarrier;
-
 import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.List;
 
 import common.IVector;
 import common.Vector;
+
+import environment.ILane;
+import environment.ITrafficCarrier;
 
 /**
  * A traffic carrier implementation

@@ -1,10 +1,10 @@
 package gui;
 
-import environment.ILane;
-
 import org.newdawn.slick.geom.Shape;
 
 import common.IVector;
+
+import environment.ILane;
 
 /**
  * The adapter interface for a lane

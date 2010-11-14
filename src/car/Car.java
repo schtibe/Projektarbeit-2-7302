@@ -8,7 +8,7 @@ import environment.ILane;
 
 /**
  * The first implemented vehicle
- *
+ * 
  */
 public class Car extends Vehicle {
 	/**

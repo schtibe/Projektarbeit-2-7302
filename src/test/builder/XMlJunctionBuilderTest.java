@@ -12,10 +12,11 @@ import org.jdom.input.SAXBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
-import common.IVector;
-
 import simulation.builder.IXMLWorldBuilder;
 import simulation.builder.XMLJunctionBuilder;
+
+import common.IVector;
+
 import environment.CrossRoads;
 import environment.IJunction;
 import environment.IRoad;

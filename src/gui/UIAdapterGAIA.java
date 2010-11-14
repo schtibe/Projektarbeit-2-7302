@@ -1,12 +1,5 @@
 package gui;
 
-import driver.Character;
-import driver.Drug;
-import driver.Physics;
-import environment.IGaia;
-import environment.ITrafficCarrier;
-import environment.IWayPoint;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +9,13 @@ import car.VehicleFactory.VehicleType;
 import common.GlobalConstants;
 import common.IVector;
 import common.Vector;
+
+import driver.Character;
+import driver.Drug;
+import driver.Physics;
+import environment.IGaia;
+import environment.ITrafficCarrier;
+import environment.IWayPoint;
 
 /**
  * A gaia adapter implementation 
@@ -87,7 +87,11 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 		 * Generate all wayPoints
 		 */
 		for(IWayPoint wayPoint : this.mainObject.getWayPoints()) {
-			this.wayPoints.add(UIElementFactory.getUIElement(wayPoint, this.scale, correctionVector));
+			this.wayPoints.add(UIElementFactory.getUIElement(
+					wayPoint, 
+					this.scale, 
+					correctionVector
+			));
 		}
 		
 	}
@@ -98,7 +102,6 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 	 */
 	private float calculateScale() {
 		float xScale, yScale;
-		IVector maxPos, minPos;
 		
 		//Try to fit into the screen
 		xScale = xMax / (this.maxPos.getComponent(0) - this.minPos.getComponent(0));

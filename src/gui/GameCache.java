@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.Image;
 /*
  * Holds information which are relevant for the gui
  */

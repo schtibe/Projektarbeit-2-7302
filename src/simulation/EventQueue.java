@@ -2,8 +2,6 @@ package simulation;
 
 import java.util.PriorityQueue;
 
-import common.GlobalConstants;
-
 /**
  * The queue of all events
  * 

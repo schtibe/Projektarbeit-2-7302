@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import common.IVector;
 import common.Vector;
+
 import driver.DriverView;
 import environment.IPlacable;
 import environment.SpeedWayPoint;

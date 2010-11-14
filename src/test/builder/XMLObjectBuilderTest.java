@@ -17,6 +17,7 @@ import simulation.builder.XMLObjectBuilder;
 
 import common.IVector;
 import common.Vector;
+
 import environment.IJunction;
 import environment.IRoad;
 import environment.IWayPoint;

@@ -31,11 +31,12 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle> implements IUIAdapterV
 		this.oldDirection = this.mainObject.getDirection().normalize();
 		float cosAlpha = this.oldDirection.dot(X_AXIS);
 		this.angle = (float) Math.acos(cosAlpha);
-		this.boundingBox = new Rectangle(0,
-										 0,
-										 this.mainObject.getDimension().getLength() * scale *5,
-										 this.mainObject.getDimension().getWidth() * scale *5
-										 );	
+		this.boundingBox = new Rectangle(
+				0,
+				0,
+				this.mainObject.getDimension().getLength() * scale *5,
+				this.mainObject.getDimension().getWidth() * scale *5
+		);	
 
 		if (oldDirection.getComponent(1) < 0) {
 			this.boundingBox = this.boundingBox.transform(Transform.createRotateTransform(-this.angle)); 

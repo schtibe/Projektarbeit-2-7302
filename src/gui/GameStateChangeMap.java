@@ -16,7 +16,6 @@ import common.GlobalConstants;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.dropdown.controller.DropDownControl;
-import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.input.mouse.MouseInputEvent;
 import de.lessvoid.nifty.lwjglslick.render.RenderDeviceLwjgl;
 import de.lessvoid.nifty.lwjglslick.sound.SlickSoundDevice;

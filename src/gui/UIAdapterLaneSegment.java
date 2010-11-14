@@ -1,11 +1,11 @@
 package gui;
 
-import environment.ILaneSegment;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import common.IVector;
+
+import environment.ILaneSegment;
 
 /**
  * A lane segment adapter implementation
