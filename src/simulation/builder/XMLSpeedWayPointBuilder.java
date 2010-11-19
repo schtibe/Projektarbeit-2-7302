@@ -44,11 +44,11 @@ public class XMLSpeedWayPointBuilder extends XMLWayPointBuilder {
 	 * @return
 	 */
 	private IVector getWayPointPosition(ILane lane) {
-		float pos = this.readPosition();
+		float pos = this.readPosition() * 100;
 		
 		IVector position = null;
 		try {
-			position = lane.getVehiclePosition(pos);
+			position = lane.getPositionOnLaneByPercentage(pos);
 		} catch (LaneLengthExceededException e) {
 			// forget it, it is already checked by the XSD
 		}

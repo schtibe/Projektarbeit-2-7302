@@ -11,9 +11,16 @@ public interface ILane {
 	 * Calculate the vehicle's position
 	 * 
 	 * @param drivenLaneDistance
-	 * TODO the math
 	 */
-	public IVector getVehiclePosition(float drivenLaneDistance) throws LaneLengthExceededException;
+	public IVector getPositionOnLane(float drivenLaneDistance) throws LaneLengthExceededException;
+	
+	/**
+	 * Calculate the position on a lane by the percentage
+	 * @param position
+	 * @return
+	 * @throws LaneLengthExceededException
+	 */
+	public IVector getPositionOnLaneByPercentage(float position) throws LaneLengthExceededException; 
 	
 	/**
 	 * Return all sign way points that a car can see

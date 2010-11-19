@@ -80,7 +80,7 @@ public interface IVehicle extends IEventTarget<VehicleEvent> {
 	 * 
 	 * - Adjust the speed - Get the new driven lane distance - Save the position
 	 * which is calculated by the lane (see
-	 * {@link Lane#getVehiclePosition(float)})
+	 * {@link Lane#getPositionOnLane(float)})
 	 */
 	public abstract void updatePosition(float timestep)
 			throws CarCannotReverseException;

@@ -34,7 +34,7 @@ public class CarTest {
 		this.lane = new ILane() {
 
 			@Override
-			public IVector getVehiclePosition(float drivenDistance) {
+			public IVector getPositionOnLane(float drivenDistance) {
 				return new Vector(
 						new float[]{
 								carPosition.getComponent(0),
@@ -121,7 +121,7 @@ public class CarTest {
 	public void testChangeLange() {
 		ILane newlane = new ILane() {
 			@Override
-			public IVector getVehiclePosition(float drivenDistance) {
+			public IVector getPositionOnLane(float drivenDistance) {
 				return new Vector(new float[]{
 						carPosition.getComponent(0),
 						carPosition.getComponent(1)}

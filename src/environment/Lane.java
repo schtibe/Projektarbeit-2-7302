@@ -109,7 +109,7 @@ public class Lane implements ILane {
 	/**
 	 * {@inheritDoc}
 	 */
-	public IVector getVehiclePosition(float drivenDistance) throws LaneLengthExceededException {
+	public IVector getPositionOnLane(float drivenDistance) throws LaneLengthExceededException {
 		if (drivenDistance > this.length) {
 		//System.out.println("you have to change lane now!");
 			throw new LaneLengthExceededException();
@@ -325,5 +325,17 @@ public class Lane implements ILane {
 		} catch (Exception e) {
 			e.printStackTrace(); // not sure what this exception is about
 		}
+	}
+
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public IVector getPositionOnLaneByPercentage(float position)
+			throws LaneLengthExceededException {
+		float absolutePos = this.length / 100 * position;
+		
+		return this.getPositionOnLane(absolutePos);
 	}
 }

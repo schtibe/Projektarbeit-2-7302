@@ -60,7 +60,7 @@ public class JunctionWayPoint extends WayPoint {
 	public float getXPos (){
 		if (this.position == null){
 			try{
-				this.position = this.lane.getVehiclePosition((float)(this.lane.getLength()*0.8f));
+				this.position = this.lane.getPositionOnLane((float)(this.lane.getLength()*0.8f));
 			}catch (Exception ex){
 				System.out.println("Lane Length Exception on Junciton Way Point");
 			}
@@ -75,7 +75,7 @@ public class JunctionWayPoint extends WayPoint {
 	public float getYPos (){
 		if (this.position == null){
 			try{
-				this.position = this.lane.getVehiclePosition((float)(this.lane.getLength()*0.8f));
+				this.position = this.lane.getPositionOnLane((float)(this.lane.getLength()*0.8f));
 			}catch (Exception ex){
 				System.out.println("Lane Length Exception on Junciton Way Point");
 			}

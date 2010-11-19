@@ -139,11 +139,11 @@ public abstract class Vehicle implements IVehicle {
 		this.lanes.add(lane);
 		this.drivenLaneDistance = drivenLaneDistance;
 		try {
-			this.position = this.lanes.peek().getVehiclePosition(
+			this.position = this.lanes.peek().getPositionOnLane(
 					this.drivenLaneDistance);
 		} catch (LaneLengthExceededException e) {
 			try {
-				this.position = this.lanes.peek().getVehiclePosition(0);
+				this.position = this.lanes.peek().getPositionOnLane(0);
 			} catch (LaneLengthExceededException e1) {
 				e1.printStackTrace();
 			}
@@ -191,7 +191,7 @@ public abstract class Vehicle implements IVehicle {
 		this.drivenLaneDistance += (this.speed / 36)
 				* GlobalConstants.getInstance().getScale();
 		try {
-			this.position = this.lanes.peek().getVehiclePosition(
+			this.position = this.lanes.peek().getPositionOnLane(
 					this.drivenLaneDistance);
 		} catch (LaneLengthExceededException e) {
 			// change lane
@@ -199,7 +199,7 @@ public abstract class Vehicle implements IVehicle {
 					- this.lanes.peek().getLength();
 			this.animus.laneChange(this.lanes.poll());
 			try {
-				this.position = this.lanes.peek().getVehiclePosition(
+				this.position = this.lanes.peek().getPositionOnLane(
 						this.drivenLaneDistance);
 			} catch (LaneLengthExceededException e1) {
 			} catch (NullPointerException e2) {
