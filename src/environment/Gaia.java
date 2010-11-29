@@ -5,7 +5,6 @@ import java.util.List;
 
 import simulation.DriverEvent;
 import simulation.EventQueue;
-import simulation.IEventTarget;
 import simulation.Simulator;
 import simulation.builder.IXMLWorldBuilder;
 import simulation.builder.XMLWorldBuilder;
@@ -55,22 +54,14 @@ public class Gaia implements IGaia {
 	}
 	
 	/**
-	 * resets the gaia
-	 */
-	
-	public void reset() throws Exception {
-		Gaia.instance = new Gaia();
-	}
-	
-	/**
 	 * destroy the singleton instance
 	 */
-	
+	@Override
 	public void destroy() {
 		Gaia.instance = null;
 	}
 	
-	/*
+	/**
 	 * Junctions
 	 * @see environment.IGaia#getJunctions()
 	 */
@@ -81,17 +72,18 @@ public class Gaia implements IGaia {
 		return Gaia.junctions;
 	}
 
-	/*
+	/**
 	 * Roads
 	 * @see environment.IGaia#getRoads()
 	 */
 	private static List<IRoad> roads;
+	
 	@Override
 	public List<IRoad> getRoads() {
 		return Gaia.roads;
 	}
 	
-	/*
+	/**
 	 * Vehicle
 	 * @see environment.IGaia#setVehicle(car.IVehicle)
 	 */
@@ -124,6 +116,7 @@ public class Gaia implements IGaia {
 	 * get a list of all the way points
 	*/ 
 	
+	@Override
 	public List<IWayPoint> getWayPoints() {
 		return Gaia.waypoints;
 	}
@@ -150,6 +143,8 @@ public class Gaia implements IGaia {
 	 * The world builder call to action
 	 */
 	public void rebuildWorld() throws Exception {
+		XMLWorldBuilder.reset();
+		WayPointManager.destroy();
 		IXMLWorldBuilder world = XMLWorldBuilder.getInstance(); 
 			
 		XMLWorldBuilder.getInstance().generate(GlobalConstants.getInstance().getStreetXMLSchema());
@@ -170,6 +165,7 @@ public class Gaia implements IGaia {
 	 * get a list of all traffic carriers
 	 */
 	
+	@Override
 	public List<ITrafficCarrier> getTrafficCarriers() {
 		List<ITrafficCarrier> everything = new ArrayList<ITrafficCarrier>();
 		everything.addAll(Gaia.roads);
@@ -188,6 +184,7 @@ public class Gaia implements IGaia {
 	 * @param physics The physics of the driver
 	 * @throws Exception
 	 */
+	@Override
 	public IVehicle addRoadUser(
 			VehicleFactory.VehicleType vehicleType, 
 			ILane lane, 
@@ -213,6 +210,7 @@ public class Gaia implements IGaia {
 	 * @param physics The physics of the driver
 	 * @throws Exception
 	 */
+	@Override
 	public IVehicle addRoadUser(
 			VehicleFactory.VehicleType vehicleType, 
 			float drivenLaneDistance,
@@ -241,7 +239,7 @@ public class Gaia implements IGaia {
 		EventQueue.getInstance().addEvent(
 			new DriverEvent(
 				1,
-				(IEventTarget<DriverEvent>)driver
+				driver
 			).setMonitoring(true)
 		);
 	}

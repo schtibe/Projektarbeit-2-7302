@@ -43,6 +43,13 @@ public class WayPointManager implements IPlacableManager {
 		}
 		return WayPointManager.instance;
 	}
+	
+	/**
+	 * Destroy the Way Point manager 
+	 */
+	public static void destroy() {
+		WayPointManager.instance = null;
+	}
 
 	/**
 	 * {@inheritDoc}

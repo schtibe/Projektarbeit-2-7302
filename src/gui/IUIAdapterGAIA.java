@@ -32,11 +32,6 @@ public interface IUIAdapterGAIA<E>  extends IUIAdapter<E> {
 	public void addVehicle(IUIAdapterLane<?> lane) throws Exception;
 	
 	/**
-	 * Re-init the gaia
-	 */
-	public void reset() throws Exception;
-	
-	/**
 	 * Destroys the gaia
 	 */
 	public void destroy();
