@@ -71,6 +71,7 @@ public interface ILaneSegment<E> {
 	 * {@deprecated}
 	 */
 	
+	@Deprecated
 	public IVector[] getBezierPoints();
 	
 	/**
@@ -92,6 +93,7 @@ public interface ILaneSegment<E> {
 	 * @return String
 	 */
 	
+	@Override
 	public String toString();
 	
 	/**
@@ -99,6 +101,7 @@ public interface ILaneSegment<E> {
 	 * @return
 	 */
 	
+	@Deprecated
 	public List<SignWayPoint> getAllWayPoints();
 	
 	/**

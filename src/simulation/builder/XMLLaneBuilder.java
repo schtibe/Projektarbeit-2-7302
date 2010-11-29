@@ -43,11 +43,6 @@ public abstract class XMLLaneBuilder extends LaneBuilder implements
 	 * The XML element
 	 */
 	protected Element elem;
-	
-	/**
-	 * The world builder object
-	 */
-	protected IXMLWorldBuilder worldBuilder;
 
 	/**
 	 * Construct
@@ -55,10 +50,9 @@ public abstract class XMLLaneBuilder extends LaneBuilder implements
 	 * @param e The XML element
 	 * @param roadPosition
 	 */
-	public XMLLaneBuilder(Element e, IVector roadPosition, IXMLWorldBuilder wb) {
+	public XMLLaneBuilder(Element e, IVector roadPosition) {
 		this.elem = e;
-		this.roadPosition = (IVector) roadPosition.clone();
-		this.worldBuilder = wb;
+		this.roadPosition = roadPosition.clone();
 
 		this.laneWidth = Float.parseFloat(this.elem.getAttributeValue("width"));
 	}

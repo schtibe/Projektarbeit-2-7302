@@ -37,6 +37,7 @@ public class Simulator implements IEventTarget<SimulatorEvent> {
 		}
 	}
 
+	@Override
 	public void handleEvent(SimulatorEvent event) {
 		// TODO Auto-generated method stub
 	}

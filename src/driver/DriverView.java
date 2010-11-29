@@ -55,6 +55,7 @@ public class DriverView implements IDriverView {
 	/**
 	 * sets the angle 
 	 */
+	@Override
 	public void setAngle (float value){
 		this.angle = value;
 	}
@@ -63,6 +64,7 @@ public class DriverView implements IDriverView {
 	 * sets the distance
 	 */
 	
+	@Override
 	public void setDistance (float value){
 		this.distance = value;
 	}
@@ -71,6 +73,7 @@ public class DriverView implements IDriverView {
 	 * sets the direction vector
 	 */
 	
+	@Override
 	public void setDirection (IVector value){
 		this.direction = value;
 	}
@@ -79,6 +82,7 @@ public class DriverView implements IDriverView {
 	 * sets the position
 	 */
 	
+	@Override
 	public void setPosition (IVector value){
 		this.position = value;
 	}
@@ -87,6 +91,7 @@ public class DriverView implements IDriverView {
 	 * get the angle
 	 */
 	
+	@Override
 	public float getAngle (){
 		return this.angle;
 	}
@@ -95,6 +100,7 @@ public class DriverView implements IDriverView {
 	 * get the distance
 	 */
 	
+	@Override
 	public float getDistance (){
 		return this.distance;
 		
@@ -104,6 +110,7 @@ public class DriverView implements IDriverView {
 	 * get the position
 	 */
 	
+	@Override
 	public IVector getPosition (){
 		return this.position;
 	}
@@ -112,6 +119,7 @@ public class DriverView implements IDriverView {
 	 * get the direction vector
 	 */
 	
+	@Override
 	public IVector getDirection (){
 		return this.direction;
 	}
@@ -120,6 +128,7 @@ public class DriverView implements IDriverView {
 	 * returns a clone of the actual DriverView
 	 */
 	
+	@Override
 	public IDriverView clone (){
 		return new DriverView(this.direction,this.position,this.angle,this.distance);
 	}
@@ -128,6 +137,7 @@ public class DriverView implements IDriverView {
 	 * to string
 	 */
 	
+	@Override
 	public String toString(){
 		return new String("position: "+this.position.toString()+", direction: "+this.direction.toString()+", distance: "+this.distance);
 	}

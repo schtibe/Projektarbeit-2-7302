@@ -11,6 +11,7 @@ public class LaneTest extends TestCase {
 	
 	private Lane testLane;
 	
+	@Override
 	@Before
 	public void setUp() throws Exception {
 		

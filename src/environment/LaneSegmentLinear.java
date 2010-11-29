@@ -45,6 +45,7 @@ public class LaneSegmentLinear extends LaneSegment<ILaneSegmentQuadratic>
 	 * {@inheritDoc}
 	 */
 	
+	@Override
 	public IVector getPointOnCurve(float time){
 		if (time >= 0f && time <= 1f){
 			IVector result = relativeEndPoint.multiply(time);

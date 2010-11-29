@@ -36,6 +36,7 @@ public class UIAdapterSpeedWayPoint extends UIAdapter<SpeedWayPoint> implements 
 	/**
 	 * Return the speed limit
 	 */
+	@Override
 	public String toString() {
 		return "" + this.mainObject.getSpeedLimit();
 	}

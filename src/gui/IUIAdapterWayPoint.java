@@ -18,5 +18,6 @@ public interface IUIAdapterWayPoint<E> extends IUIAdapter<E> {
 	 * To String
 	 * @return a string
 	 */
+	@Override
 	public String toString();
 }

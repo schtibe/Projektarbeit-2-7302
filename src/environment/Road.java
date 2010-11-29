@@ -47,6 +47,7 @@ public class Road implements IRoad {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void setLeftLanes(List<ILane> leftLanes) {
 		this.leftLanes = leftLanes;
 	}
@@ -54,6 +55,7 @@ public class Road implements IRoad {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public List<ILane> getLeftLanes() {
 		return leftLanes;
 	}
@@ -61,6 +63,7 @@ public class Road implements IRoad {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void setRightLanes(List<ILane> rightLanes) {
 		this.rightLanes = rightLanes;
 	}
@@ -68,6 +71,7 @@ public class Road implements IRoad {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public List<ILane> getRightLanes() {
 		return rightLanes;
 	}
@@ -75,6 +79,7 @@ public class Road implements IRoad {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void setStartPoint(IVector startPoint) {
 		this.startPoint = startPoint;
 	}
@@ -83,6 +88,7 @@ public class Road implements IRoad {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public IVector getStartPoint() {
 		return startPoint;
 	}
@@ -90,6 +96,7 @@ public class Road implements IRoad {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void setEndPoint(IVector endPoint) {
 		this.endPoint = endPoint;
 	}
@@ -97,6 +104,7 @@ public class Road implements IRoad {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public IVector getEndPoint() {
 		return endPoint;
 	}

@@ -14,8 +14,8 @@ public class XMLLeftLaneBuilder extends XMLLaneBuilder {
 	 * @param e
 	 * @param roadPosition
 	 */
-	public XMLLeftLaneBuilder(Element e, IVector roadPosition, IXMLWorldBuilder wb) {
-		super(e, roadPosition, wb);
+	public XMLLeftLaneBuilder(Element e, IVector roadPosition) {
+		super(e, roadPosition);
 
 		this.direction = directionType.left;
 	}

@@ -64,6 +64,7 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public IVector getMinPos() {
 		return new Vector(new float[]
 				              {this.gPath.getMinX(),
@@ -73,6 +74,7 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public IVector getMaxPos() {
 		return new Vector(new float[]
 		                      {this.gPath.getMaxX(),
@@ -82,6 +84,7 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public Path getPath() {
 		return this.gPath;
 	}
@@ -89,6 +92,7 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void setScale(float scale) throws Exception {
 		this.scale = scale;
 		//calculate the new path
@@ -98,6 +102,7 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void move(IVector pos) {
 		this.gPath.setX(pos.getComponent(0));
 		this.gPath.setY(pos.getComponent(1));
@@ -106,6 +111,7 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public ILane getOriginalLane() {
 		return this.mainObject;
 	}

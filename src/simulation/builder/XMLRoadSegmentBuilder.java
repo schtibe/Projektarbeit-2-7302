@@ -77,6 +77,7 @@ public class XMLRoadSegmentBuilder extends XMLObjectBuilder implements
 	 * 
 	 * what's this for?
 	 */
+	@Override
 	public void setEndPoint(IVector endPoint) {
 		this.endPoint = endPoint.clone();
 	}
@@ -84,6 +85,7 @@ public class XMLRoadSegmentBuilder extends XMLObjectBuilder implements
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public IVector getEndPoint() {
 		return endPoint;
 	}
@@ -93,6 +95,7 @@ public class XMLRoadSegmentBuilder extends XMLObjectBuilder implements
 	 * 
 	 * what's this for?
 	 */
+	@Override
 	public void setStartPoint(IVector startPoint) {
 		this.startPoint = startPoint.clone();
 	}
@@ -100,6 +103,7 @@ public class XMLRoadSegmentBuilder extends XMLObjectBuilder implements
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public IVector getStartPoint() {
 		return startPoint;
 	}
@@ -107,6 +111,7 @@ public class XMLRoadSegmentBuilder extends XMLObjectBuilder implements
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public LaneSegmentLinear createLaneSegment(float offset,
 			directionType direction) throws Exception {
 		IVector vector = endPoint.sub(startPoint);

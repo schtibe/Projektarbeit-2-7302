@@ -57,5 +57,6 @@ public abstract class Event<E> implements IEvent {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public abstract void handleEvent() throws Exception;
 }

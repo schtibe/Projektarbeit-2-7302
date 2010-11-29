@@ -45,6 +45,7 @@ public class GameStateChangeMap extends BasicGameState implements
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public int getID() {
 		return ID;
 	}
@@ -52,6 +53,7 @@ public class GameStateChangeMap extends BasicGameState implements
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
 		this.container = container;
@@ -60,6 +62,7 @@ public class GameStateChangeMap extends BasicGameState implements
 		// create nifty (gui)
 		nifty = new Nifty(new RenderDeviceLwjgl(), new SoundSystem(
 				new SlickSoundDevice()), new InputSystem() {
+			@Override
 			public List<MouseInputEvent> getMouseEvents() {
 				ArrayList<MouseInputEvent> result = new ArrayList<MouseInputEvent>(
 						mouseEvents);
@@ -103,6 +106,7 @@ public class GameStateChangeMap extends BasicGameState implements
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) {
 		SlickCallable.enterSafeBlock();
 		nifty.render(false);
@@ -112,6 +116,7 @@ public class GameStateChangeMap extends BasicGameState implements
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) {
 		if (this.startSimulation) {
 			game.enterState(1);
@@ -119,6 +124,7 @@ public class GameStateChangeMap extends BasicGameState implements
 		container.setShowFPS(this.showFPS);
 	}
 
+	@Override
 	public void keyReleased(int key, char c) {
 
 		if (key == Input.KEY_F) {
@@ -131,6 +137,7 @@ public class GameStateChangeMap extends BasicGameState implements
 
 	}
 
+	@Override
 	public void mouseMoved(final int oldx, final int oldy, final int newx,
 			final int newy) {
 		mouseX = newx;
@@ -138,6 +145,7 @@ public class GameStateChangeMap extends BasicGameState implements
 		forwardMouseEventToNifty(mouseX, mouseY, mouseDown);
 	}
 
+	@Override
 	public void mousePressed(final int button, final int x, final int y) {
 		mouseX = x;
 		mouseY = y;
@@ -145,6 +153,7 @@ public class GameStateChangeMap extends BasicGameState implements
 		forwardMouseEventToNifty(mouseX, mouseY, mouseDown);
 	}
 
+	@Override
 	public void mouseReleased(final int button, final int x, final int y) {
 		mouseX = x;
 		mouseY = y;
@@ -158,12 +167,15 @@ public class GameStateChangeMap extends BasicGameState implements
 				- mouseY, mouseDown));
 	}
 
+	@Override
 	public void bind(Nifty nifty, Screen screen) {
 	}
 
+	@Override
 	public void onEndScreen() {
 	}
 
+	@Override
 	public void onStartScreen() {
 	}
 

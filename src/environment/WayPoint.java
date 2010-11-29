@@ -46,6 +46,7 @@ public abstract class WayPoint implements IWayPoint {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public String toString(){
 		try {
 			return (int)this.getXPos()+"/" + (int)this.getYPos();

@@ -86,6 +86,7 @@ public interface IVector extends Comparable<IVector> {
 	 * @return
 	 */
 
+	@Override
 	public String toString();
 
 	/**

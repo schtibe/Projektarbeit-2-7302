@@ -18,5 +18,6 @@ public interface IUIAdapterVehicle<E> extends IUIAdapter<E> {
 	 * Generates a sting, containing the relevant data
 	 * @return a string
 	 */
+	@Override
 	public String toString();
 }

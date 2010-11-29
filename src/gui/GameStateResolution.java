@@ -15,7 +15,6 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import de.lessvoid.nifty.EndNotify;
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.input.mouse.MouseInputEvent;
 import de.lessvoid.nifty.lwjglslick.render.RenderDeviceLwjgl;
 import de.lessvoid.nifty.lwjglslick.sound.SlickSoundDevice;
@@ -40,16 +39,19 @@ public class GameStateResolution extends BasicGameState implements ScreenControl
   private StateBasedGame game;
 
   
-  public int getID() {
+  @Override
+public int getID() {
     return ID;
   }
 
-  public void init(GameContainer container, StateBasedGame game) throws SlickException {
+  @Override
+public void init(GameContainer container, StateBasedGame game) throws SlickException {
     this.container = container;
     this.game = game;
     // create nifty (gui)
     nifty = new Nifty(new RenderDeviceLwjgl(), new SoundSystem(new SlickSoundDevice()), new InputSystem() {
-      public List<MouseInputEvent> getMouseEvents() {
+      @Override
+	public List<MouseInputEvent> getMouseEvents() {
         ArrayList<MouseInputEvent> result = new ArrayList<MouseInputEvent>(mouseEvents);
         mouseEvents.clear();
         return result;
@@ -58,17 +60,20 @@ public class GameStateResolution extends BasicGameState implements ScreenControl
     nifty.fromXml("ressources/gui/resolutionMenu.xml", "start", this);
   }
 
-  public void render(GameContainer container, StateBasedGame game, Graphics g) {
+  @Override
+public void render(GameContainer container, StateBasedGame game, Graphics g) {
     SlickCallable.enterSafeBlock();
     nifty.render(false);
     SlickCallable.leaveSafeBlock();
   }
 
-  public void update(GameContainer container, StateBasedGame game, int delta) {
+  @Override
+public void update(GameContainer container, StateBasedGame game, int delta) {
 	  container.setShowFPS(this.showFPS);
   }
 
-  public void keyReleased(int key, char c) {
+  @Override
+public void keyReleased(int key, char c) {
     
      /*
     if (key == Input.KEY_1) {
@@ -92,24 +97,24 @@ public class GameStateResolution extends BasicGameState implements ScreenControl
     
   }
 
-  private Element getElement(final String id) {
-    return nifty.getCurrentScreen().findElementByName(id);
-  }
 
-  public void mouseMoved(final int oldx, final int oldy, final int newx, final int newy) {
+  @Override
+public void mouseMoved(final int oldx, final int oldy, final int newx, final int newy) {
 	mouseX = newx;
     mouseY = newy;
     forwardMouseEventToNifty(mouseX, mouseY, mouseDown);
   }
 
-  public void mousePressed(final int button, final int x, final int y) {
+  @Override
+public void mousePressed(final int button, final int x, final int y) {
     mouseX = x;
     mouseY = y;
     mouseDown = true;
     forwardMouseEventToNifty(mouseX, mouseY, mouseDown);
   }
 
-  public void mouseReleased(final int button, final int x, final int y) {
+  @Override
+public void mouseReleased(final int button, final int x, final int y) {
 	mouseX = x;
     mouseY = y;
     mouseDown = false;
@@ -120,18 +125,22 @@ public class GameStateResolution extends BasicGameState implements ScreenControl
 	  mouseEvents.add(new MouseInputEvent(mouseX, container.getHeight() - mouseY, mouseDown));
   }
 
-  public void bind(Nifty nifty, Screen screen) {
+  @Override
+public void bind(Nifty nifty, Screen screen) {
   }
 
-  public void onEndScreen() {
+  @Override
+public void onEndScreen() {
   }
 
-  public void onStartScreen() {
+  @Override
+public void onStartScreen() {
   }
 
   public void quit() {
     nifty.getCurrentScreen().endScreen(new EndNotify() {
-      public void perform() {
+      @Override
+	public void perform() {
         container.exit();
       }
     });
@@ -139,7 +148,8 @@ public class GameStateResolution extends BasicGameState implements ScreenControl
   
   public void exit() {
 	  nifty.getCurrentScreen().endScreen(new EndNotify() {
-	      public void perform() {
+	      @Override
+		public void perform() {
 	        game.enterState(0);
 	      }
 	    });

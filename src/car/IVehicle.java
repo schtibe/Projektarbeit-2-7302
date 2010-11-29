@@ -95,6 +95,7 @@ public interface IVehicle extends IEventTarget<VehicleEvent> {
 	/**
 	 * Handle an Event, please implement in subclasses
 	 */
+	@Override
 	public abstract void handleEvent(VehicleEvent event);
 
 	/**

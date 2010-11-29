@@ -277,6 +277,7 @@ public class CrossRoads implements IJunction {
 	 * {@deprecated}
 	 */
 	
+	@Deprecated
 	@Override
 	public List<ILane> getImportantLanes(IDecision decision) {
 		// TODO Auto-generated method stub

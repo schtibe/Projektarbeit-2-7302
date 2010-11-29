@@ -85,9 +85,14 @@ public class XMLWorldBuilder implements IXMLWorldBuilder {
 		return XMLWorldBuilder.instance;
 	}
 	
+	public static void reset() {
+		XMLWorldBuilder.instance = null;
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void generate(String filename) throws InvalidXMLException, Exception {
 		this.file = new File(filename);
 
@@ -107,6 +112,7 @@ public class XMLWorldBuilder implements IXMLWorldBuilder {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void generate(Document document) throws InvalidXMLException, Exception {
 		this.document = document;
 		
@@ -116,6 +122,7 @@ public class XMLWorldBuilder implements IXMLWorldBuilder {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void generate() throws Exception {
 		this.file = new File(GlobalConstants.getInstance().getStreetXMLSchema());
 
@@ -164,6 +171,7 @@ public class XMLWorldBuilder implements IXMLWorldBuilder {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public List<IRoad> getRoads() {
 		List<IRoad> roads = new ArrayList<IRoad>();
 		for (XMLRoadBuilder road : this.roads.values()) {
@@ -176,6 +184,7 @@ public class XMLWorldBuilder implements IXMLWorldBuilder {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public List<IJunction> getJunctions() {
 		List<IJunction> junctions = new ArrayList<IJunction>();
 		for (XMLJunctionBuilder junction : this.junctions.values()) {
@@ -188,6 +197,7 @@ public class XMLWorldBuilder implements IXMLWorldBuilder {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public List<IWayPoint> getAllWayPoints() {
 		return this.wayPoints;
 	}
@@ -281,6 +291,7 @@ public class XMLWorldBuilder implements IXMLWorldBuilder {
 		}
 	}
 
+	@Override
 	public float getScale() {
 		return scale;
 	}

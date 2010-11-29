@@ -84,7 +84,7 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle> implements IUIAdapterV
 			);
 			p.addPoint( // left lower corner
 					 (float)(Math.sin(turnAngle)*width),
-					 (float)(float)(Math.cos(turnAngle)*width)
+					 (float)(Math.cos(turnAngle)*width)
 			);
 			this.boundingBox = p;
 			
@@ -98,6 +98,7 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle> implements IUIAdapterV
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public Shape getBoundingBox() {
 		this.update();
 		return boundingBox;
@@ -106,6 +107,7 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle> implements IUIAdapterV
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public String toString() {
 		return "new Angle: " + newAngle + "\n angleDiff: " + angleDiff;
 	}

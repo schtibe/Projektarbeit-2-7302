@@ -62,7 +62,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 			this.simulator = new Simulator();
 			
 			this.font =  new Font("Verdana", Font.BOLD, FONTSIZE);
-			this.ttf = new TrueTypeFont(font.deriveFont(font.BOLD, FONTSIZE), true, null);
+			this.ttf = new TrueTypeFont(font.deriveFont(Font.BOLD, FONTSIZE), true, null);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,28 +70,38 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		}
 	}
 
+	/**
+	 * This function is called when the simulation is actually
+	 * started
+	 * 
+	 * Generate a gaia then start the simulation
+	 */
+	@Override
 	public void enter(GameContainer container, StateBasedGame game) {
-		// Try to generate GAIA
 		try {
 			super.enter(container, game);
 			GameCache.getInstance().setGAIA(
-					UIElementFactory.getUIElement(Gaia.getInstance(),
-					container.getWidth(), 
-					container.getHeight()));
+					UIElementFactory.getUIElement(
+							Gaia.getInstance(),
+							container.getWidth(), 
+							container.getHeight()
+					)
+			);
 			
 			// generate the grid
 			this.generateGrid();
-			
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			this.errorBox.startEffect(EffectEventId.onCustom);
 		}
 	}
 
+	@Override
 	public int getID() {
 		return ID;
 	}
 
+	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		
 		this.container = container;
@@ -100,6 +110,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		// create nifty (gui)
 		nifty = new Nifty(new RenderDeviceLwjgl(), new SoundSystem(
 				new SlickSoundDevice()), new InputSystem() {
+			@Override
 			public List<MouseInputEvent> getMouseEvents() {
 				ArrayList<MouseInputEvent> result = new ArrayList<MouseInputEvent>(
 						mouseEvents);
@@ -113,6 +124,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		this.errorBox = getElement("errorLayer");
 	}
 
+	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) {
 		g.setAntiAlias(false);
 		try {
@@ -130,7 +142,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 							   wayPoint.toString(),Color.orange);
 			}
 			
-			g.setColor(GlobalConstants.getInstance().getPahColor()); // indians??
+			g.setColor(GlobalConstants.getInstance().getPathColor()); 
 			for (IUIAdapterTrafficCarrier<?> road : GameCache.getInstance()
 					.getGAIA().getRoads()) {
 				for (IUIAdapterLane<?> lane : road.getLanes()) {
@@ -160,6 +172,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		SlickCallable.leaveSafeBlock();
 	}
 
+	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) {
 		try {
 			if (!this.simulationStarted) {
@@ -175,6 +188,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		}
 	}
 
+	@Override
 	public void keyReleased(int key, char c) {
 		if (key == Input.KEY_F) {
 			this.container.setShowFPS(!this.container.isShowingFPS());
@@ -185,12 +199,14 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		return nifty.getCurrentScreen().findElementByName(id);
 	}
 
+	@Override
 	public void mouseMoved(final int oldx, final int oldy, final int newx,
 			final int newy) {
 		
 		forwardMouseEventToNifty(mouseX, mouseY, mouseDown);
 	}
 
+	@Override
 	public void mousePressed(final int button, final int x, final int y) {
 		mouseX = x;
 		mouseY = y;
@@ -215,6 +231,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		forwardMouseEventToNifty(mouseX, mouseY, mouseDown);
 	}
 
+	@Override
 	public void mouseReleased(final int button, final int x, final int y) {
 		mouseX = x;
 		mouseY = y;
@@ -228,10 +245,13 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 				- mouseY, mouseDown));
 	}
 
+	@Override
 	public void bind(Nifty nifty, Screen screen) { }
 
+	@Override
 	public void onEndScreen() { }
 
+	@Override
 	public void onStartScreen() { }
 
 	public void restartSimulation() {
@@ -239,7 +259,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 	}
 
 	public void exit() {
-		GameCache.getInstance().getGAIA().destroy();
+		GameCache.getInstance().getGAIA().destroy(); // destroying the gaia
 		// nifty.getCurrentScreen().endScreen(new EndNotify() {
 		// public void perform() {
 		game.enterState(0);

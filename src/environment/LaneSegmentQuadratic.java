@@ -31,6 +31,7 @@ public class LaneSegmentQuadratic extends LaneSegment<ILaneSegmentLinear>
 	 * 
 	 * @return float
 	 */
+	@Override
 	protected float calculateLength() {
 		double ax = startPoint.getComponent(0) - 2*bendPoint.getComponent(0) + endPoint.getComponent(0);
 		double ay = startPoint.getComponent(1) - 2*bendPoint.getComponent(1) + endPoint.getComponent(1);

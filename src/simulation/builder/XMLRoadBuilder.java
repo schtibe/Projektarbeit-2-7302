@@ -162,8 +162,7 @@ public class XMLRoadBuilder extends XMLObjectBuilder {
 			rightLanes.add(
 				new XMLRightLaneBuilder(
 					(Element) rightLanesElem.get(i), 
-					position,
-					XMLWorldBuilder.getInstance()
+					position
 				)
 			);
 		}
@@ -185,8 +184,7 @@ public class XMLRoadBuilder extends XMLObjectBuilder {
 			leftLanes.add(
 				new XMLLeftLaneBuilder(
 					(Element) leftLanesElem.get(i), 
-					position,
-					XMLWorldBuilder.getInstance()
+					position
 				)
 			);
 		}

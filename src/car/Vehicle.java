@@ -60,6 +60,7 @@ public abstract class Vehicle implements IVehicle {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public VehicleDimension getDimension() {
 		return dimension;
 	}
@@ -67,6 +68,7 @@ public abstract class Vehicle implements IVehicle {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void setDimension(VehicleDimension dimension) {
 		this.dimension = dimension;
 	}
@@ -92,6 +94,7 @@ public abstract class Vehicle implements IVehicle {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public float getSpeed() {
 		return this.speed;
 	}
@@ -164,6 +167,7 @@ public abstract class Vehicle implements IVehicle {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void accelerate(float acceleration) {
 		this.acceleration = acceleration;
 	}
@@ -171,6 +175,7 @@ public abstract class Vehicle implements IVehicle {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public ILane getLane() {
 		return this.lanes.peek();
 	}
@@ -178,6 +183,7 @@ public abstract class Vehicle implements IVehicle {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public IVector getPosition() {
 		return new Vector(new float[] { this.position.getComponent(0),
 				this.position.getComponent(1) });
@@ -186,6 +192,7 @@ public abstract class Vehicle implements IVehicle {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void updatePosition(float timestep) throws CarCannotReverseException {
 		this.adjustSpeed(timestep);
 		this.drivenLaneDistance += (this.speed / 36)
@@ -241,6 +248,7 @@ public abstract class Vehicle implements IVehicle {
 	 * 
 	 * @return Driven lane distance
 	 */
+	@Override
 	public float getDrivenLaneDistance() {
 		return this.drivenLaneDistance;
 	}
@@ -258,6 +266,7 @@ public abstract class Vehicle implements IVehicle {
 	 * 
 	 * @see car.IVehicle#handleEvent(simulation.IEvent)
 	 */
+	@Override
 	public abstract void handleEvent(VehicleEvent event);
 
 	@Override
@@ -276,6 +285,7 @@ public abstract class Vehicle implements IVehicle {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public Queue<ILane> getLanes() {
 		return this.lanes;
 	}
@@ -299,6 +309,7 @@ public abstract class Vehicle implements IVehicle {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void setAnimus(Animus animus) {
 		this.animus = animus;
 	}

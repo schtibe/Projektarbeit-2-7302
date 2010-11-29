@@ -109,6 +109,7 @@ public class Lane implements ILane {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public IVector getPositionOnLane(float drivenDistance) throws LaneLengthExceededException {
 		if (drivenDistance > this.length) {
 		//System.out.println("you have to change lane now!");
@@ -243,6 +244,7 @@ public class Lane implements ILane {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public IVector getStartPosition() { 
 		return this.startPosition.clone();
 	}
@@ -260,6 +262,7 @@ public class Lane implements ILane {
 	 * get the last segment
 	 * @return ILaneSegment<?>
 	 */
+	@Override
 	public ILaneSegment<?> getLastILaneSegment(){
 		if (this.endSegment == null){
 			Boolean hasNext = true;
@@ -295,6 +298,7 @@ public class Lane implements ILane {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public List<IVector[]> getLanePath (){
 		ArrayList<IVector[]> output = new ArrayList<IVector[]> ();
 		LaneSegment<?> actualSegment = (LaneSegment<?>) startSegment;

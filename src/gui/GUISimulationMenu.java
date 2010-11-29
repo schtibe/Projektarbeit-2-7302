@@ -26,7 +26,7 @@ public class GUISimulationMenu extends StateBasedGame {
     	
       //AppGameContainer container = new AppGameContainer(new ScalableGame(new GUISimulationMenu("traffic simulation "), 800, 600, false));
       AppGameContainer container = new AppGameContainer(new GUISimulationMenu("traffic simulation "));
-      container.setDisplayMode(container.getScreenWidth(),container.getScreenHeight(),true);
+      container.setDisplayMode(container.getScreenWidth(),container.getScreenHeight(),false);
 
       container.setTargetFrameRate(30);
       container.setMinimumLogicUpdateInterval(1);

@@ -83,7 +83,7 @@ public final class GlobalConstants {
 	}
 
 	/*
-	 * Initial timestamp
+	 * Initial time stamp
 	 */
 	private long initialTimestamp;
 
@@ -157,16 +157,16 @@ public final class GlobalConstants {
 
 	/**
 	 * 
-	 * @return a color obviously
+	 * @return a colour obviously
 	 */
 
-	public Color getPahColor() { // pah??
+	public Color getPathColor() { 
 		return new Color(255, 255, 255);
 	}
 
 	/**
 	 * 
-	 * @return a color obviously
+	 * @return a colour obviously
 	 */
 
 	public Color getBackgroundColor() {

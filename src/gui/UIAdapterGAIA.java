@@ -34,6 +34,8 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 	public UIAdapterGAIA(IGaia mainObject, float xMax, float yMax) throws Exception {
 		super(mainObject);
 		
+		System.out.println("new ui adapter gaia");
+		
 		/*
 		 * Generates the map
 		 */
@@ -153,6 +155,7 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public List<IUIAdapterTrafficCarrier<?>> getRoads() {
 		return this.trafficCarriers;
 	}
@@ -161,6 +164,7 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 	 * Get a list of all IUIAdapterVehicle
 	 * @return a list of all IUIAdapterVehicle
 	 */
+	@Override
 	public List<IUIAdapterVehicle<?>> getVehicles() {
 		return vehicles;
 	}
@@ -168,6 +172,7 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public float getScale() {
 		return this.scale;
 	}
@@ -175,23 +180,28 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void addVehicle(IUIAdapterLane<?> lane) throws Exception {
-		this.vehicles.add(UIElementFactory.getUIElement
-				(this.mainObject.addRoadUser(VehicleType.car, lane.getOriginalLane(),  new Character(), new Physics(100, (float)((2*Math.PI)/3),250, new ArrayList<Drug>())),
+		this.vehicles.add(UIElementFactory.getUIElement(
+				this.mainObject.addRoadUser(
+						VehicleType.car, 
+						lane.getOriginalLane(),  
+						new Character(), 
+						new Physics(100, 
+								(float)((2*Math.PI)/3),
+								250, 
+								new ArrayList<Drug>()
+								)
+						),
 				this.scale,
-				this.correctionVector));
+				this.correctionVector)
+		);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void reset() throws Exception {
-		this.mainObject.reset();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
+	@Override
 	public void destroy() {
 		this.mainObject.destroy();
 	}
@@ -199,6 +209,7 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public List<IUIAdapterWayPoint<?>> getWaypoints() {
 		return this.wayPoints;
 	}

@@ -18,6 +18,7 @@ public class LaneSegmentTest extends TestCase {
 	
 	private LaneSegment<LaneSegmentLinear> testLaneSeg;
 	
+	@Override
 	@Before
 	public void setUp() throws Exception {
 		

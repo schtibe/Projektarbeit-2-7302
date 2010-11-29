@@ -28,6 +28,7 @@ public class WayPointManagerTest extends TestCase {
 	float angle = (float) (Math.PI / 2);
 	DriverView testView;
 
+	@Override
 	@Before
 	public void setUp() throws Exception {
 

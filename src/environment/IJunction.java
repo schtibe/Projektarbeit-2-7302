@@ -28,6 +28,7 @@ public interface IJunction extends ITrafficCarrier{
 	 * @return
 	 */
 	
+	@Deprecated
 	List<ILane> getImportantLanes(IDecision decision);
 	//List<IWayPoint> getWayPoints(Lane actualLane);
 	//List<ILane> getJunctionLanes();

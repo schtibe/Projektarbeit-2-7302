@@ -13,8 +13,8 @@ public class XMLRightLaneBuilder extends XMLLaneBuilder {
 	/**
 	 * Right lane builder
 	 */
-	public XMLRightLaneBuilder(Element e, IVector roadPosition, IXMLWorldBuilder wb) {
-		super(e, roadPosition, wb);
+	public XMLRightLaneBuilder(Element e, IVector roadPosition) {
+		super(e, roadPosition);
 
 		this.direction = directionType.right;
 	}

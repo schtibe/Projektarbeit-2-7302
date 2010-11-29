@@ -70,7 +70,7 @@ public class Animus {
 		System.out.println("car speed at this point:"+vehicle.getSpeed());
 		System.out.println("new target speed: "+waypoint.getSpeedLimit());
 		targetSpeed = waypoint.getSpeedLimit();
-		if (vehicle.getSpeed() > (float)targetSpeed){
+		if (vehicle.getSpeed() > targetSpeed){
 			VehicleEvent evt = new VehicleEvent(event.getTimeStamp()+physics.getUpdateInterval(),vehicle,-0.5f);
 			EventQueue.getInstance().addEvent(evt);
 		}
@@ -96,7 +96,7 @@ public class Animus {
 				IJunctionDecision decision = decisions.get((int)Math.round(Math.random()*(decisions.size()-1)));
 				EventQueue.getInstance().addEvent(
 						new DriverEvent(this.event.getTimeStamp(), 
-						(IEventTarget<DriverEvent>)this.event.getTarget()).setDecision(decision));
+						this.event.getTarget()).setDecision(decision));
 			}
 		}
 	}

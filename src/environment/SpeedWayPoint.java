@@ -63,6 +63,7 @@ public class SpeedWayPoint extends SignWayPoint {
 	 * {@inheritDoc}
 	 * @throws Exception 
 	 */
+	@Override
 	public IUIAdapterWayPoint<SpeedWayPoint> visitUIFactory(float scale, IVector offsetVector) throws Exception {
 		return UIElementFactory.getUIElement(this, scale, offsetVector);
 	}

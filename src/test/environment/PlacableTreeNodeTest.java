@@ -11,6 +11,7 @@ public class PlacableTreeNodeTest extends TestCase {
 	
 	private PlacableTreeNode root;
 	
+	@Override
 	@Before
 	public void setUp(){
 		

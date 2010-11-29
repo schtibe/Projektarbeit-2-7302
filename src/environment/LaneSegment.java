@@ -38,6 +38,7 @@ public abstract class LaneSegment<E> implements ILaneSegment<E> {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public IVector getStartPoint() {
 		return startPoint;
 	}
@@ -45,6 +46,7 @@ public abstract class LaneSegment<E> implements ILaneSegment<E> {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public IVector getEndPoint() {
 		return endPoint;
 	}
@@ -52,6 +54,7 @@ public abstract class LaneSegment<E> implements ILaneSegment<E> {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public float getDistanceOnLane() {
 		return distanceOnLane;
 	}
@@ -59,6 +62,7 @@ public abstract class LaneSegment<E> implements ILaneSegment<E> {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void setDistanceOnLane(float distanceOnLane) {
 		this.distanceOnLane = distanceOnLane;
 	}
@@ -112,6 +116,7 @@ public abstract class LaneSegment<E> implements ILaneSegment<E> {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void setNextLaneSegment(E laneSegment) {
 		this.nextLaneSegment = laneSegment;
 	}
@@ -119,6 +124,7 @@ public abstract class LaneSegment<E> implements ILaneSegment<E> {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public float getLength() {
 		return this.length;
 	}
@@ -126,6 +132,7 @@ public abstract class LaneSegment<E> implements ILaneSegment<E> {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public E getNextLaneSegment() {
 		return this.nextLaneSegment;
 	}
@@ -133,17 +140,20 @@ public abstract class LaneSegment<E> implements ILaneSegment<E> {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public abstract IVector getVehiclePosition(float segmentLength);
 	
 	/**
 	 *
 	 * {@inheritDoc}
 	 */
+	@Override
 	public abstract IVector[] getBezierPoints();
 	
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public int getId() {
 		return id;
 	}
@@ -151,6 +161,7 @@ public abstract class LaneSegment<E> implements ILaneSegment<E> {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -158,6 +169,7 @@ public abstract class LaneSegment<E> implements ILaneSegment<E> {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public String toString() {
 		String ret = "LaneSegment id: " + this.id + "\n";
 		ret += "Startpoint: " + this.startPoint + "\n";
@@ -168,6 +180,7 @@ public abstract class LaneSegment<E> implements ILaneSegment<E> {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public List<SignWayPoint> getAllWayPoints() {
 		return this.wayPoints;
 	}

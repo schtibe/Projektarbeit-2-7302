@@ -33,10 +33,7 @@ public interface IGaia {
 			Physics physics) throws Exception;
 	
 	public void updateVehicles(float timestep) 
-			throws CarCannotReverseException;
-	
-	public void reset() throws Exception;
-	
+			throws CarCannotReverseException;	
 	public void destroy();
 	
 	public List<IWayPoint> getWayPoints();

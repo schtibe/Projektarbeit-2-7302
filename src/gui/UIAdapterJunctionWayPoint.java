@@ -36,6 +36,7 @@ public class UIAdapterJunctionWayPoint extends UIAdapter<IWayPoint> implements I
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public Shape getShape() {
 		return this.shape;
 	}
@@ -43,6 +44,7 @@ public class UIAdapterJunctionWayPoint extends UIAdapter<IWayPoint> implements I
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public String toString() {
 		return this.mainObject.toString();
 	}

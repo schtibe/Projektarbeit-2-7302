@@ -64,6 +64,7 @@ public class UIAdapterTrafficCarrier extends UIAdapter<ITrafficCarrier> implemen
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public IVector getMaxPos() {
 		return this.maxPos;
 	}
@@ -71,6 +72,7 @@ public class UIAdapterTrafficCarrier extends UIAdapter<ITrafficCarrier> implemen
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public IVector getMinPos() {
 		return this.minPos;
 	}
@@ -78,6 +80,7 @@ public class UIAdapterTrafficCarrier extends UIAdapter<ITrafficCarrier> implemen
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public List<IUIAdapterLane<?>> getLanes() {
 		return this.lanes;
 	}
@@ -85,6 +88,7 @@ public class UIAdapterTrafficCarrier extends UIAdapter<ITrafficCarrier> implemen
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void setScale(float scale) throws Exception {
 		for(IUIAdapterLane<?> lane : this.lanes) {
 			lane.setScale(scale);
@@ -96,6 +100,7 @@ public class UIAdapterTrafficCarrier extends UIAdapter<ITrafficCarrier> implemen
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void move(IVector pos) {	
 		for(IUIAdapterLane<?> lane : this.lanes) {
 			lane.move(pos);

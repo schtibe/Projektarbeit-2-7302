@@ -31,5 +31,6 @@ public interface IWayPoint extends Comparable<IWayPoint>,IPlacable {
 	 * return a string representation
 	 * @return String
 	 */
+	@Override
 	public String toString();
 }
