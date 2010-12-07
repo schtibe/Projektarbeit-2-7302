@@ -10,7 +10,7 @@ import environment.ILane;
  * The adapter interface for a lane
  * @param <E> the class to adapt
  */
-public interface IUIAdapterLane<E> extends IUIAdapter<E>{
+public interface IUIAdapterLane<E> extends IUIAdapterColored<E>{
 
 	/**
 	 * Get the Path

@@ -1,5 +1,6 @@
 package gui;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
@@ -47,6 +48,15 @@ public class UIAdapterJunctionWayPoint extends UIAdapter<IWayPoint> implements I
 	@Override
 	public String toString() {
 		return this.mainObject.toString();
+	}
+
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Color getColor() {
+		return new Color(Color.white);
 	}
 	
 

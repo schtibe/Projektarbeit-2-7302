@@ -1,6 +1,7 @@
 package gui;
 
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -110,5 +111,11 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle> implements IUIAdapterV
 	@Override
 	public String toString() {
 		return "new Angle: " + newAngle + "\n angleDiff: " + angleDiff;
+	}
+
+	
+	@Override
+	public Color getColor() {
+		return new Color(Color.red);
 	}
 }

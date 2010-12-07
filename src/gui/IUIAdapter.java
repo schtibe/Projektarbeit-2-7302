@@ -5,5 +5,4 @@ package gui;
  * @param <E> the class to adapt
  */
 public interface IUIAdapter<E> {
-
 }

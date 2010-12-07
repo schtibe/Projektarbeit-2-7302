@@ -1,5 +1,6 @@
 package gui;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
@@ -11,7 +12,11 @@ public class UIAdapterSpeedWayPoint extends UIAdapter<SpeedWayPoint> implements 
 	
 	private Rectangle shape;
 
-	public UIAdapterSpeedWayPoint(SpeedWayPoint mainObject, float scale, IVector offsetVector) throws Exception {
+	public UIAdapterSpeedWayPoint(
+			SpeedWayPoint mainObject, 
+			float scale, 
+			IVector offsetVector
+	) throws Exception {
 		super(mainObject);
 		this.shape = new Rectangle(
 				0, 
@@ -20,8 +25,14 @@ public class UIAdapterSpeedWayPoint extends UIAdapter<SpeedWayPoint> implements 
 				10f
 		);
 		
-		this.shape.setCenterX(this.mainObject.getXPos() * scale + offsetVector.getComponent(0));
-		this.shape.setCenterY(this.mainObject.getYPos() * scale + offsetVector.getComponent(1)); 
+		this.shape.setCenterX(
+				this.mainObject.getXPos() * 
+				scale + offsetVector.getComponent(0)
+		);
+		this.shape.setCenterY(
+				this.mainObject.getYPos() * 
+				scale + offsetVector.getComponent(1)
+		); 
 	}
 	
 
@@ -39,5 +50,15 @@ public class UIAdapterSpeedWayPoint extends UIAdapter<SpeedWayPoint> implements 
 	@Override
 	public String toString() {
 		return "" + this.mainObject.getSpeedLimit();
+	}
+
+
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Color getColor() {
+		return new Color(Color.red);
 	}
 }

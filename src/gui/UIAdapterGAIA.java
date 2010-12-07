@@ -213,4 +213,5 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 	public List<IUIAdapterWayPoint<?>> getWaypoints() {
 		return this.wayPoints;
 	}
+
 }

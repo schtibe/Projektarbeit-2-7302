@@ -6,7 +6,7 @@ import org.newdawn.slick.geom.Shape;
  * The adpater interface for the vehicle
  * @param <E> the class to adapt
  */
-public interface IUIAdapterVehicle<E> extends IUIAdapter<E> {
+public interface IUIAdapterVehicle<E> extends IUIAdapterColored<E> {
 
 	/**
 	 * Get the shape which represents this object

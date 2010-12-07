@@ -156,10 +156,9 @@ public final class GlobalConstants {
 	}
 
 	/**
-	 * 
+	 * Return the Colour of the path
 	 * @return a colour obviously
 	 */
-
 	public Color getPathColor() { 
 		return new Color(255, 255, 255);
 	}

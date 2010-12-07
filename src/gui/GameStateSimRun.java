@@ -19,8 +19,6 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import simulation.Simulator;
 
-import common.GlobalConstants;
-
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.effects.EffectEventId;
 import de.lessvoid.nifty.elements.Element;
@@ -124,52 +122,82 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		this.errorBox = getElement("errorLayer");
 	}
 
+	/**
+	 * Renders the Simulation
+	 */
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) {
 		g.setAntiAlias(false);
-		try {
-			g.setLineWidth(1);
-			if (isGridEnabled) {
-				for (Path tmpPath : grid) {
-					g.draw(tmpPath);
-				}
-			}
-			for(IUIAdapterWayPoint<?> wayPoint : GameCache.getInstance().getGAIA().getWaypoints()) {
-				g.setColor(Color.white);
-				g.draw(wayPoint.getShape());
-				ttf.drawString(wayPoint.getShape().getCenterX(),
-							   wayPoint.getShape().getCenterY(), 
-							   wayPoint.toString(),Color.orange);
-			}
-			
-			g.setColor(GlobalConstants.getInstance().getPathColor()); 
-			for (IUIAdapterTrafficCarrier<?> road : GameCache.getInstance()
-					.getGAIA().getRoads()) {
-				for (IUIAdapterLane<?> lane : road.getLanes()) {
-					g.draw(lane.getPath());
-				}
-			}
-			for (IUIAdapterVehicle<?> vehicle : GameCache.getInstance()
-					.getGAIA().getVehicles()) {
+		
+		this.drawGrid(g);
+		this.drawWaypoints(g);
+		this.drawTrafficCarriers(g);		
+		this.drawVehicles(g);			
 
-				g.setColor(Color.red);
-				g.fill(vehicle.getBoundingBox());
-				g.draw(vehicle.getBoundingBox());
-				g.setColor(Color.green);
-				//g.fill(vehicle.getDirectionShape());
-				//g.draw(vehicle.getDirectionShape());
-				g.setColor(Color.red);
-				//vehicle.getValues().drawString(vehicle.getBoundingBox().getCenterX(), vehicle.getBoundingBox().getCenterY(), "hello");
-				ttf.drawString(vehicle.getBoundingBox().getCenterX(),vehicle.getBoundingBox().getCenterY(), vehicle.toString());
-			}			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			this.errorBox.startEffect(EffectEventId.onCustom);
-		}
 		//draw the gui
 		SlickCallable.enterSafeBlock();
 		nifty.render(false);
 		SlickCallable.leaveSafeBlock();
+	}
+
+	/**
+	 * Draws the vehicles
+	 * 
+	 * @param g
+	 */
+	private void drawVehicles(Graphics g) {
+		for (IUIAdapterVehicle<?> vehicle : GameCache.getInstance()
+				.getGAIA().getVehicles()) {
+
+			g.setColor(vehicle.getColor());
+			g.fill(vehicle.getBoundingBox());
+			g.draw(vehicle.getBoundingBox());
+		}
+	}
+
+	/**
+	 * Draws the traffic carriers
+	 * 
+	 * @param g
+	 */
+	private void drawTrafficCarriers(Graphics g) { 
+		for (IUIAdapterTrafficCarrier<?> road : GameCache.getInstance()
+				.getGAIA().getRoads()) {
+			for (IUIAdapterLane<?> lane : road.getLanes()) {
+				g.setColor(lane.getColor());
+				g.draw(lane.getPath());
+			}
+		}
+	}
+
+	/**
+	 * Draw the Grid if wanted
+	 * 
+	 * @param g
+	 */
+	private void drawGrid(Graphics g) {
+		g.setLineWidth(1);
+		if (isGridEnabled) {
+			for (Path tmpPath : grid) {
+				g.draw(tmpPath);
+			}
+		}
+	}
+
+	/**
+	 * Draw the way points
+	 * 
+	 * @param g
+	 */
+	private void drawWaypoints(Graphics g) {
+		for(IUIAdapterWayPoint<?> wayPoint : GameCache.getInstance().getGAIA().getWaypoints()) {
+			g.setColor(wayPoint.getColor());
+			g.draw(wayPoint.getShape());
+			
+			ttf.drawString(wayPoint.getShape().getCenterX(),
+						   wayPoint.getShape().getCenterY(), 
+						   wayPoint.toString(),Color.orange);
+		}
 	}
 
 	@Override

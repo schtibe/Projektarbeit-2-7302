@@ -67,6 +67,7 @@ public class UIAdapterLaneSegment extends UIAdapter<ILaneSegment<?>>
 	 */
 	@Override
 	public List<IVector> getPath() {
+
 		return this.path;
 	}
 }

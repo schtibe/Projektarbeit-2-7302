@@ -3,8 +3,10 @@ package gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.geom.Path;
 
+import common.GlobalConstants;
 import common.IVector;
 import common.Vector;
 
@@ -116,4 +118,11 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 		return this.mainObject;
 	}
 	
+	/**
+	 * Returns the color
+	 */
+	@Override
+	public Color getColor() {
+		return GlobalConstants.getInstance().getPathColor();
+	}
 }
