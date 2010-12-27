@@ -9,7 +9,7 @@
 		<rightlanes>
 			<lane id="1" width="1" >
 				<waypoints>
-					<SpeedWaypoint id="1" value="30" position="0.0" />
+					<SpeedWaypoint id="1" value="30" position="0.2" />
 				</waypoints>
 			</lane>
 		</rightlanes>
@@ -23,12 +23,16 @@
 		<leftlanes>
 			<lane id="1" width="1" >
 				<waypoints>
-					<SpeedWaypoint id="1" value="50" position="0.1"/>
+					<SpeedWaypoint id="1" value="50" position="0.2"/>
 				</waypoints>
 			</lane>
 		</leftlanes>
 		<rightlanes>
-			<lane id="1" width="1" />
+			<lane id="1" width="1" >
+				<waypoints>
+					<SpeedWaypoint id="2" value="80" position="0.2"/>
+				</waypoints>
+			</lane>
 		</rightlanes>
 		<roadsegments>
 			<roadsegment order="1" startX="0" startY="0" endX="-380" endY="0" />
@@ -41,7 +45,7 @@
 		<rightlanes>
 			<lane id="1" width="1" >
 				<waypoints>
-					<SpeedWaypoint id="1" value="80" position="0.1"/>
+					<SpeedWaypoint id="1" value="80" position="0.2"/>
 				</waypoints>
 			</lane>
 		</rightlanes>

@@ -7,11 +7,13 @@
     <property name="source" value="1.6"/>
     <path id="Projekt2.classpath">
         <pathelement location="bin"/>
-        <pathelement location="/usr/share/java/jdom1.jar"/>
-				<pathelement location="lib/slick/lwjgl.jar"/>
+        <pathelement location="/usr/share/java/jdom1-1.1.1.jar"/>
+		<pathelement location="lib/slick/lwjgl.jar"/>
         <pathelement location="lib/slick/nifty-style-black-1.0.jar"/>
         <pathelement location="lib/slick/nifty-default-controls-1.0.jar"/>
         <pathelement location="lib/slick/nifty-1.0-complete-with-dependencies.jar"/>
+        <pathelement location="lib/slick/nifty-1.0-complete-with-dependencies.jar"/>
+        <pathelement location="/opt/eclipse/plugins/org.junit_4.8.1.v4_8_1_v20100427-1100/junit.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
@@ -32,6 +34,7 @@
         <echo message="${ant.project.name}: ${ant.file}"/>
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
             <src path="${src_git.link}"/>
+	    <exclude name="**/*Test.java"/>
             <classpath refid="Projekt2.classpath"/>
         </javac>
     </target>

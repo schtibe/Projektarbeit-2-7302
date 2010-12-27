@@ -11,6 +11,9 @@ import environment.ILane;
  * 
  */
 public class Car extends Vehicle {
+	
+	long lastStep; 
+	
 	/**
 	 * Initialize the car's variables
 	 * 
@@ -19,11 +22,11 @@ public class Car extends Vehicle {
 	 */
 	public Car(ILane lane) {
 		super(lane);
-		this.speed = 60f;
-
+		this.speed = 0;
 		this.dimension = new VehicleDimension(1.8f * GlobalConstants
 				.getInstance().getScale(), 3.5f * GlobalConstants.getInstance()
 				.getScale());
+		lastStep = 0;
 	}
 
 	/**
@@ -37,7 +40,7 @@ public class Car extends Vehicle {
 	public Car(ILane lane, float drivenLaneDistance)
 			throws IllegalArgumentException {
 		super(lane, drivenLaneDistance);
-		this.speed = 60f;
+		this.speed = 0f;
 
 		this.dimension = new VehicleDimension(1.8f * GlobalConstants
 				.getInstance().getScale(), 3.5f * GlobalConstants.getInstance()
@@ -49,12 +52,7 @@ public class Car extends Vehicle {
 	 */
 	@Override
 	protected void adjustSpeed(float timestep) throws CarCannotReverseException {
-		// TODO does this check belong here?
-		if (this.speed == 0 && this.acceleration < 0) {
-			throw new CarCannotReverseException();
-		}
-
-		this.speed += this.acceleration * timestep;
+		this.speed += this.acceleration * (timestep/1000);
 		if (this.speed < 0) {
 			this.speed = 0;
 		}
@@ -63,11 +61,21 @@ public class Car extends Vehicle {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * This is currently not really implemented for testing reasons
+	 * @param VehilceEvent
 	 */
 	@Override
 	public void handleEvent(VehicleEvent event) {
-		// this.accelerate(event.getTargetAcceleration());
-		this.speed = 60f;
+		if (lastStep == 0){
+			lastStep = event.getTimeStamp();
+			accelerate(event.getTargetAcceleration()); 
+		}else{
+			try{
+				adjustSpeed (event.getTimeStamp()-lastStep);
+			}catch (Exception ex){
+				System.out.println("car tried to reverse");
+			}
+			lastStep = event.getTimeStamp();
+			accelerate (event.getTargetAcceleration());
+		}
 	}
 }

@@ -58,6 +58,13 @@ public class Animus {
 		for(IPlacable waypoint : wayPoints){
 			((IWayPoint)waypoint).visitHandleWayPoint(this);
 		}
+		if (vehicle.getSpeed() > (float)targetSpeed){
+			VehicleEvent evt = new VehicleEvent(event.getTimeStamp()+physics.getUpdateInterval(),vehicle,-6.0f);
+			EventQueue.getInstance().addEvent(evt);
+		}else{
+			VehicleEvent evt = new VehicleEvent(event.getTimeStamp()+physics.getUpdateInterval(),vehicle,6.0f);
+			EventQueue.getInstance().addEvent(evt);
+		}
 	}
 	
 	/**
@@ -65,14 +72,12 @@ public class Animus {
 	 * @param waypoint
 	 */
 	public void handleWayPoint (SpeedWayPoint waypoint){
-		System.out.println("handling speed wayPoint");
-		System.out.println("original target speed: "+targetSpeed);
-		System.out.println("car speed at this point:"+vehicle.getSpeed());
-		System.out.println("new target speed: "+waypoint.getSpeedLimit());
-		targetSpeed = waypoint.getSpeedLimit();
-		if (vehicle.getSpeed() > targetSpeed){
-			VehicleEvent evt = new VehicleEvent(event.getTimeStamp()+physics.getUpdateInterval(),vehicle,-0.5f);
-			EventQueue.getInstance().addEvent(evt);
+		if (vehicle.getLane().equals(waypoint.getLane())){
+			System.out.println("handling speed wayPoint");
+			System.out.println("original target speed: "+targetSpeed);
+			System.out.println("car speed at this point:"+vehicle.getSpeed());
+			System.out.println("new target speed: "+waypoint.getSpeedLimit());
+			targetSpeed = waypoint.getSpeedLimit();
 		}
 	}
 	
