@@ -6,10 +6,11 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 import simulation.DriverEvent;
 import simulation.EventQueue;
-import simulation.IEventTarget;
 import simulation.VehicleEvent;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import car.IVehicle;
 import car.Vehicle;
+import environment.CarWayPoint;
 import environment.IJunctionDecision;
 import environment.ILane;
 import environment.IPlacable;
@@ -162,5 +163,11 @@ public class Animus {
 				this.seenWayPoints.remove(wp);
 			}
 		}
+	}
+
+	
+	public void handleWayPoint(CarWayPoint carWayPoint) {
+		throw new NotImplementedException();
+		
 	}
 }

@@ -116,7 +116,6 @@ public class Vector implements IVector {
 	@Override
 	public float norm() {
 		if (!lengthCalculated) {
-			double rawlength = 0;
 			for (int i = 0; i < this.components.length; i++) {
 				length += this.components[i] * this.components[i];
 			}

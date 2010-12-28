@@ -191,10 +191,12 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 	 */
 	private void drawWaypoints(Graphics g) {
 		for(IUIAdapterWayPoint<?> wayPoint : GameCache.getInstance().getGAIA().getWaypoints()) {
-			g.setColor(wayPoint.getColor());
-			g.draw(wayPoint.getShape());
-			
-			wayPoint.drawString(ttf);
+			if (wayPoint.doDraw()) {
+				g.setColor(wayPoint.getColor());
+				g.draw(wayPoint.getShape());
+				
+				wayPoint.drawString(ttf);
+			}
 		}
 	}
 

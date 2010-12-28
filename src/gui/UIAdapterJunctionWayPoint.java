@@ -70,6 +70,13 @@ public class UIAdapterJunctionWayPoint extends UIAdapter<IWayPoint> implements I
 					   this.toString(),Color.orange);
 		}
 	}
+
+	
+	
+	@Override
+	public boolean doDraw() {
+		return true;
+	}
 	
 
 }

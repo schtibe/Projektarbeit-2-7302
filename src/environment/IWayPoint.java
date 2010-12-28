@@ -33,4 +33,17 @@ public interface IWayPoint extends Comparable<IWayPoint>,IPlacable {
 	 */
 	@Override
 	public String toString();
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public float getXPos();
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public float getYPos();
+
 }

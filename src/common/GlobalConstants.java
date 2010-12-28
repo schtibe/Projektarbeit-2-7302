@@ -175,4 +175,13 @@ public final class GlobalConstants {
 	public void setStreetXMLSchema(String streetXMLSchema) {
 		this.streetXMLSchema = streetXMLSchema;
 	}
+
+	
+	/**
+	 * The distance fuzzy bias
+	 */
+	protected float distanceFuzzyBias = 0.1f;
+	public float getDistanceFuzzyBias() {
+		return this.distanceFuzzyBias;
+	}
 }

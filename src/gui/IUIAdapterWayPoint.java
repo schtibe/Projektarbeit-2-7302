@@ -27,4 +27,6 @@ public interface IUIAdapterWayPoint<E> extends IUIAdapterColored<E> {
 	 * @param ttf The true type font to draw with
 	 */
 	public void drawString(TrueTypeFont ttf);
+
+	boolean doDraw();
 }

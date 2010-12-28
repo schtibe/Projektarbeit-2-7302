@@ -76,4 +76,11 @@ public class UIAdapterSpeedWayPoint extends UIAdapter<SpeedWayPoint> implements 
 					   this.toString(),Color.orange);
 		}
 	}
+
+
+	
+	@Override
+	public boolean doDraw() {
+		return true;
+	}
 }

@@ -1,5 +1,7 @@
 package environment;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 public abstract class WayPoint implements IWayPoint {
 	/**
 	 * The lane the way point is on
@@ -7,7 +9,7 @@ public abstract class WayPoint implements IWayPoint {
 	protected ILane lane;
 	
 	/**
-	 * Construct the lange
+	 * Construct the lane
 	 * @param lane
 	 */
 	public WayPoint (ILane lane){
@@ -27,21 +29,8 @@ public abstract class WayPoint implements IWayPoint {
 	 */
 	@Override
 	public int compareTo(IWayPoint o) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new NotImplementedException();
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public abstract float getXPos();
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public abstract float getYPos();
 	
 	/**
 	 * {@inheritDoc}
