@@ -190,4 +190,32 @@ public final class GlobalConstants {
 	public void setStreetXMLSchema(String streetXMLSchema) {
 		this.streetXMLSchema = streetXMLSchema;
 	}
+	
+	/**
+	 * Defines which character trait has how much influence on the alteration of perceived values
+	 */
+	
+	public float getRiskynessInfluence (){
+		return 0.2f;
+	}
+	
+	public float getTemperamentInfluence (){
+		return 0.2f;
+	}
+	
+	/**
+	 * the sum of the 3 influences hereafter has always to be 1.0
+	 */
+	
+	public float getVehicleWaypointInfluence (){
+		return 0.6f;
+	}
+	
+	public float getJunctionWaypointInfluence(){
+		return 0.2f;
+	}
+	
+	public float getSpeedWaypointInfluence(){
+		return 0.2f;
+	}
 }

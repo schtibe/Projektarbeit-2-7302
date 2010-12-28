@@ -22,7 +22,6 @@ public class JunctionWayPoint extends WayPoint {
 	 */
 	public JunctionWayPoint (ILane lane, IJunction junction){
 		super(lane);
-		this.lane = lane;
 		this.junction = junction;
 	}
 	
