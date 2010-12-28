@@ -2,6 +2,7 @@ package environment;
 
 import java.util.ArrayList;
 import java.util.List;
+import common.Vector;
 
 public class PlacableTreeNode implements IPlacableManager {
 	
@@ -87,9 +88,42 @@ public class PlacableTreeNode implements IPlacableManager {
 	 */
 	
 	@Override
-	public void move(IPlacable placable, float oldX, float oldY) {
-		// TODO Auto-generated method stub
-		
+	public boolean move(IMovable movable, float newX, float newY) {
+		float xPos = movable.getXPos();
+		float yPos = movable.getYPos();
+		if (this.maxDepth > 0){
+			int index =0;
+			if (xPos > (this.minX+this.halfX)){
+				index+=1;
+			}
+			if(yPos > (this.minY+this.halfY)){
+				index+=2;
+			}
+			if (this.subNodes[index]!=null){
+				boolean removed = this.subNodes[index].move(movable,newX,newY);
+				if (removed){
+					if (
+							(newX > this.minX && newX < (this.minX+2*this.halfX))
+							&& (newY > this.minY && newY < (this.minY + 2*this.halfY))
+					)
+					{
+						movable.updatePosition(new Vector(new float[]{newX,newY}));
+						this.add(movable);
+						return false;
+					}else{
+						return true;
+					}
+				}
+				return removed;
+			}
+			return false;
+		}else{
+			if (items.contains(movable)){
+				items.remove(movable);
+				return true;
+			}
+			return false;
+		}
 	}
 
 	/**

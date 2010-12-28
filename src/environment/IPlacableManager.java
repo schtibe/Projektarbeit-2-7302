@@ -25,5 +25,5 @@ public interface IPlacableManager {
 	 * @param oldY
 	 */
 	
-	public void move(IPlacable placable,float oldX, float oldY);
+	public boolean move(IMovable movable,float newX, float newY);
 }

@@ -3,6 +3,7 @@ package car;
 import simulation.VehicleEvent;
 
 import common.GlobalConstants;
+import common.IObserver;
 
 import environment.CarWayPoint;
 import environment.ILane;
@@ -124,6 +125,5 @@ public class Car extends Vehicle {
 	protected float maxDeceleration() {
 		return this.maxDeceleration;
 	}
-
 
 }

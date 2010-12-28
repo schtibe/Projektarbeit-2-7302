@@ -66,23 +66,17 @@ public class WayPointManager implements IPlacableManager {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void move(IPlacable placable, float oldX, float oldY) {
-		root.move(placable, oldX, oldY);
-	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @param movable
 	 * @param newX
 	 * @param newY
 	 */
-	public void move(IMovable movable, float newX, float newY) {
-		root.move(movable, newX, newY);
-		movable.updatePosition(new Vector(new float[]{newX, newY}));
+	public boolean move(IMovable movable, float newX, float newY) {
+		return root.move(movable, newX, newY);
+		//unnecessary! should be done when moved in move method internally
+		//movable.updatePosition(new Vector(new float[]{newX, newY}));
 	}
 
 	/**

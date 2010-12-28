@@ -1,5 +1,6 @@
 package car;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -7,10 +8,12 @@ import java.util.concurrent.ArrayBlockingQueue;
 import simulation.VehicleEvent;
 
 import common.GlobalConstants;
+import common.IObservable;
+import common.IObserver;
 import common.IVector;
 import common.Vector;
 
-import driver.Animus;
+//import driver.Animus;
 import driver.DriverView;
 import driver.IDriverView;
 import environment.ILane;
@@ -24,11 +27,18 @@ import environment.WayPointManager;
  * This class contains all the needed information and methods for a vehicle.
  * 
  */
-public abstract class Vehicle implements IVehicle {
+public abstract class Vehicle implements IVehicle,IObservable {
+	
+	/**
+	 * List of Observers, that get notified when a change occurs
+	 */
+	
+	private List<IObserver> observers;
+	
 	/**
 	 * This is more like a temporary hack
 	 */
-	protected Animus animus;
+	//protected Animus animus;
 
 	/**
 	 * The way point that belongs to this vehicle
@@ -239,7 +249,7 @@ public abstract class Vehicle implements IVehicle {
 			// change lane
 			this.drivenLaneDistance = this.drivenLaneDistance
 					- this.lanes.peek().getLength();
-			this.animus.laneChange(this.lanes.poll());
+			this.notify("laneChange");
 			try {
 				this.position = this.lanes.peek().getPositionOnLane(
 						this.drivenLaneDistance);
@@ -353,13 +363,31 @@ public abstract class Vehicle implements IVehicle {
 	/**
 	 * {@inheritDoc}
 	 */
+	/*
 	@Override
 	public void setAnimus(Animus animus) {
 		this.animus = animus;
 	}
-
+	*/
 	/**
 	 * Create a way point from this vehicle
 	 */
 	public abstract void createWayPoint();
+	
+	public void register (IObserver obs){
+		if (observers == null){
+			observers = new ArrayList<IObserver>();
+		}
+		observers.add(obs);
+	}
+	
+	public void remove (IObserver obs){
+		observers.remove(obs);
+	}
+	
+	public void notify (String msg){
+		for (IObserver obs: observers){
+			obs.update(msg);
+		}
+	}
 }
