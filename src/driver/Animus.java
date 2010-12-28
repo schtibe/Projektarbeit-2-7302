@@ -12,6 +12,7 @@ import car.IVehicle;
 import car.Vehicle;
 import environment.CarWayPoint;
 import common.GlobalConstants;
+import common.IObserver;
 import environment.IJunctionDecision;
 import environment.ILane;
 import environment.IPlacable;
@@ -21,14 +22,14 @@ import environment.SignWayPoint;
 import environment.SpeedWayPoint;
 import environment.WayPointManager;
 
-public class Animus {
+public class Animus implements IObserver {
 	
 	/**
 	 * instance variables
 	 */
 	protected Physics physics;
 	protected Character character;
-	protected IVehicle vehicle;
+	protected Vehicle vehicle;
 	protected DriverEvent event;
 	protected int targetSpeed = 30;
 	
@@ -51,8 +52,7 @@ public class Animus {
 	 * @param event
 	 * @throws Exception
 	 */
-	public void assessSituation (IVehicle vehicle, DriverEvent event) throws Exception{
-		this.vehicle = vehicle;
+	public void assessSituation (DriverEvent event) throws Exception{
 		this.event = event;
 		DecelerationActivator vehicleActivator = new DecelerationActivator(0f);
 		DecelerationActivator junctionActivator = new DecelerationActivator(0f);
@@ -240,5 +240,22 @@ public class Animus {
 	 */
 	public void handleWayPoint(CarWayPoint carWayPoint) {
 		System.out.println("I Saw a car");
+	}
+
+	@Override
+	public void update(String message) {
+		if (message.compareTo("laneChange")== 0){
+			Queue<ILane> lanes = vehicle.getLanes();
+			for (IWayPoint wp: this.seenWayPoints){
+				if (!lanes.contains(wp.getLane())){
+					this.seenWayPoints.remove(wp);
+				}
+			}
+		}
+	}
+
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+		this.vehicle.register (this);
 	}
 }

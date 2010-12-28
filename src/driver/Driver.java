@@ -3,6 +3,7 @@ package driver;
 import simulation.DriverEvent;
 import simulation.EventQueue;
 import car.IVehicle;
+import car.Vehicle;
 import environment.IJunctionDecision;
 
 public class Driver implements IDriver {
@@ -20,7 +21,7 @@ public class Driver implements IDriver {
 	public Driver (IVehicle vehicle, Character character, Physics physics){
 		this.vehicle = vehicle;
 		this.animus = new Animus (physics, character);
-		this.vehicle.setAnimus(animus);
+		this.animus.setVehicle ((Vehicle) vehicle);
 	}
 	
 	/**
@@ -45,7 +46,7 @@ public class Driver implements IDriver {
 	
 		if (event.getMonitoring()) {
 			//DriverView carView = this.vehicle.getDriverView();
-			this.animus.assessSituation(this.vehicle, event);
+			this.animus.assessSituation(event);
 			
 			EventQueue.getInstance().addEvent(new DriverEvent(
 					event.getTimeStamp()+this.animus.getPhysics().getUpdateInterval(),
