@@ -64,26 +64,27 @@ public class Animus {
 		}
 		float acceleration = 0;
 		if (vehicle.getSpeed()>(float)targetSpeed){
-			acceleration = generateAcceleration (new DecelerationActivator(0), vehicleActivator, junctionActivator);
+			
+			acceleration = generateAcceleration (new DecelerationActivator(assessSpeeds(vehicle.getSpeed(),(float)targetSpeed)), vehicleActivator, junctionActivator);
 		}else{
-			acceleration = generateAcceleration (new AccelerationActivator(1), vehicleActivator, junctionActivator);
+			acceleration = generateAcceleration (new AccelerationActivator(assessSpeeds(vehicle.getSpeed(),(float)targetSpeed)), vehicleActivator, junctionActivator);
 		}
 		VehicleEvent evt = new VehicleEvent(event.getTimeStamp()+physics.getUpdateInterval(),vehicle,acceleration);
 		EventQueue.getInstance().addEvent(evt);
-		
-		//legacy code remove on adaptations completed
-		
-		/*
-		if (vehicle.getSpeed() > (float)targetSpeed){
-			VehicleEvent evt = new VehicleEvent(event.getTimeStamp()+physics.getUpdateInterval(),vehicle,-6.0f);
-			EventQueue.getInstance().addEvent(evt);
-		}else{
-			VehicleEvent evt = new VehicleEvent(event.getTimeStamp()+physics.getUpdateInterval(),vehicle,6.0f);
-			EventQueue.getInstance().addEvent(evt);
-		}
-		*/
 	}
 	
+	private float assessSpeeds(float vehicle, float target) {
+		float percentage = Math.abs((vehicle/target)-1f);
+		if (percentage<GlobalConstants.getInstance().getSpeedPerceptionThreshold()){
+			return 0;
+		}
+		if (percentage > GlobalConstants.getInstance().getAccelerationThreshold()){
+			return 1f;
+		}else{
+			return (1f/GlobalConstants.getInstance().getAccelerationThreshold())*percentage;
+		}
+	}
+
 	private float generateAcceleration(DecelerationActivator speedActivator,
 			DecelerationActivator vehicleActivator,
 			DecelerationActivator junctionActivator) {

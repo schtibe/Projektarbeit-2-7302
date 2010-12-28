@@ -203,4 +203,12 @@ public final class GlobalConstants {
 	public float getSpeedWaypointInfluence(){
 		return 0.2f;
 	}
+	
+	public float getSpeedPerceptionThreshold(){
+		return 0.025f;
+	}
+	
+	public float getAccelerationThreshold(){
+		return 0.1f;
+	}
 }
