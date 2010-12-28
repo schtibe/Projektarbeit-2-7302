@@ -63,11 +63,13 @@ public class Animus {
 			((IWayPoint)waypoint).visitHandleWayPoint(this);
 		}
 		float acceleration = 0;
-		if (vehicle.getSpeed()>(float)targetSpeed){
-			
-			acceleration = generateAcceleration (new DecelerationActivator(assessSpeeds(vehicle.getSpeed(),(float)targetSpeed)), vehicleActivator, junctionActivator);
-		}else{
-			acceleration = generateAcceleration (new AccelerationActivator(assessSpeeds(vehicle.getSpeed(),(float)targetSpeed)), vehicleActivator, junctionActivator);
+		float speedAssessed = assessSpeeds(vehicle.getSpeed(),(float)targetSpeed);
+		if (speedAssessed != 0){
+			if (vehicle.getSpeed()>(float)targetSpeed){
+				acceleration = generateAcceleration (new DecelerationActivator(speedAssessed), vehicleActivator, junctionActivator);
+			}else{
+				acceleration = generateAcceleration (new AccelerationActivator(speedAssessed), vehicleActivator, junctionActivator);
+			}
 		}
 		VehicleEvent evt = new VehicleEvent(event.getTimeStamp()+physics.getUpdateInterval(),vehicle,acceleration);
 		EventQueue.getInstance().addEvent(evt);
@@ -75,6 +77,7 @@ public class Animus {
 	
 	private float assessSpeeds(float vehicle, float target) {
 		float percentage = Math.abs((vehicle/target)-1f);
+		System.out.println("p:"+percentage);
 		if (percentage<GlobalConstants.getInstance().getSpeedPerceptionThreshold()){
 			return 0;
 		}
@@ -106,6 +109,7 @@ public class Animus {
 	}
 
 	private float calculateAcceleration (float vehicle, float junction, float speed){
+		System.out.println("speedActivator: "+speed);
 		GlobalConstants constants = GlobalConstants.getInstance();
 		float acceleration;
 		float n;
@@ -121,6 +125,7 @@ public class Animus {
 		}else{
 			acceleration = (n*weightN+speed*constants.getSpeedWaypointInfluence())/(weightN+constants.getSpeedWaypointInfluence());
 		}
+		System.out.println("acc:"+acceleration);
 		return acceleration;
 	}
 
