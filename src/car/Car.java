@@ -17,6 +17,16 @@ public class Car extends Vehicle {
 	long lastStep; 
 	
 	/**
+	 * The maximal acceleration of the car
+	 */
+	float maxAcceleration = 5;
+	
+	/**
+	 * The maximal deceleration of the car 
+	 */
+	float maxDeceleration = 8;
+	
+	/**
 	 * Initialis1e the car's variables
 	 * 
 	 * @param lane
@@ -96,4 +106,24 @@ public class Car extends Vehicle {
 			e.printStackTrace();
 		}
 	}
+
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected float maxAcceleration() {
+		return this.maxAcceleration;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+
+	@Override
+	protected float maxDeceleration() {
+		return this.maxDeceleration;
+	}
+
+
 }

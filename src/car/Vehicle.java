@@ -173,11 +173,38 @@ public abstract class Vehicle implements IVehicle {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Calculate the real acceleration of the vehicle
+	 * @param acceleration
+	 * @return
+	 */
+	protected float calculateAcceleration(float acceleration) {
+		if (acceleration > 0) {
+			return this.maxAcceleration() * acceleration; 
+		} else {
+			return this.maxDeceleration() * acceleration;
+		}
+	}
+	
+	/**
+	 * Return the maximal acceleration
+	 * 
+	 * @return
+	 */
+	protected abstract float maxAcceleration();
+	
+	/**
+	 * Return the maximal deceleration
+	 * 
+	 * @return
+	 */
+	protected abstract float maxDeceleration();
+	
+	/**
+	 * Set the acceleration of the vehicle
 	 */
 	@Override
 	public void accelerate(float acceleration) {
-		this.acceleration = acceleration;
+		this.acceleration = this.calculateAcceleration(acceleration);
 	}
 
 	/**
