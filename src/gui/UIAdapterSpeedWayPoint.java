@@ -1,6 +1,7 @@
 package gui;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
@@ -60,5 +61,19 @@ public class UIAdapterSpeedWayPoint extends UIAdapter<SpeedWayPoint> implements 
 	@Override
 	public Color getColor() {
 		return new Color(Color.red);
+	}
+
+
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void drawString(TrueTypeFont ttf) {
+		if (GUIConstants.getInstance().showSpeedWaypointPosition()) {
+			ttf.drawString(this.getShape().getCenterX(),
+					   this.getShape().getCenterY(), 
+					   this.toString(),Color.orange);
+		}
 	}
 }

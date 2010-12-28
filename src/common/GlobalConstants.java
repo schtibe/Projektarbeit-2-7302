@@ -8,13 +8,11 @@ public final class GlobalConstants {
 	/**
 	 * singleton instance
 	 */
-
 	private static GlobalConstants instance;
 
 	/**
 	 * private constructor
 	 */
-
 	private GlobalConstants() {
 	}
 
@@ -24,7 +22,6 @@ public final class GlobalConstants {
 	 * 
 	 * @return singleton instance
 	 */
-
 	public synchronized static GlobalConstants getInstance() {
 		if (instance == null) {
 			instance = new GlobalConstants();
@@ -42,7 +39,6 @@ public final class GlobalConstants {
 	 * 
 	 * @return wordlscale as float
 	 */
-
 	public float getScale() {
 		return this.scale;
 	}
@@ -52,7 +48,6 @@ public final class GlobalConstants {
 	 * 
 	 * @param float scale
 	 */
-
 	public void setScale(float scale) {
 		this.scale = scale;
 	}
@@ -67,7 +62,6 @@ public final class GlobalConstants {
 	 * 
 	 * @return timeFactor
 	 */
-
 	public double getTimeFactor() {
 		return timeFactor;
 	}
@@ -77,7 +71,6 @@ public final class GlobalConstants {
 	 * 
 	 * @param timeFactor
 	 */
-
 	public void setTimeFactor(double timeFactor) {
 		this.timeFactor = timeFactor;
 	}
@@ -92,7 +85,6 @@ public final class GlobalConstants {
 	 * 
 	 * @return initial time stamp
 	 */
-
 	public long getInitialTimestamp() {
 		return this.initialTimestamp;
 	}
@@ -102,7 +94,6 @@ public final class GlobalConstants {
 	 * 
 	 * @param timestamp
 	 */
-
 	public void setInitialTimestamp(long timestamp) {
 		this.initialTimestamp = timestamp;
 	}
@@ -117,7 +108,6 @@ public final class GlobalConstants {
 	 * 
 	 * @return streetSchema
 	 */
-
 	public String getStreetXMLSchema() {
 		return this.streetXMLSchema;
 	}
@@ -125,7 +115,6 @@ public final class GlobalConstants {
 	/*
 	 * The world boundaries
 	 */
-
 	private IVector[] boundaries;
 
 	/**
@@ -133,7 +122,6 @@ public final class GlobalConstants {
 	 * 
 	 * @param boundaries
 	 */
-
 	public void setWorldBoundaries(IVector[] boundaries) {
 		this.boundaries = boundaries;
 	}
@@ -143,7 +131,6 @@ public final class GlobalConstants {
 	 * 
 	 * @return
 	 */
-
 	public IVector[] getWorldBoundaries() {
 		return this.boundaries;
 	}
@@ -176,7 +163,6 @@ public final class GlobalConstants {
 	 * 
 	 * @return root path for maps
 	 */
-
 	public String getMapRoot() {
 		return "ressources/data/";
 	}
@@ -186,7 +172,6 @@ public final class GlobalConstants {
 	 * 
 	 * @param streetXMLSchema
 	 */
-
 	public void setStreetXMLSchema(String streetXMLSchema) {
 		this.streetXMLSchema = streetXMLSchema;
 	}

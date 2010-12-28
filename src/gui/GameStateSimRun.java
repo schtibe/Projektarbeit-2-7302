@@ -194,9 +194,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 			g.setColor(wayPoint.getColor());
 			g.draw(wayPoint.getShape());
 			
-			ttf.drawString(wayPoint.getShape().getCenterX(),
-						   wayPoint.getShape().getCenterY(), 
-						   wayPoint.toString(),Color.orange);
+			wayPoint.drawString(ttf);
 		}
 	}
 

@@ -1,6 +1,7 @@
 package gui;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
@@ -57,6 +58,17 @@ public class UIAdapterJunctionWayPoint extends UIAdapter<IWayPoint> implements I
 	@Override
 	public Color getColor() {
 		return new Color(Color.white);
+	}
+
+	
+	
+	@Override
+	public void drawString(TrueTypeFont ttf) {
+		if (GUIConstants.getInstance().showJunctionWaypointPosition()) {
+			ttf.drawString(this.getShape().getCenterX(),
+					   this.getShape().getCenterY(), 
+					   this.toString(),Color.orange);
+		}
 	}
 	
 
