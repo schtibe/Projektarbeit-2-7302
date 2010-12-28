@@ -35,7 +35,6 @@ public abstract class MovingWayPoint implements IWayPoint,IMovable {
 	 * @param pos
 	 */
 	public void updatePosition(IVector pos) {
-		System.out.println("Updating position of vehicle to" + pos);
 		this.position = pos;
 	}
 }

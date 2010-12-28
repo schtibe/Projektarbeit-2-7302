@@ -11,6 +11,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import car.IVehicle;
 import car.Vehicle;
 import environment.CarWayPoint;
+import common.GlobalConstants;
 import environment.IJunctionDecision;
 import environment.ILane;
 import environment.IPlacable;
@@ -29,7 +30,7 @@ public class Animus {
 	protected Character character;
 	protected IVehicle vehicle;
 	protected DriverEvent event;
-	protected int targetSpeed;
+	protected int targetSpeed = 30;
 	
 	private Queue<IWayPoint> seenWayPoints;
 	
@@ -53,21 +54,76 @@ public class Animus {
 	public void assessSituation (IVehicle vehicle, DriverEvent event) throws Exception{
 		this.vehicle = vehicle;
 		this.event = event;
+		DecelerationActivator vehicleActivator = new DecelerationActivator(0f);
+		DecelerationActivator junctionActivator = new DecelerationActivator(0f);
 		IDriverView dView = this.physics.getView(vehicle.getDriverView());
 		List<IPlacable> wayPoints = WayPointManager.getInstance().findWayPoints(dView);
 		//this.clearWayPoints();
 		for(IPlacable waypoint : wayPoints){
 			((IWayPoint)waypoint).visitHandleWayPoint(this);
 		}
-		if (vehicle.getSpeed() > (float)targetSpeed){
-			VehicleEvent evt = new VehicleEvent(event.getTimeStamp()+physics.getUpdateInterval(),vehicle,-6.0f);
-			EventQueue.getInstance().addEvent(evt);
+		float acceleration = 0;
+		if (vehicle.getSpeed()>(float)targetSpeed){
+			
+			acceleration = generateAcceleration (new DecelerationActivator(assessSpeeds(vehicle.getSpeed(),(float)targetSpeed)), vehicleActivator, junctionActivator);
 		}else{
-			VehicleEvent evt = new VehicleEvent(event.getTimeStamp()+physics.getUpdateInterval(),vehicle,6.0f);
-			EventQueue.getInstance().addEvent(evt);
+			acceleration = generateAcceleration (new AccelerationActivator(assessSpeeds(vehicle.getSpeed(),(float)targetSpeed)), vehicleActivator, junctionActivator);
 		}
+		VehicleEvent evt = new VehicleEvent(event.getTimeStamp()+physics.getUpdateInterval(),vehicle,acceleration);
+		EventQueue.getInstance().addEvent(evt);
 	}
 	
+	private float assessSpeeds(float vehicle, float target) {
+		float percentage = Math.abs((vehicle/target)-1f);
+		if (percentage<GlobalConstants.getInstance().getSpeedPerceptionThreshold()){
+			return 0;
+		}
+		if (percentage > GlobalConstants.getInstance().getAccelerationThreshold()){
+			return 1f;
+		}else{
+			return (1f/GlobalConstants.getInstance().getAccelerationThreshold())*percentage;
+		}
+	}
+
+	private float generateAcceleration(DecelerationActivator speedActivator,
+			DecelerationActivator vehicleActivator,
+			DecelerationActivator junctionActivator) {
+		return calculateAcceleration (
+				-character.changeActivator(vehicleActivator).getValue(),
+				-character.changeActivator(junctionActivator).getValue(),
+				-character.changeActivator(speedActivator).getValue()
+		);
+	}
+	
+	private float generateAcceleration(AccelerationActivator speedActivator,
+			DecelerationActivator vehicleActivator,
+			DecelerationActivator junctionActivator) {
+		return calculateAcceleration (
+				-character.changeActivator(vehicleActivator).getValue(),
+				-character.changeActivator(junctionActivator).getValue(),
+				character.changeActivator(speedActivator).getValue()
+		);
+	}
+
+	private float calculateAcceleration (float vehicle, float junction, float speed){
+		GlobalConstants constants = GlobalConstants.getInstance();
+		float acceleration;
+		float n;
+		float weightN = constants.getJunctionWaypointInfluence()+constants.getVehicleWaypointInfluence();
+		if (vehicle == 0 || junction == 0){
+			n = vehicle+junction;
+		}else{
+			n = (vehicle*constants.getVehicleWaypointInfluence()+junction*constants.getJunctionWaypointInfluence())/
+			(weightN); 
+		}
+		if (n == 0 || speed == 0){
+			acceleration = n+speed;
+		}else{
+			acceleration = (n*weightN+speed*constants.getSpeedWaypointInfluence())/(weightN+constants.getSpeedWaypointInfluence());
+		}
+		return acceleration;
+	}
+
 	/**
 	 * handles a speed waypoint
 	 * @param waypoint
@@ -86,12 +142,20 @@ public class Animus {
 	 * handles a sign way point
 	 * @param waypoint
 	 */
+	//public void handleWayPoint (VehicleWayPoint waypoint){
+	//System.out.println("signy signal drawer");
+	//}
+	
+	/**
+	 * handles a sign way point
+	 * @param waypoint
+	 */
 	public void handleWayPoint (SignWayPoint waypoint){
 	//System.out.println("signy signal drawer");
 	}
 	
 	/**
-	 * handles any waypoint
+	 * handles a junction waypoint
 	 * @param waypoint
 	 */
 	public void handleWayPoint (JunctionWayPoint waypoint) {
