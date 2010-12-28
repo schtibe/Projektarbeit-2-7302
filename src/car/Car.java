@@ -4,7 +4,9 @@ import simulation.VehicleEvent;
 
 import common.GlobalConstants;
 
+import environment.CarWayPoint;
 import environment.ILane;
+import environment.WayPointManager;
 
 /**
  * The first implemented vehicle
@@ -15,7 +17,7 @@ public class Car extends Vehicle {
 	long lastStep; 
 	
 	/**
-	 * Initialize the car's variables
+	 * Initialis1e the car's variables
 	 * 
 	 * @param lane
 	 *            The lane to put the car on
@@ -30,7 +32,7 @@ public class Car extends Vehicle {
 	}
 
 	/**
-	 * Initialize the car's variables
+	 * Initialise the car's variables
 	 * 
 	 * @param lane
 	 *            The lane to put the car on
@@ -76,6 +78,22 @@ public class Car extends Vehicle {
 			}
 			lastStep = event.getTimeStamp();
 			accelerate (event.getTargetAcceleration());
+		}
+	}
+
+	
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void createWayPoint() {
+		this.wayPoint = new CarWayPoint(this);
+		
+		try {
+			WayPointManager.getInstance().add(this.wayPoint);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

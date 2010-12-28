@@ -19,12 +19,7 @@ public class UIAdapterSpeedWayPoint extends UIAdapter<SpeedWayPoint> implements 
 			IVector offsetVector
 	) throws Exception {
 		super(mainObject);
-		this.shape = new Rectangle(
-				0, 
-				0, 
-				10f, 
-				10f
-		);
+		this.shape = new Rectangle(0, 0, 10f, 10f);
 		
 		this.shape.setCenterX(
 				this.mainObject.getXPos() * 

@@ -16,6 +16,7 @@ import driver.Physics;
 import environment.IGaia;
 import environment.ITrafficCarrier;
 import environment.IWayPoint;
+import environment.WayPointManager;
 
 /**
  * A gaia adapter implementation 
@@ -96,6 +97,14 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 			));
 		}
 		
+		/*
+		for(IWayPoint wayPoint : WayPointManager.getInstance().getWayPoints()) {
+			this.wayPoints.add(UIElementFactory.getUIElement(
+					wayPoint, 
+					this.scale, 
+					correctionVector
+			));
+		}*/
 	}
 
 	/**

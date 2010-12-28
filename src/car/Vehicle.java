@@ -14,7 +14,9 @@ import driver.Animus;
 import driver.DriverView;
 import driver.IDriverView;
 import environment.ILane;
+import environment.IMovable;
 import environment.LaneLengthExceededException;
+import environment.WayPointManager;
 
 /**
  * The abstract vehicle
@@ -28,6 +30,11 @@ public abstract class Vehicle implements IVehicle {
 	 */
 	protected Animus animus;
 
+	/**
+	 * The way point that belongs to this vehicle
+	 */
+	protected IMovable wayPoint;
+	
 	/**
 	 * The direction the vehicle is heading
 	 * 
@@ -152,6 +159,7 @@ public abstract class Vehicle implements IVehicle {
 			}
 		}
 		this.initializeDirection();
+		this.createWayPoint();
 	}
 
 	/**
@@ -223,6 +231,15 @@ public abstract class Vehicle implements IVehicle {
 		}
 
 		this.updateDirection();
+		try {
+			WayPointManager.getInstance().move(
+					this.wayPoint, 
+					this.getPosition().getComponent(0), 
+					this.getPosition().getComponent(1)
+			);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -313,4 +330,9 @@ public abstract class Vehicle implements IVehicle {
 	public void setAnimus(Animus animus) {
 		this.animus = animus;
 	}
+
+	/**
+	 * Create a way point from this vehicle
+	 */
+	public abstract void createWayPoint();
 }

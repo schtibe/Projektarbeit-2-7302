@@ -4,6 +4,7 @@ import car.IVehicle;
 
 import common.IVector;
 
+import environment.CarWayPoint;
 import environment.IGaia;
 import environment.ILane;
 import environment.ILaneSegment;
@@ -125,5 +126,21 @@ public class UIElementFactory {
 			IVector offsetVector
 	) throws Exception {
 		return new UIAdapterJunctionWayPoint(wayPoint, scale, offsetVector);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @param wayPoint
+	 * @param scale
+	 * @param offsetVector
+	 * @return
+	 * @throws Exception
+	 */
+	public static IUIAdapterCarWayPoint getUIElement(
+			CarWayPoint wayPoint,
+			float scale,
+			IVector offsetVector
+	) throws Exception {
+		return new UIAdapterCarWayPoint(wayPoint, scale, offsetVector);
 	}
 }

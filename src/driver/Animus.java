@@ -165,9 +165,11 @@ public class Animus {
 		}
 	}
 
-	
+	/**
+	 * Handle a car
+	 * @param carWayPoint
+	 */
 	public void handleWayPoint(CarWayPoint carWayPoint) {
-		throw new NotImplementedException();
-		
+		System.out.println("I Saw a car");
 	}
 }
