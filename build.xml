@@ -9,11 +9,17 @@
         <pathelement location="bin"/>
         <pathelement location="/usr/share/java/jdom1-1.1.1.jar"/>
 		<pathelement location="lib/slick/lwjgl.jar"/>
-        <pathelement location="lib/slick/nifty-style-black-1.0.jar"/>
+		<!--<pathelement location="lib/slick/nifty-style-black-1.0.jar"/>
         <pathelement location="lib/slick/nifty-default-controls-1.0.jar"/>
         <pathelement location="lib/slick/nifty-1.0-complete-with-dependencies.jar"/>
-        <pathelement location="lib/slick/nifty-1.0-complete-with-dependencies.jar"/>
+		<pathelement location="lib/slick/nifty-1.0-complete-with-dependencies.jar"/>-->
+		<pathelement location="lib/slick/nifty-1.2.jar" />
+		<pathelement location="lib/slick/nifty-default-controls-1.2.jar" />
+		<pathelement location="lib/slick/nifty-lwjgl-slick-renderer-1.0.jar" />
+        <pathelement location="lib/slick/nifty-style-black-1.0.jar"/>
+		<pathelement location="lib/slick/slick.jar" />
         <pathelement location="/opt/eclipse/plugins/org.junit_4.8.1.v4_8_1_v20100427-1100/junit.jar"/>
+        <pathelement location="/usr/share/java/kxml2.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>

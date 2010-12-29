@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.geom.Ellipse;
 import org.newdawn.slick.geom.Path;
 import org.newdawn.slick.opengl.SlickCallable;
@@ -20,6 +19,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import simulation.Simulator;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.NiftyInputConsumer;
 import de.lessvoid.nifty.effects.EffectEventId;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.input.mouse.MouseInputEvent;
@@ -53,14 +53,14 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 	private Element errorBox;
 	protected boolean simulationStarted = false;
 	protected Font font;
-    TrueTypeFont ttf;
+	private UnicodeFont ttf;
 
 	public GameStateSimRun() {
 		try {
 			this.simulator = new Simulator();
 			
 			this.font =  new Font("Verdana", Font.BOLD, FONTSIZE);
-			this.ttf = new TrueTypeFont(font.deriveFont(Font.BOLD, FONTSIZE), true, null);
+			this.ttf = new UnicodeFont(this.font, FONTSIZE, false, false);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -106,16 +106,25 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		this.game = game;
 
 		// create nifty (gui)
-		nifty = new Nifty(new RenderDeviceLwjgl(), new SoundSystem(
-				new SlickSoundDevice()), new InputSystem() {
-			@Override
-			public List<MouseInputEvent> getMouseEvents() {
-				ArrayList<MouseInputEvent> result = new ArrayList<MouseInputEvent>(
-						mouseEvents);
-				mouseEvents.clear();
-				 return result;
-			}
-		}, new TimeProvider());
+		nifty = new Nifty(
+				new RenderDeviceLwjgl(), 
+				new SlickSoundDevice(), 
+				new InputSystem() {
+					public List<MouseInputEvent> getMouseEvents() {
+						ArrayList<MouseInputEvent> result = new ArrayList<MouseInputEvent>(
+								mouseEvents);
+						mouseEvents.clear();
+						 return result;
+					}
+
+					@Override
+					public void forwardEvents(NiftyInputConsumer arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+				}, 
+			new TimeProvider()
+			);
 		nifty.fromXml("ressources/gui/simMenu.xml", "simMenu", this);
 
 		// fetch the error box from the xml

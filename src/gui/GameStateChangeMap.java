@@ -15,6 +15,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import common.GlobalConstants;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.NiftyInputConsumer;
 import de.lessvoid.nifty.controls.dropdown.controller.DropDownControl;
 import de.lessvoid.nifty.input.mouse.MouseInputEvent;
 import de.lessvoid.nifty.lwjglslick.render.RenderDeviceLwjgl;
@@ -62,12 +63,17 @@ public class GameStateChangeMap extends BasicGameState implements
 		// create nifty (gui)
 		nifty = new Nifty(new RenderDeviceLwjgl(), new SoundSystem(
 				new SlickSoundDevice()), new InputSystem() {
-			@Override
 			public List<MouseInputEvent> getMouseEvents() {
 				ArrayList<MouseInputEvent> result = new ArrayList<MouseInputEvent>(
 						mouseEvents);
 				mouseEvents.clear();
 				return result;
+			}
+
+			@Override
+			public void forwardEvents(NiftyInputConsumer arg0) {
+				// TODO Auto-generated method stub
+				
 			}
 		}, new TimeProvider());
 

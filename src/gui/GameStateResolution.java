@@ -15,6 +15,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import de.lessvoid.nifty.EndNotify;
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.NiftyInputConsumer;
 import de.lessvoid.nifty.input.mouse.MouseInputEvent;
 import de.lessvoid.nifty.lwjglslick.render.RenderDeviceLwjgl;
 import de.lessvoid.nifty.lwjglslick.sound.SlickSoundDevice;
@@ -50,12 +51,17 @@ public void init(GameContainer container, StateBasedGame game) throws SlickExcep
     this.game = game;
     // create nifty (gui)
     nifty = new Nifty(new RenderDeviceLwjgl(), new SoundSystem(new SlickSoundDevice()), new InputSystem() {
-      @Override
-	public List<MouseInputEvent> getMouseEvents() {
+      public List<MouseInputEvent> getMouseEvents() {
         ArrayList<MouseInputEvent> result = new ArrayList<MouseInputEvent>(mouseEvents);
         mouseEvents.clear();
         return result;
       }
+
+	@Override
+	public void forwardEvents(NiftyInputConsumer arg0) {
+		// TODO Auto-generated method stub
+		
+	}
     }, new TimeProvider());
     nifty.fromXml("ressources/gui/resolutionMenu.xml", "start", this);
   }

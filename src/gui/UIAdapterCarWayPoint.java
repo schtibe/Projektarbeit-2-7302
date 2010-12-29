@@ -1,7 +1,7 @@
 package gui;
 
 import org.newdawn.slick.Color;
-import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
@@ -10,7 +10,7 @@ import common.IVector;
 import environment.CarWayPoint;
 
 /**
- * Since we dont want to draw this stuff, we don't implement the methods
+ * Since we don't want to draw this stuff, we don't implement the methods
  *
  */
 public class UIAdapterCarWayPoint extends UIAdapter<CarWayPoint> implements IUIAdapterCarWayPoint {
@@ -43,7 +43,7 @@ public class UIAdapterCarWayPoint extends UIAdapter<CarWayPoint> implements IUIA
 	}
 
 	@Override
-	public void drawString(TrueTypeFont ttf) {
+	public void drawString(UnicodeFont ttf) {
 		// TODO Auto-generated method stub
 
 	}
@@ -61,5 +61,7 @@ public class UIAdapterCarWayPoint extends UIAdapter<CarWayPoint> implements IUIA
 	public boolean doDraw() {
 		return true;
 	}
+
+	
 
 }
