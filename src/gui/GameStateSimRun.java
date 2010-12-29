@@ -306,6 +306,14 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		this.container.setShowFPS(!this.container.isShowingFPS());
 	}
 	
+	/**
+	 * Toggle whether the driver views should be displayed
+	 */
+	public void toggleDriverView() {
+		System.out.println("Toggling driver view");
+		GUIConstants.getInstance().toggleShowDriverView();
+	}
+	
 	private void generateGrid() {
 		this.grid = new ArrayList<Path>();
 		for (float x = 0; x <= container.getScreenWidth(); x += GRIDSIZE) {

@@ -20,7 +20,6 @@ public class GUIConstants {
 	 */
 	private GUIConstants() {}
 	
-	
 	/**
 	 * Whether the position of the junction way points are to be shown
 	 */
