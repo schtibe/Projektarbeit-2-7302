@@ -402,4 +402,6 @@ public abstract class Vehicle implements IVehicle,IObservable {
 			obs.update(msg);
 		}
 	}
+	
+	public abstract IMovable getWayPoint();
 }

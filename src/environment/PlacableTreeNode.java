@@ -89,6 +89,7 @@ public class PlacableTreeNode implements IPlacableManager {
 	
 	@Override
 	public boolean move(IMovable movable, float newX, float newY) {
+		// TODO change this method completely as it doesn't work at all :( 
 		float xPos = movable.getXPos();
 		float yPos = movable.getYPos();
 		if (this.maxDepth > 0){

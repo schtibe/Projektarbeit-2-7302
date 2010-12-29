@@ -76,6 +76,8 @@ public class WayPointManager implements IPlacableManager {
 	 * @param newY
 	 */
 	public boolean move(IMovable movable, float newX, float newY) {
+		// TODO this is a workaround to make development of the rest of the solution go on while we have an issue here
+		// with the move method
 		try{
 			root.remove(movable);
 			movable.updatePosition(new Vector(new float[]{newX,newY}));

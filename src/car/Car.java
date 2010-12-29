@@ -7,6 +7,8 @@ import common.IObserver;
 
 import environment.CarWayPoint;
 import environment.ILane;
+import environment.IMovable;
+import environment.VehicleWayPoint;
 import environment.WayPointManager;
 
 /**
@@ -124,6 +126,11 @@ public class Car extends Vehicle {
 	@Override
 	protected float maxDeceleration() {
 		return this.maxDeceleration;
+	}
+
+	@Override
+	public IMovable getWayPoint() {
+		return this.wayPoint;
 	}
 
 }

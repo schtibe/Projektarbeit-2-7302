@@ -37,4 +37,8 @@ public abstract class MovingWayPoint implements IWayPoint,IMovable {
 	public void updatePosition(IVector pos) {
 		this.position = pos;
 	}
+	@Override
+	public String toString(){
+		return "type: moving\ncoordinates: "+this.position.toString();
+	}
 }

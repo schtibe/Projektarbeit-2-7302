@@ -67,5 +67,9 @@ public class SpeedWayPoint extends SignWayPoint {
 	public IUIAdapterWayPoint<SpeedWayPoint> visitUIFactory(float scale, IVector offsetVector) throws Exception {
 		return UIElementFactory.getUIElement(this, scale, offsetVector);
 	}
-
+	
+	@Override
+	public String toString(){
+		return "type: speed sign\ncoordinates: "+this.position.toString(); 
+	}
 }

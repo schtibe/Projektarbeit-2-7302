@@ -9,7 +9,6 @@ import simulation.EventQueue;
 import simulation.VehicleEvent;
 import car.IVehicle;
 import car.Vehicle;
-import environment.CarWayPoint;
 import common.GlobalConstants;
 import common.IObserver;
 import environment.IJunctionDecision;
@@ -32,6 +31,8 @@ public class Animus implements IObserver {
 	protected Vehicle vehicle;
 	protected DriverEvent event;
 	protected int targetSpeed = 30;
+	protected float nearestVehicleDistance;
+	protected float nearestVehicleDistanceOld;
 	
 	private Queue<IWayPoint> seenWayPoints;
 	
@@ -44,6 +45,7 @@ public class Animus implements IObserver {
 		this.physics = physics;
 		this.character = character;
 		this.seenWayPoints = new ArrayBlockingQueue<IWayPoint>(10);
+		nearestVehicleDistanceOld = Float.MAX_VALUE;
 	}
 	
 	/**
@@ -54,15 +56,27 @@ public class Animus implements IObserver {
 	 */
 	public void assessSituation (DriverEvent event) throws Exception{
 		this.event = event;
+		nearestVehicleDistance = Float.MAX_VALUE;
 		DecelerationActivator vehicleActivator = new DecelerationActivator(0f);
 		DecelerationActivator junctionActivator = new DecelerationActivator(0f);
 		IDriverView dView = this.physics.getView(vehicle.getDriverView());
 		List<IPlacable> wayPoints = WayPointManager.getInstance().findWayPoints(dView);
-		//this.clearWayPoints();
 		for(IPlacable waypoint : wayPoints){
-			System.out.println(waypoint.toString());
 			((IWayPoint)waypoint).visitHandleWayPoint(this);
 		}
+		if (wayPoints.isEmpty()){
+			nearestVehicleDistanceOld = Float.MAX_VALUE;
+		}
+		if (nearestVehicleDistanceOld != Float.MAX_VALUE){
+			if (nearestVehicleDistanceOld > nearestVehicleDistance){
+				vehicleActivator.setValue(1.0f);
+			}
+			float securityDistance = this.vehicle.getSpeed()/2;
+			if (nearestVehicleDistance < securityDistance){
+				vehicleActivator.setValue(1.0f);
+			}
+		}
+		nearestVehicleDistanceOld = nearestVehicleDistance;
 		float acceleration = 0;
 		float speedAssessed = assessSpeeds(vehicle.getSpeed(),(float)targetSpeed);
 		if (speedAssessed != 0){
@@ -72,6 +86,7 @@ public class Animus implements IObserver {
 				acceleration = generateAcceleration (new AccelerationActivator(speedAssessed), vehicleActivator, junctionActivator);
 			}
 		}
+		System.out.println("("+vehicle.hashCode()+")acceleration:"+acceleration);
 		VehicleEvent evt = new VehicleEvent(event.getTimeStamp()+physics.getUpdateInterval(),vehicle,acceleration);
 		EventQueue.getInstance().addEvent(evt);
 	}
@@ -136,7 +151,7 @@ public class Animus implements IObserver {
 	 */
 	public void handleWayPoint (SpeedWayPoint waypoint){
 		if (vehicle.getLane().equals(waypoint.getLane())){
-			System.out.println("handling speed wayPoint");
+			//System.out.println("handling speed wayPoint");
 			//System.out.println("original target speed: "+targetSpeed);
 			//System.out.println("car speed at this point:"+vehicle.getSpeed());
 			//System.out.println("new target speed: "+waypoint.getSpeedLimit());
@@ -148,16 +163,8 @@ public class Animus implements IObserver {
 	 * handles a sign way point
 	 * @param waypoint
 	 */
-	//public void handleWayPoint (VehicleWayPoint waypoint){
-	//System.out.println("signy signal drawer");
-	//}
-	
-	/**
-	 * handles a sign way point
-	 * @param waypoint
-	 */
 	public void handleWayPoint (SignWayPoint waypoint){
-	//System.out.println("signy signal drawer");
+		//System.out.println("signy signal drawer");
 	}
 	
 	/**
@@ -166,9 +173,9 @@ public class Animus implements IObserver {
 	 */
 	public void handleWayPoint (JunctionWayPoint waypoint) {
 		if (this.vehicle.getLanes().size() < Vehicle.queueSize) {
-			System.out.println("handling junction waypoint");
+			//System.out.println("handling junction waypoint");
  			if (this.checkWayPoint(vehicle, waypoint)) {
- 				System.out.println("decision making for direction");
+ 				//System.out.println("decision making for direction");
 				List<IJunctionDecision> decisions = 
 					waypoint.getJunction().getPossibilities(waypoint.getLane());
 				IJunctionDecision decision = decisions.get((int)Math.round(Math.random()*(decisions.size()-1)));
@@ -184,7 +191,16 @@ public class Animus implements IObserver {
 	 * @param carWayPoint
 	 */
 	public void handleWayPoint(VehicleWayPoint waypoint) {
-		System.out.println("I Saw a vehicle");
+		if (waypoint != (VehicleWayPoint)vehicle.getWayPoint()){
+			if (waypoint.getLane() == this.vehicle.getLane()){
+				float distance = waypoint.getDistance(this.vehicle);
+				if (nearestVehicleDistance > distance){
+					nearestVehicleDistance = distance;
+					
+				}
+			}
+			//System.out.println("I Saw a vehicle");
+		}
 	}
 	
 	/**

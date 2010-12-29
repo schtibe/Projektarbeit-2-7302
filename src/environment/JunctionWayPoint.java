@@ -104,4 +104,12 @@ public class JunctionWayPoint extends WayPoint {
 		return UIElementFactory.getUIElement(this, scale, offsetVector);
 	}
 
+	
+	/**
+	 * 
+	 */
+	@Override
+	public String toString(){
+		return "type: junction\ncoordinates: "+this.position.toString();
+	}
 }
