@@ -122,57 +122,53 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle> implements IUIAdapterV
 		return new Color(Color.red);
 	}
 
-	
-	
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(this.getColor());
 		g.fill(this.getBoundingBox());
 		g.draw(this.getBoundingBox());
 		
-		g.setColor(Color.yellow);
-		Shape view = this.getDriverViewBoundingBox();
-		g.draw(view);
+		if (GUIConstants.getInstance().showDriverView()) {
+			g.setColor(Color.yellow);
+			Shape view = this.getDriverViewBoundingBox();
+			g.draw(view);
+		}
 	}
 	
 	
 	/**
-	 * @TODO refactor this
+	 * Get the shape for the driver's view
 	 * @return
 	 */
 	protected Shape getDriverViewBoundingBox() {
 		IDriverView view = this.mainObject.getDriverView();
-		
-		float angle = view.getAngle();
-		IVector direction = view.getDirection();
 		IVector position = view.getPosition();
-		float distance = view.getDistance();
 		
-		float halfAngle = angle / 2;
-		
-		IVector a = (direction.rotate(halfAngle)).normalize().multiply(distance);
-		IVector c = (direction.rotate(-halfAngle)).normalize().multiply(distance);
+		IVector a = view.getABoundary();
+		IVector c = view.getCBoundary();
 		
 		a = a.add(position);
 		c = c.add(position);
 		
+		float oX = this.offsetVector.getComponent(0);
+		float oY = this.offsetVector.getComponent(1);
+		
 		Path path = new Path(
-				position.getComponent(0) * scale + this.offsetVector.getComponent(0), 
-				position.getComponent(1) * scale + this.offsetVector.getComponent(1)
+				position.getComponent(0) * scale + oX, 
+				position.getComponent(1) * scale + oY
 		);
 		
-		
 		path.lineTo(
-				a.getComponent(0) * scale + this.offsetVector.getComponent(0), 
-				a.getComponent(1) * scale + this.offsetVector.getComponent(1)
+				a.getComponent(0) * scale + oX, 
+				a.getComponent(1) * scale + oY
 		);
 		path.lineTo(
-				c.getComponent(0) * scale + this.offsetVector.getComponent(0), 
-				c.getComponent(1) * scale + this.offsetVector.getComponent(1)
+				c.getComponent(0) * scale + oX, 
+				c.getComponent(1) * scale + oY
 		);
 		path.lineTo(
-				position.getComponent(0) * scale + this.offsetVector.getComponent(0), 
-				position.getComponent(1) * scale + this.offsetVector.getComponent(1)
+				position.getComponent(0) * scale + oX, 
+				position.getComponent(1) * scale + oY
 		);
 		
 		return path;

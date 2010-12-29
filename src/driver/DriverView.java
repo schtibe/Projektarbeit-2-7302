@@ -3,10 +3,19 @@ package driver;
 import common.IVector;
 
 public class DriverView implements IDriverView {
+	/**
+	 * The properties of the view
+	 */
 	private IVector direction;
 	private IVector position;
 	private float angle;
 	private float distance;
+	
+	/**
+	 * The boundaries of the view
+	 */
+	IVector aBoundary, bBoundary, cBoundary;
+	boolean boundaryCalculated = false;
 	
 	/**
 	 * constructor, a driver view can be empty on construction time
@@ -43,60 +52,40 @@ public class DriverView implements IDriverView {
 	 * @param angle
 	 * @param distance
 	 */
-	
 	private DriverView(IVector direction, IVector position, float angle, float distance){
 		this.direction = direction;
 		this.position = position;
 		this.angle = angle;
 		this.distance = distance;
 	}
-	/**
-	 * sets the angle 
-	 */
+	
 	@Override
 	public void setAngle (float value){
 		this.angle = value;
+		this.boundaryCalculated = false;
 	}
-	
-	/**
-	 * sets the distance
-	 */
 	
 	@Override
 	public void setDistance (float value){
 		this.distance = value;
+		this.boundaryCalculated = false;
 	}
-	
-	/**
-	 * sets the direction vector
-	 */
 	
 	@Override
 	public void setDirection (IVector value){
 		this.direction = value;
+		this.boundaryCalculated = false;
 	}
-	
-	/**
-	 * sets the position
-	 */
 	
 	@Override
 	public void setPosition (IVector value){
 		this.position = value;
 	}
 	
-	/**
-	 * get the angle
-	 */
-	
 	@Override
 	public float getAngle (){
 		return this.angle;
 	}
-	
-	/**
-	 * get the distance
-	 */
 	
 	@Override
 	public float getDistance (){
@@ -104,86 +93,94 @@ public class DriverView implements IDriverView {
 		
 	}
 	
-	/**
-	 * get the position
-	 */
-	
 	@Override
 	public IVector getPosition (){
 		return this.position;
 	}
-	
-	/**
-	 * get the direction vector
-	 */
 	
 	@Override
 	public IVector getDirection (){
 		return this.direction;
 	}
 	
-	/**
-	 * returns a clone of the actual DriverView
-	 */
-	
 	@Override
 	public IDriverView clone (){
 		return new DriverView(this.direction,this.position,this.angle,this.distance);
 	}
 	
-	/**
-	 * to string
-	 */
 	@Override
 	public String toString(){
 		return new String("position: "+this.position.toString()+", direction: "+this.direction.toString()+", distance: "+this.distance);
 	}
 
-	/**
-	 * Check whether the way point lies in this area
-	 * @param position
-	 * @return
-	 */
 	public boolean checkWayPoint(IVector position) {
+		IVector a = this.getABoundary();
+		IVector b = this.getBBoundary();
+
 		position = position.sub(this.position);
 		
-	//	System.out.println("Calculating constants");
-		IVector aBoundary = this.direction.rotate(this.angle / 2)
-			.normalize().multiply(this.distance); 
+		float ax = a.getComponent(0);
+		float ay = a.getComponent(1);
 		
-		//System.out.println("A boundary: " + aBoundary);
+		float bx = b.getComponent(0);
+		float by = b.getComponent(1);
 		
-		IVector cBoundary = this.direction.rotate(- this.angle / 2)
-			.normalize().multiply(this.distance);
-		//System.out.println("The C: " + cBoundary);
+		float posx = position.getComponent(0);
+		float posy = position.getComponent(1);
 		
-		IVector bBoundary = cBoundary.sub(aBoundary); 
-		//System.out.println("B boundary: " + bBoundary);
-		float boundaryRatio =  bBoundary.norm() /  aBoundary.norm();
-		//System.out.println("ratio: " + boundaryRatio);
+		float boundaryRatio =  b.norm() /  b.norm();
+		float denominator = ax * by	- ay * bx;
 		
-		float denominator = 
-			aBoundary.getComponent(0) * bBoundary.getComponent(1)
-			- aBoundary.getComponent(1) * bBoundary.getComponent(0);
+		float lambda = -(bx * posy - by * posx) /denominator;
 		
-		float lambda = -(bBoundary.getComponent(0) * position.getComponent(1)
-				- bBoundary.getComponent(1) * position.getComponent(0)) /
-				denominator;
+		float mu = (ax * posy - ay * posx) / denominator;
 		
-		float mu = (aBoundary.getComponent(0) * position.getComponent(1)
-				- aBoundary.getComponent(1) * position.getComponent(0)) /
-				denominator;
+		float ratio = mu * b.norm() / lambda * b.norm();
+			
+		return ratio >= boundaryRatio && 
+			lambda > 0 && lambda <=1 && 
+			mu > 0 && mu <= 1;
+	}
+
+	
+	@Override
+	public IVector getABoundary() {
+		this.calculateBoundaries();
+		return this.aBoundary;
+	}
+
+	
+	@Override
+	public IVector getBBoundary() {
+		this.calculateBoundaries();
+		return this.bBoundary;
+	}
+
+	
+	@Override
+	public IVector getCBoundary() {
+		this.calculateBoundaries();
+		return this.cBoundary;
+	}
+
+	/**
+	 * Calculate the boundaries of the view if necessary
+	 * 
+	 * The boundaries are relative to the position of the view.
+	 */
+	protected void calculateBoundaries() {
+		if (boundaryCalculated) {
+			return;
+		}
 		
-		//mu = Math.abs(mu);
+		float halfAngle = angle / 2;
 		
-		//System.out.println("lambda: " + lambda);
-		//System.out.println("mu " + mu);
+		this.aBoundary = (direction.rotate(halfAngle))
+				.normalize().multiply(distance);
+		this.cBoundary = (direction.rotate(-halfAngle))
+				.normalize().multiply(distance);
+		this.bBoundary = cBoundary.sub(this.aBoundary);
 		
-		float ratio = mu * bBoundary.norm() / lambda * aBoundary.norm();
-		
-		//System.out.println("ratio2: " + ratio);
-		
-		return ratio >= boundaryRatio && lambda > 0 && lambda <=1 && mu > 0 && mu <= 1;
-		//return lambda > 0 && lambda <= 1 && mu > 0 && mu <= 1;
+		this.boundaryCalculated = true;
 	}
 }
