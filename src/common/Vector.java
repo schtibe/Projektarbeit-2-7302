@@ -190,7 +190,6 @@ public class Vector implements IVector {
 
 	@Override
 	public Vector rotate(float angle) {
-		// TODO Auto-generated method stub
 		float newAngle = this.getAngle() + angle;
 		return new Vector(new float[] {
 				(float) Math.cos(newAngle) * this.norm(),

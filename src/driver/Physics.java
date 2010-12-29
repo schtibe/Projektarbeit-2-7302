@@ -38,19 +38,16 @@ public class Physics {
 	 * @param view
 	 * @return
 	 */
-	
 	public IDriverView getView(IDriverView view){
-		IDriverView output = view.clone();
-		output.setAngle(this.fieldOfView); 
-		output.setDistance(this.sight);
-		return output;
+		view.setAngle(this.fieldOfView); 
+		view.setDistance(this.sight);
+		return view;
 	}
 	
 	/**
 	 * returns the interval value
 	 * @return
 	 */
-	
 	public int getUpdateInterval (){
 		return this.updateInterval;
 	}

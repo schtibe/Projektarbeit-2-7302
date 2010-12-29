@@ -131,7 +131,7 @@ public class Animus implements IObserver {
 	}
 
 	/**
-	 * handles a speed waypoint
+	 * handles a speed way point
 	 * @param waypoint
 	 */
 	public void handleWayPoint (SpeedWayPoint waypoint){

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import org.newdawn.slick.command.InputProviderListener;
+
 import common.GlobalConstants;
 import common.IVector;
 import common.Vector;
@@ -94,30 +96,38 @@ public class WayPointManager implements IPlacableManager {
 	}
 
 	/**
-	 * returns a list of way points contained in the driver view's hitbox
+	 * returns a list of way points contained in the driver view's hit box
 	 * @param view
 	 * @return list of way points
 	 */
-	
 	public List<IPlacable> findWayPoints(IDriverView view) {
 		float halfViewAngle = (view.getAngle()/2);
-		//System.out.println("half an angle: "+halfViewAngle);
+		
 		IVector upperBound = (view.getDirection().rotate(halfViewAngle)).normalize().multiply(view.getDistance());//.add(view.getPosition());
 		IVector lowerBound = (view.getDirection().rotate(-halfViewAngle)).normalize().multiply(view.getDistance());//.add(view.getPosition());
-		//System.out.println("lowerBound: "+lowerBound.toString()+": upperBound: "+upperBound.toString());
+
 		upperBound = upperBound.add(view.getPosition());
 		lowerBound = lowerBound.add(view.getPosition());
-		//System.out.println("lowerBound: "+lowerBound.toString()+": upperBound: "+upperBound.toString());
-		//System.out.println("directionAngle: "+view.getDirection().getAngle()+" upperBoundAngle: "+upperBound.getAngle()+" lowerBound: "+lowerBound.getAngle());
+
 		IVector[] xtremes = getMinMaxVectors(new IVector[]{view.getPosition(),upperBound,lowerBound});
 		IVector min = xtremes[0];
 		IVector max = xtremes[1];//.sub(min);
-		//System.out.println("min: "+min.toString()+":max "+max.toString());
-		/*if (view.getPosition().getComponent(0) < 480){
-			System.out.println("it should come now");
-		}*/
-		return root.findInArea(min.getComponent(0),min.getComponent(1),max.getComponent(0),max.getComponent(1));
-		//return root.findInArea(160f, 160f, 250f, 250f);
+		List<IPlacable> found = root.findInArea(
+				min.getComponent(0), 
+				min.getComponent(1), 
+				max.getComponent(0), 
+				max.getComponent(1)
+		);
+		
+		List<IPlacable> ret = new ArrayList<IPlacable>();
+		
+		for (IPlacable pl : found) {
+			if (view.checkWayPoint(new Vector(new float[]{pl.getXPos(), pl.getYPos()}))) {
+				ret.add(pl);
+			}
+		}
+		
+		return ret;
 	}
 	
 	/**

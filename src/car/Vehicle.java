@@ -73,6 +73,13 @@ public abstract class Vehicle implements IVehicle,IObservable {
 	 * The vehicle's dimension
 	 */
 	protected VehicleDimension dimension;
+	
+	/**
+	 * The driver's view
+	 * 
+	 * @TODO probably move this to another place
+	 */
+	protected DriverView driverView;
 
 	/**
 	 * {@inheritDoc}
@@ -170,6 +177,8 @@ public abstract class Vehicle implements IVehicle,IObservable {
 		}
 		this.initializeDirection();
 		this.createWayPoint();
+		
+		this.driverView = new DriverView(this.direction.normalize(), this.position);
 	}
 
 	/**
@@ -267,6 +276,7 @@ public abstract class Vehicle implements IVehicle,IObservable {
 			return;
 		}
 
+		this.driverView.setPosition(this.position);
 		this.updateDirection();
 		try {
 			WayPointManager.getInstance().move(
@@ -295,6 +305,8 @@ public abstract class Vehicle implements IVehicle,IObservable {
 			this.direction = this.position.sub(this.lastPosition);
 			this.lastPosition = this.position;
 		}
+		
+		this.driverView.setDirection(this.direction);
 	}
 
 	/**
@@ -357,7 +369,7 @@ public abstract class Vehicle implements IVehicle,IObservable {
 	 */
 	@Override
 	public IDriverView getDriverView() {
-		return new DriverView(this.direction.normalize(), this.position);
+		return this.driverView;
 	}
 
 	/**

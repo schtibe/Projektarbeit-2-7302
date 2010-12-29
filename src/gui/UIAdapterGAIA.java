@@ -196,7 +196,7 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 						VehicleType.car, 
 						lane.getOriginalLane(),  
 						new Character(), 
-						new Physics(100, 
+						new Physics(100,
 								(float)((2*Math.PI)/3),
 								250, 
 								new ArrayList<Drug>()

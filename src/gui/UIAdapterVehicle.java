@@ -2,6 +2,8 @@ package gui;
 
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Path;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -11,6 +13,7 @@ import car.IVehicle;
 
 import common.IVector;
 import common.Vector;
+import driver.IDriverView;
 
 /**
  * A vehicle adapter implementation
@@ -118,4 +121,62 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle> implements IUIAdapterV
 	public Color getColor() {
 		return new Color(Color.red);
 	}
+
+	
+	
+	@Override
+	public void draw(Graphics g) {
+		g.setColor(this.getColor());
+		g.fill(this.getBoundingBox());
+		g.draw(this.getBoundingBox());
+		
+		g.setColor(Color.yellow);
+		Shape view = this.getDriverViewBoundingBox();
+		g.draw(view);
+	}
+	
+	
+	/**
+	 * @TODO refactor this
+	 * @return
+	 */
+	protected Shape getDriverViewBoundingBox() {
+		IDriverView view = this.mainObject.getDriverView();
+		
+		float angle = view.getAngle();
+		IVector direction = view.getDirection();
+		IVector position = view.getPosition();
+		float distance = view.getDistance();
+		
+		float halfAngle = angle / 2;
+		
+		IVector a = (direction.rotate(halfAngle)).normalize().multiply(distance);
+		IVector c = (direction.rotate(-halfAngle)).normalize().multiply(distance);
+		
+		a = a.add(position);
+		c = c.add(position);
+		
+		Path path = new Path(
+				position.getComponent(0) * scale + this.offsetVector.getComponent(0), 
+				position.getComponent(1) * scale + this.offsetVector.getComponent(1)
+		);
+		
+		
+		path.lineTo(
+				a.getComponent(0) * scale + this.offsetVector.getComponent(0), 
+				a.getComponent(1) * scale + this.offsetVector.getComponent(1)
+		);
+		path.lineTo(
+				c.getComponent(0) * scale + this.offsetVector.getComponent(0), 
+				c.getComponent(1) * scale + this.offsetVector.getComponent(1)
+		);
+		path.lineTo(
+				position.getComponent(0) * scale + this.offsetVector.getComponent(0), 
+				position.getComponent(1) * scale + this.offsetVector.getComponent(1)
+		);
+		
+		return path;
+	}
+
+	
 }

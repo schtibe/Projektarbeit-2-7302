@@ -1,5 +1,6 @@
 package gui;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Shape;
 
 /**
@@ -20,4 +21,6 @@ public interface IUIAdapterVehicle<E> extends IUIAdapterColored<E> {
 	 */
 	@Override
 	public String toString();
+
+	public void draw(Graphics g);
 }

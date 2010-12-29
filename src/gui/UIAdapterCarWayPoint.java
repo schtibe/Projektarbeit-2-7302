@@ -59,7 +59,7 @@ public class UIAdapterCarWayPoint extends UIAdapter<CarWayPoint> implements IUIA
 	 */
 	@Override
 	public boolean doDraw() {
-		return false;
+		return true;
 	}
 
 }

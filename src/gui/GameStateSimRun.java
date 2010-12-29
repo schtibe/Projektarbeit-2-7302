@@ -130,9 +130,9 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		g.setAntiAlias(false);
 		
 		this.drawGrid(g);
-		this.drawWaypoints(g);
 		this.drawTrafficCarriers(g);		
-		this.drawVehicles(g);			
+		this.drawVehicles(g);
+		this.drawWaypoints(g);
 
 		//draw the gui
 		SlickCallable.enterSafeBlock();
@@ -149,9 +149,12 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		for (IUIAdapterVehicle<?> vehicle : GameCache.getInstance()
 				.getGAIA().getVehicles()) {
 
+			vehicle.draw(g);
+			/*
 			g.setColor(vehicle.getColor());
 			g.fill(vehicle.getBoundingBox());
-			g.draw(vehicle.getBoundingBox());
+			g.raw(vehicle.getBoundingBox());
+			*/
 		}
 	}
 

@@ -120,34 +120,8 @@ public class Lane implements ILane {
 		float segmentLength = drivenDistance - position;
 		IVector actualPosition = segment.getVehiclePosition(segmentLength);
 		
-		//System.out.println("Lanesegment position... "+ segment.getStartPoint());
-		/*
-	//System.out.println("Actual position" + actualPosition);
-	//System.out.println("Lanesegment length: " + segment.getLength());*/
 		return actualPosition;
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	/*
-	public List<IWayPoint> getWayPointsAtPosition(float lanePosition, float viewField) {
-		ILaneSegment<?> laneSegment;
-		laneSegment = this.getLaneSegmentAtPosition(lanePosition);
-		List<IWayPoint> wayPoints = new ArrayList<IWayPoint>();
-		
-		for (float i = viewField; i > 0;) {
-			wayPoints.addAll(laneSegment.getSignWayPoints(viewField));
-			
-			if (laneSegment.getLength() < viewField) {
-				viewField -= laneSegment.getLength();
-				laneSegment = (LaneSegment<?>) laneSegment.getNextLaneSegment();
-			}
-		}
-		
-		return wayPoints;
-	}
-	*/
 	
 	/**
 	 * Return the lane segment's distance on the lane

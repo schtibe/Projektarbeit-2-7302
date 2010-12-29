@@ -22,4 +22,5 @@ public interface IDriverView {
 	
 	public abstract IDriverView clone();
 
+	public boolean checkWayPoint(IVector position);
 }
