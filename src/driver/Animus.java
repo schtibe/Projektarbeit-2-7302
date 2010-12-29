@@ -7,7 +7,6 @@ import java.util.concurrent.ArrayBlockingQueue;
 import simulation.DriverEvent;
 import simulation.EventQueue;
 import simulation.VehicleEvent;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import car.IVehicle;
 import car.Vehicle;
 import environment.CarWayPoint;
@@ -20,6 +19,7 @@ import environment.IWayPoint;
 import environment.JunctionWayPoint;
 import environment.SignWayPoint;
 import environment.SpeedWayPoint;
+import environment.VehicleWayPoint;
 import environment.WayPointManager;
 
 public class Animus implements IObserver {
@@ -60,6 +60,7 @@ public class Animus implements IObserver {
 		List<IPlacable> wayPoints = WayPointManager.getInstance().findWayPoints(dView);
 		//this.clearWayPoints();
 		for(IPlacable waypoint : wayPoints){
+			System.out.println(waypoint.toString());
 			((IWayPoint)waypoint).visitHandleWayPoint(this);
 		}
 		float acceleration = 0;
@@ -77,7 +78,7 @@ public class Animus implements IObserver {
 	
 	private float assessSpeeds(float vehicle, float target) {
 		float percentage = Math.abs((vehicle/target)-1f);
-		System.out.println("p:"+percentage);
+		//System.out.println("p:"+percentage);
 		if (percentage<GlobalConstants.getInstance().getSpeedPerceptionThreshold()){
 			return 0;
 		}
@@ -109,7 +110,7 @@ public class Animus implements IObserver {
 	}
 
 	private float calculateAcceleration (float vehicle, float junction, float speed){
-		System.out.println("speedActivator: "+speed);
+		//System.out.println("speedActivator: "+speed);
 		GlobalConstants constants = GlobalConstants.getInstance();
 		float acceleration;
 		float n;
@@ -125,7 +126,7 @@ public class Animus implements IObserver {
 		}else{
 			acceleration = (n*weightN+speed*constants.getSpeedWaypointInfluence())/(weightN+constants.getSpeedWaypointInfluence());
 		}
-		System.out.println("acc:"+acceleration);
+		//System.out.println("acc:"+acceleration);
 		return acceleration;
 	}
 
@@ -136,9 +137,9 @@ public class Animus implements IObserver {
 	public void handleWayPoint (SpeedWayPoint waypoint){
 		if (vehicle.getLane().equals(waypoint.getLane())){
 			System.out.println("handling speed wayPoint");
-			System.out.println("original target speed: "+targetSpeed);
-			System.out.println("car speed at this point:"+vehicle.getSpeed());
-			System.out.println("new target speed: "+waypoint.getSpeedLimit());
+			//System.out.println("original target speed: "+targetSpeed);
+			//System.out.println("car speed at this point:"+vehicle.getSpeed());
+			//System.out.println("new target speed: "+waypoint.getSpeedLimit());
 			targetSpeed = waypoint.getSpeedLimit();
 		}
 	}
@@ -165,7 +166,9 @@ public class Animus implements IObserver {
 	 */
 	public void handleWayPoint (JunctionWayPoint waypoint) {
 		if (this.vehicle.getLanes().size() < Vehicle.queueSize) {
+			System.out.println("handling junction waypoint");
  			if (this.checkWayPoint(vehicle, waypoint)) {
+ 				System.out.println("decision making for direction");
 				List<IJunctionDecision> decisions = 
 					waypoint.getJunction().getPossibilities(waypoint.getLane());
 				IJunctionDecision decision = decisions.get((int)Math.round(Math.random()*(decisions.size()-1)));
@@ -174,6 +177,14 @@ public class Animus implements IObserver {
 						this.event.getTarget()).setDecision(decision));
 			}
 		}
+	}
+	
+	/**
+	 * Handle a car
+	 * @param carWayPoint
+	 */
+	public void handleWayPoint(VehicleWayPoint waypoint) {
+		System.out.println("I Saw a vehicle");
 	}
 	
 	/**
@@ -226,7 +237,7 @@ public class Animus implements IObserver {
 	/**
 	 * Remove the way points not on the lane
 	 */
-	public void laneChange(ILane lastLane) {
+	private void laneChange(ILane lastLane) {
 		for (IWayPoint wp: this.seenWayPoints) {
 			if (wp.getLane() == lastLane) {
 				this.seenWayPoints.remove(wp);
@@ -234,23 +245,12 @@ public class Animus implements IObserver {
 		}
 	}
 
-	/**
-	 * Handle a car
-	 * @param carWayPoint
-	 */
-	public void handleWayPoint(CarWayPoint carWayPoint) {
-		System.out.println("I Saw a car");
-	}
-
 	@Override
 	public void update(String message) {
 		if (message.compareTo("laneChange")== 0){
+			System.out.println(message);
 			Queue<ILane> lanes = vehicle.getLanes();
-			for (IWayPoint wp: this.seenWayPoints){
-				if (!lanes.contains(wp.getLane())){
-					this.seenWayPoints.remove(wp);
-				}
-			}
+			this.laneChange(lanes.poll());
 		}
 	}
 

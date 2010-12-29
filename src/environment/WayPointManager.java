@@ -74,9 +74,15 @@ public class WayPointManager implements IPlacableManager {
 	 * @param newY
 	 */
 	public boolean move(IMovable movable, float newX, float newY) {
-		return root.move(movable, newX, newY);
-		//unnecessary! should be done when moved in move method internally
-		//movable.updatePosition(new Vector(new float[]{newX, newY}));
+		try{
+			root.remove(movable);
+			movable.updatePosition(new Vector(new float[]{newX,newY}));
+			root.add(movable);
+		}catch (Exception ex){
+			System.out.println("ex in move");
+		}
+		//return root.move(movable, newX, newY);
+		return true;
 	}
 
 	/**
