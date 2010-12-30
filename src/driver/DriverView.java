@@ -1,6 +1,8 @@
 package driver;
 
 import common.IVector;
+import common.LinearCombination;
+import common.Vector;
 
 public class DriverView implements IDriverView {
 	private IVector direction;
@@ -145,8 +147,6 @@ public class DriverView implements IDriverView {
 	 * @return
 	 */
 	public boolean checkWayPoint(IVector position) {
-		position = position.sub(this.position);
-		
 	//	System.out.println("Calculating constants");
 		IVector aBoundary = this.direction.rotate(this.angle / 2)
 			.normalize().multiply(this.distance); 
@@ -162,6 +162,8 @@ public class DriverView implements IDriverView {
 		float boundaryRatio =  bBoundary.norm() /  aBoundary.norm();
 		//System.out.println("ratio: " + boundaryRatio);
 		
+		LinearCombination result = Vector.getLinearCombination(this.position, aBoundary, bBoundary, position);
+		/*
 		float denominator = 
 			aBoundary.getComponent(0) * bBoundary.getComponent(1)
 			- aBoundary.getComponent(1) * bBoundary.getComponent(0);
@@ -173,17 +175,19 @@ public class DriverView implements IDriverView {
 		float mu = (aBoundary.getComponent(0) * position.getComponent(1)
 				- aBoundary.getComponent(1) * position.getComponent(0)) /
 				denominator;
-		
+		*/
 		//mu = Math.abs(mu);
 		
 		//System.out.println("lambda: " + lambda);
 		//System.out.println("mu " + mu);
 		
-		float ratio = mu * bBoundary.norm() / lambda * aBoundary.norm();
+		//float ratio = mu * bBoundary.norm() / lambda * aBoundary.norm();
+		float ratio = result.getMu() * bBoundary.norm() / result.getLambda() * aBoundary.norm();
 		
 		//System.out.println("ratio2: " + ratio);
 		
-		return ratio >= boundaryRatio && lambda > 0 && lambda <=1 && mu > 0 && mu <= 1;
+		//return ratio >= boundaryRatio && lambda > 0 && lambda <=1 && mu > 0 && mu <= 1;
+		return ratio >= boundaryRatio && result.getLambda() > 0 && result.getLambda() <=1 && result.getMu() > 0 && result.getMu() <= 1;
 		//return lambda > 0 && lambda <= 1 && mu > 0 && mu <= 1;
 	}
 }

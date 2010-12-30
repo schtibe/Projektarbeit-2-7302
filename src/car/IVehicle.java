@@ -130,4 +130,6 @@ public interface IVehicle extends IEventTarget<VehicleEvent> {
 	 * @param animus
 	 */
 	//public void setAnimus(Animus animus);
+	
+	boolean isFreezed();
 }

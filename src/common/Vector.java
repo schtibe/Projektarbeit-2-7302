@@ -237,4 +237,22 @@ public class Vector implements IVector {
 			return -1;
 		}
 	}
+	
+	public static LinearCombination getLinearCombination (IVector center, IVector directionA, IVector directionB, IVector point){
+		IVector position = point.sub(center);	
+		float denominator = 
+			directionA.getComponent(0) * directionB.getComponent(1)
+			- directionA.getComponent(1) * directionB.getComponent(0);
+		
+		float lambda = -(directionB.getComponent(0) * position.getComponent(1)
+				- directionB.getComponent(1) * position.getComponent(0)) /
+				denominator;
+		
+		float mu = (directionA.getComponent(0) * position.getComponent(1)
+				- directionA.getComponent(1) * position.getComponent(0)) /
+				denominator;
+		return new LinearCombination (mu, lambda);
+	}
 }
+
+

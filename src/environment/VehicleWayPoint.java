@@ -55,4 +55,7 @@ public abstract class VehicleWayPoint extends MovingWayPoint {
 		return this.vehicle.getLane();
 	}
 
+	public Vehicle getVehicle (){
+		return this.vehicle;
+	}
 }
