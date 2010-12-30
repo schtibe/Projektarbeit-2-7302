@@ -2,6 +2,7 @@ package environment;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import common.Vector;
 
 public class PlacableTreeNode implements IPlacableManager {

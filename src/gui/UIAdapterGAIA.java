@@ -1,6 +1,5 @@
 package gui;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -168,6 +167,9 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 		return this.scale;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void addVehicle(
 			IUIAdapterLane<?> lane, 
@@ -207,10 +209,6 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 	@Override
 	public List<IUIAdapterWayPoint<?>> getWaypoints() {
 		return this.wayPoints;
-	}
-
-	public void removeVehicleAdapter() {
-		
 	}
 
 }

@@ -8,7 +8,6 @@ import simulation.VehicleEvent;
 
 import common.IVector;
 
-import driver.Animus;
 import driver.IDriverView;
 import environment.ILane;
 import environment.Lane;
@@ -130,4 +129,6 @@ public interface IVehicle extends IEventTarget<VehicleEvent> {
 	 * @param animus
 	 */
 	//public void setAnimus(Animus animus);
+	
+	boolean isFreezed();
 }

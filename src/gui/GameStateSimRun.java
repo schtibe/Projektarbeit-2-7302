@@ -57,7 +57,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 
 	public GameStateSimRun() {
 		try {
-			this.simulator = new Simulator();
+			this.simulator = Simulator.getInstance();
 			
 			this.font =  new Font("Verdana", Font.BOLD, FONTSIZE);
 			this.ttf = new TrueTypeFont(font.deriveFont(Font.BOLD, FONTSIZE), true, null);

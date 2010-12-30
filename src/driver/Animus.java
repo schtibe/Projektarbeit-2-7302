@@ -4,13 +4,21 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
+import simulation.CrashEvent;
 import simulation.DriverEvent;
 import simulation.EventQueue;
+import simulation.Simulator;
 import simulation.VehicleEvent;
 import car.IVehicle;
 import car.Vehicle;
+import car.VehicleDimension;
+
 import common.GlobalConstants;
 import common.IObserver;
+import common.IVector;
+import common.LinearCombination;
+import common.Vector;
+
 import environment.IJunctionDecision;
 import environment.ILane;
 import environment.IPlacable;
@@ -33,6 +41,7 @@ public class Animus implements IObserver {
 	protected int targetSpeed = 30;
 	protected float nearestVehicleDistance;
 	protected float nearestVehicleDistanceOld;
+	protected boolean noVehicles;
 	
 	private Queue<IWayPoint> seenWayPoints;
 	
@@ -45,6 +54,7 @@ public class Animus implements IObserver {
 		this.physics = physics;
 		this.character = character;
 		this.seenWayPoints = new ArrayBlockingQueue<IWayPoint>(10);
+		nearestVehicleDistance = Float.MAX_VALUE;
 		nearestVehicleDistanceOld = Float.MAX_VALUE;
 	}
 	
@@ -56,7 +66,7 @@ public class Animus implements IObserver {
 	 */
 	public void assessSituation (DriverEvent event) throws Exception{
 		this.event = event;
-		nearestVehicleDistance = Float.MAX_VALUE;
+		noVehicles = true;
 		DecelerationActivator vehicleActivator = new DecelerationActivator(0f);
 		DecelerationActivator junctionActivator = new DecelerationActivator(0f);
 		IDriverView dView = this.physics.getView(vehicle.getDriverView());
@@ -64,29 +74,28 @@ public class Animus implements IObserver {
 		for(IPlacable waypoint : wayPoints){
 			((IWayPoint)waypoint).visitHandleWayPoint(this);
 		}
-		if (wayPoints.isEmpty()){
+		if (noVehicles){
 			nearestVehicleDistanceOld = Float.MAX_VALUE;
+			nearestVehicleDistance = Float.MAX_VALUE;
 		}
 		if (nearestVehicleDistanceOld != Float.MAX_VALUE){
-			if (nearestVehicleDistanceOld > nearestVehicleDistance){
-				vehicleActivator.setValue(1.0f);
-			}
-			float securityDistance = this.vehicle.getSpeed()/2;
-			if (nearestVehicleDistance < securityDistance){
-				vehicleActivator.setValue(1.0f);
-			}
+			//if (nearestVehicleDistanceOld > nearestVehicleDistance){
+			//	vehicleActivator.setValue(1.0f);
+			//}
+			//this.vehicle.getSpeed()/2;
+		}
+		float securityDistance = 200f;
+		if (nearestVehicleDistance < securityDistance){
+			vehicleActivator.setValue(1.0f);
 		}
 		nearestVehicleDistanceOld = nearestVehicleDistance;
 		float acceleration = 0;
 		float speedAssessed = assessSpeeds(vehicle.getSpeed(),(float)targetSpeed);
-		if (speedAssessed != 0){
-			if (vehicle.getSpeed()>(float)targetSpeed){
-				acceleration = generateAcceleration (new DecelerationActivator(speedAssessed), vehicleActivator, junctionActivator);
-			}else{
-				acceleration = generateAcceleration (new AccelerationActivator(speedAssessed), vehicleActivator, junctionActivator);
-			}
+		if (vehicle.getSpeed()>(float)targetSpeed){
+			acceleration = generateAcceleration (new DecelerationActivator(speedAssessed), vehicleActivator, junctionActivator);
+		}else{
+			acceleration = generateAcceleration (new AccelerationActivator(speedAssessed), vehicleActivator, junctionActivator);
 		}
-		System.out.println("("+vehicle.hashCode()+")acceleration:"+acceleration);
 		VehicleEvent evt = new VehicleEvent(event.getTimeStamp()+physics.getUpdateInterval(),vehicle,acceleration);
 		EventQueue.getInstance().addEvent(evt);
 	}
@@ -125,7 +134,7 @@ public class Animus implements IObserver {
 	}
 
 	private float calculateAcceleration (float vehicle, float junction, float speed){
-		//System.out.println("speedActivator: "+speed);
+		//System.out.println("("+this.vehicle.hashCode()+") v:"+vehicle+" s: "+speed);
 		GlobalConstants constants = GlobalConstants.getInstance();
 		float acceleration;
 		float n;
@@ -191,16 +200,83 @@ public class Animus implements IObserver {
 	 * @param carWayPoint
 	 */
 	public void handleWayPoint(VehicleWayPoint waypoint) {
+		noVehicles = false;
 		if (waypoint != (VehicleWayPoint)vehicle.getWayPoint()){
-			if (waypoint.getLane() == this.vehicle.getLane()){
+			VehicleDimension myDim = this.vehicle.getDimension();
+			if (this.vehicle.getLanes().contains(waypoint.getLane())){
 				float distance = waypoint.getDistance(this.vehicle);
 				if (nearestVehicleDistance > distance){
 					nearestVehicleDistance = distance;
 					
 				}
+				VehicleDimension otherDim = waypoint.getVehicle().getDimension();
+				if (distance < myDim.getBoundingRadius()+otherDim.getBoundingRadius()){
+					
+					detectCollison(waypoint);
+				}
+				//System.out.println("("+this.vehicle.hashCode()+") now that bastard bothers me ("+distance+":"+nearestVehicleDistance+")");
 			}
-			//System.out.println("I Saw a vehicle");
+			//System.out.println("("+this.vehicle.hashCode()+") I saw a vehicle");
 		}
+	}
+
+	/**
+	 * @param waypoint
+	 */
+	private void detectCollison(VehicleWayPoint waypoint) {
+		System.out.println("("+this.vehicle.hashCode()+") possible crash with ("+waypoint.getVehicle().hashCode()+")");
+		
+		IVector LengthA = this.vehicle.getDirection().normalize().multiply(vehicle.getDimension().getLength());
+		IVector WidthA = this.vehicle.getDirection().normalize().multiply(vehicle.getDimension().getWidth()).rotate((float)Math.PI/2);
+		
+		IVector LengthB = waypoint.getVehicle().getDirection().normalize().multiply(vehicle.getDimension().getLength());
+		IVector WidthB = waypoint.getVehicle().getDirection().normalize().multiply(vehicle.getDimension().getWidth()).rotate((float)Math.PI/2);
+		
+		IVector lowerLeftA = vehicle.getPosition().sub(LengthA.multiply(0.5f)).sub(WidthA.multiply(0.5f));
+		IVector lowerLeftB = waypoint.getVehicle().getPosition().sub(LengthB.multiply(0.5f)).sub(WidthB.multiply(0.5f));
+		
+		boolean testedA = checkInside(LengthA, WidthA, lowerLeftA,vehicle.getPosition());
+		
+		boolean testedB = checkInside(LengthB, WidthB, lowerLeftB,waypoint.getVehicle().getPosition());
+		
+		if (testedB || testedA){
+			CrashEvent crash = new CrashEvent(
+					1,
+					Simulator.getInstance(),
+					this.vehicle,
+					waypoint.getVehicle());
+			EventQueue.getInstance().addEvent(crash);
+		}
+	}
+
+	/**
+	 * @param length
+	 * @param width
+	 * @param corner
+	 * @param center
+	 * @return
+	 */
+	private boolean checkInside(IVector length, IVector width,
+			IVector corner, IVector center) {
+		IVector[] toTest = new IVector[4];
+		
+		toTest[0] = corner;
+		toTest[1] = corner.add(length);
+		toTest[2] = corner.add(width);
+		toTest[3] = toTest[2].add(length);
+
+		for (IVector testV : toTest){
+			LinearCombination comb = Vector.getLinearCombination (center,length,width,testV);
+			if (
+				comb.getMu() > 0 &&
+				comb.getMu() < 1 &&
+				comb.getLambda() > 0 &&
+				comb.getLambda() < 1
+			){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -264,7 +340,7 @@ public class Animus implements IObserver {
 	@Override
 	public void update(String message) {
 		if (message.compareTo("laneChange")== 0){
-			System.out.println(message);
+			//System.out.println(message);
 			Queue<ILane> lanes = vehicle.getLanes();
 			this.laneChange(lanes.poll());
 		}

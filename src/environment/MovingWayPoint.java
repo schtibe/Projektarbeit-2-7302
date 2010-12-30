@@ -1,6 +1,7 @@
 package environment;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import common.IVector;
 
 public abstract class MovingWayPoint implements IWayPoint,IMovable {

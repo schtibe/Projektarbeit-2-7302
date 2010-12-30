@@ -13,7 +13,6 @@ import common.IObserver;
 import common.IVector;
 import common.Vector;
 
-//import driver.Animus;
 import driver.DriverView;
 import driver.IDriverView;
 import environment.ILane;
@@ -27,24 +26,26 @@ import environment.WayPointManager;
  * This class contains all the needed information and methods for a vehicle.
  * 
  */
-public abstract class Vehicle implements IVehicle,IObservable {
-	
+public abstract class Vehicle implements IVehicle, IObservable {
+
 	/**
 	 * List of Observers, that get notified when a change occurs
 	 */
-	
+
 	private List<IObserver> observers;
+
+	protected boolean freezed;
 	
 	/**
 	 * This is more like a temporary hack
 	 */
-	//protected Animus animus;
+	// protected Animus animus;
 
 	/**
 	 * The way point that belongs to this vehicle
 	 */
 	protected IMovable wayPoint;
-	
+
 	/**
 	 * The direction the vehicle is heading
 	 * 
@@ -73,7 +74,7 @@ public abstract class Vehicle implements IVehicle,IObservable {
 	 * The vehicle's dimension
 	 */
 	protected VehicleDimension dimension;
-	
+
 	/**
 	 * The driver's view
 	 * 
@@ -114,6 +115,8 @@ public abstract class Vehicle implements IVehicle,IObservable {
 	 * The driven distance on the lane
 	 */
 	protected float drivenLaneDistance = 0;
+
+	
 
 	/**
 	 * {@inheritDoc}
@@ -177,8 +180,9 @@ public abstract class Vehicle implements IVehicle,IObservable {
 		}
 		this.initializeDirection();
 		this.createWayPoint();
-		
-		this.driverView = new DriverView(this.direction.normalize(), this.position);
+
+		this.driverView = new DriverView(this.direction.normalize(),
+				this.position);
 	}
 
 	/**
@@ -193,31 +197,32 @@ public abstract class Vehicle implements IVehicle,IObservable {
 
 	/**
 	 * Calculate the real acceleration of the vehicle
+	 * 
 	 * @param acceleration
 	 * @return
 	 */
 	protected float calculateAcceleration(float acceleration) {
 		if (acceleration > 0) {
-			return this.maxAcceleration() * acceleration; 
+			return this.maxAcceleration() * acceleration;
 		} else {
 			return this.maxDeceleration() * acceleration;
 		}
 	}
-	
+
 	/**
 	 * Return the maximal acceleration
 	 * 
 	 * @return
 	 */
 	protected abstract float maxAcceleration();
-	
+
 	/**
 	 * Return the maximal deceleration
 	 * 
 	 * @return
 	 */
 	protected abstract float maxDeceleration();
-	
+
 	/**
 	 * Set the acceleration of the vehicle
 	 */
@@ -248,44 +253,45 @@ public abstract class Vehicle implements IVehicle,IObservable {
 	 */
 	@Override
 	public void updatePosition(float timestep) throws CarCannotReverseException {
-		this.adjustSpeed(timestep);
-		this.drivenLaneDistance += (this.speed / 36)
-				* GlobalConstants.getInstance().getScale();
-		try {
-			this.position = this.lanes.peek().getPositionOnLane(
-					this.drivenLaneDistance);
-		} catch (LaneLengthExceededException e) {
-			// change lane
-			this.drivenLaneDistance = this.drivenLaneDistance
-					- this.lanes.peek().getLength();
-			this.notify("laneChange");
+		if (!freezed) {
+			this.adjustSpeed(timestep);
+			this.drivenLaneDistance += (this.speed / 36)
+					* GlobalConstants.getInstance().getScale();
 			try {
 				this.position = this.lanes.peek().getPositionOnLane(
 						this.drivenLaneDistance);
-			} catch (LaneLengthExceededException e1) {
+			} catch (LaneLengthExceededException e) {
+				// change lane
+				this.drivenLaneDistance = this.drivenLaneDistance
+						- this.lanes.peek().getLength();
+				this.notify("laneChange");
+				try {
+					this.position = this.lanes.peek().getPositionOnLane(
+							this.drivenLaneDistance);
+				} catch (LaneLengthExceededException e1) {
+				} catch (NullPointerException e2) {
+					System.out.println("No further lane found!");
+					System.out.println("The car is " + this);
+					System.out.println("The car was on position "
+							+ this.position);
+					return;
+				}
 			} catch (NullPointerException e2) {
 				System.out.println("No further lane found!");
 				System.out.println("The car is " + this);
 				System.out.println("The car was on position " + this.position);
 				return;
 			}
-		} catch (NullPointerException e2) {
-			System.out.println("No further lane found!");
-			System.out.println("The car is " + this);
-			System.out.println("The car was on position " + this.position);
-			return;
-		}
 
-		this.driverView.setPosition(this.position);
-		this.updateDirection();
-		try {
-			WayPointManager.getInstance().move(
-					this.wayPoint, 
-					this.getPosition().getComponent(0), 
-					this.getPosition().getComponent(1)
-			);
-		} catch (Exception e) {
-			e.printStackTrace();
+			this.driverView.setPosition(this.position);
+			this.updateDirection();
+			try {
+				WayPointManager.getInstance().move(this.wayPoint,
+						this.getPosition().getComponent(0),
+						this.getPosition().getComponent(1));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -297,15 +303,17 @@ public abstract class Vehicle implements IVehicle,IObservable {
 	 */
 	public void updateDirection() {
 		if (this.position.compareTo(this.lastPosition) == 0) {
-			this.direction = this.lanes.peek().getFirstILaneSegment()
-					.getEndPoint().sub(
-							this.lanes.peek().getFirstILaneSegment()
-									.getStartPoint());
+			this.direction = this.lanes
+					.peek()
+					.getFirstILaneSegment()
+					.getEndPoint()
+					.sub(this.lanes.peek().getFirstILaneSegment()
+							.getStartPoint());
 		} else {
 			this.direction = this.position.sub(this.lastPosition);
 			this.lastPosition = this.position;
 		}
-		
+
 		this.driverView.setDirection(this.direction);
 	}
 
@@ -376,32 +384,39 @@ public abstract class Vehicle implements IVehicle,IObservable {
 	 * {@inheritDoc}
 	 */
 	/*
-	@Override
-	public void setAnimus(Animus animus) {
-		this.animus = animus;
-	}
-	*/
+	 * @Override public void setAnimus(Animus animus) { this.animus = animus; }
+	 */
 	/**
 	 * Create a way point from this vehicle
 	 */
 	public abstract void createWayPoint();
-	
-	public void register (IObserver obs){
-		if (observers == null){
+
+	public void register(IObserver obs) {
+		if (observers == null) {
 			observers = new ArrayList<IObserver>();
 		}
 		observers.add(obs);
 	}
-	
-	public void remove (IObserver obs){
+
+	public void remove(IObserver obs) {
 		observers.remove(obs);
 	}
-	
-	public void notify (String msg){
-		for (IObserver obs: observers){
+
+	public void notify(String msg) {
+		for (IObserver obs : observers) {
 			obs.update(msg);
 		}
 	}
-	
+
 	public abstract IMovable getWayPoint();
+
+	public void freeze() {
+		freezed = true;
+		speed = 0;
+		acceleration = 0;
+	}
+	
+	public boolean isFreezed(){
+		return freezed;
+	}
 }

@@ -1,15 +1,37 @@
 package simulation;
 
+import car.Vehicle;
+
 import common.GlobalConstants;
 
 import environment.Gaia;
+import environment.WayPointManager;
 
-public class Simulator implements IEventTarget<SimulatorEvent> {
+public class Simulator implements IEventTarget<CrashEvent> {
 
 	protected long startTime;
 	protected long lastIteration;
 
-	public Simulator() throws Exception {
+	
+	/**
+	 * singleton instance
+	 */
+	private static Simulator instance;
+
+	/**
+	 * 
+	 * method to access the singleton instance
+	 * 
+	 * @return singleton instance
+	 */
+	public synchronized static Simulator getInstance() {
+		if (instance == null) {
+			instance = new Simulator();
+		}
+		return instance;
+	}
+	
+	private Simulator(){
 
 	}
 
@@ -36,9 +58,15 @@ public class Simulator implements IEventTarget<SimulatorEvent> {
 			}
 		}
 	}
-
-	@Override
-	public void handleEvent(SimulatorEvent event) {
-		// TODO Auto-generated method stub
+	
+	public synchronized void handleEvent(CrashEvent event){
+		System.out.println("a crash occured");
+		for (Vehicle vehicle:event.getVehicles()){
+			vehicle.freeze();
+			try{
+				WayPointManager.getInstance().remove(vehicle.getWayPoint());
+			}catch (Exception ex){}
+		}
 	}
+
 }

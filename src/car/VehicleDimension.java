@@ -15,6 +15,11 @@ public class VehicleDimension {
 	private float width;
 
 	/**
+	 * The radius of the bounding circle
+	 */
+	private float radius;
+	
+	/**
 	 * Initialize the vehicle
 	 * @param width
 	 * @param length
@@ -22,6 +27,7 @@ public class VehicleDimension {
 	public VehicleDimension(float width, float length) {
 		this.width = width;
 		this.length = length;
+		this.updateBoundingRadius();
 	}
 
 	/**
@@ -38,6 +44,7 @@ public class VehicleDimension {
 	 */
 	public void setLength(float length) {
 		this.length = length;
+		this.updateBoundingRadius();
 	}
 
 	/**
@@ -54,5 +61,23 @@ public class VehicleDimension {
 	 */
 	public void setWidth(float width) {
 		this.width = width;
+		this.updateBoundingRadius();
+	}
+	
+	/**
+	 * Get the bounding circle radius
+	 * @return the bounding circles radius value
+	 */
+	
+	public float getBoundingRadius (){
+		return radius;
+	}
+	
+	/**
+	 * update the radius after change to width or height
+	 */
+	
+	private void updateBoundingRadius(){
+		radius = (float)Math.sqrt((double)(length*length+width*width));
 	}
 }

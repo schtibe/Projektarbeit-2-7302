@@ -3,12 +3,10 @@ package car;
 import simulation.VehicleEvent;
 
 import common.GlobalConstants;
-import common.IObserver;
 
 import environment.CarWayPoint;
 import environment.ILane;
 import environment.IMovable;
-import environment.VehicleWayPoint;
 import environment.WayPointManager;
 
 /**
@@ -16,19 +14,19 @@ import environment.WayPointManager;
  * 
  */
 public class Car extends Vehicle {
-	
-	long lastStep; 
-	
+
+	long lastStep;
+
 	/**
 	 * The maximal acceleration of the car
 	 */
 	float maxAcceleration = 5;
-	
+
 	/**
-	 * The maximal deceleration of the car 
+	 * The maximal deceleration of the car
 	 */
 	float maxDeceleration = 8;
-	
+
 	/**
 	 * Initialis1e the car's variables
 	 * 
@@ -67,7 +65,7 @@ public class Car extends Vehicle {
 	 */
 	@Override
 	protected void adjustSpeed(float timestep) throws CarCannotReverseException {
-		this.speed += this.acceleration * (timestep/1000);
+		this.speed += this.acceleration * (timestep / 1000);
 		if (this.speed < 0) {
 			this.speed = 0;
 		}
@@ -80,29 +78,29 @@ public class Car extends Vehicle {
 	 */
 	@Override
 	public void handleEvent(VehicleEvent event) {
-		if (lastStep == 0){
-			lastStep = event.getTimeStamp();
-			accelerate(event.getTargetAcceleration()); 
-		}else{
-			try{
-				adjustSpeed (event.getTimeStamp()-lastStep);
-			}catch (Exception ex){
-				System.out.println("car tried to reverse");
+		if (!freezed) {
+			if (lastStep == 0) {
+				lastStep = event.getTimeStamp();
+				accelerate(event.getTargetAcceleration());
+			} else {
+				try {
+					adjustSpeed(event.getTimeStamp() - lastStep);
+				} catch (Exception ex) {
+					System.out.println("car tried to reverse");
+				}
+				lastStep = event.getTimeStamp();
+				accelerate(event.getTargetAcceleration());
 			}
-			lastStep = event.getTimeStamp();
-			accelerate (event.getTargetAcceleration());
 		}
 	}
 
-	
-	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void createWayPoint() {
 		this.wayPoint = new CarWayPoint(this);
-		
+
 		try {
 			WayPointManager.getInstance().add(this.wayPoint);
 		} catch (Exception e) {
@@ -110,7 +108,6 @@ public class Car extends Vehicle {
 		}
 	}
 
-	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -118,7 +115,7 @@ public class Car extends Vehicle {
 	protected float maxAcceleration() {
 		return this.maxAcceleration;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -130,7 +127,10 @@ public class Car extends Vehicle {
 
 	@Override
 	public IMovable getWayPoint() {
-		return this.wayPoint;
+		if (!freezed) {
+			return this.wayPoint;
+		}
+		return null;
 	}
 
 }

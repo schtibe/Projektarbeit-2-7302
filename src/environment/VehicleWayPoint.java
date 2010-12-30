@@ -1,9 +1,9 @@
 package environment;
 
+import car.Vehicle;
+
 import common.GlobalConstants;
 import common.IVector;
-
-import car.Vehicle;
 
 public abstract class VehicleWayPoint extends MovingWayPoint {
 	/**
@@ -55,4 +55,7 @@ public abstract class VehicleWayPoint extends MovingWayPoint {
 		return this.vehicle.getLane();
 	}
 
+	public Vehicle getVehicle (){
+		return this.vehicle;
+	}
 }
