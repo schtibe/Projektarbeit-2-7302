@@ -5,10 +5,19 @@ import common.LinearCombination;
 import common.Vector;
 
 public class DriverView implements IDriverView {
+	/**
+	 * The properties of the view
+	 */
 	private IVector direction;
 	private IVector position;
 	private float angle;
 	private float distance;
+	
+	/**
+	 * The boundaries of the view
+	 */
+	IVector aBoundary, bBoundary, cBoundary;
+	boolean boundaryCalculated = false;
 	
 	/**
 	 * constructor, a driver view can be empty on construction time
@@ -58,6 +67,7 @@ public class DriverView implements IDriverView {
 	@Override
 	public void setAngle (float value){
 		this.angle = value;
+		this.boundaryCalculated = false;
 	}
 	
 	/**
@@ -67,6 +77,7 @@ public class DriverView implements IDriverView {
 	@Override
 	public void setDistance (float value){
 		this.distance = value;
+		this.boundaryCalculated = false;
 	}
 	
 	/**
@@ -76,6 +87,7 @@ public class DriverView implements IDriverView {
 	@Override
 	public void setDirection (IVector value){
 		this.direction = value;
+		this.boundaryCalculated = false;
 	}
 	
 	/**
@@ -148,46 +160,53 @@ public class DriverView implements IDriverView {
 	 */
 	public boolean checkWayPoint(IVector position) {
 	//	System.out.println("Calculating constants");
-		IVector aBoundary = this.direction.rotate(this.angle / 2)
-			.normalize().multiply(this.distance); 
-		
-		//System.out.println("A boundary: " + aBoundary);
-		
-		IVector cBoundary = this.direction.rotate(- this.angle / 2)
-			.normalize().multiply(this.distance);
-		//System.out.println("The C: " + cBoundary);
-		
-		IVector bBoundary = cBoundary.sub(aBoundary); 
-		//System.out.println("B boundary: " + bBoundary);
-		float boundaryRatio =  bBoundary.norm() /  aBoundary.norm();
-		//System.out.println("ratio: " + boundaryRatio);
-		
-		LinearCombination result = Vector.getLinearCombination(this.position, aBoundary, bBoundary, position);
-		/*
-		float denominator = 
-			aBoundary.getComponent(0) * bBoundary.getComponent(1)
-			- aBoundary.getComponent(1) * bBoundary.getComponent(0);
-		
-		float lambda = -(bBoundary.getComponent(0) * position.getComponent(1)
-				- bBoundary.getComponent(1) * position.getComponent(0)) /
-				denominator;
-		
-		float mu = (aBoundary.getComponent(0) * position.getComponent(1)
-				- aBoundary.getComponent(1) * position.getComponent(0)) /
-				denominator;
-		*/
-		//mu = Math.abs(mu);
-		
-		//System.out.println("lambda: " + lambda);
-		//System.out.println("mu " + mu);
-		
-		//float ratio = mu * bBoundary.norm() / lambda * aBoundary.norm();
-		float ratio = result.getMu() * bBoundary.norm() / result.getLambda() * aBoundary.norm();
-		
-		//System.out.println("ratio2: " + ratio);
-		
-		//return ratio >= boundaryRatio && lambda > 0 && lambda <=1 && mu > 0 && mu <= 1;
+		IVector a = getABoundary();
+
+		IVector b = getBBoundary();
+
+		float boundaryRatio =  b.norm() /  a.norm();
+
+		LinearCombination result = Vector.getLinearCombination(this.position, a, b, position);
+
+		float ratio = result.getMu() * b.norm() / result.getLambda() * a.norm();
+
 		return ratio >= boundaryRatio && result.getLambda() > 0 && result.getLambda() <=1 && result.getMu() > 0 && result.getMu() <= 1;
-		//return lambda > 0 && lambda <= 1 && mu > 0 && mu <= 1;
 	}
+
+	@Override
+	public IVector getABoundary() {
+		calculateBoundaries();
+		return aBoundary;
+	}
+
+
+	@Override
+	public IVector getBBoundary() {
+		calculateBoundaries();
+		return bBoundary;
+	}
+
+	@Override
+	public IVector getCBoundary() {
+		calculateBoundaries();
+		return cBoundary;
+	}
+	
+	/**
+	 * calculates the boundaries of our view
+	 */
+
+	private void calculateBoundaries() {
+		if(boundaryCalculated){
+			return ;
+		}
+		aBoundary = this.direction.rotate(this.angle / 2)
+		.normalize().multiply(this.distance);
+		
+		cBoundary = this.direction.rotate(- this.angle / 2)
+		.normalize().multiply(this.distance);
+		
+		bBoundary = cBoundary.sub(aBoundary);
+	}
+	
 }

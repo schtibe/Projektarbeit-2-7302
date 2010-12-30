@@ -123,6 +123,7 @@ public class WayPointManager implements IPlacableManager {
 		
 		List<IPlacable> ret = new ArrayList<IPlacable>();
 		
+	
 		for (IPlacable pl : found) {
 			if (view.checkWayPoint(new Vector(new float[]{pl.getXPos(), pl.getYPos()}))) {
 				ret.add(pl);

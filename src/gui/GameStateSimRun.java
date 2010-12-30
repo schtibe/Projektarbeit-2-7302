@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Font;
+import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -54,6 +55,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 	protected boolean simulationStarted = false;
 	protected Font font;
     TrueTypeFont ttf;
+    Ellipse checker;
 
 	public GameStateSimRun() {
 		try {
@@ -138,6 +140,11 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		SlickCallable.enterSafeBlock();
 		nifty.render(false);
 		SlickCallable.leaveSafeBlock();
+		
+		if (this.checker != null) {
+			g.setColor(Color.orange);
+			g.draw(this.checker);
+		}
 	}
 
 	/**
@@ -150,11 +157,6 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 				.getGAIA().getVehicles()) {
 
 			vehicle.draw(g);
-			/*
-			g.setColor(vehicle.getColor());
-			g.fill(vehicle.getBoundingBox());
-			g.raw(vehicle.getBoundingBox());
-			*/
 		}
 	}
 
@@ -169,6 +171,14 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 			for (IUIAdapterLane<?> lane : road.getLanes()) {
 				g.setColor(lane.getColor());
 				g.draw(lane.getPath());
+				
+				/*
+				g.setColor(Color.green);
+				for (Path p: lane.getLaneSegmentPaths()) {
+					g.draw(p);
+				}*/
+				
+			
 			}
 		}
 	}
@@ -237,27 +247,35 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		forwardMouseEventToNifty(mouseX, mouseY, mouseDown);
 	}
 
+	/**
+	 * Event on pressing the mouse
+	 * 
+	 * Checks, if the click position intersects with one of the roads, if yes,
+	 * place a vehicle on it. (The method checks, whether this can be done since
+	 * the vehicles cannot be placed on junctions)
+	 */
 	@Override
 	public void mousePressed(final int button, final int x, final int y) {
 		mouseX = x;
 		mouseY = y;
 		mouseDown = true;
 
-		for (IUIAdapterTrafficCarrier<?> road : GameCache.getInstance()
-				.getGAIA().getRoads()) {
+		List<IUIAdapterTrafficCarrier<?>> roads = 
+			GameCache.getInstance().getGAIA().getRoads();
+		
+		this.checker = new Ellipse(mouseX, mouseY, 2, 2);
+		for (IUIAdapterTrafficCarrier<?> road : roads) {
 			for (IUIAdapterLane<?> lane : road.getLanes()) {
-				if (lane.getPath()
-						.intersects(new Ellipse(mouseX, mouseY, 2, 2))) {
+				Path lanePath = lane.getPath();
+				if (lanePath.intersects(checker)) {
 					try {
-						GameCache.getInstance().getGAIA().addVehicle(lane);
+						GameCache.getInstance().getGAIA().addVehicle(lane, mouseX, mouseY);
 					} catch (Exception e) {
-					//System.out.println("error");
 						e.printStackTrace();
 					}
 				}
 			}
 		}
-
 
 		forwardMouseEventToNifty(mouseX, mouseY, mouseDown);
 	}
@@ -304,6 +322,14 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 
 	public void showFPS() {
 		this.container.setShowFPS(!this.container.isShowingFPS());
+	}
+	
+	/**
+	 * Toggle whether the driver views should be displayed
+	 */
+	public void toggleDriverView() {
+		System.out.println("Toggling driver view");
+		GUIConstants.getInstance().toggleShowDriverView();
 	}
 	
 	private void generateGrid() {

@@ -16,4 +16,8 @@ public abstract class UIAdapter<E> {
 			throw new Exception("mainObject can't be null.");
 		}
 	}
+
+	public E getMainObject() {
+		return this.mainObject;
+	}
 }

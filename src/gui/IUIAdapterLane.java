@@ -1,6 +1,9 @@
 package gui;
 
-import org.newdawn.slick.geom.Shape;
+import java.util.List;
+
+import org.newdawn.slick.geom.Path;
+import org.newdawn.slick.Graphics;
 
 import common.IVector;
 
@@ -16,7 +19,7 @@ public interface IUIAdapterLane<E> extends IUIAdapterColored<E>{
 	 * Get the Path
 	 * @return the path
 	 */
-	public abstract Shape getPath();
+	public abstract Path getPath();
 	
 	/**
 	 * Get the max pos of this object
@@ -47,4 +50,24 @@ public interface IUIAdapterLane<E> extends IUIAdapterColored<E>{
 	 * @return the object inside of this adapter
 	 */
 	public ILane getOriginalLane();
+
+	/**
+	 * Return whether a vehicle can be placed on this lane
+	 * 
+	 * Vehicles cannot be placed on some lanes, e.g. on those
+	 * that are in junctions. Return here if it is possible to
+	 * place a vehicle on this lane.
+	 * @return
+	 */
+	public abstract boolean vehiclePlacable();
+	
+	/**
+	 * Return the position on the lane
+	 * @param mouseX
+	 * @param mouseY
+	 * @return
+	 */
+	public float getPositionOnLane(int mouseX, int mouseY);
+	
+	public List<Path> getLaneSegmentPaths();
 }

@@ -29,22 +29,30 @@
 						valign="top" childLayout="vertical">
 						<label style="nifty-label" id="text" text="options" />
 
-						<panel id="optionPanel" width="100%" align="center" valign="top"
-							childLayout="horizontal">
-
-							<control id="showgrid" name="button" label="grid" width="50%"
+						
+						<panel id="optionpanel2" width="100%" align="center" valign="top" childLayout="vertical">
+							<control id="showgrid" name="button" label="grid" width="100%"
 								height="20px">
 								<interact onClick="showGrid()" />
 							</control>
 
-							<control id="showFPS" name="button" label="fps" width="50%"
+							<control id="showFPS" name="button" label="fps" width="100%"
 								height="20px">
 								<interact onClick="showFPS()" />
 							</control>
-						</panel>
 
+							<control id="showDriverView" name="button" label="DriverView" width="100%"
+								height="20px">
+								<interact onClick="toggleDriverView()" />
+							</control>
+						
+						</panel>
+						
+
+						<!--
 						<label style="nifty-label" id="text" text="vehicles" />
 
+						
 						<control id="slider" name="horizontalScrollbar" label="fps"
 							width="100%" height="20px">
 							<control name="scrollposition"></control>
@@ -53,7 +61,7 @@
 						<control id="back" name="button" label="add" align="center"
 							valigne="center" width="100%" height="20px" value="0.5">
 							<interact onClick="addVehicle" />
-						</control>
+						</control>-->
 
 
 

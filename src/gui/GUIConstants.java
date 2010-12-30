@@ -20,7 +20,6 @@ public class GUIConstants {
 	 */
 	private GUIConstants() {}
 	
-	
 	/**
 	 * Whether the position of the junction way points are to be shown
 	 */
@@ -34,7 +33,7 @@ public class GUIConstants {
 	}
 	
 	/**
-	 * Wheter the position of the speed way points are to be shown
+	 * Whether the position of the speed way points are to be shown
 	 */
 	private boolean showSpeedWaypointPosition = true;
 	public boolean showSpeedWaypointPosition() {
@@ -43,5 +42,17 @@ public class GUIConstants {
 	public boolean toggleShowSpeedWaypointPosition() {
 		this.showSpeedWaypointPosition = !this.showSpeedWaypointPosition;
 		return this.showSpeedWaypointPosition;
+	}
+
+	/**
+	 * Whether the driver view is to be shown
+	 */
+	private boolean showDriverView = true;
+	public boolean showDriverView() {
+		return this.showDriverView;
+	}
+	public boolean toggleShowDriverView() {
+		this.showDriverView = !this.showDriverView;
+		return this.showDriverView;
 	}
 }

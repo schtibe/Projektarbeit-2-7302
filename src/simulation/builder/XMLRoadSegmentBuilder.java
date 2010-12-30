@@ -34,14 +34,11 @@ public class XMLRoadSegmentBuilder extends XMLObjectBuilder implements
 	protected List<IXMLWayPointBuilder> wayPoints;
 
 	/**
-	 * Initialize all variables
+	 * Initialise all variables
 	 * 
-	 * @param e
-	 *            The Element in the XML
-	 * @param wBuilder
-	 *            The world builder reference
-	 * @param roadPosition
-	 *            The position of the road
+	 * @param e The Element in the XML
+	 * @param wBuilder The world builder reference
+	 * @param roadPosition The position of the road
 	 */
 	public XMLRoadSegmentBuilder(Element e,	IVector roadPosition) {
 		super(e);

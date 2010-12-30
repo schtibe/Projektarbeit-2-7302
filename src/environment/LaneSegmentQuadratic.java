@@ -15,7 +15,6 @@ public class LaneSegmentQuadratic extends LaneSegment<ILaneSegmentLinear>
 	 * @param bendPoint
 	 * @throws Exception
 	 */
-	
 	public LaneSegmentQuadratic(IVector startPoint, IVector endPoint, IVector bendPoint)throws Exception {
 		super(startPoint, endPoint);
 		if (endPoint.equals(bendPoint) || startPoint.equals(bendPoint)){
@@ -49,10 +48,6 @@ public class LaneSegmentQuadratic extends LaneSegment<ILaneSegmentLinear>
 		return (float)length;
 	}
 
-
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public IVector getVehiclePosition(float segmentLength) {
 		float time = segmentLength/length;
@@ -68,10 +63,6 @@ public class LaneSegmentQuadratic extends LaneSegment<ILaneSegmentLinear>
 		return this.bendPoint;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	
 	@Override
 	public IVector[] getBezierPoints() {
 		IVector[] output = new IVector[4];
@@ -81,15 +72,17 @@ public class LaneSegmentQuadratic extends LaneSegment<ILaneSegmentLinear>
 		return output;
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
-	
 	@Override
 	public IVector getPointOnCurve(float middle) {
 		IVector result = relativeBendPoint.multiply(2*middle*(1-middle)).add(relativeEndPoint.multiply(middle*middle));
 		
 		return startPoint.add(result);
 	}
+
 	
+	@Override
+	public float positionIntersection(IVector position) throws Exception {
+		return this.getDistanceOnLane();
+	}
+
 }

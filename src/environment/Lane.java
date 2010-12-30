@@ -17,9 +17,12 @@ public class Lane implements ILane {
 	private ILaneSegmentLinear startSegment;
 	
 	/**
-	 * if needed the last segment can be found and put in this property variable
+	 * The last lane segment
+	 * 
+	 * If needed the last segment can be found and put in 
+	 * this property variable so it doesn't have to be looked for twice.
 	 */
-	private LaneSegment endSegment;
+	private LaneSegment<?> endSegment;
 	
 	/**
 	 * Start position relative to the world's x and y axis
@@ -30,18 +33,6 @@ public class Lane implements ILane {
 	 * The width of the lane
 	 */
 	private float laneWidth;
-
-	/**
-	 * The end position
-	 * 
-	 * Probably never used
-	 */
-	//private IVector endPosition;
-	
-	/**
-	 * All the lane segments the lane contains
-	 */
-	//private LaneSegment<?> laneSegments[];
 	
 	/**
 	 * A helper array for lane segment finding
@@ -66,25 +57,40 @@ public class Lane implements ILane {
 	 */
 	private float length;
 	
-	
+	/**
+	 * Assumingly the next junction from the lane
+	 */
 	private IJunction junction;
 
+	/**
+	 * The way points on the lane
+	 */
 	private ArrayList<SignWayPoint> wayPoints;
+	
+	/**
+	 * Whether a vehicle is placable or not
+	 */
+	protected boolean vehiclePlacable = true;
 	
 	/**
 	 * Construct
 	 * 
-	 * @param startPosition The position relative to the world's x and y axis
-	 * @param laneSegments All the laneSegments that this lane contains
+	 * @param startPosition      The position relative to the world's x and y axis
+	 * @param laneSegmentLinear  The first lane segment on this lane
+	 * @param laneWidth          The width of the lane
+	 * @param vehiclePlacable    Whether vehicles can be placed on this lane
 	 */
-	public Lane(IVector startPosition, ILaneSegmentLinear laneSegmentLinear,
-			float laneWidth) 
-		throws IllegalArgumentException {
+	public Lane(
+			IVector startPosition, 
+			ILaneSegmentLinear laneSegmentLinear,
+			float laneWidth,
+			boolean vehiclePlacable
+		) throws IllegalArgumentException {
 		this.startPosition = startPosition;
 		this.startSegment = laneSegmentLinear;
-		//this.laneSegments = laneSegments;
 		this.initializeLaneSegments();
 		this.laneWidth = laneWidth;
+		this.vehiclePlacable = vehiclePlacable;
 		
 		this.wayPoints = new ArrayList<SignWayPoint>();
 	}
@@ -105,14 +111,9 @@ public class Lane implements ILane {
 		this.laneWidth = laneWidth;
 	}
 
-	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public IVector getPositionOnLane(float drivenDistance) throws LaneLengthExceededException {
 		if (drivenDistance > this.length) {
-		//System.out.println("you have to change lane now!");
 			throw new LaneLengthExceededException();
 		}
 		ILaneSegment<?> segment = this.getLaneSegmentAtPosition(drivenDistance);
@@ -121,6 +122,15 @@ public class Lane implements ILane {
 		IVector actualPosition = segment.getVehiclePosition(segmentLength);
 		
 		return actualPosition;
+	}
+
+
+	@Override
+	public IVector getPositionOnLaneByPercentage(float position)
+			throws LaneLengthExceededException {
+		float absolutePos = this.length / 100 * position;
+		
+		return this.getPositionOnLane(absolutePos);
 	}
 	
 	/**
@@ -134,7 +144,7 @@ public class Lane implements ILane {
 	}
 	
 	/**
-	 * Do some initialization with the lane segments
+	 * Do some initialisation with the lane segments
 	 * 
 	 * - Determine the first lane segment
 	 * - Count the length of all lane segments
@@ -215,9 +225,6 @@ public class Lane implements ILane {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public IVector getStartPosition() { 
 		return this.startPosition.clone();
@@ -232,18 +239,14 @@ public class Lane implements ILane {
 		return this.startSegment;
 	}
 	
-	/**
-	 * get the last segment
-	 * @return ILaneSegment<?>
-	 */
 	@Override
 	public ILaneSegment<?> getLastILaneSegment(){
 		if (this.endSegment == null){
 			Boolean hasNext = true;
-			LaneSegment nextSeg = (LaneSegment) this.startSegment;
+			LaneSegment<?> nextSeg = (LaneSegment<?>) this.startSegment;
 			while(hasNext){
 				if (nextSeg.getNextLaneSegment() != null){
-					nextSeg = (LaneSegment) nextSeg.getNextLaneSegment();
+					nextSeg = (LaneSegment<?>) nextSeg.getNextLaneSegment();
 				}else{
 					this.endSegment = nextSeg;
 					hasNext = false;
@@ -269,9 +272,6 @@ public class Lane implements ILane {
 		return this.junction;
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public List<IVector[]> getLanePath (){
 		ArrayList<IVector[]> output = new ArrayList<IVector[]> ();
@@ -283,18 +283,11 @@ public class Lane implements ILane {
 		return output;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public float getLength() {
 		return this.length;
 	}
 
-	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void addWayPoint(SignWayPoint wp) {
 		this.wayPoints.add(wp);
@@ -305,15 +298,9 @@ public class Lane implements ILane {
 		}
 	}
 
-	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
-	public IVector getPositionOnLaneByPercentage(float position)
-			throws LaneLengthExceededException {
-		float absolutePos = this.length / 100 * position;
-		
-		return this.getPositionOnLane(absolutePos);
+	public boolean vehiclePlacable() {
+		return this.vehiclePlacable;
 	}
+
 }

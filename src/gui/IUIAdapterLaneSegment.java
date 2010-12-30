@@ -3,6 +3,7 @@ package gui;
 import java.util.List;
 
 import common.IVector;
+import environment.ILaneSegment;
 
 /**
  * The adapter interface for a lane segment
@@ -14,4 +15,10 @@ public interface IUIAdapterLaneSegment<E> extends IUIAdapter<E> {
 	 * @return an ordered list of all vectors
 	 */
 	public List<IVector> getPath();
+	
+	/**
+	 * Return the start position of the lane segment
+	 * @return
+	 */
+	public IVector getStartPosition();
 }

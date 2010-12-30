@@ -2,6 +2,8 @@ package gui;
 
 import java.util.List;
 
+import org.newdawn.slick.Graphics;
+
 /**
  * The adapter interface for a gaia (world)
  * @param <E> the class to adapt
@@ -27,9 +29,15 @@ public interface IUIAdapterGAIA<E>  extends IUIAdapter<E> {
 	public float getScale();
 	
 	/**
-	 * Add a new vehicle to the gaia
+	 * Add a new vehicle to the GAIA if the lane allows it
+	 * @param mouseY 
+	 * @param mouseX 
 	 */
-	public void addVehicle(IUIAdapterLane<?> lane) throws Exception;
+	public void addVehicle(
+			IUIAdapterLane<?> lane,
+			int mouseX,
+			int mouseY
+	) throws Exception;
 	
 	/**
 	 * Destroys the gaia

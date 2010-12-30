@@ -30,9 +30,9 @@ public class VehicleFactory {
 		IVehicle vehicle = null;
 
 		switch (vehicleType) {
-		case car:
-			vehicle = new Car(lane);
-			break;
+			case car:
+				vehicle = new Car(lane);
+				break;
 		}
 
 		Gaia.getInstance().setVehicle(vehicle);
