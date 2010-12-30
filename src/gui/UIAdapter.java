@@ -4,7 +4,7 @@ package gui;
  * The basic abstract adpater
  * @param <E> the class to adapt
  */
-public abstract class UIAdapter<E> {
+public abstract class UIAdapter<E> implements IUIAdapter<E> {
 	
 	E mainObject;
 	

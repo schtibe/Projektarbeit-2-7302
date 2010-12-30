@@ -1,6 +1,7 @@
 package gui;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -47,12 +48,6 @@ public class UIAdapterCarWayPoint extends UIAdapter<CarWayPoint> implements IUIA
 		// TODO Auto-generated method stub
 
 	}
-
-	@Override
-	public Color getColor() {
-		return new Color(Color.blue);
-	}
-
 	
 	/**
 	 * {@inheritDoc}
@@ -60,6 +55,16 @@ public class UIAdapterCarWayPoint extends UIAdapter<CarWayPoint> implements IUIA
 	@Override
 	public boolean doDraw() {
 		return true;
+	}
+
+	
+	@Override
+	public void draw(Graphics g) {
+		if (this.doDraw()) {
+			g.setColor(Color.blue);
+			g.draw(this.getShape());
+		}
+		
 	}
 
 }

@@ -10,4 +10,5 @@ public interface IUIAdapter<E> {
 	 * @return
 	 */
 	public E getMainObject();
+	
 }

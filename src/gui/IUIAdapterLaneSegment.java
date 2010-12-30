@@ -3,7 +3,6 @@ package gui;
 import java.util.List;
 
 import common.IVector;
-import environment.ILaneSegment;
 
 /**
  * The adapter interface for a lane segment

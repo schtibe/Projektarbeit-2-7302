@@ -13,6 +13,7 @@ import car.IVehicle;
 
 import common.IVector;
 import common.Vector;
+
 import driver.IDriverView;
 
 /**
@@ -116,15 +117,9 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle> implements IUIAdapterV
 		return "new Angle: " + newAngle + "\n angleDiff: " + angleDiff;
 	}
 
-	
-	@Override
-	public Color getColor() {
-		return new Color(Color.red);
-	}
-
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(this.getColor());
+		g.setColor(Color.red);
 		g.fill(this.getBoundingBox());
 		g.draw(this.getBoundingBox());
 		

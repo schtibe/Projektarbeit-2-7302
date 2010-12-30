@@ -1,6 +1,7 @@
 package gui;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -48,17 +49,6 @@ public class UIAdapterSpeedWayPoint extends UIAdapter<SpeedWayPoint> implements 
 		return "" + this.mainObject.getSpeedLimit();
 	}
 
-
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Color getColor() {
-		return new Color(Color.red);
-	}
-
-
 	
 	/**
 	 * {@inheritDoc}
@@ -71,11 +61,17 @@ public class UIAdapterSpeedWayPoint extends UIAdapter<SpeedWayPoint> implements 
 					   this.toString(),Color.orange);
 		}
 	}
-
-
 	
 	@Override
 	public boolean doDraw() {
 		return true;
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		if (this.doDraw()) {
+			g.setColor(Color.red);
+			g.draw(this.getShape());
+		}
 	}
 }

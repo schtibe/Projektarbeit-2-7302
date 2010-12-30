@@ -1,6 +1,7 @@
 package gui;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -50,16 +51,6 @@ public class UIAdapterJunctionWayPoint extends UIAdapter<IWayPoint> implements I
 	public String toString() {
 		return this.mainObject.toString();
 	}
-
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Color getColor() {
-		return new Color(Color.white);
-	}
-
 	
 	
 	@Override
@@ -76,6 +67,15 @@ public class UIAdapterJunctionWayPoint extends UIAdapter<IWayPoint> implements I
 	@Override
 	public boolean doDraw() {
 		return true;
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		if (this.doDraw()) {
+			g.setColor(Color.white);
+			g.draw(this.getShape());
+		}
+	
 	}
 	
 

@@ -4,9 +4,6 @@ package gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.newdawn.slick.Graphics;
-
-
 import car.IVehicle;
 import car.VehicleFactory.VehicleType;
 
@@ -18,11 +15,8 @@ import driver.Character;
 import driver.Drug;
 import driver.Physics;
 import environment.IGaia;
-import environment.ILane;
-import environment.ILaneSegment;
 import environment.ITrafficCarrier;
 import environment.IWayPoint;
-import environment.WayPointManager;
 
 /**
  * A GAIA adapter implementation 
@@ -218,4 +212,5 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 	public void removeVehicleAdapter() {
 		
 	}
+
 }

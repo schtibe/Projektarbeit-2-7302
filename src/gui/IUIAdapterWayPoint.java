@@ -7,7 +7,7 @@ import org.newdawn.slick.geom.Shape;
  * The adpater interface for the way point
  * @param <E> the class to adapt
  */
-public interface IUIAdapterWayPoint<E> extends IUIAdapterColored<E> {
+public interface IUIAdapterWayPoint<E> extends IUIAdapterDrawable {
 	
 	/**
 	 * get the waypoint shape
@@ -25,6 +25,7 @@ public interface IUIAdapterWayPoint<E> extends IUIAdapterColored<E> {
 	/**
 	 * Draw the string next to the way point
 	 * @param ttf The true type font to draw with
+	 * @TODO rethink this
 	 */
 	public void drawString(TrueTypeFont ttf);
 

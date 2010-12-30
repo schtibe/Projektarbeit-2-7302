@@ -3,7 +3,6 @@ package gui;
 import java.util.List;
 
 import org.newdawn.slick.geom.Path;
-import org.newdawn.slick.Graphics;
 
 import common.IVector;
 
@@ -13,7 +12,7 @@ import environment.ILane;
  * The adapter interface for a lane
  * @param <E> the class to adapt
  */
-public interface IUIAdapterLane<E> extends IUIAdapterColored<E>{
+public interface IUIAdapterLane<E> extends IUIAdapter<E>, IUIAdapterDrawable {
 
 	/**
 	 * Get the Path

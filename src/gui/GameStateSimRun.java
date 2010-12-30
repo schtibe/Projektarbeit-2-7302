@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.Font;
-import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -19,7 +18,6 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import simulation.Simulator;
-
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.effects.EffectEventId;
 import de.lessvoid.nifty.elements.Element;
@@ -169,16 +167,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		for (IUIAdapterTrafficCarrier<?> road : GameCache.getInstance()
 				.getGAIA().getRoads()) {
 			for (IUIAdapterLane<?> lane : road.getLanes()) {
-				g.setColor(lane.getColor());
-				g.draw(lane.getPath());
-				
-				/*
-				g.setColor(Color.green);
-				for (Path p: lane.getLaneSegmentPaths()) {
-					g.draw(p);
-				}*/
-				
-			
+				lane.draw(g);			
 			}
 		}
 	}
@@ -204,12 +193,8 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 	 */
 	private void drawWaypoints(Graphics g) {
 		for(IUIAdapterWayPoint<?> wayPoint : GameCache.getInstance().getGAIA().getWaypoints()) {
-			if (wayPoint.doDraw()) {
-				g.setColor(wayPoint.getColor());
-				g.draw(wayPoint.getShape());
-				
-				wayPoint.drawString(ttf);
-			}
+			wayPoint.draw(g);
+			wayPoint.drawString(ttf);
 		}
 	}
 
