@@ -190,10 +190,9 @@ public class Gaia implements IGaia {
 			ILane lane, 
 			Character character, 
 			Physics physics) throws Exception {
-		IVehicle vehicle = VehicleFactory.createVehicle(vehicleType, lane);
 		
+		IVehicle vehicle = VehicleFactory.createVehicle(vehicleType, lane);
 		this.createDriver(character, physics, vehicle);
-	
 		
 		return vehicle;
 	}

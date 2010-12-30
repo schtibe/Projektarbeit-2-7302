@@ -3,6 +3,8 @@ package gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.newdawn.slick.geom.Path;
+
 import car.IVehicle;
 import car.VehicleFactory.VehicleType;
 
@@ -14,12 +16,14 @@ import driver.Character;
 import driver.Drug;
 import driver.Physics;
 import environment.IGaia;
+import environment.ILane;
+import environment.ILaneSegment;
 import environment.ITrafficCarrier;
 import environment.IWayPoint;
 import environment.WayPointManager;
 
 /**
- * A gaia adapter implementation 
+ * A GAIA adapter implementation 
  */
 public class UIAdapterGAIA extends UIAdapter<IGaia>
 	implements IUIAdapterGAIA<IGaia> {
@@ -31,11 +35,8 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 	protected float scale, xMax, yMax;
 	protected IVector maxPos, minPos, correctionVector;
 	
-	
 	public UIAdapterGAIA(IGaia mainObject, float xMax, float yMax) throws Exception {
 		super(mainObject);
-		
-		System.out.println("new ui adapter gaia");
 		
 		/*
 		 * Generates the map
@@ -53,14 +54,10 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 			this.trafficCarriers.add(UIElementFactory.getUIElement(trafficCarrier, this.scale));
 		}
 		
-		//Fit all roads on one screen
-		
 		//Get the max and min position of all roads
 		this.maxPos = this.getMaxPos();
 		this.minPos = this.getMinPos();
 		
-		
-		//calculate the scale 
 		this.scale = this.calculateScale();
 		
 		//scale all and move roads in upper right corner
@@ -79,15 +76,19 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 		this.minPos = this.getMinPos();
 		
 		/*
-		 * Generates all vehicles
+		 * TODO refactor this into a method
 		 */
 		for(IVehicle vehicle : this.mainObject.getVehicles()) {
-			this.vehicles.add(UIElementFactory.getUIElement(vehicle, 
-															this.scale, 
-															correctionVector));
+			this.vehicles.add(UIElementFactory.getUIElement(
+					vehicle, 
+					this.scale, 
+					correctionVector
+				)
+			);
 		}
+		
 		/*
-		 * Generate all wayPoints
+		 * TODO refactor this into a method
 		 */
 		for(IWayPoint wayPoint : this.mainObject.getWayPoints()) {
 			this.wayPoints.add(UIElementFactory.getUIElement(
@@ -96,15 +97,6 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 					correctionVector
 			));
 		}
-		
-		/*
-		for(IWayPoint wayPoint : WayPointManager.getInstance().getWayPoints()) {
-			this.wayPoints.add(UIElementFactory.getUIElement(
-					wayPoint, 
-					this.scale, 
-					correctionVector
-			));
-		}*/
 	}
 
 	/**
@@ -172,22 +164,30 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 	 */
 	@Override
 	public List<IUIAdapterVehicle<?>> getVehicles() {
-		return vehicles;
+		return this.vehicles;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public float getScale() {
 		return this.scale;
 	}
 
 	@Override
-	public void addVehicle(IUIAdapterLane<?> lane) throws Exception {
+	public void addVehicle(IUIAdapterLane<?> lane, int mouseX, int mouseY) throws Exception {
 		if (!lane.vehiclePlacable()) {
 			return;
 		}
+		
+		/**
+		List<Path> paths = lane.getLaneSegmentPaths();
+		
+		ILaneSegment<?> laneSeg;
+		for (Path p: paths) {
+			if (p.intersects(new Ellipse(mouseX, mouseY, 2, 2)) {
+				
+			}
+		}
+		*/
 		
 		this.vehicles.add(
 			UIElementFactory.getUIElement(
@@ -208,20 +208,17 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 		);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void destroy() {
 		this.mainObject.destroy();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public List<IUIAdapterWayPoint<?>> getWaypoints() {
 		return this.wayPoints;
 	}
 
+	public void removeVehicleAdapter() {
+		
+	}
 }

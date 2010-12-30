@@ -28,8 +28,10 @@ public interface IUIAdapterGAIA<E>  extends IUIAdapter<E> {
 	
 	/**
 	 * Add a new vehicle to the GAIA if the lane allows it
+	 * @param mouseY 
+	 * @param mouseX 
 	 */
-	public void addVehicle(IUIAdapterLane<?> lane) throws Exception;
+	public void addVehicle(IUIAdapterLane<?> lane, int mouseX, int mouseY) throws Exception;
 	
 	/**
 	 * Destroys the gaia

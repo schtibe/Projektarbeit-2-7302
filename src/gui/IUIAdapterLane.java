@@ -1,5 +1,8 @@
 package gui;
 
+import java.util.List;
+
+import org.newdawn.slick.geom.Path;
 import org.newdawn.slick.geom.Shape;
 
 import common.IVector;
@@ -57,4 +60,10 @@ public interface IUIAdapterLane<E> extends IUIAdapterColored<E>{
 	 * @return
 	 */
 	public abstract boolean vehiclePlacable();
+	
+	/**
+	 * Return paths objects of the lane segments
+	 * @return
+	 */
+	public List<Path> getLaneSegmentPaths();
 }

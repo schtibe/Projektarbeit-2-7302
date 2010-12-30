@@ -111,4 +111,12 @@ public interface ILaneSegment<E> {
 	 */
 	
 	public IVector getPointOnCurve(float middle);
+
+	/**
+	 * Returns the position on the lane segment based on a vector
+	 * @param position
+	 * @return
+	 * @throws Exception
+	 */
+	public float positionIntersection(IVector position) throws Exception;
 }

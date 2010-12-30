@@ -62,6 +62,29 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 			}
 		}
 	}
+	
+	public List<Path> getLaneSegmentPaths() {
+		List<Path> paths = new ArrayList<Path>();
+		
+		for(IUIAdapterLaneSegment<?> laneSegment : laneSegments) {
+			List<IVector> points = laneSegment.getPath();
+			IVector startPos = points.remove(0);
+			Path p = new Path(
+					startPos.getComponent(0) * this.scale, 
+					startPos.getComponent(1) * this.scale
+			);
+			for (IVector point: points) {
+				p.lineTo(
+						point.getComponent(0) * this.scale,
+						point.getComponent(1) * this.scale
+				);
+			}
+
+			paths.add(p);
+		}
+		
+		return paths;
+	}
 			
 	/**
 	 * {@inheritDoc}

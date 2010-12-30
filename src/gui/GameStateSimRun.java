@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -150,11 +149,6 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 				.getGAIA().getVehicles()) {
 
 			vehicle.draw(g);
-			/*
-			g.setColor(vehicle.getColor());
-			g.fill(vehicle.getBoundingBox());
-			g.raw(vehicle.getBoundingBox());
-			*/
 		}
 	}
 
@@ -257,7 +251,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 			for (IUIAdapterLane<?> lane : road.getLanes()) {
 				if (lane.getPath().intersects(new Ellipse(mouseX, mouseY, 2, 2))) {
 					try {
-						GameCache.getInstance().getGAIA().addVehicle(lane);
+						GameCache.getInstance().getGAIA().addVehicle(lane, mouseX, mouseY);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

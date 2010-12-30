@@ -67,13 +67,13 @@ public class LaneBuilder {
 			throws InvalidXMLException {
 
 		// get the cross points
-		IVector startPoint1 = laneSegment1.getStartPoint();
-		IVector endPoint1 = laneSegment1.getEndPoint();
-		IVector startPoint2 = laneSegment2.getStartPoint();
-		IVector endPoint2 = laneSegment2.getEndPoint();
+		IVector startPoint1  = laneSegment1.getStartPoint();
+		IVector endPoint1    = laneSegment1.getEndPoint();
+		IVector startPoint2  = laneSegment2.getStartPoint();
+		IVector endPoint2    = laneSegment2.getEndPoint();
 
-		IVector vector1 = endPoint1.sub(startPoint1);
-		IVector vector2 = endPoint2.sub(startPoint2);
+		IVector vector1      = endPoint1.sub(startPoint1);
+		IVector vector2      = endPoint2.sub(startPoint2);
 
 		// the angle of two vectors
 		float aboveLine = vector1.getComponent(0) * vector2.getComponent(0)

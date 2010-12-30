@@ -33,18 +33,6 @@ public class Lane implements ILane {
 	 * The width of the lane
 	 */
 	private float laneWidth;
-
-	/**
-	 * The end position
-	 * 
-	 * Probably never used
-	 */
-	//private IVector endPosition;
-	
-	/**
-	 * All the lane segments the lane contains
-	 */
-	//private LaneSegment<?> laneSegments[];
 	
 	/**
 	 * A helper array for lane segment finding
@@ -126,7 +114,6 @@ public class Lane implements ILane {
 	@Override
 	public IVector getPositionOnLane(float drivenDistance) throws LaneLengthExceededException {
 		if (drivenDistance > this.length) {
-		//System.out.println("you have to change lane now!");
 			throw new LaneLengthExceededException();
 		}
 		ILaneSegment<?> segment = this.getLaneSegmentAtPosition(drivenDistance);
@@ -135,6 +122,15 @@ public class Lane implements ILane {
 		IVector actualPosition = segment.getVehiclePosition(segmentLength);
 		
 		return actualPosition;
+	}
+
+
+	@Override
+	public IVector getPositionOnLaneByPercentage(float position)
+			throws LaneLengthExceededException {
+		float absolutePos = this.length / 100 * position;
+		
+		return this.getPositionOnLane(absolutePos);
 	}
 	
 	/**
@@ -148,7 +144,7 @@ public class Lane implements ILane {
 	}
 	
 	/**
-	 * Do some initialization with the lane segments
+	 * Do some initialisation with the lane segments
 	 * 
 	 * - Determine the first lane segment
 	 * - Count the length of all lane segments
@@ -303,19 +299,8 @@ public class Lane implements ILane {
 	}
 
 	@Override
-	public IVector getPositionOnLaneByPercentage(float position)
-			throws LaneLengthExceededException {
-		float absolutePos = this.length / 100 * position;
-		
-		return this.getPositionOnLane(absolutePos);
-	}
-
-
-	@Override
 	public boolean vehiclePlacable() {
 		return this.vehiclePlacable;
 	}
 
-	
-	
 }
