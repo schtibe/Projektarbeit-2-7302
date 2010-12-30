@@ -127,7 +127,8 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle> implements IUIAdapterV
 		g.setColor(Color.white);
 		g.draw(this.getBoundingBox());
 		
-		if (GUIConstants.getInstance().showDriverView()) {
+		if (GUIConstants.getInstance().showDriverView() 
+				&& !this.mainObject.isFreezed()) {
 			g.setColor(Color.yellow);
 			Shape view = this.getDriverViewBoundingBox();
 			g.draw(view);
