@@ -3,7 +3,7 @@ package gui;
 import java.util.List;
 
 import org.newdawn.slick.geom.Path;
-import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.Graphics;
 
 import common.IVector;
 
@@ -19,7 +19,7 @@ public interface IUIAdapterLane<E> extends IUIAdapterColored<E>{
 	 * Get the Path
 	 * @return the path
 	 */
-	public abstract Shape getPath();
+	public abstract Path getPath();
 	
 	/**
 	 * Get the max pos of this object
@@ -62,8 +62,12 @@ public interface IUIAdapterLane<E> extends IUIAdapterColored<E>{
 	public abstract boolean vehiclePlacable();
 	
 	/**
-	 * Return paths objects of the lane segments
+	 * Return the position on the lane
+	 * @param mouseX
+	 * @param mouseY
 	 * @return
 	 */
+	public float getPositionOnLane(int mouseX, int mouseY);
+	
 	public List<Path> getLaneSegmentPaths();
 }

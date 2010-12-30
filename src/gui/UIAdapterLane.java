@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Ellipse;
 import org.newdawn.slick.geom.Path;
 
 import common.GlobalConstants;
@@ -27,7 +29,6 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 	public UIAdapterLane(ILane mainObject, float scale) throws Exception {
 		super(mainObject);
 		this.generateLaneSegments();
-		this.generatePath();
 	}
 	
 	/**
@@ -46,10 +47,8 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 	
 	/**
 	 * Generates the scaled path for this lane
-	 * @throws Exception
 	 */
-	private void generatePath() throws Exception {
-		//create the empty lane path 
+	private void generatePath() {
 		this.gPath = new Path(
 				this.mainObject.getStartPosition().getComponent(0)* this.scale,
 				this.mainObject.getStartPosition().getComponent(1)* this.scale);
@@ -62,55 +61,85 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 			}
 		}
 	}
-	
+
+	public float getPositionOnLane(int mouseX, int mouseY) {
+		List<Path> paths = this.getLaneSegmentPaths();
+		
+		IUIAdapterLaneSegment<?> laneSeg = null;
+		int pos = 0;
+		for (Path p: paths) {
+			if (p.intersects(new Ellipse(mouseX, mouseY, 2, 2))) {
+				laneSeg = laneSegments.get(pos);
+				break;
+			}
+			
+			pos ++;
+		}
+		
+		if (laneSeg == null) {
+			return 0;
+		}
+		
+		try {
+			return ((ILaneSegment<?>) laneSeg.getMainObject()).positionIntersection(
+				new Vector(
+					new float[]{mouseX / this.scale, mouseY / this.scale}
+				)
+			);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+	/**
+	 * Return paths objects of the lane segments
+	 * @return
+	 */
 	public List<Path> getLaneSegmentPaths() {
 		List<Path> paths = new ArrayList<Path>();
 		
 		for(IUIAdapterLaneSegment<?> laneSegment : laneSegments) {
 			List<IVector> points = laneSegment.getPath();
-			IVector startPos = points.remove(0);
-			Path p = new Path(
-					startPos.getComponent(0) * this.scale, 
-					startPos.getComponent(1) * this.scale
-			);
-			for (IVector point: points) {
-				p.lineTo(
-						point.getComponent(0) * this.scale,
-						point.getComponent(1) * this.scale
+			if (points.size() > 0) {
+				IVector startPos = points.remove(0);
+				Path p = new Path(
+						startPos.getComponent(0) * this.scale, 
+						startPos.getComponent(1) * this.scale
 				);
+				for (IVector point: points) {
+					p.lineTo(
+							point.getComponent(0) * this.scale,
+							point.getComponent(1) * this.scale
+					);
+				}
+	
+				paths.add(p);
 			}
-
-			paths.add(p);
 		}
 		
 		return paths;
 	}
 			
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public IVector getMinPos() {
 		return new Vector(new float[]
-				              {this.gPath.getMinX(),
-							   this.gPath.getMinY()});
+				              {this.getPath().getMinX(),
+							   this.getPath().getMinY()});
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
+
 	@Override
 	public IVector getMaxPos() {
 		return new Vector(new float[]
-		                      {this.gPath.getMaxX(),
-							   this.gPath.getMaxY()});
+		                      {this.getPath().getMaxX(),
+							   this.getPath().getMaxY()});
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Path getPath() {
+		if (this.gPath == null) {
+			this.generatePath();
+		}
 		return this.gPath;
 	}
 
@@ -120,8 +149,7 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 	@Override
 	public void setScale(float scale) throws Exception {
 		this.scale = scale;
-		//calculate the new path
-		this.generatePath();
+		this.gPath = null; // reset the path
 	}
 
 	/**
@@ -154,4 +182,5 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 	public boolean vehiclePlacable() {
 		return this.mainObject.vehiclePlacable();
 	}
+
 }

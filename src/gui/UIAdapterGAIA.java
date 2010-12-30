@@ -1,9 +1,11 @@
 package gui;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.newdawn.slick.geom.Path;
+import org.newdawn.slick.Graphics;
+
 
 import car.IVehicle;
 import car.VehicleFactory.VehicleType;
@@ -173,26 +175,21 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 	}
 
 	@Override
-	public void addVehicle(IUIAdapterLane<?> lane, int mouseX, int mouseY) throws Exception {
+	public void addVehicle(
+			IUIAdapterLane<?> lane, 
+			int mouseX, 
+			int mouseY) throws Exception {
 		if (!lane.vehiclePlacable()) {
 			return;
 		}
-		
-		/**
-		List<Path> paths = lane.getLaneSegmentPaths();
-		
-		ILaneSegment<?> laneSeg;
-		for (Path p: paths) {
-			if (p.intersects(new Ellipse(mouseX, mouseY, 2, 2)) {
-				
-			}
-		}
-		*/
+
+		float lanePos = lane.getPositionOnLane(mouseX, mouseY);
 		
 		this.vehicles.add(
 			UIElementFactory.getUIElement(
 				this.mainObject.addRoadUser(
 					VehicleType.car, 
+					lanePos,
 					lane.getOriginalLane(),  
 					new Character(), 
 					new Physics(

@@ -1,10 +1,12 @@
 package gui;
 
 import java.awt.Font;
+import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -53,6 +55,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 	protected boolean simulationStarted = false;
 	protected Font font;
     TrueTypeFont ttf;
+    Ellipse checker;
 
 	public GameStateSimRun() {
 		try {
@@ -137,6 +140,11 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		SlickCallable.enterSafeBlock();
 		nifty.render(false);
 		SlickCallable.leaveSafeBlock();
+		
+		if (this.checker != null) {
+			g.setColor(Color.orange);
+			g.draw(this.checker);
+		}
 	}
 
 	/**
@@ -163,6 +171,14 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 			for (IUIAdapterLane<?> lane : road.getLanes()) {
 				g.setColor(lane.getColor());
 				g.draw(lane.getPath());
+				
+				/*
+				g.setColor(Color.green);
+				for (Path p: lane.getLaneSegmentPaths()) {
+					g.draw(p);
+				}*/
+				
+			
 			}
 		}
 	}
@@ -247,9 +263,11 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		List<IUIAdapterTrafficCarrier<?>> roads = 
 			GameCache.getInstance().getGAIA().getRoads();
 		
+		this.checker = new Ellipse(mouseX, mouseY, 2, 2);
 		for (IUIAdapterTrafficCarrier<?> road : roads) {
 			for (IUIAdapterLane<?> lane : road.getLanes()) {
-				if (lane.getPath().intersects(new Ellipse(mouseX, mouseY, 2, 2))) {
+				Path lanePath = lane.getPath();
+				if (lanePath.intersects(checker)) {
 					try {
 						GameCache.getInstance().getGAIA().addVehicle(lane, mouseX, mouseY);
 					} catch (Exception e) {

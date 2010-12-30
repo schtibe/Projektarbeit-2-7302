@@ -54,20 +54,19 @@ public class UIAdapterLaneSegment extends UIAdapter<ILaneSegment<?>>
 			vectors.add(middleVec); 
 		} else {
 			vectors.addAll(this.getBezierListRecursive(start, middleVec,startFloat,middleShizzle));
-			
 			vectors.add(middleVec);
-			
 			vectors.addAll(this.getBezierListRecursive(middleVec,end, middleShizzle,endFloat));
 		}
 		return vectors;
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public List<IVector> getPath() {
-
 		return this.path;
+	}
+
+	@Override
+	public IVector getStartPosition() {
+		return this.mainObject.getStartPoint();
 	}
 }

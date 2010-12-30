@@ -109,7 +109,6 @@ public interface ILaneSegment<E> {
 	 * @param middle
 	 * @return IVector
 	 */
-	
 	public IVector getPointOnCurve(float middle);
 
 	/**
