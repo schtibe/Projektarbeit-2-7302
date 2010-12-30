@@ -40,7 +40,6 @@ public interface ILane {
 	 * Returns the last lane segment
 	 * @return Returns the last lane segment
 	 */
-	
 	public ILaneSegment<?> getLastILaneSegment();
 		
 	/**
@@ -81,4 +80,14 @@ public interface ILane {
 	 * @param wp
 	 */
 	public void addWayPoint(SignWayPoint wp);
+
+	/**
+	 * Return whether a vehicle can be placed on this lane
+	 * 
+	 * Vehicles cannot be placed on some lanes, e.g. on those
+	 * that are in junctions. Return here if it is possible to
+	 * place a vehicle on this lane.
+	 * @return Whether a vehicle is placable
+	 */
+	public boolean vehiclePlacable();
 }

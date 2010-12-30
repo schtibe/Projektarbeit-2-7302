@@ -27,7 +27,7 @@ public interface IUIAdapterGAIA<E>  extends IUIAdapter<E> {
 	public float getScale();
 	
 	/**
-	 * Add a new vehicle to the gaia
+	 * Add a new vehicle to the GAIA if the lane allows it
 	 */
 	public void addVehicle(IUIAdapterLane<?> lane) throws Exception;
 	

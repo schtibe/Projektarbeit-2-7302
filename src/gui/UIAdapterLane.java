@@ -125,4 +125,10 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 	public Color getColor() {
 		return GlobalConstants.getInstance().getPathColor();
 	}
+
+	
+	@Override
+	public boolean vehiclePlacable() {
+		return this.mainObject.vehiclePlacable();
+	}
 }

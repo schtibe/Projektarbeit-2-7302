@@ -13,7 +13,7 @@ import environment.Lane;
 /**
  * Abstract class for lane builders
  * 
- * @todo there should probably be an interface
+ * @TODO there should probably be an interface
  */
 public abstract class XMLLaneBuilder extends LaneBuilder implements
 		IXMLObjectBuilder {
@@ -108,7 +108,8 @@ public abstract class XMLLaneBuilder extends LaneBuilder implements
 		Lane lane = new Lane(
 			startSegment.getStartPoint().clone(), 
 			startSegment,
-			this.laneWidth
+			this.laneWidth,
+			true
 		);
 		
 		for (IXMLWayPointBuilder wp: this.readWayPoints()) {

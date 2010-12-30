@@ -161,9 +161,6 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 		return new Vector(currentMinPos);
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public List<IUIAdapterTrafficCarrier<?>> getRoads() {
 		return this.trafficCarriers;
@@ -186,24 +183,28 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 		return this.scale;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void addVehicle(IUIAdapterLane<?> lane) throws Exception {
-		this.vehicles.add(UIElementFactory.getUIElement(
+		if (!lane.vehiclePlacable()) {
+			return;
+		}
+		
+		this.vehicles.add(
+			UIElementFactory.getUIElement(
 				this.mainObject.addRoadUser(
-						VehicleType.car, 
-						lane.getOriginalLane(),  
-						new Character(), 
-						new Physics(100,
-								(float)((2*Math.PI)/3),
-								250, 
-								new ArrayList<Drug>()
-								)
-						),
+					VehicleType.car, 
+					lane.getOriginalLane(),  
+					new Character(), 
+					new Physics(
+						200,
+						(float)((Math.PI)/3),
+						250, 
+						new ArrayList<Drug>()
+					)
+				),
 				this.scale,
-				this.correctionVector)
+				this.correctionVector
+			)
 		);
 	}
 

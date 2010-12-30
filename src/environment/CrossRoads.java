@@ -6,6 +6,7 @@ import java.util.List;
 import simulation.builder.InvalidXMLException;
 import simulation.builder.LaneBuilder;
 
+import common.IVector;
 import common.Vector;
 
 import driver.IDecision;
@@ -15,7 +16,6 @@ public class CrossRoads implements IJunction {
 	/**
 	 * instance variables
 	 */
-	
 	private List<IRoad> roads;
 	private Boolean[] startPointInCrossroad;
 	private List<ILane>[] incomingLanes;
@@ -27,23 +27,16 @@ public class CrossRoads implements IJunction {
 	/**
 	 * constructor initializes some important collections
 	 */
-	
 	public CrossRoads(){
 		this.junctionLanes = new ArrayList<ILane>();
 		this.decisionsMap = new ArrayList<ILane>();
 		this.decisions = new ArrayList<List<IJunctionDecision>>();
 	}
-	/**
-	 * {@inheritDoc}
-	 */
+
 	@Override
 	public List<IJunctionDecision> getPossibilities(ILane actualLane) {
 		return decisions.get(this.decisionsMap.indexOf(actualLane));
 	}
-	
-	/**
-	 * {@inheritedDoc}
-	 */
 	
 	@Override
 	public void setRoads(List<IRoad> roads) throws Exception{
@@ -62,7 +55,7 @@ public class CrossRoads implements IJunction {
 					for (int k=0;k<this.outgoingLanes.length;k++){
 						if (this.outgoingLanes[k]!=null && k!= i){
 							for (ILane outLane: this.outgoingLanes[k]) {
-								if (outLane != null){
+								if (outLane != null) {
 									List<ILane> theseLanes = makeJunctionLanes(
 											builder, start, outLane);
 									decisionCount++;
@@ -89,7 +82,6 @@ public class CrossRoads implements IJunction {
 	 * @param lane
 	 * @throws Exception
 	 */
-	
 	private void makeJunctionWayPoint(ILane lane) throws Exception {
 		JunctionWayPoint wp = new JunctionWayPoint(lane,this);
 		WayPointManager.getInstance().add(wp);
@@ -104,27 +96,28 @@ public class CrossRoads implements IJunction {
 	 * @throws Exception
 	 * @throws InvalidXMLException
 	 */
-	
-	
 	private List<ILane> makeJunctionLanes(LaneBuilder builder,
 			LaneSegmentLinear start, ILane outLane) throws Exception,
 			InvalidXMLException {
+		
 		outLane.setJunction(this);
 		LaneSegmentLinear end = (LaneSegmentLinear) outLane.getFirstILaneSegment();
-		Vector startVector = ((Vector) start.getEndPoint().sub(start.getStartPoint())).normalize();
-		Vector endVector = ((Vector) end.getEndPoint().sub(end.getStartPoint())).normalize();
+		IVector startVector   = (start.getEndPoint().sub(start.getStartPoint())).normalize();
+		IVector endVector     = (end.getEndPoint().sub(end.getStartPoint())).normalize();
 		List<ILaneSegmentLinear> segments = new ArrayList<ILaneSegmentLinear>();
+		
 		segments.add(new LaneSegmentLinear(1,start.getEndPoint(),((Vector)start.getEndPoint()).add(startVector)));
 		segments.add(new LaneSegmentLinear(1,((Vector) end.getStartPoint()).sub(endVector), end.getStartPoint()));
+		
 		Lane newLane = null;
-		try{
-			newLane = new Lane(start.getEndPoint(),builder.getCompleteLaneSegmentList(segments),(float)10.0);
-		}catch(InvalidXMLException e){
-		//System.out.println(e.toString()+", just assumed now they're perfectly parallel and continuous");
+		try {
+			newLane = new Lane(start.getEndPoint(),builder.getCompleteLaneSegmentList(segments),(float)10.0, false);
+		} catch(InvalidXMLException e) {
 			segments = new ArrayList<ILaneSegmentLinear>();
 			segments.add(new LaneSegmentLinear(1,start.getEndPoint(),end.getStartPoint()));
-			newLane = new Lane(start.getEndPoint(),builder.getCompleteLaneSegmentList(segments),(float)10.0);
+			newLane = new Lane(start.getEndPoint(),builder.getCompleteLaneSegmentList(segments),(float)10.0, false);
 		}
+	
 		this.junctionLanes.add(newLane);
 		List<ILane> theseLanes = new ArrayList<ILane>();
 		theseLanes.add(newLane);
@@ -136,7 +129,6 @@ public class CrossRoads implements IJunction {
 	 * separates the incoming from the outgoing lanes
 	 * @throws Exception
 	 */
-	
 	private void roadsToLanes() throws Exception {
 		Object[] roadsAsArray = this.roads.toArray();
 		startPointInCrossroad = findPointsInCrossroad(roadsAsArray);
@@ -155,7 +147,7 @@ public class CrossRoads implements IJunction {
 
 	/**
 	 * @return Boolean[] , true means the startPoint of the Road with index i is to be 
-	 * connected to the crossroads, false means the same for the endPoint
+	 * connected to the cross roads, false means the same for the endPoint
 	 */
 	private Boolean[] findPointsInCrossroad(Object[] roadsAsArray) throws Exception{
 		if (roadsAsArray.length > 1 || roadsAsArray.length > 4) {
@@ -195,7 +187,6 @@ public class CrossRoads implements IJunction {
 	 * toStart: length to a neighbouring startPoint
 	 * @return true if toStart is larger than toEnd
 	 */
-	
 	private Boolean endOrStart(float toEnd, float toStart){
 		if (toEnd < toStart){
 			return false;
@@ -208,7 +199,6 @@ public class CrossRoads implements IJunction {
 	 * @param Road roadOne, Road roadTwo
 	 * @return Boolean[] following the specification given at the method findPointsInCrossroad 
 	 */
-	
 	private void firstTwoPointsInCrossroad(IRoad roadOne, IRoad roadTwo,Boolean[] output) {
 		//Boolean[] output = new Boolean[2];
 		float endToEnd = roadOne.getEndPoint().sub(roadTwo.getEndPoint()).norm();
@@ -255,9 +245,8 @@ public class CrossRoads implements IJunction {
 	}
 
 	/**
-	 * returns an empty list, as a crossroad only has right lanes
+	 * returns an empty list, as a cross road only has right lanes
 	 */
-	
 	@Override
 	public List<ILane> getLeftLanes() {
 		// TODO Auto-generated method stub
@@ -265,9 +254,8 @@ public class CrossRoads implements IJunction {
 	}
 
 	/**
-	 * returns the crossroads lanes
+	 * returns the cross roads lanes
 	 */
-	
 	@Override
 	public List<ILane> getRightLanes() {
 		return this.junctionLanes;
@@ -276,7 +264,6 @@ public class CrossRoads implements IJunction {
 	/**
 	 * {@deprecated}
 	 */
-	
 	@Deprecated
 	@Override
 	public List<ILane> getImportantLanes(IDecision decision) {

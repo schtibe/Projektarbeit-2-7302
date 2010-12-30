@@ -237,27 +237,33 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		forwardMouseEventToNifty(mouseX, mouseY, mouseDown);
 	}
 
+	/**
+	 * Event on pressing the mouse
+	 * 
+	 * Checks, if the click position intersects with one of the roads, if yes,
+	 * place a vehicle on it. (The method checks, whether this can be done since
+	 * the vehicles cannot be placed on junctions)
+	 */
 	@Override
 	public void mousePressed(final int button, final int x, final int y) {
 		mouseX = x;
 		mouseY = y;
 		mouseDown = true;
 
-		for (IUIAdapterTrafficCarrier<?> road : GameCache.getInstance()
-				.getGAIA().getRoads()) {
+		List<IUIAdapterTrafficCarrier<?>> roads = 
+			GameCache.getInstance().getGAIA().getRoads();
+		
+		for (IUIAdapterTrafficCarrier<?> road : roads) {
 			for (IUIAdapterLane<?> lane : road.getLanes()) {
-				if (lane.getPath()
-						.intersects(new Ellipse(mouseX, mouseY, 2, 2))) {
+				if (lane.getPath().intersects(new Ellipse(mouseX, mouseY, 2, 2))) {
 					try {
 						GameCache.getInstance().getGAIA().addVehicle(lane);
 					} catch (Exception e) {
-					//System.out.println("error");
 						e.printStackTrace();
 					}
 				}
 			}
 		}
-
 
 		forwardMouseEventToNifty(mouseX, mouseY, mouseDown);
 	}

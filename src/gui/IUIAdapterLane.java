@@ -47,4 +47,14 @@ public interface IUIAdapterLane<E> extends IUIAdapterColored<E>{
 	 * @return the object inside of this adapter
 	 */
 	public ILane getOriginalLane();
+
+	/**
+	 * Return whether a vehicle can be placed on this lane
+	 * 
+	 * Vehicles cannot be placed on some lanes, e.g. on those
+	 * that are in junctions. Return here if it is possible to
+	 * place a vehicle on this lane.
+	 * @return
+	 */
+	public abstract boolean vehiclePlacable();
 }
