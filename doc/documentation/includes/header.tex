@@ -1,0 +1,48 @@
+
+\documentclass[a4paper,10pt,titlepage]{article}
+\usepackage{color}
+\usepackage{wrapfig}
+\usepackage[dvipdfm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{svnkw}
+\usepackage{tabularx}
+\usepackage{ngerman}
+\usepackage{environ}
+\pagestyle{fancy}
+\evensidemargin0mm
+\oddsidemargin0mm
+\setlength{\listparindent}{0pt}
+\setlength{\parskip}{0pt}
+\voffset-10mm
+\topmargin0mm
+\headsep10mm
+\headheight20mm
+\lhead{\includegraphics[width=40mm]{images/logo_ti.png}\newline}
+\rhead{Stefan Heinemann (heins4)\\Christoph Isch (ischc2)}
+\lfoot{\today}
+
+\title{Documentation}
+\author{heins4: Stefan Heinemann\\ischc2: Christoph Isch}
+
+\let\stdsection\section
+\renewcommand\section{\newpage\stdsection}
+
+\NewEnviron{defaultTable}[2] {
+ \@float{table}[h]
+ \noindent
+ \tabularx{\textwidth}{#1}
+ \specialrule{0.5pt}{10pt}{0pt}
+ \rowcolor[gray]{.9}
+ \gdef\mycaption{#2}
+ \BODY
+ \bottomrule}[
+ \endtabularx
+ \emph{\caption{\mycaption}}
+ \end@float
+]
+
