@@ -85,7 +85,40 @@ The search for way points that a driver can see is achieved in two steps:
 \subsubsection{The quad tree}
 \label{sec:quadTree}
 
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{images/quadtree.png}
+\end{center}
+\caption{A quad tree with the level 4 in the top right corner}
+\label{fig:quadTree}
+\end{figure}
 
+To be able to locate the way points in a certain area quickly, they are 
+organized in a quad tree. The quad tree basically divides the world into 
+squares as shown in figure \ref{fig:quadTree} to a certain depth, which are 
+nodes in the tree. The depth defines the resolution of the tree, and depending
+on the depth the nodes cover each an area in the world. The nodes 
+are created only if there are way points their area. They can contain
+more than one way point, since there can be more than one way point in an 
+area.\\
+
+\noindent With this implementation, all the nodes in the vicinity of the vehicle can be
+found with O(d) where d is the depth of the three. Since the quad tree is based
+on squares, the results have to be filtered further to determine if the located
+way points really lie in the driver view, which is explained in the next 
+chapter.\\
+
+\noindent Figure \ref{fig:quadTreeClasses} shows the composition of the quad tree classes.
+
+// TODO: mention the moving of way points in the tree
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{images/waypointsmanager.png}
+\end{center}
+\caption{The quad tree classes}
+\label{fig:quadTreeClasses}
+\end{figure}
 
 \subsubsection{The driver view}
 \label{sec:driverView}
