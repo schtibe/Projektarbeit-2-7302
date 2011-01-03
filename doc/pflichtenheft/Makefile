@@ -1,6 +1,6 @@
 .PHONY: default clean distclean 
-SOURCE := documentation.tex
-TARGET := documentation.pdf
+SOURCE := pflichtenheft.tex
+TARGET := pflichtenheft.pdf
 VIEWER := okular
 SHELL := /bin/bash
 CLEAN_EXT := aux,log,idx,out,glo,toc,lot,tex~,backup
