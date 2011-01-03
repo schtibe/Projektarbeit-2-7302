@@ -1,4 +1,5 @@
 \section{The way point system}
+\label{sec:wayPointSystem}
 
 \subsection{Concept}
 
@@ -79,13 +80,23 @@ The search for way points that a driver can see is achieved in two steps:
 \begin{itemize}
 \item Filter with a quad tree
 \item Filter with the driver view
+\item Check the lanes
 \end{itemize}
 
 
 \subsubsection{The quad tree}
 \label{sec:quadTree}
 
-\begin{figure}
+To be able to locate the way points in a certain area quickly, they are 
+organized in a quad tree. The quad tree basically divides the world into 
+rectangles as shown in figure \ref{fig:quadTree} to a certain depth, which are 
+nodes in the tree. The depth defines the resolution of the tree, and depending
+on the depth the nodes cover each an area in the world. The nodes 
+are created only if there are way points their area. They can contain
+more than one way point, since there can be more than one way point in an 
+area.\\
+
+\begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.5]{images/quadtree.png}
 \end{center}
@@ -93,18 +104,9 @@ The search for way points that a driver can see is achieved in two steps:
 \label{fig:quadTree}
 \end{figure}
 
-To be able to locate the way points in a certain area quickly, they are 
-organized in a quad tree. The quad tree basically divides the world into 
-squares as shown in figure \ref{fig:quadTree} to a certain depth, which are 
-nodes in the tree. The depth defines the resolution of the tree, and depending
-on the depth the nodes cover each an area in the world. The nodes 
-are created only if there are way points their area. They can contain
-more than one way point, since there can be more than one way point in an 
-area.\\
-
 \noindent With this implementation, all the nodes in the vicinity of the vehicle can be
 found with O(d) where d is the depth of the three. Since the quad tree is based
-on squares, the results have to be filtered further to determine if the located
+on rectangles, the results have to be filtered further to determine if the located
 way points really lie in the driver view, which is explained in the next 
 chapter.\\
 
@@ -112,7 +114,7 @@ chapter.\\
 
 // TODO: mention the moving of way points in the tree
 
-\begin{figure}
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=\textwidth]{images/waypointsmanager.png}
 \end{center}
@@ -124,14 +126,6 @@ chapter.\\
 \label{sec:driverView}
 
 \paragraph{Description}
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.4]{images/driverview.png}
-\end{center}
-\caption{The driver view}
-\label{fig:driverView}
-\end{figure}
 
 The driver view describes the area wherein the driver can see other objects in
 the world. It is described by following parameters:
@@ -149,11 +143,19 @@ on each of the parameters. \\
 \noindent With this system of parameters we tried to make the driver view as realistic
 as possible. Figure \ref{fig:driverView} depicts the driver view.
 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.4]{images/driverview.png}
+\end{center}
+\caption{The driver view}
+\label{fig:driverView}
+\end{figure}
+
 \paragraph{The filtering}
 
 After the quad tree (\ref{sec:quadTree}) has completed it's search, the located way
 points are filtered further to take account of the angled driver view instead
-of using just a square. \\
+of using just a rectangle. \\
 
 \noindent The algorithm to determine, whether a way point lies in the driver 
 view, is based on the following equation: \\
@@ -183,3 +185,12 @@ $ \frac{\lambda * \left| \vec{b} \right| }{\mu * \left| \vec{a} \right|} \leq
 \paragraph{Further thoughts}
 ...Some further stuff like the driver view should be adapted when the driver
 and how this could be implemented...
+
+
+\subsubsection{Lane check}
+
+At the last step of way point finding, the way points are checked with the
+lane queue of the vehicle (\ref{sec:laneChanges}). If the way point is not
+on any of the lanes in the vehicle's queue, it is dropped, since it doesn't
+concern the driver. An example of such a way point is a vehicle on the lane
+that goes in the opposite direction of the road.

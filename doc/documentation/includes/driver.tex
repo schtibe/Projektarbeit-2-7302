@@ -1,8 +1,56 @@
 
 \section{Driver}
+\label{sec:driver}
 
-% mention that the driver memorises the speed limit
+The part that does all the acting in this world is the drivers. A
+driver looks at the world (\ref{sec:sight}), assesses the situation
+and reacts accordingly (\ref{sec:animus}), decides about which
+way to go (\ref{sec:driverJunctions}) and eventually steers the
+vehicle (\ref{sec:driverInfluence}). Drivers have a character
+(\ref{sec:character}) and physical conditions (\ref{sec:physics}). They
+can even take drugs (\ref{sec:drugs}). \\
 
 \subsection{Animus}
+\label{sec:animus}
+
+The Animus is the brain of the driver. Here all way points 
+(\ref{sec:wayPointSystem}) are processed and decisions are made. \\
+
+\noindent The Animus only knows the current speed limit on the lane 
+(before the driver has seen any speed limit signs this is some global
+default value). It then assesses the situation in following order:
+
+\begin{itemize}
+\item Look at the world and collect way points
+\item 
+\end{itemize}
+
+\subsubsection{The estimation of other vehicle's speed}
+
+To know whether another vehicle is approaching (because it moves 
+more slowly)
 
 \subsection{Physics}
+\label{sec:physics}
+
+\subsubsection{Drugs}
+\label{sec:drugs}
+
+\subsection{Character}
+\label{sec:character}
+
+\subsection{Sight}
+\label{sec:sight}
+
+At this point of process the driver only sees things ahead of him on the
+lane. There are no mirrors, and it is not possible to look behind, hence
+he is not able to reverse.\\
+
+\noindent What the driver can see is limited to a field of view formed as a triangle.
+We implemented that as the driver view, more on that in chapter 
+\ref{sec:driverView}.
+
+\subsection{Junctions}
+\label{sec:driverJunctions}
+
+% describe how it decides where to go
