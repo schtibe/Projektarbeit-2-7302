@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
+import com.sun.jmx.snmp.Timestamp;
+
 import simulation.CrashEvent;
 import simulation.DriverEvent;
 import simulation.EventQueue;
@@ -41,6 +43,10 @@ public class Animus implements IObserver {
 	protected int targetSpeed = 30;
 	protected float nearestVehicleDistance;
 	protected float nearestVehicleDistanceOld;
+	
+	/**
+	 * Indicated whether a vehicle has been seen or not
+	 */
 	protected boolean noVehicles;
 	
 	private Queue<IWayPoint> seenWayPoints;
@@ -66,75 +72,156 @@ public class Animus implements IObserver {
 	 */
 	public void assessSituation (DriverEvent event) throws Exception{
 		this.event = event;
-		noVehicles = true;
+		this.noVehicles = true;
+		// the vehicle and the junction can only influence the deceleration
 		DecelerationActivator vehicleActivator = new DecelerationActivator(0f);
 		DecelerationActivator junctionActivator = new DecelerationActivator(0f);
+		
 		IDriverView dView = this.physics.getView(vehicle.getDriverView());
 		List<IPlacable> wayPoints = WayPointManager.getInstance().findWayPoints(dView);
-		for(IPlacable waypoint : wayPoints){
+		for(IPlacable waypoint : wayPoints) {
 			((IWayPoint)waypoint).visitHandleWayPoint(this);
 		}
-		if (noVehicles){
+		
+		if (this.noVehicles) {
 			nearestVehicleDistanceOld = Float.MAX_VALUE;
 			nearestVehicleDistance = Float.MAX_VALUE;
 		}
-		if (nearestVehicleDistanceOld != Float.MAX_VALUE){
-			//if (nearestVehicleDistanceOld > nearestVehicleDistance){
-			//	vehicleActivator.setValue(1.0f);
-			//}
-			//this.vehicle.getSpeed()/2;
+		
+		float securityDistance = this.securityDistance();
+		if (nearestVehicleDistance < securityDistance) {
+			vehicleActivator.setValue(
+					this.calculateVehicleActivator(
+							securityDistance(),
+							nearestVehicleDistance,
+							this.vehicle.getSpeed()
+					)
+			);
 		}
-		float securityDistance = 200f;
-		if (nearestVehicleDistance < securityDistance){
-			vehicleActivator.setValue(1.0f);
-		}
+		
+		// save the distance of the nearest vehicle for the next assessment
+		// TODO: this should probably consider the vehicles too? What if
+		// another vehicle comes into the picture that is nearer
 		nearestVehicleDistanceOld = nearestVehicleDistance;
+		
 		float acceleration = 0;
-		float speedAssessed = assessSpeeds(vehicle.getSpeed(),(float)targetSpeed);
-		if (vehicle.getSpeed()>(float)targetSpeed){
-			acceleration = generateAcceleration (new DecelerationActivator(speedAssessed), vehicleActivator, junctionActivator);
-		}else{
-			acceleration = generateAcceleration (new AccelerationActivator(speedAssessed), vehicleActivator, junctionActivator);
+		float speedAssessed = assessSpeeds(this.vehicle.getSpeed(),(float)targetSpeed);
+		
+		// calculate the acceleration depending on the activators
+		if (this.vehicle.getSpeed() > (float)targetSpeed) {
+			acceleration = generateAcceleration(
+					new DecelerationActivator(speedAssessed), 
+					vehicleActivator, 
+					junctionActivator
+			);
+		} else {
+			acceleration = generateAcceleration(
+					new AccelerationActivator(speedAssessed),
+					vehicleActivator,
+					junctionActivator
+			);
 		}
-		VehicleEvent evt = new VehicleEvent(event.getTimeStamp()+physics.getUpdateInterval(),vehicle,acceleration);
+		
+		VehicleEvent evt = new VehicleEvent(
+				event.getTimeStamp() + physics.getUpdateInterval(),
+				vehicle,
+				acceleration
+		);
 		EventQueue.getInstance().addEvent(evt);
 	}
-	
+
+
+	/**
+	 * Returns whether the speed should be changed to achieve the target speed
+	 * @param vehicle
+	 * @param target
+	 * @return
+	 */
 	private float assessSpeeds(float vehicle, float target) {
 		float percentage = Math.abs((vehicle/target)-1f);
-		//System.out.println("p:"+percentage);
-		if (percentage<GlobalConstants.getInstance().getSpeedPerceptionThreshold()){
+		
+		if (percentage < GlobalConstants.getInstance().getSpeedPerceptionThreshold()) {
 			return 0;
 		}
-		if (percentage > GlobalConstants.getInstance().getAccelerationThreshold()){
+		
+		if (percentage > GlobalConstants.getInstance().getAccelerationThreshold()) {
 			return 1f;
-		}else{
-			return (1f/GlobalConstants.getInstance().getAccelerationThreshold())*percentage;
+		} else { 
+			return (1f/GlobalConstants.getInstance().getAccelerationThreshold()) * percentage;
 		}
 	}
 
+	/**
+	 * Bring the activators together
+	 * @param speedActivator
+	 * @param vehicleActivator
+	 * @param junctionActivator
+	 * @return
+	 */
 	private float generateAcceleration(DecelerationActivator speedActivator,
 			DecelerationActivator vehicleActivator,
 			DecelerationActivator junctionActivator) {
 		return calculateAcceleration (
-				-character.changeActivator(vehicleActivator).getValue(),
+				-character.changeActivator(vehicleActivator).getValue(), 
 				-character.changeActivator(junctionActivator).getValue(),
 				-character.changeActivator(speedActivator).getValue()
 		);
 	}
 	
+	/**
+	 * Bring the activators together
+	 * @param speedActivator
+	 * @param vehicleActivator
+	 * @param junctionActivator
+	 * @return
+	 */
 	private float generateAcceleration(AccelerationActivator speedActivator,
 			DecelerationActivator vehicleActivator,
 			DecelerationActivator junctionActivator) {
 		return calculateAcceleration (
-				-character.changeActivator(vehicleActivator).getValue(),
+				-character.changeActivator(vehicleActivator).getValue(), 
 				-character.changeActivator(junctionActivator).getValue(),
 				character.changeActivator(speedActivator).getValue()
 		);
 	}
+	
+	/**
+	 * Calculate, how heavy the driver should step on the brakes
+	 * 
+	 * @param vehicleDistance The distance to the next vehicle
+	 * @param speed The current speed
+	 * @return
+	 */
+	private float calculateVehicleActivator(
+			float securityDistance,
+			float vehicleDistance, 
+			float speed
+		) {
+		float brakeWay = (float) Math.pow((speed / 10), 2);
+		float map = securityDistance - brakeWay;
+		float dist = vehicleDistance - brakeWay;
+		
+		float res = 1 - (dist / map);
+		
+		return res;
+	}
+	
+	/**
+	 * Calculate the security distance
+	 * @return
+	 */
+	private float securityDistance() {
+		return this.vehicle.getSpeed() * 2;
+	}
 
+	/**
+	 * 
+	 * @param vehicle
+	 * @param junction
+	 * @param speed
+	 * @return
+	 */
 	private float calculateAcceleration (float vehicle, float junction, float speed){
-		//System.out.println("("+this.vehicle.hashCode()+") v:"+vehicle+" s: "+speed);
 		GlobalConstants constants = GlobalConstants.getInstance();
 		float acceleration;
 		float n;
@@ -145,12 +232,13 @@ public class Animus implements IObserver {
 			n = (vehicle*constants.getVehicleWaypointInfluence()+junction*constants.getJunctionWaypointInfluence())/
 			(weightN); 
 		}
+		
 		if (n == 0 || speed == 0){
 			acceleration = n+speed;
 		}else{
 			acceleration = (n*weightN+speed*constants.getSpeedWaypointInfluence())/(weightN+constants.getSpeedWaypointInfluence());
 		}
-		//System.out.println("acc:"+acceleration);
+		
 		return acceleration;
 	}
 
@@ -198,14 +286,15 @@ public class Animus implements IObserver {
 	 * @param carWayPoint
 	 */
 	public void handleWayPoint(VehicleWayPoint waypoint) {
-		noVehicles = false;
 		if (waypoint != (VehicleWayPoint)vehicle.getWayPoint()){
 			VehicleDimension myDim = this.vehicle.getDimension();
 			if (this.vehicle.getLanes().contains(waypoint.getLane())){
 				float distance = waypoint.getDistance(this.vehicle);
 				if (nearestVehicleDistance > distance){
+					nearestVehicleDistance = distance;	
+				} else if (noVehicles) {
+					// we are the first vehicle so set the distance to it
 					nearestVehicleDistance = distance;
-					
 				}
 				VehicleDimension otherDim = waypoint.getVehicle().getDimension();
 				if (distance < myDim.getBoundingRadius()+otherDim.getBoundingRadius()){
@@ -216,6 +305,7 @@ public class Animus implements IObserver {
 			}
 			//System.out.println("("+this.vehicle.hashCode()+") I saw a vehicle");
 		}
+		noVehicles = false;
 	}
 
 	/**
