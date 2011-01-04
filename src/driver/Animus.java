@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
-
 import simulation.CrashEvent;
 import simulation.DriverEvent;
 import simulation.EventQueue;

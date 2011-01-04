@@ -249,7 +249,7 @@ public class Gaia implements IGaia {
 	 */
 	@Override
 	public void updateVehicles(float timestep) throws CarCannotReverseException {
-
+		
 		for (IVehicle vehicle: this.getVehicles()) {
 			vehicle.updatePosition(timestep);
 		}

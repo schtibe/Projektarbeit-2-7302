@@ -97,7 +97,7 @@ public abstract class Vehicle implements IVehicle, IObservable {
 	 * 
 	 * This acceleration is added to the speed and/or direction
 	 */
-	protected float acceleration;
+	protected float acceleration = 0;
 
 	/**
 	 * The lane the vehicle is on

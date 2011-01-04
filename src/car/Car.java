@@ -83,11 +83,6 @@ public class Car extends Vehicle {
 				lastStep = event.getTimeStamp();
 				accelerate(event.getTargetAcceleration());
 			} else {
-				try {
-					adjustSpeed(event.getTimeStamp() - lastStep);
-				} catch (Exception ex) {
-					System.out.println("car tried to reverse");
-				}
 				lastStep = event.getTimeStamp();
 				accelerate(event.getTargetAcceleration());
 			}
