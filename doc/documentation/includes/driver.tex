@@ -25,10 +25,18 @@ default value). It then assesses the situation in following order:
 \item 
 \end{itemize}
 
-\subsubsection{The estimation of other vehicle's speed}
+\subsubsection{The estimation of another vehicle's speed}
 
 To know whether another vehicle is approaching (because it moves 
-more slowly)
+more slowly) or not, we could have just implemented a method on the
+way point that returns the speed of it's vehicle to the driver that
+is assessing. But we wanted it more realistic, the drivers should have
+to estimate the speed of the other traffic participants. They can
+therefore only retrieve the fuzzy distance (\ref{par:movingWPDistance})
+to the other way points. A driver then has to remember the distance
+of the nearest vehicle, until the next assessment cycle. It can then
+compare the remembered distance with the new one and knows, whether the
+vehicle is approaching or not and how fast.
 
 \subsection{Physics}
 \label{sec:physics}
@@ -46,11 +54,17 @@ At this point of process the driver only sees things ahead of him on the
 lane. There are no mirrors, and it is not possible to look behind, hence
 he is not able to reverse.\\
 
-\noindent What the driver can see is limited to a field of view formed as a triangle.
-We implemented that as the driver view, more on that in chapter 
+\noindent What the driver can see is limited to a field of view formed as 
+a triangle.  We implemented that as the driver view, more on that in chapter 
 \ref{sec:driverView}.
 
 \subsection{Junctions}
 \label{sec:driverJunctions}
 
-% describe how it decides where to go
+When a driver approached a junction, he receives the according way point
+from the way point system. He then makes a decision in which direction he
+wants to drive on. Since we don't have any path finding and the cars are
+just driving around, this decision is randomly taken. Once decided, a
+driver event is created and processed immediately which then triggers
+the junction routine of the vehicle (\ref{sec:laneChanges}).
+

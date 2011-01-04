@@ -11,7 +11,7 @@ default: build
 noview: build
 
 build:
-	if [[ -a "/usr/bin/rubber" ]]; then rubber -d $(SOURCE); else pdflatex -interaction=nonstopmode $(SOURCE) >/dev/null pdflatex -interaction=nonstopmode $(SOURCE) >/dev/null; fi 
+	if [[ -a "/usr/bin/rubber" ]]; then rubber -d $(SOURCE); else pdflatex -interaction=nonstopmode $(SOURCE) >/dev/null; pdflatex -interaction=nonstopmode $(SOURCE) >/dev/null; fi 
 
 # cleans index, logs, temporary files etc. 
 clean:
