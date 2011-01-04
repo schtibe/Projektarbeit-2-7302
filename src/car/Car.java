@@ -127,10 +127,6 @@ public class Car extends Vehicle {
 
 	@Override
 	public IMovable getWayPoint() {
-		if (!freezed) {
-			return this.wayPoint;
-		}
-		return null;
+		return this.wayPoint;
 	}
-
 }

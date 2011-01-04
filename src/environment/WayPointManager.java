@@ -56,10 +56,9 @@ public class WayPointManager implements IPlacableManager {
 	 */
 	@Override
 	public void add(IPlacable placable){
-		// TODO dig deeper into the exception issue posted on github by schtibe, logically there is only one reason
-		// why this could throw an Exception and it's within PlacableTreeNode.add()
 		if (this.root != null){
 			this.root.add(placable);
+			waypoints.add((IWayPoint)placable);
 		}else{
 			stack.push(placable);
 			waypoints.add((IWayPoint)placable);
@@ -93,6 +92,7 @@ public class WayPointManager implements IPlacableManager {
 	@Override
 	public void remove(IPlacable placable) throws Exception{
 		root.remove(placable);
+		waypoints.remove(placable);
 	}
 
 	/**

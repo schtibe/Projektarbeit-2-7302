@@ -5,6 +5,8 @@ import car.Vehicle;
 import common.GlobalConstants;
 
 import environment.Gaia;
+import environment.IWayPoint;
+import environment.VehicleWayPoint;
 import environment.WayPointManager;
 
 public class Simulator implements IEventTarget<CrashEvent> {
@@ -65,7 +67,9 @@ public class Simulator implements IEventTarget<CrashEvent> {
 			vehicle.freeze();
 			try{
 				WayPointManager.getInstance().remove(vehicle.getWayPoint());
-			}catch (Exception ex){}
+			}catch (Exception ex){
+				System.out.println(ex);
+			}
 		}
 	}
 
