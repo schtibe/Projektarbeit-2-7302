@@ -19,9 +19,14 @@ public class EventQueue {
 	private PriorityQueue<IEvent> events;
 
 	private EventQueue() {
+		System.out.println("Building a new event queue");
 		events = new PriorityQueue<IEvent>();
 	}
 
+	public static void reset() {
+		EventQueue.instance = null;
+	}
+	
 	/**
 	 * Singleton
 	 * 

@@ -293,12 +293,9 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 	}
 
 	public void exit() {
+		simulationStarted = false;
 		GameCache.getInstance().getGAIA().destroy(); // destroying the gaia
-		// nifty.getCurrentScreen().endScreen(new EndNotify() {
-		// public void perform() {
 		game.enterState(0);
-		// }
-		// });
 	}
 
 	public void showGrid() {

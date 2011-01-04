@@ -5,8 +5,6 @@ import car.Vehicle;
 import common.GlobalConstants;
 
 import environment.Gaia;
-import environment.IWayPoint;
-import environment.VehicleWayPoint;
 import environment.WayPointManager;
 
 public class Simulator implements IEventTarget<CrashEvent> {
@@ -38,10 +36,12 @@ public class Simulator implements IEventTarget<CrashEvent> {
 	}
 
 	public void startSimulation(long timestamp, double factor) {
+		EventQueue.reset();
 		this.startTime = timestamp;
 		GlobalConstants.getInstance().setInitialTimestamp(timestamp);
 		this.lastIteration = 0;
 		GlobalConstants.getInstance().setTimeFactor(factor);
+		
 	}
 
 	public synchronized void update(long timestamp) throws Exception {
