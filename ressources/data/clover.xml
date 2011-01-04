@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<world >
+	<road id="1" startX="120" startY="0">
+		<leftlanes>
+			<lane id="1" width="1"/>
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="1" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endX="180" endY="0" />
+			<roadsegment order="2" startX="200" startY="20" endX="200" endY="80" />
+		</roadsegments>
+	</road>
+	<road id="2" startX="200" startY="120">
+		<leftlanes>
+			<lane id="1" width="1"/>
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="1" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" startY="0" endY="60" endX="0" />
+			<roadsegment order="2" startX="-20" startY="80" endY="80" endX="-80"></roadsegment>
+		</roadsegments>
+	</road>
+	<road id="3" startX="80" startY="200">
+		<leftlanes>
+			<lane id="1" width="1"/>
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="1"/>
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" endX="-60" startY="0" endY="0" />
+			<roadsegment order="2" startX="-80" endX="-80" startY="-20" endY="-80" />
+		</roadsegments>
+	</road>
+	<road id="4" startX="0" startY="80">
+		<leftlanes>
+			<lane id="1" width="1"/>
+		</leftlanes>
+		<rightlanes>
+			<lane id="2" width="1" />
+		</rightlanes>
+		<roadsegments>
+			<roadsegment order="1" startX="0" endX="0" startY="0" endY="-60" />
+			<roadsegment order="2" startX="20" endX="80" startY="-80" endY="-80" />
+		</roadsegments>
+	</road>
+	<junction id="1" type="CrossRoad">
+		<roads>
+			<road id="1" />
+			<road id="2" />
+		</roads>
+	</junction>
+	<junction id="2" type="CrossRoad">
+		<roads>
+			<road id="2" />
+			<road id="3" />
+		</roads>
+	</junction>
+	<junction id="3" type="CrossRoad">
+		<roads>
+			<road id="3" />
+			<road id="4" />
+		</roads>
+	</junction>
+	<junction id="4" type="CrossRoad">
+		<roads>
+			<road id="4" />
+			<road id="1" />
+		</roads>
+	</junction>
+</world>
