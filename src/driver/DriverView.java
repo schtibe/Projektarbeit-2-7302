@@ -179,7 +179,6 @@ public class DriverView implements IDriverView {
 		return aBoundary;
 	}
 
-
 	@Override
 	public IVector getBBoundary() {
 		calculateBoundaries();
@@ -194,8 +193,9 @@ public class DriverView implements IDriverView {
 	
 	/**
 	 * calculates the boundaries of our view
+	 * 
+	 * @TODO The distance is wrong
 	 */
-
 	private void calculateBoundaries() {
 		if(boundaryCalculated){
 			return ;

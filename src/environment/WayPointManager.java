@@ -99,6 +99,7 @@ public class WayPointManager implements IPlacableManager {
 	 * returns a list of way points contained in the driver view's hit box
 	 * @param view
 	 * @return list of way points
+	 * @TODO Use the calculation of the driver view
 	 */
 	public List<IPlacable> findWayPoints(IDriverView view) {
 		float halfViewAngle = (view.getAngle()/2);

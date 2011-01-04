@@ -182,9 +182,7 @@ public class Animus implements IObserver {
 	 */
 	public void handleWayPoint (JunctionWayPoint waypoint) {
 		if (this.vehicle.getLanes().size() < Vehicle.queueSize) {
-			//System.out.println("handling junction waypoint");
  			if (this.checkWayPoint(vehicle, waypoint)) {
- 				//System.out.println("decision making for direction");
 				List<IJunctionDecision> decisions = 
 					waypoint.getJunction().getPossibilities(waypoint.getLane());
 				IJunctionDecision decision = decisions.get((int)Math.round(Math.random()*(decisions.size()-1)));

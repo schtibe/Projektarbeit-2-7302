@@ -82,17 +82,11 @@ public abstract class Vehicle implements IVehicle, IObservable {
 	 */
 	protected DriverView driverView;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public VehicleDimension getDimension() {
 		return dimension;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void setDimension(VehicleDimension dimension) {
 		this.dimension = dimension;
@@ -116,11 +110,6 @@ public abstract class Vehicle implements IVehicle, IObservable {
 	 */
 	protected float drivenLaneDistance = 0;
 
-	
-
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public float getSpeed() {
 		return this.speed;
@@ -231,31 +220,22 @@ public abstract class Vehicle implements IVehicle, IObservable {
 		this.acceleration = this.calculateAcceleration(acceleration);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public ILane getLane() {
 		return this.lanes.peek();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public IVector getPosition() {
 		return new Vector(new float[] { this.position.getComponent(0),
 				this.position.getComponent(1) });
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void updatePosition(float timestep) throws CarCannotReverseException {
 		if (!freezed) {
 			this.adjustSpeed(timestep);
-			this.drivenLaneDistance += (this.speed / 36)
+			this.drivenLaneDistance += (this.speed / 36) // this seems weird?
 					* GlobalConstants.getInstance().getScale();
 			try {
 				this.position = this.lanes.peek().getPositionOnLane(
@@ -348,41 +328,26 @@ public abstract class Vehicle implements IVehicle, IObservable {
 		this.lanes.add(lane);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void setLanes(List<ILane> lanes) {
 		this.lanes.addAll(lanes);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Queue<ILane> getLanes() {
 		return this.lanes;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public IVector getDirection() {
 		return this.direction;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public IDriverView getDriverView() {
 		return this.driverView;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	/*
 	 * @Override public void setAnimus(Animus animus) { this.animus = animus; }
 	 */
