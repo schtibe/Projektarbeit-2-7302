@@ -131,4 +131,6 @@ public interface IVehicle extends IEventTarget<VehicleEvent> {
 	//public void setAnimus(Animus animus);
 	
 	boolean isFreezed();
+	
+	void removeWaypoint();
 }

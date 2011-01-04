@@ -112,4 +112,5 @@ public class JunctionWayPoint extends WayPoint {
 	public String toString(){
 		return "type: junction\ncoordinates: "+this.position.toString();
 	}
+
 }

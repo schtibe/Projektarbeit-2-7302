@@ -15,4 +15,5 @@ public interface IPlacable {
 	 */
 	
 	float getYPos();
+
 }

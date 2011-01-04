@@ -384,4 +384,8 @@ public abstract class Vehicle implements IVehicle, IObservable {
 	public boolean isFreezed(){
 		return freezed;
 	}
+	
+	public void removeWaypoint(){
+		this.wayPoint = null;
+	}
 }

@@ -93,6 +93,16 @@ public class WayPointManager implements IPlacableManager {
 	public void remove(IPlacable placable) throws Exception{
 		root.remove(placable);
 		waypoints.remove(placable);
+		try{
+			List<IPlacable> found = root.find(placable.getXPos(), placable.getYPos());
+			for (IPlacable candidate:found){
+				if (candidate == placable){
+					System.out.println("motherfucker!!!!!!!!!!!!!!!!");
+				}
+			}
+		}catch (Exception ex){
+			System.out.println("finding casted an exception:"+ex);
+		}
 	}
 
 	/**
@@ -201,5 +211,9 @@ public class WayPointManager implements IPlacableManager {
 	
 	public List<IWayPoint> getWayPoints() {
 		return this.waypoints;
+	}
+	
+	public List<IPlacable> toList(){
+		return root.toList();
 	}
 }

@@ -1,5 +1,7 @@
 package environment;
 
+import java.util.List;
+
 public interface IPlacableManager {
 	
 	/**
@@ -26,4 +28,6 @@ public interface IPlacableManager {
 	 */
 	
 	public boolean move(IMovable movable,float newX, float newY);
+	
+	public List<IPlacable> toList();
 }

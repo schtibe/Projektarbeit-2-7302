@@ -5,6 +5,9 @@ import car.Vehicle;
 import common.GlobalConstants;
 
 import environment.Gaia;
+import environment.IPlacable;
+import environment.IWayPoint;
+import environment.VehicleWayPoint;
 import environment.WayPointManager;
 
 public class Simulator implements IEventTarget<CrashEvent> {
@@ -66,7 +69,30 @@ public class Simulator implements IEventTarget<CrashEvent> {
 		for (Vehicle vehicle:event.getVehicles()){
 			vehicle.freeze();
 			try{
+				/*
+				System.out.println("----------------------------in there before crash:");
+				for(IWayPoint waypoint: WayPointManager.getInstance().getWayPoints()){
+					if (waypoint instanceof VehicleWayPoint){
+						System.out.println(waypoint.toString());
+					}
+				}
+				*/
 				WayPointManager.getInstance().remove(vehicle.getWayPoint());
+				vehicle.removeWaypoint();
+				/*
+				System.out.println("*****************************in there after crash:");
+				for(IWayPoint waypoint: WayPointManager.getInstance().getWayPoints()){
+					if (waypoint instanceof VehicleWayPoint){
+						System.out.println(waypoint.toString());
+					}
+				}
+				System.out.println("++++++++++++++++++++++++++++++in quad tree:");
+				for (IPlacable placable : WayPointManager.getInstance().toList()){
+					if (placable instanceof VehicleWayPoint){
+						System.out.println(placable.toString());
+					}
+				}
+				*/
 			}catch (Exception ex){
 				System.out.println(ex);
 			}

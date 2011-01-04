@@ -1,5 +1,7 @@
 package environment;
 
+import java.util.List;
+
 import gui.IUIAdapterWayPoint;
 import gui.UIElementFactory;
 
@@ -72,4 +74,5 @@ public class SpeedWayPoint extends SignWayPoint {
 	public String toString(){
 		return "type: speed sign\ncoordinates: "+this.position.toString(); 
 	}
+
 }

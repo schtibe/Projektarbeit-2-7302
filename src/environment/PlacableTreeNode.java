@@ -1,7 +1,9 @@
 package environment;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import common.Vector;
 
@@ -17,7 +19,7 @@ public class PlacableTreeNode implements IPlacableManager {
 	 * list of items on this node
 	 */
 	
-	private List<IPlacable> items;
+	private Set<IPlacable> items;
 	
 	/**
 	 * instance variables
@@ -45,7 +47,7 @@ public class PlacableTreeNode implements IPlacableManager {
 			this.halfX = maxX/2;
 			this.halfY = maxY/2;
 		}else{
-			this.items = new ArrayList<IPlacable>();
+			this.items = new HashSet<IPlacable>();
 		}
 		this.maxDepth = maxDepth;
 	}
@@ -171,7 +173,7 @@ public class PlacableTreeNode implements IPlacableManager {
 				return this.subNodes[index].find(xPos,yPos);
 			}
 		}else{
-			return this.items;
+			return new ArrayList<IPlacable> (this.items);
 		}
 		return null;
 	}
@@ -300,10 +302,30 @@ public class PlacableTreeNode implements IPlacableManager {
 			return output;
 		}else{
 			if (this.items != null){
-				return this.items;
+				return new ArrayList<IPlacable> (this.items);
 			}else{
 				return null;
 			}
+		}
+	}
+	
+	public List<IPlacable> toList (){
+		if (this.maxDepth == 0){
+			return new ArrayList<IPlacable> (this.items);
+		}else{
+			List<IPlacable> output = null;
+			if (this.subNodes != null){
+				for (IPlacableManager child:this.subNodes){
+					if (child!=null){
+						if (output != null){
+							output.addAll(child.toList());
+						}else{
+							output = child.toList();
+						}
+					}
+				}
+			}
+			return output;
 		}
 	}
 }

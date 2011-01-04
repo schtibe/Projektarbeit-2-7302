@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
-import com.sun.jmx.snmp.Timestamp;
 
 import simulation.CrashEvent;
 import simulation.DriverEvent;
@@ -71,6 +70,9 @@ public class Animus implements IObserver {
 	 * @throws Exception
 	 */
 	public void assessSituation (DriverEvent event) throws Exception{
+		if (vehicle.isFreezed()){
+			return;
+		}
 		this.event = event;
 		this.noVehicles = true;
 		// the vehicle and the junction can only influence the deceleration
