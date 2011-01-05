@@ -42,29 +42,18 @@ public class UIAdapterCarWayPoint extends UIAdapter<CarWayPoint> implements IUIA
 	public Shape getShape() {
 		return this.shape;
 	}
-
-	@Override
-	public void drawString(TrueTypeFont ttf) {
-		// TODO Auto-generated method stub
-
-	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean doDraw() {
 		return true;
 	}
 
-	
 	@Override
-	public void draw(Graphics g) {
+	public void draw(Graphics g, TrueTypeFont ttf) {
 		if (this.doDraw()) {
 			g.setColor(Color.blue);
 			g.draw(this.getShape());
 		}
 		
 	}
-
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Ellipse;
 import org.newdawn.slick.geom.Path;
 
@@ -175,7 +176,7 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 
 	
 	@Override
-	public void draw(Graphics g) {
+	public void draw(Graphics g, TrueTypeFont ttf) {
 		g.setColor(GlobalConstants.getInstance().getPathColor());
 		g.draw(this.getPath());
 	}

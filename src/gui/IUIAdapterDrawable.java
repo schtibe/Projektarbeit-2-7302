@@ -1,6 +1,7 @@
 package gui;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.TrueTypeFont;
 
 public interface IUIAdapterDrawable {
 	/**
@@ -8,5 +9,5 @@ public interface IUIAdapterDrawable {
 	 * 
 	 * @TODO Probably also put the ttf there
 	 */
-	public void draw(Graphics g);
+	public void draw(Graphics g, TrueTypeFont ttf);
 }

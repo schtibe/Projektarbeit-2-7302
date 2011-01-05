@@ -11,7 +11,6 @@ import common.IVector;
 import environment.SpeedWayPoint;
 
 public class UIAdapterSpeedWayPoint extends UIAdapter<SpeedWayPoint> implements IUIAdapterSpeedWayPoint {
-	
 	private Rectangle shape;
 
 	public UIAdapterSpeedWayPoint(
@@ -32,28 +31,16 @@ public class UIAdapterSpeedWayPoint extends UIAdapter<SpeedWayPoint> implements 
 		); 
 	}
 	
-
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Shape getShape() {
 		return this.shape;
 	}
 	
-	/**
-	 * Return the speed limit
-	 */
 	@Override
 	public String toString() {
 		return "" + this.mainObject.getSpeedLimit();
 	}
 
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public void drawString(TrueTypeFont ttf) {
 		if (GUIConstants.getInstance().showSpeedWaypointPosition()) {
 			ttf.drawString(this.getShape().getCenterX(),
@@ -68,10 +55,11 @@ public class UIAdapterSpeedWayPoint extends UIAdapter<SpeedWayPoint> implements 
 	}
 
 	@Override
-	public void draw(Graphics g) {
+	public void draw(Graphics g, TrueTypeFont ttf) {
 		if (this.doDraw()) {
 			g.setColor(Color.red);
 			g.draw(this.getShape());
+			this.drawString(ttf);
 		}
 	}
 }
