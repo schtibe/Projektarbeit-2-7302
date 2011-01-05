@@ -29,19 +29,19 @@ public class LaneSegmentTest extends TestCase {
 
 			@Override
 			protected float calculateLength() {
-				// TODO Auto-generated method stub
+				
 				return 6;
 			}
 
 			@Override
 			public IVector getVehiclePosition(float segmentLength) {
-				// TODO Auto-generated method stub
+				
 				return new Vector(new float[]{15,15});
 			}
 
 			@Override
 			public IVector[] getBezierPoints() {
-				// TODO Auto-generated method stub
+				
 				return null;
 			}
 

@@ -3,6 +3,7 @@ package gui;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
+// import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
@@ -36,33 +37,27 @@ public class UIAdapterJunctionWayPoint extends UIAdapter<IWayPoint> implements I
 		this.shape.setCenterY(this.mainObject.getYPos() * scale + offsetVector.getComponent(1)); 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Shape getShape() {
 		return this.shape;
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String toString() {
 		return this.mainObject.toString();
 	}
 	
-	
-	@Override
-	public void drawString(TrueTypeFont ttf) {
+	/**
+	 * Draw the string 
+	 * @param ttf
+	 */
+	private void drawString(TrueTypeFont ttf) {
 		if (GUIConstants.getInstance().showJunctionWaypointPosition()) {
 			ttf.drawString(this.getShape().getCenterX(),
 					   this.getShape().getCenterY(), 
 					   this.toString(),Color.orange);
 		}
 	}
-
-	
 	
 	@Override
 	public boolean doDraw() {
@@ -70,10 +65,11 @@ public class UIAdapterJunctionWayPoint extends UIAdapter<IWayPoint> implements I
 	}
 
 	@Override
-	public void draw(Graphics g) {
+	public void draw(Graphics g, TrueTypeFont ttf) {
 		if (this.doDraw()) {
 			g.setColor(Color.white);
 			g.draw(this.getShape());
+			this.drawString(ttf);
 		}
 	
 	}

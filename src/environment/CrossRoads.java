@@ -249,7 +249,6 @@ public class CrossRoads implements IJunction {
 	 */
 	@Override
 	public List<ILane> getLeftLanes() {
-		// TODO Auto-generated method stub
 		return new ArrayList<ILane>();
 	}
 
@@ -267,7 +266,6 @@ public class CrossRoads implements IJunction {
 	@Deprecated
 	@Override
 	public List<ILane> getImportantLanes(IDecision decision) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

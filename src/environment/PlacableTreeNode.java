@@ -12,19 +12,16 @@ public class PlacableTreeNode implements IPlacableManager {
 	/**
 	 * set of sub nodes
 	 */
-	
 	private PlacableTreeNode[] subNodes;
 	
 	/**
 	 * list of items on this node
 	 */
-	
 	private Set<IPlacable> items;
 	
 	/**
 	 * instance variables
 	 */
-	
 	private float minX;
 	private float minY;
 	private float halfX;
@@ -39,7 +36,6 @@ public class PlacableTreeNode implements IPlacableManager {
 	 * @param maxY
 	 * @param maxDepth
 	 */
-	
 	public PlacableTreeNode (float minX, float minY, float maxX,float maxY,int maxDepth){
 		this.minX = minX;
 		this.minY = minY;
@@ -52,10 +48,7 @@ public class PlacableTreeNode implements IPlacableManager {
 		this.maxDepth = maxDepth;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	
+
 	@Override
 	public void add(IPlacable placable){
 		if (this.maxDepth > 0){
@@ -85,10 +78,6 @@ public class PlacableTreeNode implements IPlacableManager {
 			this.items.add(placable);
 		}
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
 	
 	@Override
 	public boolean move(IMovable movable, float newX, float newY) {
@@ -130,10 +119,6 @@ public class PlacableTreeNode implements IPlacableManager {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	
 	@Override
 	public void remove(IPlacable placable) throws Exception{
 		if (this.maxDepth > 0){
@@ -159,7 +144,6 @@ public class PlacableTreeNode implements IPlacableManager {
 	 * @param yPos
 	 * @return
 	 */
-	
 	public List<IPlacable> find(float xPos,float yPos){
 		if (this.maxDepth > 0){
 			int index =0;

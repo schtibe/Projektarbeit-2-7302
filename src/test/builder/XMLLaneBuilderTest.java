@@ -219,7 +219,6 @@ public class XMLLaneBuilderTest {
 
 					@Override
 					public IVector getPointOnCurve(float middle) {
-						// TODO Auto-generated method stub
 						return null;
 					}
 				};
@@ -396,7 +395,7 @@ public class XMLLaneBuilderTest {
 
 							@Override
 							public IVector getPointOnCurve(float middle) {
-								// TODO Auto-generated method stub
+								
 								return null;
 							}
 
@@ -488,7 +487,7 @@ public class XMLLaneBuilderTest {
 
 							@Override
 							public IVector getPointOnCurve(float middle) {
-								// TODO Auto-generated method stub
+								
 								return null;
 							}
 						}
@@ -599,7 +598,7 @@ public class XMLLaneBuilderTest {
 
 						@Override
 						public IVector getPointOnCurve(float middle) {
-							// TODO Auto-generated method stub
+							
 							return null;
 						}
 
@@ -691,7 +690,7 @@ public class XMLLaneBuilderTest {
 
 						@Override
 						public IVector getPointOnCurve(float middle) {
-							// TODO Auto-generated method stub
+							
 							return null;
 						}
 					}
@@ -792,7 +791,7 @@ public class XMLLaneBuilderTest {
 
 						@Override
 						public IVector getPointOnCurve(float middle) {
-							// TODO Auto-generated method stub
+							
 							return null;
 						}
 
@@ -884,7 +883,7 @@ public class XMLLaneBuilderTest {
 
 						@Override
 						public IVector getPointOnCurve(float middle) {
-							// TODO Auto-generated method stub
+							
 							return null;
 						}
 					}

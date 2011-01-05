@@ -2,6 +2,9 @@ package simulation;
 
 /**
  * Events for the simulator
+ * 
+ * This class is currently not in use
+ * @deprecated
  */
 public class SimulatorEvent extends Event<SimulatorEvent> {
 	/**
@@ -14,12 +17,8 @@ public class SimulatorEvent extends Event<SimulatorEvent> {
 		super(timestamp, target);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void handleEvent() throws Exception {
-		// TODO Auto-generated method stub
 
 	}
 }

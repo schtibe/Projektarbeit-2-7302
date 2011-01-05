@@ -101,8 +101,6 @@ public class Animus implements IObserver {
 		}
 		
 		// save the distance of the nearest vehicle for the next assessment
-		// TODO: this should probably consider the vehicles too? What if
-		// another vehicle comes into the picture that is nearer
 		nearestVehicleDistanceOld = nearestVehicleDistance;
 		
 		float acceleration = 0;

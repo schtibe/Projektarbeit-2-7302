@@ -7,26 +7,22 @@ public class Vector implements IVector {
 	/**
 	 * The vectors components
 	 */
-
 	private float[] components;
 
 	/**
 	 * Is the vectors length already calculated
 	 */
-
 	private boolean lengthCalculated = false;
 
 	/**
 	 * The vectors length
 	 */
-
 	private float length;
 
 	/**
 	 * @param array
 	 *            of floats, the vectors components
 	 */
-
 	public Vector(float[] components) {
 		if (components != null) {
 			if (components.length == 2) {
@@ -57,7 +53,6 @@ public class Vector implements IVector {
 	 *            vector to be added to this vector
 	 * @return a vector as a result of the operation
 	 */
-
 	@Override
 	public Vector add(IVector vector) {
 		return new Vector(new float[] { components[0] + vector.getComponent(0),
@@ -73,7 +68,6 @@ public class Vector implements IVector {
 	 *         corresponding 2d vector is (0,0) hence the function will always
 	 *         return (0,0)
 	 */
-
 	@Override
 	public Vector cross(IVector vector) {
 		return new Vector(new float[] { 0, 0 });
@@ -84,7 +78,6 @@ public class Vector implements IVector {
 	 *            vector to calculate the dotproduct with this vector
 	 * @return a float as a result of the operation
 	 */
-
 	@Override
 	public float dot(IVector vector) {
 		float scalar = 0;
@@ -99,7 +92,6 @@ public class Vector implements IVector {
 	 *            of a component of the vector
 	 * @return the components value
 	 */
-
 	@Override
 	public float getComponent(int index) {
 		if (index >= this.components.length) {
@@ -112,7 +104,6 @@ public class Vector implements IVector {
 	/**
 	 * @return the length of the vector
 	 */
-
 	@Override
 	public float norm() {
 		if (!lengthCalculated) {
@@ -130,7 +121,6 @@ public class Vector implements IVector {
 	 *            vector to be subtracted from this vector
 	 * @return a vector as a result of the operation
 	 */
-
 	@Override
 	public Vector sub(IVector vector) {
 		return new Vector(new float[] { components[0] - vector.getComponent(0),
@@ -140,7 +130,6 @@ public class Vector implements IVector {
 	/**
 	 * @return a vector of the same direction with the length 1
 	 */
-
 	@Override
 	public Vector normalize() {
 		float[] newComponents = new float[this.components.length];
@@ -153,7 +142,6 @@ public class Vector implements IVector {
 	/**
 	 * @return a clone of this vector
 	 */
-
 	@Override
 	public Vector clone() {
 		return new Vector(this.components);
@@ -164,7 +152,6 @@ public class Vector implements IVector {
 	 *            to multiply this vector with
 	 * @return a scaled copy of the actual vector
 	 */
-
 	@Override
 	public Vector multiply(float factor) {
 		float[] newComponents = new float[this.components.length];
@@ -184,10 +171,9 @@ public class Vector implements IVector {
 
 	/**
 	 * @param an
-	 *            angle in the radians notation [0,2*PI]
+	 *            angle in the radiant notation [0,2*PI]
 	 * @return a vector rotated by the input angle
 	 */
-
 	@Override
 	public Vector rotate(float angle) {
 		float newAngle = this.getAngle() + angle;
@@ -197,13 +183,11 @@ public class Vector implements IVector {
 	}
 
 	/**
-	 * 
-	 * @return an angle in rad
+	 * Return the angle to the X axis 
+	 * @return an angle in radiant
 	 */
-
 	@Override
 	public float getAngle() {
-		// TODO Auto-generated method stub
 		IVector newThis = this.normalize();
 		IVector xAxis = new Vector(new float[] { 1, 0 });
 		float cosAlpha = newThis.dot(xAxis);
@@ -216,10 +200,6 @@ public class Vector implements IVector {
 			return (float) (Math.PI * 2) - angle;
 		}
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 
 	@Override
 	public int compareTo(IVector arg0) {

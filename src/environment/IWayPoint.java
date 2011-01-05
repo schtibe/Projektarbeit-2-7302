@@ -6,7 +6,7 @@ import common.IVector;
 
 import driver.Animus;
 
-public interface IWayPoint extends Comparable<IWayPoint>,IPlacable {
+public interface IWayPoint extends IPlacable {
 	
 	/**
 	 * return the lane to which the way point belongs

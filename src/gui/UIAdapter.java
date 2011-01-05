@@ -8,8 +8,7 @@ public abstract class UIAdapter<E> implements IUIAdapter<E> {
 	
 	E mainObject;
 	
-	public UIAdapter(E mainObject) throws Exception
-	{
+	public UIAdapter(E mainObject) throws Exception {
 		if(mainObject != null) {
 			this.mainObject=mainObject;
 		} else {

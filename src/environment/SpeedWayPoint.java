@@ -1,7 +1,5 @@
 package environment;
 
-import java.util.List;
-
 import gui.IUIAdapterWayPoint;
 import gui.UIElementFactory;
 
@@ -26,15 +24,6 @@ public class SpeedWayPoint extends SignWayPoint {
 	 */
 	public int getSpeedLimit() {
 		return this.speedLimit;
-	}
-
-	/**
-	 * compare two way points
-	 */
-	@Override
-	public int compareTo(IWayPoint o) {
-		// todo, maybe
-		return 0;
 	}
 
 	/**

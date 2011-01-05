@@ -2,7 +2,6 @@ package common;
 
 import org.newdawn.slick.Color;
 
-// TODO probably these things should come from a configuration file
 public final class GlobalConstants {
 
 	/**

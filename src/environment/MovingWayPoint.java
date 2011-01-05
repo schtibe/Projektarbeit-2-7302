@@ -1,7 +1,5 @@
 package environment;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import common.IVector;
 
 public abstract class MovingWayPoint implements IWayPoint,IMovable {
@@ -10,11 +8,6 @@ public abstract class MovingWayPoint implements IWayPoint,IMovable {
 
 	public MovingWayPoint(IVector position) {
 		this.position = position;
-	}
-
-	@Override
-	public int compareTo(IWayPoint arg0) {
-		throw new NotImplementedException();
 	}
 
 	/**

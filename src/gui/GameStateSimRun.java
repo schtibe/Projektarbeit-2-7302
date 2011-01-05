@@ -167,7 +167,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 		for (IUIAdapterTrafficCarrier<?> road : GameCache.getInstance()
 				.getGAIA().getRoads()) {
 			for (IUIAdapterLane<?> lane : road.getLanes()) {
-				lane.draw(g);			
+				lane.draw(g, ttf);			
 			}
 		}
 	}
@@ -193,8 +193,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 	 */
 	private void drawWaypoints(Graphics g) {
 		for(IUIAdapterWayPoint<?> wayPoint : GameCache.getInstance().getGAIA().getWaypoints()) {
-			wayPoint.draw(g);
-			wayPoint.drawString(ttf);
+			wayPoint.draw(g, ttf);
 		}
 	}
 
