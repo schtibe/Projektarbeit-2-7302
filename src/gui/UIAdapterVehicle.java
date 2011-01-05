@@ -3,6 +3,7 @@ package gui;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Path;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
@@ -141,6 +142,18 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle> implements IUIAdapterV
 	 * @return
 	 */
 	protected Shape getDriverViewBoundingBox() {
+		
+		IDriverView view = this.mainObject.getDriverView();
+		IVector position = view.getPosition();
+		Circle path = new Circle(
+			position.getComponent(0)*scale+this.offsetVector.getComponent(0),
+			position.getComponent(1)*scale+this.offsetVector.getComponent(1),
+			view.getDistance()*scale
+		);
+		
+		/**
+		 *@deprecated 
+		 *
 		IDriverView view = this.mainObject.getDriverView();
 		IVector position = view.getPosition();
 		
@@ -170,8 +183,9 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle> implements IUIAdapterV
 				position.getComponent(0) * scale + oX, 
 				position.getComponent(1) * scale + oY
 		);
-		
+		*/
 		return path;
+		
 	}
 
 	

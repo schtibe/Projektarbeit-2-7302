@@ -38,5 +38,10 @@ public class Rectangle implements IRectangle {
 		}
 		return height;
 	}
+	
+	@Override
+	public String toString (){
+		return bottomLeft.toString()+":"+topRight.toString();
+	}
 
 }

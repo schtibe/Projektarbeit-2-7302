@@ -116,7 +116,11 @@ public class DriverViewCircleSector implements IDriverView {
 	public IRectangle getBoundingBox() {
 		IVector topRight = new Vector (new float[]{1,1});
 		IVector bottomLeft = new Vector (new float[]{-1,-1});
-		return new Rectangle(bottomLeft.normalize().multiply(radius),topRight.normalize().multiply(radius));
+		IRectangle bbox = new Rectangle(
+			this.position.add(bottomLeft.normalize().multiply(radius)),
+			this.position.add(topRight.normalize().multiply(radius))
+		);
+		return bbox;
 	}
 
 }
