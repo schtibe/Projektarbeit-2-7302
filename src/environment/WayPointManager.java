@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Stack;
 
 import common.GlobalConstants;
+import common.IRectangle;
 import common.IVector;
 import common.Vector;
 
@@ -33,7 +34,7 @@ public class WayPointManager implements IPlacableManager {
 
 	/**
 	 * get the instance reference
-	 * @return refrence to singleton instance
+	 * @return reference to singleton instance
 	 * @throws Exception
 	 */
 	
@@ -109,25 +110,14 @@ public class WayPointManager implements IPlacableManager {
 	 * returns a list of way points contained in the driver view's hit box
 	 * @param view
 	 * @return list of way points
-	 * @TODO Use the calculation of the driver view
 	 */
 	public List<IPlacable> findWayPoints(IDriverView view) {
-		float halfViewAngle = (view.getAngle()/2);
-		
-		IVector upperBound = (view.getDirection().rotate(halfViewAngle)).normalize().multiply(view.getDistance());//.add(view.getPosition());
-		IVector lowerBound = (view.getDirection().rotate(-halfViewAngle)).normalize().multiply(view.getDistance());//.add(view.getPosition());
-
-		upperBound = upperBound.add(view.getPosition());
-		lowerBound = lowerBound.add(view.getPosition());
-
-		IVector[] xtremes = getMinMaxVectors(new IVector[]{view.getPosition(),upperBound,lowerBound});
-		IVector min = xtremes[0];
-		IVector max = xtremes[1];//.sub(min);
+		IRectangle bbox = view.getBoundingBox();
 		List<IPlacable> found = root.findInArea(
-				min.getComponent(0), 
-				min.getComponent(1), 
-				max.getComponent(0), 
-				max.getComponent(1)
+				bbox.getBottomLeft().getComponent(0), 
+				bbox.getBottomLeft().getComponent(1), 
+				bbox.getTopRight().getComponent(0), 
+				bbox.getTopRight().getComponent(1)
 		);
 		
 		List<IPlacable> ret = new ArrayList<IPlacable>();
@@ -146,6 +136,7 @@ public class WayPointManager implements IPlacableManager {
 	 * creates the bounding box of a given vector array (min and max values)
 	 * @param input
 	 * @return
+	 * @deprecated
 	 */
 	
 	private IVector[] getMinMaxVectors (IVector[] input){

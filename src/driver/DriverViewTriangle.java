@@ -1,10 +1,12 @@
 package driver;
 
+import common.IRectangle;
 import common.IVector;
 import common.LinearCombination;
+import common.Rectangle;
 import common.Vector;
 
-public class DriverView implements IDriverView {
+public class DriverViewTriangle implements IDriverView {
 	/**
 	 * The properties of the view
 	 */
@@ -22,7 +24,7 @@ public class DriverView implements IDriverView {
 	/**
 	 * constructor, a driver view can be empty on construction time
 	 */
-	public DriverView(){
+	public DriverViewTriangle(){
 		
 	}
 	
@@ -31,7 +33,7 @@ public class DriverView implements IDriverView {
 	 * @param direction
 	 * @param position
 	 */
-	public DriverView(IVector direction,IVector position){
+	public DriverViewTriangle(IVector direction,IVector position){
 		this.direction = direction;
 		this.position = position;
 	}
@@ -42,7 +44,7 @@ public class DriverView implements IDriverView {
 	 * @param distance
 	 */
 	
-	public DriverView(float angle, float distance){
+	public DriverViewTriangle(float angle, float distance){
 		this.angle = angle;
 		this.distance = distance;
 	}
@@ -55,7 +57,7 @@ public class DriverView implements IDriverView {
 	 * @param distance
 	 */
 	
-	private DriverView(IVector direction, IVector position, float angle, float distance){
+	private DriverViewTriangle(IVector direction, IVector position, float angle, float distance){
 		this.direction = direction;
 		this.position = position;
 		this.angle = angle;
@@ -142,7 +144,7 @@ public class DriverView implements IDriverView {
 	
 	@Override
 	public IDriverView clone (){
-		return new DriverView(this.direction,this.position,this.angle,this.distance);
+		return new DriverViewTriangle(this.direction,this.position,this.angle,this.distance);
 	}
 	
 	/**
@@ -173,20 +175,17 @@ public class DriverView implements IDriverView {
 		return ratio >= boundaryRatio && result.getLambda() > 0 && result.getLambda() <=1 && result.getMu() > 0 && result.getMu() <= 1;
 	}
 
-	@Override
-	public IVector getABoundary() {
+	private IVector getABoundary() {
 		calculateBoundaries();
 		return aBoundary;
 	}
 
-	@Override
-	public IVector getBBoundary() {
+	private IVector getBBoundary() {
 		calculateBoundaries();
 		return bBoundary;
 	}
 
-	@Override
-	public IVector getCBoundary() {
+	private IVector getCBoundary() {
 		calculateBoundaries();
 		return cBoundary;
 	}
@@ -207,6 +206,82 @@ public class DriverView implements IDriverView {
 		.normalize().multiply(this.distance);
 		
 		bBoundary = cBoundary.sub(aBoundary);
+	}
+
+	@Override
+	public IRectangle getBoundingBox() {
+		// @TODO implement in corresponding DriverView instance
+		
+		IVector[] points = new IVector[2];
+		
+		points[0] = this.position.add(getCBoundary());
+		points[1] = this.position.add(getABoundary());
+		
+		
+		float maxX = this.position.getComponent(0);
+		float maxY = this.position.getComponent(1);
+		float minX = this.position.getComponent(0);
+		float minY = this.position.getComponent(1);
+		
+		for (int i = 0;i<points.length;i++){
+			float xComp = points[i].getComponent(0);
+			if (xComp > maxX){
+				maxX = xComp;
+			}
+			if (xComp < minX){
+				minX = xComp;
+			}
+			float yComp = points[i].getComponent(1);
+			if (yComp > maxY){
+				maxY = yComp;
+			}
+			if (yComp < minY){
+				minY = yComp;
+			}
+		}
+		return new Rectangle (new Vector(new float[]{minX,minY}), new Vector(new float[]{maxX,maxY}));
+		
+		//old stuff
+		
+		/*
+		float halfViewAngle = (view.getAngle()/2);
+		
+		IVector upperBound = (view.getDirection().rotate(halfViewAngle)).normalize().multiply(view.getDistance());//.add(view.getPosition());
+		IVector lowerBound = (view.getDirection().rotate(-halfViewAngle)).normalize().multiply(view.getDistance());//.add(view.getPosition());
+
+		upperBound = upperBound.add(view.getPosition());
+		lowerBound = lowerBound.add(view.getPosition());
+
+		IVector[] xtremes = getMinMaxVectors(new IVector[]{view.getPosition(),upperBound,lowerBound});
+		IVector min = xtremes[0];
+		IVector max = xtremes[1];//.sub(min);
+		
+		//min max stuff
+		/*
+		IVector min = input[0].clone();
+		IVector max = input[0].clone();
+		for (IVector vec : input){
+			float minX = min.getComponent(0);
+			float minY = min.getComponent(1);
+			float maxX = max.getComponent(0);
+			float maxY = max.getComponent(1);
+			if (vec.getComponent(0) < minX){
+				minX = vec.getComponent(0);
+			}
+			if (vec.getComponent(1)<minY){
+				minY = vec.getComponent(1);
+			}
+			min = new Vector (new float[]{minX,minY});
+			if (vec.getComponent(0) > maxX){
+				maxX = vec.getComponent(0);
+			}
+			if (vec.getComponent(1) > maxY){
+				maxY = vec.getComponent(1);
+			}
+			max = new Vector(new float[]{maxX,maxY});
+		}
+		return new IVector[]{min,max};
+		*/
 	}
 	
 }
