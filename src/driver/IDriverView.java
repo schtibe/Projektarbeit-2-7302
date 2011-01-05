@@ -1,5 +1,6 @@
 package driver;
 
+import common.IRectangle;
 import common.IVector;
 
 public interface IDriverView {
@@ -68,20 +69,7 @@ public interface IDriverView {
 	public boolean checkWayPoint(IVector position);
 	
 	/**
-	 * Return the boundary of the view to the right
-	 * @return
+	 * Return a Rectangle that represents the bounding box of the DriverView
 	 */
-	public IVector getABoundary();
-	
-	/**
-	 * Return the boundary of the view that is on top of the triangle
-	 * @return
-	 */
-	public IVector getBBoundary();
-	
-	/**
-	 * Return the boundary of the view that is on the left
-	 * @return
-	 */
-	public IVector getCBoundary();
+	public IRectangle getBoundingBox();
 }

@@ -13,7 +13,7 @@ import common.IObserver;
 import common.IVector;
 import common.Vector;
 
-import driver.DriverView;
+import driver.DriverViewCircleSector;
 import driver.IDriverView;
 import environment.ILane;
 import environment.IMovable;
@@ -80,7 +80,7 @@ public abstract class Vehicle implements IVehicle, IObservable {
 	 * 
 	 * @TODO probably move this to another place
 	 */
-	protected DriverView driverView;
+	protected IDriverView driverView;
 
 	@Override
 	public VehicleDimension getDimension() {
@@ -170,7 +170,8 @@ public abstract class Vehicle implements IVehicle, IObservable {
 		this.initializeDirection();
 		this.createWayPoint();
 
-		this.driverView = new DriverView(this.direction.normalize(),
+		//this.driverView = new DriverViewTriangle(this.direction.normalize(),this.position);
+		this.driverView = new DriverViewCircleSector(this.direction.normalize(),
 				this.position);
 	}
 

@@ -10,7 +10,7 @@ import org.junit.Test;
 import common.IVector;
 import common.Vector;
 
-import driver.DriverView;
+import driver.DriverViewTriangle;
 import environment.IPlacable;
 import environment.SpeedWayPoint;
 import environment.WayPoint;
@@ -26,7 +26,7 @@ public class WayPointManagerTest extends TestCase {
 	IVector upperBoundInPlace;
 	float length = 100;
 	float angle = (float) (Math.PI / 2);
-	DriverView testView;
+	DriverViewTriangle testView;
 
 	@Override
 	@Before
@@ -35,7 +35,7 @@ public class WayPointManagerTest extends TestCase {
 		this.direction = new Vector(new float[] { 20, 20 });
 		this.position = new Vector(new float[] { 10, 10 });
 
-		testView = new DriverView(angle, length);
+		testView = new DriverViewTriangle(angle, length);
 		testView.setPosition(this.position);
 		testView.setDirection(this.direction);
 		float halfViewAngle = testView.getAngle() / 2;
