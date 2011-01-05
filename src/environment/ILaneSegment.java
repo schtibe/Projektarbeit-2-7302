@@ -113,6 +113,9 @@ public interface ILaneSegment<E> {
 
 	/**
 	 * Returns the position on the lane segment based on a vector
+	 * 
+	 * This method is currently not yet in use and therefore not
+	 * really implemented in the according lane segments.
 	 * @param position
 	 * @return
 	 * @throws Exception
