@@ -1,14 +1,16 @@
 package environment;
 
-public abstract class SignWayPoint extends WayPoint {
+import common.IVector;
+
+public abstract class SignWayPoint extends StaticWayPoint {
 	
 	/**
 	 * The position on the lane segment
 	 */
 	private float laneSegmentPosition;
 	
-	public SignWayPoint(ILane lane) {
-		super(lane);
+	public SignWayPoint(ILane lane, IVector position) {
+		super(lane, position);
 	}
 
 	/**

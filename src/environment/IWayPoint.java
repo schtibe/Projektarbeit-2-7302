@@ -34,16 +34,11 @@ public interface IWayPoint extends IPlacable {
 	@Override
 	public String toString();
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public float getXPos();
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public float getYPos();
 
+	public IVector getPosition();
 }

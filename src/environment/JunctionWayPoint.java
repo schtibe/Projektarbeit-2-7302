@@ -7,13 +7,12 @@ import common.IVector;
 
 import driver.Animus;
 
-public class JunctionWayPoint extends WayPoint {
+public class JunctionWayPoint extends StaticWayPoint {
 
 	/**
 	 * instance variables
 	 */
 	protected IJunction junction;
-	protected IVector position;
 	
 	/**
 	 * constructor
@@ -21,10 +20,11 @@ public class JunctionWayPoint extends WayPoint {
 	 * @param junction
 	 */
 	public JunctionWayPoint (ILane lane, IJunction junction) {
-		super(lane);
+		super(lane, null);
 		this.junction = junction;
+		
+		this.setPos();
 	}
-	
 	
 	/**
 	 * return the corresponding junction
@@ -41,28 +41,12 @@ public class JunctionWayPoint extends WayPoint {
 	* the value of 0.8 indicates that you see the junction as early as you have passed 79% percent of the lanes length
 	* before the junction.
 	*/
-	@Override
-	public float getXPos (){
-		if (this.position == null){
-			try{
-				this.position = this.lane.getPositionOnLane((this.lane.getLength()*0.8f));
-			}catch (Exception ex){
-				System.out.println("Lane Length Exception on Junciton Way Point");
-			}
+	protected void setPos() {
+		try {
+			this.position = this.lane.getPositionOnLane((this.lane.getLength()*0.8f));
+		} catch (LaneLengthExceededException e) {
+			e.printStackTrace();
 		}
-		return this.position.getComponent(0);
-	}
-	
-	@Override
-	public float getYPos (){
-		if (this.position == null){
-			try{
-				this.position = this.lane.getPositionOnLane((this.lane.getLength()*0.8f));
-			}catch (Exception ex){
-				System.out.println("Lane Length Exception on Junciton Way Point");
-			}
-		}
-		return this.position.getComponent(1);
 	}
 
 	@Override

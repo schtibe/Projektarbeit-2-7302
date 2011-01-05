@@ -10,12 +10,9 @@ import driver.Animus;
 public class SpeedWayPoint extends SignWayPoint {
 	int speedLimit;
 	
-	IVector position;
-	
 	public SpeedWayPoint(ILane lane, int speedLimit, IVector position) {
-		super(lane);
+		super(lane, position);
 		this.speedLimit = speedLimit;
-		this.position = position;
 	}
 
 	/**
@@ -34,21 +31,6 @@ public class SpeedWayPoint extends SignWayPoint {
 		animus.handleWayPoint(this);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public float getXPos(){
-		return this.position.getComponent(0);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public float getYPos(){
-		return this.position.getComponent(1);
-	}
 	
 	/**
 	 * {@inheritDoc}

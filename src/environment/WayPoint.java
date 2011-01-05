@@ -1,23 +1,34 @@
 package environment;
 
+import car.Vehicle;
+
+import common.GlobalConstants;
+import common.IVector;
+
 
 public abstract class WayPoint implements IWayPoint {
 	/**
-	 * The lane the way point is on
+	 * Return the fuzzy distance to the vehicle
+	 * 
+	 * This adds or subtracts some random error value based on a bias
+	 * value
+	 * @param vehicle
+	 * @return
 	 */
-	protected ILane lane;
-	
-	/**
-	 * Construct the lane
-	 * @param lane
-	 */
-	public WayPoint (ILane lane){
-		this.lane = lane;
-	}
-	
-	@Override
-	public ILane getLane() {
-		return lane;
+	public float getDistance(Vehicle vehicle) {
+		IVector distanceVector = vehicle.getPosition().sub(this.getPosition());
+		float actualLength = distanceVector.norm();
+		
+		float bias = GlobalConstants.getInstance().getDistanceFuzzyBias();
+		float maxError = actualLength * bias;
+		
+		float rand = (float) Math.random();
+		float error = rand * maxError;
+		if (rand > 0.5) {
+			return actualLength + error;
+		} else {
+			return actualLength - error;
+		}
 	}
 	
 	@Override

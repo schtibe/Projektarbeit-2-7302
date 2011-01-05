@@ -2,7 +2,7 @@ package environment;
 
 import common.IVector;
 
-public abstract class MovingWayPoint implements IWayPoint,IMovable {
+public abstract class MovingWayPoint extends WayPoint implements IWayPoint,IMovable {
 
 	protected IVector position;
 
@@ -32,7 +32,13 @@ public abstract class MovingWayPoint implements IWayPoint,IMovable {
 		this.position = pos;
 	}
 	@Override
+
+	
 	public String toString(){
 		return "type: moving\ncoordinates: "+this.position.toString();
+	}
+	
+	public IVector getPosition() {
+		return this.position;
 	}
 }

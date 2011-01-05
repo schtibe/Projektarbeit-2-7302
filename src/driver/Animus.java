@@ -247,11 +247,9 @@ public class Animus implements IObserver {
 	 */
 	public void handleWayPoint (SpeedWayPoint waypoint){
 		if (vehicle.getLane().equals(waypoint.getLane())){
-			//System.out.println("handling speed wayPoint");
-			//System.out.println("original target speed: "+targetSpeed);
-			//System.out.println("car speed at this point:"+vehicle.getSpeed());
-			//System.out.println("new target speed: "+waypoint.getSpeedLimit());
-			targetSpeed = waypoint.getSpeedLimit();
+			if (waypoint.getDistance(vehicle) < this.securityDistance()) {
+				targetSpeed = waypoint.getSpeedLimit();
+			}
 		}
 	}
 	
