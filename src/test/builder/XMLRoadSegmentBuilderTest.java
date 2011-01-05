@@ -57,49 +57,49 @@ public class XMLRoadSegmentBuilderTest {
 			
 			@Override
 			public void setWayPoint(IWayPoint wayPoint) {
-				// TODO Auto-generated method stub
+				
 				
 			}
 			
 			@Override
 			public void setCoordinates(IVector coordinates) {
-				// TODO Auto-generated method stub
+				
 				
 			}
 			
 			@Override
 			public IVector[] getWorldBoundaries() {
-				// TODO Auto-generated method stub
+				
 				return null;
 			}
 			
 			@Override
 			public float getScale() {
-				// TODO Auto-generated method stub
+				
 				return 0;
 			}
 			
 			@Override
 			public List<IRoad> getRoads() {
-				// TODO Auto-generated method stub
+				
 				return null;
 			}
 			
 			@Override
 			public List<IJunction> getJunctions() {
-				// TODO Auto-generated method stub
+				
 				return null;
 			}
 			
 			@Override
 			public List<IWayPoint> getAllWayPoints() {
-				// TODO Auto-generated method stub
+				
 				return null;
 			}
 			
 			@Override
 			public void generate() throws Exception {
-				// TODO Auto-generated method stub
+				
 				
 			}
 		};

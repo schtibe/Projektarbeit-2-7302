@@ -54,43 +54,43 @@ public class CarTest {
 
 			@Override
 			public ILaneSegment<?> getFirstILaneSegment() {
-				// TODO Auto-generated method stub
+				
 				return null;
 			}
 
 			@Override
 			public IJunction getJunction() {
-				// TODO Auto-generated method stub
+				
 				return null;
 			}
 
 			@Override
 			public List<IVector[]> getLanePath() {
-				// TODO Auto-generated method stub
+				
 				return null;
 			}
 
 			@Override
 			public IVector getStartPosition() {
-				// TODO Auto-generated method stub
+				
 				return null;
 			}
 
 			@Override
 			public void setJunction(IJunction junction) {
-				// TODO Auto-generated method stub
+				
 				
 			}
 
 			@Override
 			public ILaneSegment<?> getLastILaneSegment() {
-				// TODO Auto-generated method stub
+				
 				return null;
 			}
 
 			@Override
 			public float getLength() {
-				// TODO Auto-generated method stub
+				
 				return 0;
 			}		
 		};
@@ -138,31 +138,31 @@ public class CarTest {
 
 			@Override
 			public ILaneSegment<?> getFirstILaneSegment() {
-				// TODO Auto-generated method stub
+				
 				return null;
 			}
 
 			@Override
 			public IJunction getJunction() {
-				// TODO Auto-generated method stub
+				
 				return null;
 			}
 
 			@Override
 			public List<IVector[]> getLanePath() {
-				// TODO Auto-generated method stub
+				
 				return null;
 			}
 
 			@Override
 			public IVector getStartPosition() {
-				// TODO Auto-generated method stub
+				
 				return null;
 			}
 
 			@Override
 			public void setJunction(IJunction junction) {
-				// TODO Auto-generated method stub
+				
 				
 			}	
 		};
