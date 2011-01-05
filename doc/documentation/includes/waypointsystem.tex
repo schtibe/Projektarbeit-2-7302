@@ -39,7 +39,12 @@ class design:
 \label{fig:waypoints}
 \end{figure}
 
-The implemented way points are described further below.
+\noindent The implemented way points are described further below. \\
+
+\label{par:movingWPDistance}
+\noindent An important thing to note is that the way points  have a method to 
+return the distance to another vehicle. To make it more realistic, some random 
+error is added to this distance, since humans can only estimate distances.
 
 \subsubsection{Static way points}
 
@@ -56,7 +61,7 @@ The speed way points are road signs that restrict the speed limit to a certain
 value. To keep things simple, there is, unlike in the real world, no sign to 
 abrogate the speed limit to the default value. \\
 
-These way points are given by the XML (\ref{sec:XML}) file that describes the 
+\noindent These way points are given by the XML (\ref{sec:XML}) file that describes the 
 world.
 
 \subsubsection{Moving way points}
@@ -64,13 +69,7 @@ world.
 Some of the way points represent moving objects. Since we only have cars in this
 project, only those way points are needed. \\
 
-\label{par:movingWPDistance}
-The way points of the kind ''vehicle way points`` additionally have a method to 
-return the distance to another vehicle. To make it more realistic, some random 
-error is added to this distance, since humans can only estimate distances.
-
 \paragraph{Car way points}
-
 These way points represent other cars in the simulation. Each car generates its
 way point and updates its position as the car moves.
 

@@ -2,7 +2,7 @@ package environment;
 
 import common.IVector;
 
-public abstract class MovingWayPoint extends WayPoint implements IWayPoint,IMovable {
+public abstract class MovingWayPoint extends WayPoint implements IMovable {
 
 	protected IVector position;
 
