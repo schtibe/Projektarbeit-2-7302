@@ -5,9 +5,6 @@ import car.Vehicle;
 import common.GlobalConstants;
 
 import environment.Gaia;
-import environment.IPlacable;
-import environment.IWayPoint;
-import environment.VehicleWayPoint;
 import environment.WayPointManager;
 
 public class Simulator implements IEventTarget<CrashEvent> {

@@ -7,10 +7,8 @@ public abstract class SignWayPoint extends WayPoint {
 	 */
 	private float laneSegmentPosition;
 	
-	
 	public SignWayPoint(ILane lane) {
 		super(lane);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -26,7 +24,6 @@ public abstract class SignWayPoint extends WayPoint {
 	 * @param arg0
 	 * @return
 	 */
-	
 	public int compareTo(SignWayPoint arg0) {
 		if (arg0.getLanePosition() == this.laneSegmentPosition) {
 			return 0;

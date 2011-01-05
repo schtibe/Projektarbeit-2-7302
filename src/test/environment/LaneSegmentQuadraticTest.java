@@ -20,7 +20,6 @@ public class LaneSegmentQuadraticTest extends TestCase {
 		try {
 			tester = new LaneSegmentQuadratic(vec1,vec2,vec3,null);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

@@ -124,7 +124,7 @@ public class XMLRoadSegmentBuilderTest {
 
 	@Test
 	public void testGetWaypoints() {
-		// TODO implement later
+
 	}
 
 	@Test

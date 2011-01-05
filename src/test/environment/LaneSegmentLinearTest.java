@@ -19,7 +19,6 @@ public class LaneSegmentLinearTest extends TestCase {
 		try {
 			tester = new LaneSegmentLinear(vec1,vec2,null);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

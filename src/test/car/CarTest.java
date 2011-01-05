@@ -192,7 +192,7 @@ public class CarTest {
 	@Test
 	public void testAccelerate() {
 		GlobalConstants.getInstance().setTimestep(0.1F); // set the time step so we are sure to calculate rightly
-		// TODO what is the delta here really?
+		
 		assertEquals(0, this.car.getSpeed(), 0.1); // initially this should be zero
 		this.car.accelerate(1);
 		try {

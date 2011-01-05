@@ -20,20 +20,11 @@ public class JunctionWayPoint extends WayPoint {
 	 * @param lane
 	 * @param junction
 	 */
-	public JunctionWayPoint (ILane lane, IJunction junction){
+	public JunctionWayPoint (ILane lane, IJunction junction) {
 		super(lane);
 		this.junction = junction;
 	}
 	
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int compareTo(IWayPoint o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 	
 	/**
 	 * return the corresponding junction
@@ -50,11 +41,6 @@ public class JunctionWayPoint extends WayPoint {
 	* the value of 0.8 indicates that you see the junction as early as you have passed 79% percent of the lanes length
 	* before the junction.
 	*/
-	
-	/**
-	 * {@inheritDoc}
-	 */	
-	
 	@Override
 	public float getXPos (){
 		if (this.position == null){
@@ -67,9 +53,6 @@ public class JunctionWayPoint extends WayPoint {
 		return this.position.getComponent(0);
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */	
 	@Override
 	public float getYPos (){
 		if (this.position == null){
@@ -82,16 +65,11 @@ public class JunctionWayPoint extends WayPoint {
 		return this.position.getComponent(1);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void visitHandleWayPoint(Animus animus) {
 		animus.handleWayPoint(this);
 	}
 
-
-	
 	/**
 	 * {@inheritDoc}
 	 * @throws Exception 
@@ -104,10 +82,6 @@ public class JunctionWayPoint extends WayPoint {
 		return UIElementFactory.getUIElement(this, scale, offsetVector);
 	}
 
-	
-	/**
-	 * 
-	 */
 	@Override
 	public String toString(){
 		return "type: junction\ncoordinates: "+this.position.toString();

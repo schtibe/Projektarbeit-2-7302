@@ -70,9 +70,30 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 		this.maxPos = this.getMaxPos();
 		this.minPos = this.getMinPos();
 		
-		/*
-		 * TODO refactor this into a method
-		 */
+		createVehicles();
+	
+		createWaypoints();
+	}
+
+	/**
+	 * Create the UI elements for way points
+	 * @throws Exception
+	 */
+	private void createWaypoints() throws Exception {
+		for(IWayPoint wayPoint : this.mainObject.getWayPoints()) {
+			this.wayPoints.add(UIElementFactory.getUIElement(
+					wayPoint, 
+					this.scale, 
+					correctionVector
+			));
+		}
+	}
+
+	/**
+	 * Create the UI elements for vehicles
+	 * @throws Exception
+	 */
+	private void createVehicles() throws Exception {
 		for(IVehicle vehicle : this.mainObject.getVehicles()) {
 			this.vehicles.add(UIElementFactory.getUIElement(
 					vehicle, 
@@ -80,17 +101,6 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 					correctionVector
 				)
 			);
-		}
-		
-		/*
-		 * TODO refactor this into a method
-		 */
-		for(IWayPoint wayPoint : this.mainObject.getWayPoints()) {
-			this.wayPoints.add(UIElementFactory.getUIElement(
-					wayPoint, 
-					this.scale, 
-					correctionVector
-			));
 		}
 	}
 
