@@ -48,7 +48,6 @@ public class LaneSegmentLinear extends LaneSegment<ILaneSegmentQuadratic>
 		return output;
 	}
 
-
 	@Override
 	public float positionIntersection(IVector position) throws Exception {
 		return this.getDistanceOnLane();

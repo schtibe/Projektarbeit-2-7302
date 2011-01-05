@@ -6,26 +6,46 @@
 \label{sec:roadModel}
 
 The road model is defined by an XML file. It contains roads and
-junctions that connect together. A road also defines its lanes,
+junctions that connect together. A road defines lanes, whereof
+there can be more than one even in the same direction. It also defines
+a path, consisting of straight elements. The simulation then creates the 
+curves between those straight elements with bézier curves (\ref{bezier}).
+For every lane there is a new path generated that goes along the given path.
 
 
 \subsubsection{Lanes}
 \label{sec:lanes}
-% mention that lanes have "positions" from 0 to 1
-% they are composed of lane segments
+
+Lanes are composed of lane segments, which there are two types of:
+straight segments and curved segments. Straight segments are fairly
+easy and only consist of the start and end point. The curved segments
+have some more properties to be able to create the bézier curve. 
+These lane segments have to alternate, so every straight lane is connected
+to a curved one and vise-versa. \\
+
+% probably mention how the distance finding works
 
 \subsubsection{Junctions}
 \label{sec:junctions}
 
-% junctions offer decisions
-% put lane into queue -> ref to lane change
+Junctions can have a certain type, to be able to implement different types
+of rights of way. The layout of the junction, however, is by default 
+determined automatically based on the roads that it is connecting. All 
+lanes with the same direction are connected together. 
 
-\subsubsection{Bezier curves}
+TODO: document how this is done with the lanes
+
+\noindent When the junction is built, it places junction way points on the
+lanes that are connecting to it. These way points not only indicate the
+junctions to the drivers but also offer the possibilities of directions
+to take.
+
+\subsubsection{Bézier curves}
+\label{sec:bezier}
 
 
 \subsection{XML}
 \label{sec:XML}
-
 
 \subsection{Collision detection}
 
