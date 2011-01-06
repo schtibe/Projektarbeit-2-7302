@@ -9,6 +9,7 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
+\usepackage{listings}
 \usepackage{svnkw}
 \usepackage{tabularx}
 \usepackage{environ}
@@ -49,3 +50,25 @@
 
 % start the sections with 0 for the abstract
 \setcounter{section}{0}
+
+% default options for the listings
+\newcommand{\resetListing}{
+	\lstset{
+		keywordstyle=\color[rgb]{0,0,1},
+		commentstyle=\color[rgb]{0.133,0.545,0.133},
+		stringstyle=\color[rgb]{0.627,0.126,0.941},
+		frame=single, % make a frame around the listing
+		numbers=left, % make line numbers
+		breaklines=true, % wrap lines if they are too long
+		showstringspaces=true, % show underlines between spaces in strings
+		language=java, % the default language
+		stepnumber=1, % the step between numbers, if it's 1 each line will be numbered
+		numbersep=5pt, % how far the line-numbers are from the code 
+		showspaces=false, % show spaces adding particular underscores
+		showtabs=false, % show tabs within strings adding particular underscores
+		tabsize=4, % sets default tabsize to 2 spaces
+		captionpos=b,% sets the caption-position to bottom
+	}
+}
+
+\resetListing
