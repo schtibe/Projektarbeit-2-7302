@@ -65,7 +65,7 @@ public class Car extends Vehicle {
 	 */
 	@Override
 	protected void adjustSpeed(float timestep) throws CarCannotReverseException {
-		this.speed += this.acceleration * (timestep / 1000);
+		this.speed += this.acceleration * (timestep / 1000) * 3.6;
 		if (this.speed < 0) {
 			this.speed = 0;
 		}
