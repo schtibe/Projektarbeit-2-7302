@@ -60,6 +60,7 @@ concerning classes. \\
 \end{figure}
 
 \subsection{The process}
+\label{sec:process}
 
 The following figure shows how the main loop works:
 
@@ -76,4 +77,14 @@ events that have to occur in that elapsed time, ordered by their time stamps.
 With this model no threads are needed, and the GUI renders exactly the amount
 % eer?
 of frames possible to keep the simulation running.
+
+\subsection{Collision detection}
+
+We added some collision detection to the simulation. Two vehicles
+that are close are checked for collisions periodically. This is done
+using a linear combination (\ref{sec:linearCombination}). If two
+vehicles really do crash, a crash event is created. The simulation
+then freezes the vehicles and removes their way points. Like that, they
+are still displayable in the GUI, but they do not affect the 
+simulation anymore.
 

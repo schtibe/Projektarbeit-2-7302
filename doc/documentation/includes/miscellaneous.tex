@@ -1,0 +1,32 @@
+
+\section{Miscellaneous}
+
+\subsection{Vectors}
+\label{sec:vectors}
+
+We tried a few given vector classes, but we weren't satisfied
+with their features. Most of them don't create new objects
+on operations like addition, subtraction etc. which we needed because 
+changing the objects may result in unwanted situations. % probably use other words here
+
+\noindent So we made a generic interface for vectors of any size and
+implemented a 2D vector with following operations:
+
+\begin{itemize}
+\item Addition
+\item Subtraction
+\item Norm
+\item Cross product
+\item Dot product
+\item Normalize
+\item Multiply by scalar
+\item Rotate 
+\item Get angle to x axis
+\end{itemize}
+
+\subsection{Linear combination}
+\label{sec:linearCombination}
+
+Since we had several occasions where we had to use a
+linear combination, we implemented this as static method
+on the vector class to provide it globally.
