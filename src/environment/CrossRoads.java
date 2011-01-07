@@ -10,6 +10,10 @@ import common.IVector;
 import common.Vector;
 
 import driver.IDecision;
+import driver.IDirection;
+import driver.LeftDirection;
+import driver.RightDirection;
+import driver.StraightDirection;
 
 public class CrossRoads implements IJunction {
 
@@ -40,6 +44,7 @@ public class CrossRoads implements IJunction {
 	
 	@Override
 	public void setRoads(List<IRoad> roads) throws Exception{
+		System.out.println("+++++++++++++++++++++++++++new junction");
 		this.roads = roads;
 		roadsToLanes();
 		LaneBuilder builder = new LaneBuilder();	
@@ -59,7 +64,8 @@ public class CrossRoads implements IJunction {
 									List<ILane> theseLanes = makeJunctionLanes(
 											builder, start, outLane);
 									decisionCount++;
-									IJunctionDecision decision = new JunctionDecision(theseLanes,decisionCount,this);
+									IDirection dir = this.getDirectionForDecision(lane, outLane);
+									IJunctionDecision decision = new JunctionDecision(theseLanes,decisionCount,this,dir);
 									try{
 										decisions.get(laneIdx);
 									}catch(Exception e){
@@ -77,8 +83,24 @@ public class CrossRoads implements IJunction {
 		}
 	}
 	
+	private IDirection getDirectionForDecision (ILane coming,ILane going){
+		IVector incomingStart = coming.getLastILaneSegment().getStartPoint();
+		IVector incomingEnd = coming.getLastILaneSegment().getEndPoint();
+		IVector end = going.getStartPosition();
+		IVector turnDirection = end.sub(incomingEnd);
+		IVector incomingDirection = incomingEnd.sub(incomingStart);
+		float angle = incomingDirection.getAngle()-turnDirection.getAngle();
+		if (angle <= Math.PI/4 || angle >= 7*Math.PI/4){
+			return new StraightDirection();
+		}else if (angle < 7*Math.PI/4 && angle > Math.PI){
+			return new LeftDirection();
+		}else{
+			return new RightDirection();
+		}
+	}
+	
 	/**
-	 * creates a way point for this junction on th eprovided lane
+	 * creates a way point for this junction on the provided lane
 	 * @param lane
 	 * @throws Exception
 	 */

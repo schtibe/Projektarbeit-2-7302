@@ -22,4 +22,8 @@ public class StraightDirection implements IDirection {
 	public boolean crossesMe (LeftDirection comingFrom, StraightDirection goingTo){
 		return true;
 	}
+	
+	public String toString (){
+		return "straight";
+	}
 }
