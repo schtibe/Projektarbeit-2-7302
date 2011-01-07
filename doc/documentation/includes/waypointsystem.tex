@@ -75,7 +75,8 @@ way point and updates its position as the car moves.
 
 \subsection{Way point finding}
 
-The search for way points that a driver can see is achieved in two steps:
+The search for way points that a driver can see on ordinary lanes is achieved 
+in three steps:
 
 \begin{itemize}
 \item Filter with a quad tree
@@ -140,51 +141,65 @@ the world. It is described by following parameters:
 \noindent Drugs can be applied to these parameters. They can have a certain effect
 on each of the parameters. \\
 
-\noindent With this system of parameters we tried to make the driver view as realistic
-as possible. Figure \ref{fig:driverView} depicts the driver view.
+\noindent With this system of parameters we tried to make the driver view as 
+realistic as possible. At first we had a driver view shaped as a triangle, 
+which was based on the human field of view.
+Figure \ref{fig:driverView} depicts this driver view.
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.4]{images/driverview.png}
 \end{center}
-\caption{The driver view}
+\caption{The first driver view}
 \label{fig:driverView}
 \end{figure}
 
+\noindent During the development we realized that, although this driver view
+worked well, it posed a few problems with situations like curves and junctions.
+In these situation the driver should have the possibility to look around. Instead
+of enabling him to do so we implemented a new version of the driver view that is 
+shaped like this:
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.4]{images/driverviewcircled.png}
+\end{center}
+\caption{The new driver view}
+\label{fig:driverViewCircled}
+\end{figure}
+
+\noindent With this shape the driver is able to look around the curves and also
+see things on a crossing lane. Thanks to an interface for the driver view we 
+could just replace the triangular driver view with the new, round one.
+
 \paragraph{The filtering}
 
-After the quad tree (\ref{sec:quadTree}) has completed it's search, the located way
+After the quad tree (\ref{sec:quadTree}) has completed its search, the located way
 points are filtered further to take account of the angled driver view instead
 of using just a rectangle. \\
 
-\noindent The algorithm to determine, whether a way point lies in the driver 
-view, is based on the following equation: \\
-
-$
-\lambda * \vec{a} + \mu * \vec{b}
-$ \\
-
-\noindent where $\vec{a}$ is the view boundary to the right of the direction 
-vector and $\vec{b}$ is the boundary on top of the view (see figure 
-\ref{fig:driverView})). $\lambda$ and $\mu$ are then calculated using the 
-vector $\vec{v}$, which is the position of the way point to check, with following
-equations: (all vectors are relative to the position of the driver view) \\
-
-$ \lambda = \frac{-(b_x*v_y - b_y * v_x)}{a_x * b_y - a_y * b_x}$\\
-
-$\mu = \frac{a_x * v_y - a_y * v_x}{a_x * b_y - a_y * b_x} $ \\
-
-\noindent If following constraints are fulfilled, the way point lies in the driver
-view triangle: \\
+The algorithm to determine whether a way point lies in the triangular 
+driver view, is based on a linear equation which we implemented globally in the
+vector class (\ref{sec:linearCombination}). If following constraints are fulfilled, 
+the way point lies in the driver view triangle: \\
 
 $ \lambda, \mu \in ]0, 1]$ \\
 
 $ \frac{\lambda * \left| \vec{b} \right| }{\mu * \left| \vec{a} \right|} \leq 
-\frac{\left| \vec{b} \right|}{\left| \vec{a} \right|}$
+\frac{\left| \vec{b} \right|}{\left| \vec{a} \right|}$ \\
 
-\paragraph{Further thoughts}
-...Some further stuff like the driver view should be adapted when the driver
-and how this could be implemented...
+\noindent Where $\lambda$ and $\mu$ are the components of the linear combination \\
+
+$ \lambda * \vec{a} + \mu * \vec{b} $ \\
+
+The algorithm for the Pacman-shaped way point simpler. Assuming $\vec{v}$ is the 
+position vector of the way point and $\vec{p}$ the one of the driver view and 
+$\alpha$ is the angle of $\left | \vec{v} - \vec{p}\right|$ to the axis, following 
+constraints have to be fulfilled (here the distance is the radius of the circle): \\
+
+$ \left| \vec{v} - \vec{p} \right| \leq \text{distance}$  \\
+
+$ -\frac{\text{angle}}{2} < \alpha < \frac{\text{angle}}{2} $
 
 
 \subsubsection{Lane check}
