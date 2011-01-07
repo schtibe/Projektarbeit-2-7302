@@ -7,7 +7,8 @@ import common.IVector;
 import driver.Animus;
 
 public abstract class StaticWayPoint extends WayPoint {
-	IVector position;
+	
+	protected IVector position;
 	
 	/**
 	 * The lane the way point is on

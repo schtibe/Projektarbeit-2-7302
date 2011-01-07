@@ -43,6 +43,11 @@ public class Animus implements IObserver {
 	protected float nearestVehicleDistanceOld;
 	
 	/**
+	 * If we are driving through a junction, save its waypoint here
+	 */
+	protected JunctionWayPoint currentJunction = null;
+	
+	/**
 	 * Indicated whether a vehicle has been seen or not
 	 */
 	protected boolean noVehicles;
@@ -72,6 +77,9 @@ public class Animus implements IObserver {
 		if (vehicle.isFreezed()){
 			return;
 		}
+		
+		this.forgetJunction();
+		
 		this.event = event;
 		this.noVehicles = true;
 		// the vehicle and the junction can only influence the deceleration
@@ -92,6 +100,10 @@ public class Animus implements IObserver {
 		float securityDistance = this.securityDistance();
 		if (nearestVehicleDistance < securityDistance) {
 			vehicleActivator.setValue(
+					/*
+					this.calculateVehicleActivator(
+							
+					)*/
 					this.calculateVehicleActivator(
 							securityDistance(),
 							nearestVehicleDistance,
@@ -127,6 +139,9 @@ public class Animus implements IObserver {
 				acceleration
 		);
 		EventQueue.getInstance().addEvent(evt);
+		
+		if (this.isOnJunction()) {
+		}
 	}
 
 
@@ -266,6 +281,7 @@ public class Animus implements IObserver {
 	 * @param waypoint
 	 */
 	public void handleWayPoint (JunctionWayPoint waypoint) {
+		this.rememberJunction(waypoint);
 		if (this.vehicle.getLanes().size() < Vehicle.queueSize) {
  			if (this.checkWayPoint(vehicle, waypoint)) {
 				List<IJunctionDecision> decisions = 
@@ -276,6 +292,33 @@ public class Animus implements IObserver {
 						this.event.getTarget()).setDecision(decision));
 			}
 		}
+	}
+	
+	/**
+	 * Remember a junction
+	 * @param wp
+	 */
+	protected void rememberJunction(JunctionWayPoint wp) {
+		this.currentJunction = wp;
+	}
+	
+	/**
+	 * We we have finished driving through a junction, it
+	 * should be forgotten. This method decides whether
+	 * to do it or not and then acts accordingly
+	 */
+	protected void forgetJunction() {
+		if (this.vehicle.getLanes().size() <= 1) {
+			this.currentJunction = null;
+		}
+	}
+
+	/**
+	 * Whether we are on a junction or not
+	 * @return
+	 */
+	protected boolean isOnJunction() {
+		return this.currentJunction != null;
 	}
 	
 	/**
