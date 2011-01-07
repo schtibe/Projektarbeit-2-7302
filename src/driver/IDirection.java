@@ -17,6 +17,4 @@ public interface IDirection {
 	void evaluateFrom(IPriority priority);
 	
 	void evaluateTo(IPriority priority);
-	
-	IDirection returnSelf ();
 }

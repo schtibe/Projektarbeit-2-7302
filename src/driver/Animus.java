@@ -106,19 +106,21 @@ public class Animus implements IObserver {
 				for (ILane lane : wpLanes){
 					if (lanes.contains(lane)){
 						Vehicle vehicle = waypoint.getVehicle();
-						IDirection dir = this.decision.getDirection();
-						IDirection from = this.currentJunction.getJunction().comingFrom(this.vehicle.getLane(), vehicle.getLane());
-						IDirection to = vehicle.getSimpleDirection();
-						if (dir.crossesMe(from,to)){
-							IPriority priority = new PriorityRight();
-							if (!priority.hasPriority(dir, from, to)){
-								float distance = waypoint.getDistance(this.vehicle);
-								if (distance < nextWayPoint){
-									nextWayPoint = distance;
+						if (this.decision != null){
+							IDirection dir = this.decision.getDirection();
+							IDirection from = this.currentJunction.getJunction().comingFrom(this.vehicle.getLane(), vehicle.getLane());
+							IDirection to = vehicle.getSimpleDirection();
+							if (dir.crossesMe(from,to)){
+								IPriority priority = new PriorityRight();
+								if (!priority.hasPriority(dir, from, to)){
+									float distance = waypoint.getDistance(this.vehicle);
+									if (distance < nextWayPoint){
+										nextWayPoint = distance;
+									}
 								}
 							}
+							break;
 						}
-						break;
 					}
 				}
 			}

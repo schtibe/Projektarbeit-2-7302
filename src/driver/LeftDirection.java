@@ -6,7 +6,7 @@ public class LeftDirection implements IDirection {
 
 	@Override
 	public boolean crossesMe(IDirection comingFrom, IDirection goingTo) {
-		return this.crossesMe(comingFrom.returnSelf(), goingTo.returnSelf());
+		return true;
 	}
 	
 	/**
@@ -44,9 +44,5 @@ public class LeftDirection implements IDirection {
 	public void evaluateTo(IPriority priority) {
 		priority.handleTo(this);
 	}
-	
-	@Override
-	public LeftDirection returnSelf (){
-		return this;
-	}
+
 }

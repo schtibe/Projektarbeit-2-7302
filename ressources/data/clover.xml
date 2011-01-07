@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <world xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="file:ressources/data/worldschema.xsd" scale="0.1">
+	xsi:noNamespaceSchemaLocation="file:ressources/data/worldschema.xsd" scale="0.3">
 	<road id="1" startX="120" startY="0">
 		<leftlanes>
-			<lane id="1" width="1"/>
+			<lane id="1" width="1">
+				<waypoints>
+					<SpeedWaypoint id="1" value="50" position="0.2" />
+				</waypoints>
+			</lane>
 		</leftlanes>
 		<rightlanes>
 			<lane id="2" width="1" />
@@ -30,7 +34,11 @@
 			<lane id="1" width="1"/>
 		</leftlanes>
 		<rightlanes>
-			<lane id="2" width="1"/>
+			<lane id="2" width="1">
+				<waypoints>
+					<SpeedWaypoint id="1" value="80" position="0.2" />
+				</waypoints>
+			</lane>
 		</rightlanes>
 		<roadsegments>
 			<roadsegment order="1" startX="0" endX="-60" startY="0" endY="0" />
@@ -51,7 +59,11 @@
 	</road>
 	<road id="5" startX="20" startY="100">
 		<leftlanes>
-			<lane id="1" width="1"/>
+			<lane id="1" width="1">
+				<waypoints>
+					<SpeedWaypoint id="1" value="50" position="0.2" />
+				</waypoints>
+			</lane>
 		</leftlanes>
 		<rightlanes>
 			<lane id="2" width="1" />
@@ -87,7 +99,11 @@
 			<lane id="1" width="1"/>
 		</leftlanes>
 		<rightlanes>
-			<lane id="2" width="1" />
+			<lane id="2" width="1">
+				<waypoints>
+					<SpeedWaypoint id="1" value="60" position="0.2" />
+				</waypoints>
+			</lane>
 		</rightlanes>
 		<roadsegments>
 			<roadsegment order="1" startX="0" endX="0" startY="0" endY="-60" />

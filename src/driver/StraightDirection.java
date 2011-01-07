@@ -43,9 +43,4 @@ public class StraightDirection implements IDirection {
 	public void evaluateTo(IPriority priority) {
 		priority.handleTo(this);
 	}
-	
-	@Override
-	public StraightDirection returnSelf() {
-		return this;
-	}
 }

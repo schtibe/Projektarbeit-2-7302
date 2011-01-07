@@ -36,8 +36,4 @@ public class RightDirection implements IDirection {
 		priority.handleTo(this);
 	}
 
-	@Override
-	public RightDirection returnSelf() {
-		return this;
-	}
 }
