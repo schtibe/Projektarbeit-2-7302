@@ -1,10 +1,12 @@
 package driver;
 
+import environment.IPriority;
+
 public class LeftDirection implements IDirection {
 
 	@Override
 	public boolean crossesMe(IDirection comingFrom, IDirection goingTo) {
-		return true;
+		return this.crossesMe(comingFrom.returnSelf(), goingTo.returnSelf());
 	}
 	
 	/**
@@ -26,5 +28,25 @@ public class LeftDirection implements IDirection {
 	
 	public String toString (){
 		return "left";
+	}
+
+	@Override
+	public void evaluateDir(IPriority priority) {
+		priority.handleDir(this);
+	}
+
+	@Override
+	public void evaluateFrom(IPriority priority) {
+		priority.handleFrom(this);
+	}
+
+	@Override
+	public void evaluateTo(IPriority priority) {
+		priority.handleTo(this);
+	}
+	
+	@Override
+	public LeftDirection returnSelf (){
+		return this;
 	}
 }

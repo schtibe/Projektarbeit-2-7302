@@ -1,5 +1,6 @@
 package driver;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -22,8 +23,10 @@ import common.Vector;
 import environment.IJunctionDecision;
 import environment.ILane;
 import environment.IPlacable;
+import environment.IPriority;
 import environment.IWayPoint;
 import environment.JunctionWayPoint;
+import environment.PriorityRight;
 import environment.SignWayPoint;
 import environment.SpeedWayPoint;
 import environment.VehicleWayPoint;
@@ -41,6 +44,7 @@ public class Animus implements IObserver {
 	protected int targetSpeed = 30;
 	protected float nearestVehicleDistance;
 	protected float nearestVehicleDistanceOld;
+	protected List<VehicleWayPoint> vehicleWayPoints;
 	
 	/**
 	 * If we are driving through a junction, save its waypoint here
@@ -53,6 +57,7 @@ public class Animus implements IObserver {
 	protected boolean noVehicles;
 	
 	private Queue<IWayPoint> seenWayPoints;
+	private IJunctionDecision decision;
 	
 	/**
 	 * constructor
@@ -88,8 +93,31 @@ public class Animus implements IObserver {
 		
 		IDriverView dView = this.physics.getView(vehicle.getDriverView());
 		List<IPlacable> wayPoints = WayPointManager.getInstance().findWayPoints(dView);
+		vehicleWayPoints = new ArrayList<VehicleWayPoint>();
 		for(IPlacable waypoint : wayPoints) {
 			((IWayPoint)waypoint).visitHandleWayPoint(this);
+		}
+		
+		if (isOnJunction()){
+			List<ILane> lanes = this.currentJunction.getJunction().getRelevantLanes(this.vehicle.getLane());
+			for (VehicleWayPoint waypoint:vehicleWayPoints){
+				List<ILane> wpLanes = new ArrayList<ILane>(waypoint.getVehicle().getLanes());
+				for (ILane lane : wpLanes){
+					if (lanes.contains(lane)){
+						Vehicle vehicle = waypoint.getVehicle();
+						IDirection dir = this.decision.getDirection();
+						IDirection from = this.currentJunction.getJunction().comingFrom(this.vehicle.getLane(), vehicle.getLane());
+						IDirection to = vehicle.getSimpleDirection();
+						if (dir.crossesMe(from,to)){
+							IPriority priority = new PriorityRight();
+							if (priority.hasPriority(dir, from, to)){
+								
+							}
+						}
+						break;
+					}
+				}
+			}
 		}
 		
 		if (this.noVehicles) {
@@ -139,11 +167,7 @@ public class Animus implements IObserver {
 				acceleration
 		);
 		EventQueue.getInstance().addEvent(evt);
-		
-		if (this.isOnJunction()) {
-		}
 	}
-
 
 	/**
 	 * Returns whether the speed should be changed to achieve the target speed
@@ -303,7 +327,7 @@ public class Animus implements IObserver {
 	}
 	
 	/**
-	 * We we have finished driving through a junction, it
+	 * We have finished driving through a junction, it
 	 * should be forgotten. This method decides whether
 	 * to do it or not and then acts accordingly
 	 */
@@ -327,6 +351,7 @@ public class Animus implements IObserver {
 	 */
 	public void handleWayPoint(VehicleWayPoint waypoint) {
 		if (waypoint != (VehicleWayPoint)vehicle.getWayPoint()){
+			vehicleWayPoints.add(waypoint);
 			VehicleDimension myDim = this.vehicle.getDimension();
 			if (this.vehicle.getLanes().contains(waypoint.getLane())){
 				float distance = waypoint.getDistance(this.vehicle);
@@ -341,9 +366,7 @@ public class Animus implements IObserver {
 					
 					detectCollison(waypoint);
 				}
-				//System.out.println("("+this.vehicle.hashCode()+") now that bastard bothers me ("+distance+":"+nearestVehicleDistance+")");
 			}
-			//System.out.println("("+this.vehicle.hashCode()+") I saw a vehicle");
 		}
 		noVehicles = false;
 	}
@@ -352,8 +375,6 @@ public class Animus implements IObserver {
 	 * @param waypoint
 	 */
 	private void detectCollison(VehicleWayPoint waypoint) {
-		System.out.println("("+this.vehicle.hashCode()+") possible crash with ("+waypoint.getVehicle().hashCode()+")");
-		
 		IVector LengthA = this.vehicle.getDirection().normalize().multiply(vehicle.getDimension().getLength());
 		IVector WidthA = this.vehicle.getDirection().normalize().multiply(vehicle.getDimension().getWidth()).rotate((float)Math.PI/2);
 		
@@ -477,5 +498,10 @@ public class Animus implements IObserver {
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
 		this.vehicle.register (this);
+	}
+
+	public void setDecision(IJunctionDecision junctionDecision) {
+		this.decision = junctionDecision;
+		this.vehicle.setSimpleDirection(this.decision.getDirection());
 	}
 }

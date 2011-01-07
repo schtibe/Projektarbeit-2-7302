@@ -1,6 +1,7 @@
 package environment;
 
 import java.util.List;
+import java.util.Set;
 
 import driver.IDecision;
 import driver.IDirection;
@@ -32,17 +33,12 @@ public interface IJunction extends ITrafficCarrier{
 	
 	IDirection comingFrom (ILane actualLane, ILane otherLane);
 	
-	
 	/**
-	 * {@deprecated}
-	 * @param decision
-	 * @return
+	 * returns the list of all the other lanes running through the junction
+	 * @param actualLane
+	 * @return List<ILane>
 	 */
 	
-	@Deprecated
-	List<ILane> getImportantLanes(IDecision decision);
-	//List<IWayPoint> getWayPoints(Lane actualLane);
-	//List<ILane> getJunctionLanes();
-	
-	//public void handleVehicle(IVehicle vehicle);
+	List<ILane> getRelevantLanes (ILane actualLane);
+
 }

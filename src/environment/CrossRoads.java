@@ -1,7 +1,9 @@
 package environment;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import simulation.builder.InvalidXMLException;
 import simulation.builder.LaneBuilder;
@@ -291,7 +293,9 @@ public class CrossRoads implements IJunction {
 		return this.junctionLanes;
 	}
 
-	
+	/**
+	 * 
+	 */
 
 	@Override
 	public IDirection comingFrom(ILane actualLane, ILane otherLane) {
@@ -299,11 +303,18 @@ public class CrossRoads implements IJunction {
 	}
 	
 	/**
-	 * {@deprecated}
+	 * 
 	 */
-	@Deprecated
+	
 	@Override
-	public List<ILane> getImportantLanes(IDecision decision) {
-		return null;
+	public List<ILane> getRelevantLanes(ILane actualLane) {
+		List<ILane> output = this.junctionLanes;
+		for (List<ILane> lanes :incomingLanes){
+			if (!lanes.contains(actualLane)){
+				output.addAll(lanes);
+			}
+		}
+		return output;
 	}
+		
 }

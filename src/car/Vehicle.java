@@ -14,6 +14,7 @@ import common.IVector;
 import common.Vector;
 
 import driver.DriverViewCircleSector;
+import driver.IDirection;
 import driver.IDriverView;
 import environment.ILane;
 import environment.IMovable;
@@ -109,6 +110,8 @@ public abstract class Vehicle implements IVehicle, IObservable {
 	 * The driven distance on the lane
 	 */
 	protected float drivenLaneDistance = 0;
+
+	private IDirection dir;
 
 	@Override
 	public float getSpeed() {
@@ -388,5 +391,13 @@ public abstract class Vehicle implements IVehicle, IObservable {
 	
 	public void removeWaypoint(){
 		this.wayPoint = null;
+	}
+	
+	public void setSimpleDirection(IDirection dir){
+		this.dir = dir;
+	}
+	
+	public IDirection getSimpleDirection(){
+		return this.dir;
 	}
 }
