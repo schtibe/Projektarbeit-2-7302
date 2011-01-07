@@ -44,7 +44,6 @@ public class CrossRoads implements IJunction {
 	
 	@Override
 	public void setRoads(List<IRoad> roads) throws Exception{
-		System.out.println("+++++++++++++++++++++++++++new junction");
 		this.roads = roads;
 		roadsToLanes();
 		LaneBuilder builder = new LaneBuilder();	
@@ -83,6 +82,13 @@ public class CrossRoads implements IJunction {
 		}
 	}
 	
+	/**
+	 * attributes a Direction object to a certain combination of lanes
+	 * @param coming
+	 * @param going
+	 * @return IDirection instance
+	 */
+	
 	private IDirection getDirectionForDecision (ILane coming,ILane going){
 		IVector incomingStart = coming.getLastILaneSegment().getStartPoint();
 		IVector incomingEnd = coming.getLastILaneSegment().getEndPoint();
@@ -90,12 +96,15 @@ public class CrossRoads implements IJunction {
 		IVector turnDirection = end.sub(incomingEnd);
 		IVector incomingDirection = incomingEnd.sub(incomingStart);
 		float angle = incomingDirection.getAngle()-turnDirection.getAngle();
-		if (angle <= Math.PI/4 || angle >= 7*Math.PI/4){
+		if (angle < 0){
+			angle += 2*Math.PI;
+		}
+		if (angle <= Math.PI/8 || angle >= 15*Math.PI/8){
 			return new StraightDirection();
-		}else if (angle < 7*Math.PI/4 && angle > Math.PI){
-			return new LeftDirection();
-		}else{
+		}else if (angle < 15*Math.PI/8 && angle > Math.PI){
 			return new RightDirection();
+		}else{
+			return new LeftDirection();
 		}
 	}
 	
@@ -282,6 +291,13 @@ public class CrossRoads implements IJunction {
 		return this.junctionLanes;
 	}
 
+	
+
+	@Override
+	public IDirection comingFrom(ILane actualLane, ILane otherLane) {
+		return this.getDirectionForDecision(actualLane, otherLane);
+	}
+	
 	/**
 	 * {@deprecated}
 	 */

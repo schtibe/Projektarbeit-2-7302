@@ -56,6 +56,7 @@ public class Driver implements IDriver {
 		
 		if (event.getDecision() != null) {
 			this.junctionDecision = event.getDecision();
+			System.out.println("i am turning: "+event.getDecision().getDirection().toString());
 			try {
 				this.vehicle.setLanes(event.getDecision().getLanes());
 			} catch (IllegalStateException e) {}

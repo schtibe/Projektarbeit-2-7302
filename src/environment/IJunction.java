@@ -3,6 +3,7 @@ package environment;
 import java.util.List;
 
 import driver.IDecision;
+import driver.IDirection;
 
 public interface IJunction extends ITrafficCarrier{
 	
@@ -21,6 +22,16 @@ public interface IJunction extends ITrafficCarrier{
 	 */
 	
 	List<IJunctionDecision> getPossibilities(ILane actualLane);
+	
+	/**
+	 * get the direction of the other vehicle according to which lane I am on
+	 * @param actualLane
+	 * @param otherLane
+	 * @return
+	 */
+	
+	IDirection comingFrom (ILane actualLane, ILane otherLane);
+	
 	
 	/**
 	 * {@deprecated}
