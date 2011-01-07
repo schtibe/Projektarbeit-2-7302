@@ -100,6 +100,7 @@ public class Animus implements IObserver {
 		
 		if (isOnJunction()){
 			List<ILane> lanes = this.currentJunction.getJunction().getRelevantLanes(this.vehicle.getLane());
+			float nextWayPoint = Float.MAX_VALUE;
 			for (VehicleWayPoint waypoint:vehicleWayPoints){
 				List<ILane> wpLanes = new ArrayList<ILane>(waypoint.getVehicle().getLanes());
 				for (ILane lane : wpLanes){
@@ -110,13 +111,25 @@ public class Animus implements IObserver {
 						IDirection to = vehicle.getSimpleDirection();
 						if (dir.crossesMe(from,to)){
 							IPriority priority = new PriorityRight();
-							if (priority.hasPriority(dir, from, to)){
-								
+							if (!priority.hasPriority(dir, from, to)){
+								float distance = waypoint.getDistance(this.vehicle);
+								if (distance < nextWayPoint){
+									nextWayPoint = distance;
+								}
 							}
 						}
 						break;
 					}
 				}
+			}
+			if (nextWayPoint < securityDistance()){
+				junctionActivator.setValue(
+						this.calculateVehicleActivator(
+						securityDistance(),
+						nextWayPoint,
+						this.vehicle.getSpeed()
+					)
+				);
 			}
 		}
 		
