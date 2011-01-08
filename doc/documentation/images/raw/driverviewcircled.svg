@@ -14,7 +14,10 @@
    id="svg2876"
    version="1.1"
    inkscape:version="0.47 r22583"
-   sodipodi:docname="driverviewcircled.svg">
+   sodipodi:docname="driverviewcircled.svg"
+   inkscape:export-filename="/home/sh/gitty/private/Projektarbeit-2-7302/doc/documentation/images/driverviewcircled.png"
+   inkscape:export-xdpi="300.04868"
+   inkscape:export-ydpi="300.04868">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -22,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.3006763"
-     inkscape:cx="368.23419"
-     inkscape:cy="600.97069"
+     inkscape:zoom="0.91971705"
+     inkscape:cx="394.33311"
+     inkscape:cy="583.21236"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -125,7 +128,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -197,7 +200,7 @@
        sodipodi:nodetypes="cc" />
     <path
        sodipodi:type="arc"
-       style="fill:none;stroke:#eff741;stroke-width:3.03900002999999996;stroke-miterlimit:4;stroke-opacity:0.92156863;stroke-dasharray:none"
+       style="fill:none;stroke:#feec73;stroke-width:3.03900002999999996;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="path4795"
        sodipodi:cx="407.09589"
        sodipodi:cy="353.87943"
