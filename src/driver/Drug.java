@@ -4,8 +4,7 @@ public abstract class Drug {
 	
 	/**
 	 * prepared class can be used later to influence character and physics
-	 */
-	
+	 */	
 	protected int effectOnInterval;
 	protected float effectOnSight;
 	protected float effectOnFieldOfView;

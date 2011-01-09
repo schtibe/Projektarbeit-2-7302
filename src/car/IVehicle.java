@@ -6,6 +6,7 @@ import java.util.Queue;
 import simulation.IEventTarget;
 import simulation.VehicleEvent;
 
+import common.IObserver;
 import common.IVector;
 
 import driver.IDriverView;
@@ -133,4 +134,6 @@ public interface IVehicle extends IEventTarget<VehicleEvent> {
 	boolean isFreezed();
 	
 	void removeWaypoint();
+	
+	public void register(IObserver obs);
 }

@@ -5,19 +5,20 @@
 The focus of our project was more on the simulation than on the graphical 
 display of it hence the GUI is kept quite rudimentary. \\
 
-\noindent We used the 2D game library Slick 
+\noindent We used the 2D game library Slick
 \footnote{\href{http://slick.cokeandcode.com/}{http://slick.cokeandcode.com/}}
 to implement the GUI. Slick relies on OpenGL to display the graphics.
-To make things exchangeable, we tried to avoid heavy
-relations between the GUI and the real simulation. Therefore for every 
-element in the simulation that has to be displayed we made a wrapper class
-that takes care of the drawing. \\
+To make things exchangeable, we tried to avoid heavy relations between
+the GUI and the real simulation (except for the update cycle).  Therefore
+for every element in the simulation that has to be displayed we made a
+wrapper class that takes care of the drawing. \\
 
-\noindent Additionally we used the Nifty Library 
+\noindent Additionally we used the Nifty Library
 \footnote{\href{http://sourceforge.net/projects/nifty-gui/}
-{http://sourceforge.net/projects/nifty-gui/}} which is a library to display
-buttons and other GUI elements. These GUIs can easily described in an XML file. \\
+{http://sourceforge.net/projects/nifty-gui/}} which is a library to
+display buttons and other GUI elements. These GUIs can easily described
+in an XML file. \\
 
-An important thing to note is that the GUI calls the update routines of the
+\noindent An important thing to note is that the GUI calls the update routines of the
 simulation. This is documented in more details in section \ref{sec:process}.
 

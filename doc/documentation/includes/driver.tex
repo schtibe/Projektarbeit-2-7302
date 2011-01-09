@@ -8,7 +8,7 @@ and reacts accordingly (\ref{sec:animus}), decides about which
 way to go (\ref{sec:driverJunctions}) and eventually steers the
 vehicle (\ref{sec:driverInfluence}). Drivers have a character
 (\ref{sec:character}) and physical conditions (\ref{sec:physics}). They
-can even take drugs (\ref{sec:drugs}). \\
+can also take drugs (\ref{sec:drugs}). \\
 
 \subsection{Animus}
 \label{sec:animus}
@@ -21,7 +21,7 @@ The Animus is the brain of the driver. Here all way points
 default value). It then assesses the situation in following order:
 
 \begin{itemize}
-\item Look at the world and collect way points
+\item Look at the world and collect way points (assessment)
 \item 
 \end{itemize}
 
@@ -47,11 +47,27 @@ of this v
 % brakeway
 % 
 
+\subsubsection{Decisions in junctions}
+
 \subsection{Physics}
 \label{sec:physics}
 
+The physics objects define the physical conditions of the driver. Every
+driver has one of these objects. They provide following properties:
+
+\begin{itemize}
+\item \textbf{The sight} How far the driver can see
+\item \textbf{The field of view (angle)} The opening of the driver view
+\item \textbf{Update interval} The interval of the assessment cycles
+\item \textbf{Drugs}
+\end{itemize}
+
 \subsubsection{Drugs}
 \label{sec:drugs}
+
+Drugs are objects than can influence the properties mentioned above in the
+physics section. They are merely just implemented and prepared but not 
+in use yet.
 
 \subsection{Character}
 \label{sec:character}
@@ -64,13 +80,13 @@ lane. There are no mirrors, and it is not possible to look behind, hence
 he is not able to reverse.\\
 
 \noindent What the driver can see is limited to a field of view formed as 
-a ''pacman``. We implemented that as the driver view, more on that in chapter 
-\ref{sec:driverView}.
+a ''Pacman``. We implemented that as the \emph{driver view}, more on that in 
+section \ref{sec:driverView}.
 
 \subsection{Junctions}
 \label{sec:driverJunctions}
 
-When a driver approached a junction, he receives the according way point
+When a driver approaches a junction, he receives the according way point
 from the way point system. He then makes a decision in which direction he
 wants to drive on. Since we don't have any path finding and the cars are
 just driving around, this decision is randomly taken. Once decided, a

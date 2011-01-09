@@ -24,6 +24,13 @@ implemented a 2D vector with following operations:
 \item Get angle to x axis
 \end{itemize}
 
+All operations that do not result in a scalar return a new vector object
+instead of changing the one that the operation is called on. We are aware
+that this is slower in process time than to change the objects, but most
+times we needed new vector objects anyway. Additionally it provides more
+safety, since it's not possible to accidentally change a vector object
+where it should be cloned.
+
 \subsection{Linear combination}
 \label{sec:linearCombination}
 

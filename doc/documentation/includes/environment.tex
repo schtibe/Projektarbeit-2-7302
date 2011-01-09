@@ -6,7 +6,7 @@
 \label{sec:roadModel}
 
 The road model is defined by an XML file (\ref{sec:XML}). It contains roads and
-junctions that connect together. A road defines lanes, whereof
+junctions that are connected together. A road defines lanes, whereof
 there can be more than one even in the same direction. It also defines
 a path, consisting of straight elements. The simulation then creates the 
 curves between those straight elements with bézier curves (\ref{sec:bezier}).
@@ -46,11 +46,13 @@ to take.
 \subsubsection{Bézier curves}
 \label{sec:bezier}
 
-To be able to create any type of curves in our simulation, we implemented
+To be able to create any type of curves in our simulation we implemented
 bézier curves for both the straight and the curved lane segments. The 
 straight segments are done with linear curves, the curved lane segments
 with quadratic curves. The curved segments therefore have additionally
-to the start and end point a vector that indicates the bend. \\
+to the start and end point a vector that indicates the bend. The reason
+that we implemented the straight lines as bézier curves too is to avoid
+having to treat them differently.  \\
 
 \noindent Since the curved segments are created automatically, the bend
 point is calculated automatically too. To do so, the linear segments are 
@@ -64,7 +66,7 @@ detected too, for example, lane segments that are crossing each other.
 
 As mentioned above, the road model is defined by XML files. They are 
 designed quite simple, since they have to be written by hand. Most work
-is then done automatically by the simulation builder. Figure 
+is done automatically by the simulation builder. Figure 
 \ref{fig:xmlRoad} shows an example of a road consisting of only one 
 lane with two straight segments and a speed way point restricting the
 speed limit to 30. Road segment coordinates are relative to the start

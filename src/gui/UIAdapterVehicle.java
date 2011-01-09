@@ -4,7 +4,6 @@ package gui;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.geom.Path;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -12,6 +11,7 @@ import org.newdawn.slick.geom.Transform;
 
 import car.IVehicle;
 
+import common.IObserver;
 import common.IVector;
 import common.Vector;
 
@@ -20,7 +20,8 @@ import driver.IDriverView;
 /**
  * A vehicle adapter implementation
  */
-public class UIAdapterVehicle extends UIAdapter<IVehicle> implements IUIAdapterVehicle<IVehicle> {
+public class UIAdapterVehicle extends UIAdapter<IVehicle> 
+	implements IUIAdapterVehicle<IVehicle>, IObserver {
 
 	protected IVector oldDirection;
 	protected IVector offsetVector = new Vector(new float[]{0, 0});
@@ -28,6 +29,14 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle> implements IUIAdapterV
 	protected float angle=0, scale = 0;
 	protected final IVector X_AXIS = new Vector(new float[]{1,0});
 	protected float cosAlpha, newAngle, angleDiff;
+	
+	protected static enum turnSignalType {
+		left,
+		right,
+		off
+	}
+	
+	protected turnSignalType turnSignal;
 	
 	public UIAdapterVehicle(IVehicle mainObject, float scale, IVector offsetVector) throws Exception {
 		super(mainObject);
@@ -52,6 +61,8 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle> implements IUIAdapterV
 
 		this.boundingBox.setCenterX(this.mainObject.getPosition().getComponent(0) * scale + offsetVector.getComponent(0));
 		this.boundingBox.setCenterY(this.mainObject.getPosition().getComponent(1) * scale + offsetVector.getComponent(1));
+		
+		this.mainObject.register(this);
 	}
 	
 	/**
@@ -110,9 +121,6 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle> implements IUIAdapterV
 		return boundingBox;
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String toString() {
 		return "new Angle: " + newAngle + "\n angleDiff: " + angleDiff;
@@ -134,8 +142,15 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle> implements IUIAdapterV
 			Shape view = this.getDriverViewBoundingBox();
 			g.draw(view);
 		}
+		
+		this.drawTurnSignal(g);
 	}
 	
+	protected void drawTurnSignal(Graphics g) {
+		if (this.turnSignal == turnSignalType.right) {
+			
+		}
+	}
 	
 	/**
 	 * Get the shape for the driver's view
@@ -189,4 +204,16 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle> implements IUIAdapterV
 	}
 
 	
+	public void update(String message) {
+		if (message.compareTo("signal right") == 0)  {
+			this.turnSignal = gui.UIAdapterVehicle.turnSignalType.right;
+		} else if (message.compareTo("signal left") == 0) {
+			this.turnSignal = gui.UIAdapterVehicle.turnSignalType.left;
+		} else if (message.compareTo("signal off") == 0) {
+			this.turnSignal = gui.UIAdapterVehicle.turnSignalType.off;
+		}
+		
+	}
 }
+
+

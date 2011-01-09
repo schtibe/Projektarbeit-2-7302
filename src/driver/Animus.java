@@ -329,6 +329,8 @@ public class Animus implements IObserver {
 				EventQueue.getInstance().addEvent(
 						new DriverEvent(this.event.getTimeStamp(), 
 						this.event.getTarget()).setDecision(decision));
+				
+				this.vehicle.notify("signal " + decision.getDirection().toString());
 			}
 		}
 	}
@@ -350,6 +352,8 @@ public class Animus implements IObserver {
 		if (this.vehicle.getLanes().size() <= 1) {
 			this.currentJunction = null;
 		}
+		
+		this.vehicle.notify("signal off");
 	}
 
 	/**

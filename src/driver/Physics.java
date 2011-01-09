@@ -20,7 +20,7 @@ public class Physics {
 	 * @param interval
 	 * @param drugs
 	 */
-	public Physics (float sight,float fov,int interval,List<Drug> drugs){
+	public Physics (float sight, float fov, int interval, List<Drug> drugs){
 		this.sight = sight * GlobalConstants.getInstance().getScale();
 		this.fieldOfView = fov;
 		this.updateInterval = interval;

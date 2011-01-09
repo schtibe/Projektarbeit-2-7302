@@ -106,4 +106,6 @@ public interface IVector extends Comparable<IVector> {
 
 	public float getAngle();
 	// public int compareTo(IVector vector);
+
+
 }
