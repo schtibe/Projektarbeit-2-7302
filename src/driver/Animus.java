@@ -465,14 +465,17 @@ public class Animus implements IObserver {
 	}
 	
 	/**
+	 * Do not use this for other waypoints than junction way points
 	 * checks if a waypoint is important for this lane
+	 * Only be interested in junction way points that lie on the
+	 * current lane.
 	 * @param vehicle
 	 * @param waypoint
 	 * @return
 	 */
 	protected boolean checkWayPoint(IVehicle vehicle, IWayPoint waypoint)  {
-		for (ILane lane: vehicle.getLanes()) {
-			if (lane == waypoint.getLane()) {
+		/*for (ILane lane: vehicle.getLanes()) {*/
+			if (vehicle.getLanes().peek() == waypoint.getLane()) { // only use the current lane
 				// test if it's already seen
 				boolean seen = false;
 				for (IWayPoint wp: this.seenWayPoints) {
@@ -491,7 +494,7 @@ public class Animus implements IObserver {
 					return true;
 				}
 			}
-		}
+		//}
 		return false;
 	}
 	
