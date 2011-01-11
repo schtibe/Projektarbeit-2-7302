@@ -465,8 +465,8 @@ public class Animus implements IObserver {
 	}
 	
 	/**
-	 * Do not use this for other waypoints than junction way points
-	 * checks if a waypoint is important for this lane
+	 * Do not use this for other way points than junction way points
+	 * checks if a way point is important for this lane
 	 * Only be interested in junction way points that lie on the
 	 * current lane.
 	 * @param vehicle
@@ -485,11 +485,6 @@ public class Animus implements IObserver {
 					}
 				}
 				if (!seen) {
-					try {
-						if (waypoint.getXPos() > 141 && waypoint.getXPos() < 142) {
-							System.out.println("debug");
-						}
-					} catch (Exception e) {}
 					this.seenWayPoints.add(waypoint);
 					return true;
 				}

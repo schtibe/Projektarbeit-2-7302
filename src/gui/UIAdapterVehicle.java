@@ -156,8 +156,6 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle>
 			IVector lenDirection = direction.normalize().multiply(vd.getLength() / 4 * 3);
 			IVector widthDirection;
 			
-			System.out.println(scale);
-			
 			if (this.turnSignal == turnSignalType.right) {
 				widthDirection = direction.rotate((float)Math.PI/2);
 				widthDirection = widthDirection.normalize().multiply(vd.getWidth()/2 * 5);
