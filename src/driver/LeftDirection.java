@@ -2,28 +2,50 @@ package driver;
 
 import environment.IPriority;
 
+/**
+ * to whom it may concern: sorry or the instanceofs :(
+ *
+ */
+
 public class LeftDirection implements IDirection {
 
+	/**
+	 * this is so damned dirty but still we had to do it
+	 */
 	@Override
 	public boolean crossesMe(IDirection comingFrom, IDirection goingTo) {
-		return true;
+		if (comingFrom instanceof LeftDirection){
+			return comingFromLeft(goingTo);
+		}else if (comingFrom instanceof RightDirection){
+			return comingFromRight (goingTo);
+		}else{
+			return comingFromStraight (goingTo);
+		}
 	}
 	
 	/**
 	 * used negative logic to minimize implementation effort
 	 */
 	
-	public boolean crossesMe(LeftDirection comingFrom, RightDirection goingTo){
-		return false;
+	private boolean comingFromLeft(IDirection goingTo){
+		if (goingTo instanceof RightDirection){
+			return false;
+		}
+		return true;
 	}
 	
-	
-	public boolean crossesMe(RightDirection comingFrom, RightDirection goingTo){
-		return false;
+	private boolean comingFromRight(IDirection goingTo){
+		if (goingTo instanceof RightDirection){
+			return false;
+		}
+		return true;
 	}
 	
-	public boolean crossesMe(StraightDirection comingFrom, LeftDirection goingTo){
-		return false;
+	private boolean comingFromStraight(IDirection goingTo){
+		if (goingTo instanceof LeftDirection){
+			return false;
+		}
+		return true;
 	}
 	
 	public String toString (){

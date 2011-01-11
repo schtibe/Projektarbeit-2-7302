@@ -2,21 +2,27 @@ package driver;
 
 import environment.IPriority;
 
+/**
+ * to whom it may concern: sorry for the instanceofs 8(
+ */
+
 public class RightDirection implements IDirection {
 
 	@Override
 	public boolean crossesMe(IDirection comingFrom, IDirection goingTo) {
+		if (comingFrom instanceof LeftDirection){
+			if (goingTo instanceof StraightDirection){
+				return true;
+			}
+		}
+		if (comingFrom instanceof StraightDirection){
+			if (goingTo instanceof LeftDirection){
+				return true;
+			}
+		}
 		return false;
 	}
 
-	public boolean crossesMe(LeftDirection comingFrom, StraightDirection goingTo){
-		return true;
-	}
-	
-	public boolean crossesMe(StraightDirection comingFrom, LeftDirection goingTo){
-		return true;
-	}
-	
 	public String toString (){
 		return "right";
 	}
