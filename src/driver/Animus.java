@@ -41,7 +41,7 @@ public class Animus implements IObserver {
 	protected Character character;
 	protected Vehicle vehicle;
 	protected DriverEvent event;
-	protected int targetSpeed = 30;
+	protected int targetSpeed = 50;
 	protected float nearestVehicleDistance;
 	protected float nearestVehicleDistanceOld;
 	protected List<VehicleWayPoint> vehicleWayPoints;
