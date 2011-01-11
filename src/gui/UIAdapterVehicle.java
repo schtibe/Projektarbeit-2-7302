@@ -4,12 +4,14 @@ package gui;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
+import org.newdawn.slick.geom.Ellipse;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
 
 import car.IVehicle;
+import car.VehicleDimension;
 
 import common.IObserver;
 import common.IVector;
@@ -36,7 +38,7 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle>
 		off
 	}
 	
-	protected turnSignalType turnSignal;
+	protected turnSignalType turnSignal = turnSignalType.off;
 	
 	public UIAdapterVehicle(IVehicle mainObject, float scale, IVector offsetVector) throws Exception {
 		super(mainObject);
@@ -49,8 +51,8 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle>
 		this.boundingBox = new Rectangle(
 				0,
 				0,
-				this.mainObject.getDimension().getLength() * scale *5,
-				this.mainObject.getDimension().getWidth() * scale *5
+				this.mainObject.getDimension().getLength() * scale * 5,
+				this.mainObject.getDimension().getWidth() * scale * 5
 		);	
 
 		if (oldDirection.getComponent(1) < 0) {
@@ -147,8 +149,37 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle>
 	}
 	
 	protected void drawTurnSignal(Graphics g) {
-		if (this.turnSignal == turnSignalType.right) {
+		if (this.turnSignal != turnSignalType.off) {
+			VehicleDimension vd = this.mainObject.getDimension();
+			IVector direction = this.mainObject.getDirection();
+			IVector position = this.mainObject.getPosition();
+			IVector lenDirection = direction.normalize().multiply(vd.getLength() / 4 * 3);
+			IVector widthDirection;
 			
+			System.out.println(scale);
+			
+			if (this.turnSignal == turnSignalType.right) {
+				widthDirection = direction.rotate((float)Math.PI/2);
+				widthDirection = widthDirection.normalize().multiply(vd.getWidth()/2 * 5);
+				
+			} else {
+				widthDirection = direction.rotate((float)-Math.PI/2);
+				widthDirection = widthDirection.normalize().multiply(vd.getWidth()/2 * 5);
+			}
+			
+			IVector drawPos = position.add(widthDirection).add(lenDirection);
+			
+			float offsetX = offsetVector.getComponent(0);
+			float offsetY = offsetVector.getComponent(1);
+			g.setColor(Color.yellow);
+			g.fill(
+				new Ellipse(
+					drawPos.getComponent(0) * scale + offsetX, 
+					drawPos.getComponent(1) * scale + offsetY, 
+					4, 
+					4
+				)
+			);
 		}
 	}
 	

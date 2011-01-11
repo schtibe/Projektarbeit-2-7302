@@ -316,7 +316,7 @@ public class Animus implements IObserver {
 	}
 	
 	/**
-	 * handles a junction waypoint
+	 * handles a junction way point
 	 * @param waypoint
 	 */
 	public void handleWayPoint (JunctionWayPoint waypoint) {
@@ -350,10 +350,11 @@ public class Animus implements IObserver {
 	 */
 	protected void forgetJunction() {
 		if (this.vehicle.getLanes().size() <= 1) {
-			this.currentJunction = null;
+			if (this.currentJunction != null) {
+				this.currentJunction = null;
+				this.vehicle.notify("signal off");
+			}
 		}
-		
-		this.vehicle.notify("signal off");
 	}
 
 	/**
