@@ -200,7 +200,7 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 					new Character(), 
 					new Physics(
 						200,
-						(float)(1-((Math.PI)/3)),
+						(float)(2*Math.PI-((Math.PI)/3)),
 						250, 
 						new ArrayList<Drug>()
 					)

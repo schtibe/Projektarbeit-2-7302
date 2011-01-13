@@ -308,12 +308,14 @@ public class CrossRoads implements IJunction {
 	
 	@Override
 	public List<ILane> getRelevantLanes(ILane actualLane) {
-		List<ILane> output = this.junctionLanes;
+		Set<ILane> relevant = new HashSet();
+		relevant.addAll(this.junctionLanes);
 		for (List<ILane> lanes :incomingLanes){
 			if (!lanes.contains(actualLane)){
-				output.addAll(lanes);
+				relevant.addAll(lanes);
 			}
 		}
+		List<ILane> output = new ArrayList<ILane>(relevant);
 		return output;
 	}
 		

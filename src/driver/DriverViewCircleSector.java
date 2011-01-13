@@ -100,7 +100,7 @@ public class DriverViewCircleSector implements IDriverView {
 		IVector relative = position.sub(this.position);
 		if (relative.norm() < radius){
 			relative = relative.rotate(-direction.getAngle());
-			if (-angle/2 >= relative.getAngle() && angle/2 <= relative.getAngle()){
+			if (2*Math.PI-angle/2 >= relative.getAngle() || angle/2 <= relative.getAngle()){
 				return true;
 			}
 		}
