@@ -4,7 +4,11 @@
 	<!-- first road is single lane, used to simulate the starting procedure of a vehicle -->
 	<road id="1" startX="20" startY="0">
 		<leftlanes>
-
+			<lane id="1" width="1" >
+				<waypoints>
+					<SpeedWaypoint id="1" value="30" position="0.2" />
+				</waypoints>
+			</lane>
 		</leftlanes>
 		<rightlanes>
 			<lane id="1" width="1" >
@@ -40,7 +44,11 @@
 	</road>
 	<road id="3" startX="0" startY="460">
 		<leftlanes>
-			<lane id="1" width="1" />
+			<lane id="1" width="1" >
+				<waypoints>
+					<SpeedWaypoint id="1" value="80" position="0.2"/>
+				</waypoints>
+			</lane>
 		</leftlanes>
 		<rightlanes>
 			<lane id="1" width="1" >

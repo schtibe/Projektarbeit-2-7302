@@ -74,8 +74,7 @@ public class Vector implements IVector {
 	}
 
 	/**
-	 * @param the
-	 *            vector to calculate the dotproduct with this vector
+	 * @param the vector to calculate the dotproduct with this vector
 	 * @return a float as a result of the operation
 	 */
 	@Override

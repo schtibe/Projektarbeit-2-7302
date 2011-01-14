@@ -98,9 +98,11 @@ public class DriverViewCircleSector implements IDriverView {
 	@Override
 	public boolean checkWayPoint(IVector position) {
 		IVector relative = position.sub(this.position);
-		if (relative.norm() < radius){
+		float norm = relative.norm();
+		if (norm < radius && norm > 0){
 			relative = relative.rotate(-direction.getAngle());
-			if (2*Math.PI-angle/2 >= relative.getAngle() || angle/2 <= relative.getAngle()){
+			float relAngle = relative.getAngle();
+			if ((2*Math.PI-angle/2) <= relAngle || angle/2 >= relAngle){
 				return true;
 			}
 		}
@@ -114,11 +116,11 @@ public class DriverViewCircleSector implements IDriverView {
 
 	@Override
 	public IRectangle getBoundingBox() {
-		IVector topRight = new Vector (new float[]{1,1});
-		IVector bottomLeft = new Vector (new float[]{-1,-1});
+		IVector topRight = new Vector (new float[]{radius,radius});
+		IVector bottomLeft = new Vector (new float[]{-radius,-radius});
 		IRectangle bbox = new Rectangle(
-			this.position.add(bottomLeft.normalize().multiply(radius)),
-			this.position.add(topRight.normalize().multiply(radius))
+			this.position.add(bottomLeft),
+			this.position.add(topRight)
 		);
 		return bbox;
 	}
