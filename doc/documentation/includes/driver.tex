@@ -22,18 +22,39 @@ default value). It then assesses the situation in following order:
 
 \begin{itemize}
 \item Look at the world and collect way points (assessment)
-\item 
+\item Process them and let them act on the acceleration and deceleration activators
+\item Do the way point specific stuff (e.g. remember speed limit)
+\item Calculate the resulting acceleration value
 \end{itemize}
 
 \subsubsection{Assessment and decision making}
+\label{sec:assessment}
+
+Based on the way points the driver has to decide whether to accelerate or
+decelerate or keep the current speed. Since he can see several way points
+at once, we developed a system where all the way points have a certain effect 
+on that decision. Figure \ref{fig:animus} shows this process.
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[width=\textwidth]{images/animus.png}
+\includegraphics[width=10cm]{images/animus.png}
 \end{center}
-\caption{The assessment process}
+\caption{How the way points influent the acceleration}
 \label{fig:animus}
 \end{figure}
+
+The influences on the acceleration and deceleration are weighted, so for 
+instance the vehicle way points have a higher weight so it influences the 
+deceleration more than a speed way point can influent the acceleration.
+The acceleration and deceleration in this picture are values ranging from
+0 to 1. After all way points had their influence, the two values are then
+subtracted. The difference is then the effective acceleration value that 
+goes to the vehicle; -1 is full braking and 1 is full acceleration which
+both depend on the vehicles properties. \\
+
+With this system the driver always drives as fast as he is allowed to
+as long as there is nothing else interrupting his way.
+
 
 \subsubsection{The estimation of another vehicle's speed}
 
@@ -50,14 +71,18 @@ vehicle is approaching or not and how fast.
 
 \subsubsection{Following another vehicle}
 
-When a driver sees another vehicle in front of him, it retrieves the distance
-of this v
-
-% mention how the speed is calculated
-% brakeway
-% 
+The driver always tries to keep a certain security distance to the
+vehicle in front of him, which is twice the speed that he is going.
+When the distance of the vehicle in front falls below that value, the
+animus begins to influent the deceleration value (\ref{sec:assessment}).
+The nearer the vehicle is, the higher is the influence.
 
 \subsubsection{Decisions in junctions}
+
+The behaviour in junctions is a bit extended. As described in 
+\ref{sec:junctionWPfinding}, the way point finding is a bit more intelligent
+to regard the right of way. Once they are found, the process is the same
+though.
 
 \subsection{Physics}
 \label{sec:physics}
@@ -81,6 +106,10 @@ in use yet.
 
 \subsection{Character}
 \label{sec:character}
+
+The drivers are prepared to have some sort of character. This character
+contains values like ''riskyness`` and temperament. A driver with a
+high temperament accelerates faster than a Sunday driver.
 
 \subsection{Sight}
 \label{sec:sight}

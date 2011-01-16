@@ -14,7 +14,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.47 r22583"
-   sodipodi:docname="animus.svg">
+   sodipodi:docname="animus.svg"
+   inkscape:export-filename="/home/sh/gitty/private/Projektarbeit-2-7302/doc/documentation/images/animus.png"
+   inkscape:export-xdpi="300.04868"
+   inkscape:export-ydpi="300.04868">
   <defs
      id="defs4">
     <marker
@@ -68,7 +71,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
      inkscape:cx="457.62746"
-     inkscape:cy="526.88852"
+     inkscape:cy="784.03138"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
