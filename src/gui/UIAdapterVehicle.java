@@ -5,6 +5,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Ellipse;
+import org.newdawn.slick.geom.Path;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -149,7 +150,7 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle>
 	}
 	
 	protected void drawTurnSignal(Graphics g) {
-		if (this.turnSignal != turnSignalType.off) {
+		if (this.turnSignal != turnSignalType.off && !this.mainObject.isFreezed()) {
 			VehicleDimension vd = this.mainObject.getDimension();
 			IVector direction = this.mainObject.getDirection();
 			IVector position = this.mainObject.getPosition();
@@ -186,50 +187,43 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle>
 	 * @return
 	 */
 	protected Shape getDriverViewBoundingBox() {
-		
 		IDriverView view = this.mainObject.getDriverView();
-		IVector position = view.getPosition();
-		Circle path = new Circle(
-			position.getComponent(0)*scale+this.offsetVector.getComponent(0),
-			position.getComponent(1)*scale+this.offsetVector.getComponent(1),
-			view.getDistance()*scale
-		);
+		IVector position = view.getPosition().multiply(scale);
+		float offsetX = this.offsetVector.getComponent(0);
+		float offsetY = this.offsetVector.getComponent(1);
 		
-		/**
-		 *@deprecated 
-		 *
-		IDriverView view = this.mainObject.getDriverView();
-		IVector position = view.getPosition();
-		
-		IVector a = view.getABoundary();
-		IVector c = view.getCBoundary();
-		
-		a = a.add(position);
-		c = c.add(position);
-		
-		float oX = this.offsetVector.getComponent(0);
-		float oY = this.offsetVector.getComponent(1);
+		IVector drawer = view.getDirection().normalize().multiply(view.getDistance() * scale);
+		drawer = drawer.rotate(view.getAngle() / 2);
 		
 		Path path = new Path(
-				position.getComponent(0) * scale + oX, 
-				position.getComponent(1) * scale + oY
+				position.getComponent(0) + offsetX, 
+				position.getComponent(1) + offsetY
 		);
 		
+		// draw the opening 
 		path.lineTo(
-				a.getComponent(0) * scale + oX, 
-				a.getComponent(1) * scale + oY
+				position.getComponent(0) + offsetX + drawer.getComponent(0), 
+				position.getComponent(1) + offsetY + drawer.getComponent(1)
 		);
+		
+		// draw the circle 
+		int steps = 100; // the steps to rotate the driver view 
+		float dvAngle = view.getAngle();
+		for (float angle = dvAngle / steps; angle < view.getAngle(); angle += dvAngle / steps) {
+			drawer = drawer.rotate(-dvAngle / steps);
+			path.lineTo(
+				position.getComponent(0) + offsetX + drawer.getComponent(0), 
+				position.getComponent(1) + offsetY + drawer.getComponent(1)
+			);
+		}
+		
+		// draw the closing
 		path.lineTo(
-				c.getComponent(0) * scale + oX, 
-				c.getComponent(1) * scale + oY
+			position.getComponent(0) + offsetX,
+			position.getComponent(1) + offsetY
 		);
-		path.lineTo(
-				position.getComponent(0) * scale + oX, 
-				position.getComponent(1) * scale + oY
-		);
-		*/
+		
 		return path;
-		
 	}
 
 	
