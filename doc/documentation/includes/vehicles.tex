@@ -26,7 +26,7 @@ contains information about the dimensions of a vehicle. We implemented this
 to achieve a high level of detail concerning the estimation of distances
 by the driver. \\
 
-In this simulation, the maximal acceleration and deceleration values
+In this simulation, the maximum acceleration and deceleration values
 are chosen by random within some range to simulate different types of
 cars. At this point of progress, the cars cannot reverse. We would have
 to adjust the driver view concept (\ref{sec:driverView}) so that the
@@ -39,7 +39,9 @@ or turn the driver view over to the back of the vehicle.
 The only influence that the driver currently has on the vehicle is the 
 acceleration. It can range from -1 (full braking) to 1 (full acceleration)
 where 0 is to keep the current speed. These values are not applied directly,
-instead the vehicle receives them as an event (\ref{sec:eventSystem}).
+instead the vehicle receives them as an event (\ref{sec:eventSystem}), to 
+simulate the natural latency between sight and reaction to the perceived 
+situation.
 
 \subsection{Movement}
 
@@ -59,8 +61,6 @@ Similarly, the driven distance is calculated by \\
 
 $ s = s_0 + v * t $ \\
 
-TODO: is this correct??
-
 \noindent In this process, the direction of the car and therefore the driver
 view are updated too, in case the car moves around a curve. \\
 
@@ -79,8 +79,12 @@ driver from having to decide, in which direction she has to steer.
 
 Due to the configuration of the world, lanes can only connect to junctions
 (\ref{sec:junctions}). In the process of driving through a junction, the 
-junction offers the driver the possibilities to driver through. Once decided,
+junction offers the driver the possibilities to drive through. Once decided,
 the lane that connects to the next road and the lane on that road are put 
 into a queue in the according order. When the car reaches the end of a lane, 
-it dequeues a lane from the queue and drives on on that lane.
+it dequeues a lane from the queue and drives on on that lane. The Problem 
+with this was as the simulation is event driven, that actually a car can be 
+already over the length of a lane when the update is processed. We circumvented 
+this issue by keeping track of the driven distance an detecting such 
+overflows.
 

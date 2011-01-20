@@ -31,12 +31,19 @@ The curved segments in between are generated automatically.
 \subsubsection{Junctions}
 \label{sec:junctions}
 
-Junctions can have a certain type, to be able to implement different types
-of rights of way. The layout of the junction, however, is by default 
+Junctions can have different types, like a crossroads or a roundabout. 
+For instance there's only an implementation of crossroads. 
+The layout of the junction, however, is by default 
 determined automatically based on the roads that it is connecting. All 
 lanes with the same direction are connected together. \\
 
-TODO: document how this is done with the lanes
+\noindent The algorithm for connecting the roads is the following:
+\begin{itemize}
+\item take two random roads and find out which ends are closer to each other
+\item find the closest ends of the other roads
+\item according to that build a matrix which contains all incoming and outgoing lanes
+\item connect all the incoming lanes to the outgoing lanes which belong not to the same road
+\end{itemize}
 
 \noindent When the junction is built, it places junction way points on the
 lanes that are connecting to it. These way points not only indicate the
@@ -55,7 +62,7 @@ that we implemented the straight lines as bézier curves too is to avoid
 having to treat them differently.  \\
 
 \noindent Since the curved segments are created automatically, the bend
-point is calculated automatically too. To do so, the linear segments are 
+point is calculated automatically too. To achieve this, the linear segments are 
 considered as straights and the intersection of them is then calculated.
 This intersection point is then used as the bend point of the bézier curve.
 With this algorithm, some erroneous conditions in the XML file can be

@@ -5,9 +5,11 @@
 \label{sec:vectors}
 
 We tried a few given vector classes, but we weren't satisfied
-with their features. Most of them don't create new objects
-on operations like addition, subtraction etc. which we needed because 
-changing the objects may result in unwanted situations. % probably use other words here
+with their features. It lies in the nature of vectors, that when an 
+operation on a vector is performed you usually get a new vector and 
+the base vector is left unaltered. Apparently the other people who 
+provided implementations for vectors have not been having this impression 
+which made us implement our own Vectors.
 
 \noindent So we made a generic interface for vectors of any size and
 implemented a 2D vector with following operations:
@@ -30,18 +32,21 @@ that this is slower in process time than to change the objects, but most
 times we needed new vector objects anyway. Additionally it provides more
 safety, since it's not possible to accidentally change a vector object
 where it should be cloned.
-
 \subsection{Linear combination}
 \label{sec:linearCombination}
 
-Since we had several occasions where we had to use a
-linear combination, we implemented this as static method
-on the vector class to provide it globally. It solves following
-equation: \\
+Often we had to solve problems where the borders of an area had been defined 
+by vectors and the question was if a certain point is in that area or not.
+This sort of problem is usually solved by a linear combination of the form:\\
+\\
+$ \vec{v} = \lambda * \vec{a} + \mu * \vec{b} $\\
+\\
+Since the solution to this problem is a linear equation system based on the 
+dimension of the vectors we decided to implement this as a static method in 
+the vector implementation. We omit the math here and present just the solutions 
+for $\lambda$ and $\mu$\\
 
 $ \lambda = \frac{-(b_x*v_y - b_y * v_x)}{a_x * b_y - a_y * b_x}$\\
 
 $\mu = \frac{a_x * v_y - a_y * v_x}{a_x * b_y - a_y * b_x} $ \\
-
-TODO : probably explain further
 

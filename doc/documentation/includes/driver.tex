@@ -7,13 +7,13 @@ driver looks at the world (\ref{sec:sight}), assesses the situation
 and reacts accordingly (\ref{sec:animus}), decides about which
 way to go (\ref{sec:driverJunctions}) and eventually steers the
 vehicle (\ref{sec:driverInfluence}). Drivers have a character
-(\ref{sec:character}) and physical conditions (\ref{sec:physics}). They
-can also take drugs (\ref{sec:drugs}). \\
+(\ref{sec:character}), physical conditions (\ref{sec:physics}) and could
+even take drugs (\ref{sec:drugs}). \\
 
 \subsection{Animus}
 \label{sec:animus}
 
-The Animus is the brain of the driver. Here all way points 
+The Animus is the brain of the driver. Here all waypoints 
 (\ref{sec:wayPointSystem}) are processed and decisions are made. \\
 
 \noindent The Animus only knows the current speed limit on the lane 
@@ -39,13 +39,13 @@ on that decision. Figure \ref{fig:animus} shows this process.
 \begin{center}
 \includegraphics[width=10cm]{images/animus.png}
 \end{center}
-\caption{How the way points influent the acceleration}
+\caption{How the waypoints influence the acceleration}
 \label{fig:animus}
 \end{figure}
 
 The influences on the acceleration and deceleration are weighted, so for 
 instance the vehicle way points have a higher weight so it influences the 
-deceleration more than a speed way point can influent the acceleration.
+deceleration more than a speed way point can influence the acceleration.
 The acceleration and deceleration in this picture are values ranging from
 0 to 1. After all way points had their influence, the two values are then
 subtracted. The difference is then the effective acceleration value that 
@@ -61,10 +61,10 @@ as long as there is nothing else interrupting his way.
 To know whether another vehicle is approaching (because it moves 
 more slowly) or not, we could have just implemented a method on the
 way point that returns the speed of it's vehicle to the driver that
-is assessing. But we wanted it more realistic, the drivers should have
+is assessing. But we wanted it to be more realistic, the drivers should have
 to estimate the speed of the other traffic participants. They can
-therefore only retrieve the fuzzy distance (\ref{par:movingWPDistance})
-to the other way points. A driver then has to remember the distance
+therefore only retrieve the somewhat fuzzy distance (\ref{sec:movingWPDistance})
+to the other waypoints. A driver then has to remember the distance
 of the nearest vehicle, until the next assessment cycle. It can then
 compare the remembered distance with the new one and knows, whether the
 vehicle is approaching or not and how fast.
@@ -72,9 +72,9 @@ vehicle is approaching or not and how fast.
 \subsubsection{Following another vehicle}
 
 The driver always tries to keep a certain security distance to the
-vehicle in front of him, which is twice the speed that he is going.
+vehicle in front of him, which is twice the speed that he is going (e.g. $ 50 km/h => 100m$).
 When the distance of the vehicle in front falls below that value, the
-animus begins to influent the deceleration value (\ref{sec:assessment}).
+animus begins to influence the deceleration value (\ref{sec:assessment}).
 The nearer the vehicle is, the higher is the influence.
 
 \subsubsection{Decisions in junctions}
@@ -88,7 +88,7 @@ though.
 \label{sec:physics}
 
 The physics objects define the physical conditions of the driver. Every
-driver has one of these objects. They provide following properties:
+driver has one of these objects. They provide the following properties:
 
 \begin{itemize}
 \item \textbf{The sight} How far the driver can see
@@ -118,7 +118,7 @@ At this point of process the driver only sees things ahead of him on the
 lane. There are no mirrors, and it is not possible to look behind, hence
 he is not able to reverse.\\
 
-\noindent What the driver can see is limited to a field of view formed as 
+\noindent What the driver can see is limited to a field of view formed like 
 a ''Pacman``. We implemented that as the \emph{driver view}, more on that in 
 section \ref{sec:driverView}.
 

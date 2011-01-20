@@ -12,7 +12,7 @@ this concept, all objects in the world can be treated similarly.\\
 ''driver view`` (\ref{sec:driverView}) and is based on the manner 
 how humans view their environment. \\
 
-\noindent To have an efficient filter for the waypoints we implemented a quad tree 
+\noindent To have an efficient location based filter for the waypoints we implemented a quad tree 
 (\ref{sec:quadTree}).
 
 \subsection{Types of waypoints}
@@ -71,7 +71,7 @@ project so far, only those waypoints are needed. \\
 
 \paragraph{Car waypoints}
 These waypoints represent other cars in the simulation. Each car generates its
-waypoint and updates its position as the car moves.
+waypoint and updates its position as the car moves on.
 
 \subsection{Waypoint finding}
 
@@ -95,7 +95,7 @@ organized in a quad tree. The quad tree basically divides the world
 into rectangles as shown in figure \ref{fig:quadTree} to a certain
 depth, which are nodes in the tree. The depth defines the resolution
 of the tree, and depending on the depth the nodes cover each an area
-in the world. The nodes are created only if there are waypoints their
+in the world. The nodes are created only if there are waypoints in their
 area. They can contain more than one waypoint, since there can be more
 than one waypoint in an area.\\
 
@@ -176,9 +176,9 @@ to see more in the world. It is shaped like this:
 \end{figure}
 
 \noindent With this shape the driver is able to look around the curves
-and also see things on a crossing lane. Thanks to an interface for the
+and also see things on a crossing lane. Thanks to thoughtfull software design for the
 driver view we could just replace the triangular driver view with the new,
-round one without having to change the other parts of the code.
+circular one without having to adopt other parts of the code.
 
 \paragraph{The filtering}
 
@@ -197,11 +197,11 @@ $ \lambda, \mu \in ]0, 1]$ \\
 $ \frac{\lambda * \left| \vec{b} \right| }{\mu * \left| \vec{a} \right|} \leq 
 \frac{\left| \vec{b} \right|}{\left| \vec{a} \right|}$ \\
 
-\noindent Where $\lambda$ and $\mu$ are the components of the linear combination \\
+\noindent Where $\lambda$ and $\mu$ are the scalar components of the linear combination \\
 
-$ \lambda * \vec{a} + \mu * \vec{b} $ \\
+$ \vec{v} = \lambda * \vec{a} + \mu * \vec{b} $ \\
 
-The algorithm for the Pacman-shaped waypoint is simpler. Assuming
+The algorithm for the Pacman-shaped waypoint is much simpler. Assuming
 $\vec{v}$ is the position vector of the waypoint, $\vec{p}$ the
 one of the driver view and $\alpha$ is the angle of $\left | \vec{v} -
 \vec{p}\right|$ to the x-axis, following constraints have to be fulfilled
@@ -214,7 +214,7 @@ $ -\frac{\text{angle}}{2} < \alpha < \frac{\text{angle}}{2} $
 
 \subsubsection{Lane check}
 
-At the last step of waypoint finding, the waypoints are checked with the
+In the last step of waypoint finding, the waypoints are checked with the
 lane queue of the vehicle (\ref{sec:laneChanges}). If the waypoint is not
 on any of the lanes in the vehicle's queue, it is dropped, since it doesn't
 concern the driver. An example of such a waypoint is a vehicle on the lane
@@ -224,7 +224,38 @@ that goes in the opposite direction of the road.
 \subsection{Junction waypoint finding}
 \label{sec:junctionWPfinding}
 
-TODO: document this
+The finding of relevant waypoints while driving onto or on a junction is somewhat more
+ complex. First of all other vehicles have to be considered not only the ones on the same
+lane but also those on the lanes that are crossing the own track. And then there's another
+ important point to consider: the priorities so when to give way or not to. Therefore this
+process has been divided into three substeps:
+
+\subsubsection{Getting the relevant lanes}
+
+After the waypoints have been filtered by the DriverView we apply another filter based on 
+the lanes leading through the junction ahead. The junction returns a list of lanes that 
+are not related to the lane we are on. If a vehicle waypoint doesn't contain one of the 
+lanes in the list it is ignored.
+
+\subsubsection{Detecting track intersections}
+
+When a driver makes a decision which way it will turn on a junction it saves a decision 
+object in the animus which contains a Direction object. There are three different 
+directions: \emph {Left, Straight} and \emph{Right}.
+If the track of another vehicle is not intersecting with the track of this vehicle ignore the 
+vehicle. To determine if it intersects the directions are evaluated. 
+
+\subsubsection{Process of giving way}
+ 
+So to be able to evaluate which car has to give way the priority Object has to be 
+provided with the direction the own car is heading to, where the other car is coming 
+from and where it is heading to. On this basis it returns true if we have to give way or 
+false if we do not. This value is then stored so that driver is able to remember who has 
+to give way. This is necessary because the directions change while the vehicles are driving 
+through a junction. Meanwhile the distance to the vehicles which we have to give way to are 
+evaluated and the shortest one is taken into consideration exactly as it is done when 
+following another car. For instance there is only the PriorityRight object implemented which 
+simulates the rules of giving way always to the vehicle coming from or turning right.
 
 
 
