@@ -13,52 +13,30 @@ public class PriorityRight implements IPriority {
 	
 	private int from,to,dir;
 	
+	/**
+	 * forgive me the instanceof thing
+	 */
 	@Override
 	public boolean hasPriority(IDirection dir, IDirection from, IDirection to) {
-		dir.evaluateDir(this);
-		from.evaluateFrom(this);
-		to.evaluateTo(this);
+		this.dir = directionToInteger(dir);
+		this.from = directionToInteger(from);
+		this.to = directionToInteger(to);
 		return assessPriority();
 	}
-	
-	public void handleDir (LeftDirection dir){
-		this.dir = LEFT;
-	}
-	
-	public void handleDir (RightDirection dir){
-		this.dir = RIGHT;
-	}
-	
-	public void handleDir (StraightDirection dir){
-		this.dir = STRAIGHT;
-	}
-	
-	public void handleFrom (LeftDirection dir){
-		from = LEFT;
-	}
-	
-	public void handleFrom (RightDirection dir){
-		from = RIGHT;
-	}
-	
-	public void handleFrom (StraightDirection dir){
-		from = STRAIGHT;
-	}
-	
-	public void handleTo (LeftDirection dir){
-		to = LEFT;
-	}
-	
-	public void handleTo (RightDirection dir){
-		to = RIGHT;
-	}
-	
-	public void handleTo (StraightDirection dir){
-		to = STRAIGHT;
+
+	private int directionToInteger (IDirection d){
+		if (d instanceof LeftDirection){
+			return LEFT;
+		}
+		if (d instanceof RightDirection){
+			return RIGHT;
+		}
+		return STRAIGHT;
 	}
 
 	@Override
 	public void handleDir(IDirection dir) {
+		System.out.println("handle dir called");
 	}
 
 	@Override
@@ -70,22 +48,20 @@ public class PriorityRight implements IPriority {
 	}
 	
 	private boolean assessPriority (){
-		if (dir == LEFT){
-			if (from == STRAIGHT){
-				if (to != LEFT){
-					return false;
-				}
-			}else if (from == RIGHT){
-				if (to != RIGHT){
-					return false;
-				}
-			}
-		}
+		System.out.println("dir:"+dir+";from:"+from+";to:"+to);
 		if (dir == STRAIGHT){
 			if (from == RIGHT){
-				return false;
+				return true;
 			}
 		}
-		return true;
+		if (dir == LEFT){
+			if (from == STRAIGHT && to != LEFT){
+				return true;
+			}
+			if (from == RIGHT && to != RIGHT){
+				return true;
+			}
+		}
+		return false;
 	}
 }

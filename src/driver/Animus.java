@@ -1,7 +1,9 @@
 package driver;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -44,7 +46,9 @@ public class Animus implements IObserver {
 	protected int targetSpeed = 50;
 	protected float nearestVehicleDistance;
 	protected float nearestVehicleDistanceOld;
+	protected float nextWaypointOld;
 	protected List<VehicleWayPoint> vehicleWayPoints;
+	protected Map<VehicleWayPoint,Boolean> crossingVehicles;
 	
 	/**
 	 * If we are driving through a junction, save its waypoint here
@@ -70,6 +74,7 @@ public class Animus implements IObserver {
 		this.seenWayPoints = new ArrayBlockingQueue<IWayPoint>(10);
 		nearestVehicleDistance = Float.MAX_VALUE;
 		nearestVehicleDistanceOld = Float.MAX_VALUE;
+		crossingVehicles = new HashMap<VehicleWayPoint,Boolean>();
 	}
 	
 	/**
@@ -100,38 +105,61 @@ public class Animus implements IObserver {
 		
 		if (isOnJunction()){
 			List<ILane> lanes = this.currentJunction.getJunction().getRelevantLanes(this.vehicle.getLane());
-			float nextWayPoint = Float.MAX_VALUE;
+			float nextWaypoint = Float.MAX_VALUE;
 			for (VehicleWayPoint waypoint:vehicleWayPoints){
 				List<ILane> wpLanes = new ArrayList<ILane>(waypoint.getVehicle().getLanes());
 				for (ILane lane : wpLanes){
 					if (lanes.contains(lane)){
 						Vehicle vehicle = waypoint.getVehicle();
-						if (this.decision != null){
-							IDirection dir = this.decision.getDirection();
-							IDirection from = this.currentJunction.getJunction().comingFrom(this.vehicle.getLane(), vehicle.getLane());
-							IDirection to = vehicle.getSimpleDirection();
-							if (dir.crossesMe(from,to)){
-								IPriority priority = new PriorityRight();
-								if (!priority.hasPriority(dir, from, to)){
-									float distance = waypoint.getDistance(this.vehicle);
-									if (distance < nextWayPoint){
-										nextWayPoint = distance;
-									}
+						if (this.crossingVehicles.keySet().contains(waypoint)){
+							if (this.crossingVehicles.get(waypoint)){
+								System.out.println(this.vehicle.hashCode()+" knows already "+vehicle.hashCode());
+								float distance = waypoint.getDistance(this.vehicle);
+								if (distance < nextWaypoint){
+									nextWaypoint = distance;
 								}
 							}
-							break;
+						}else{
+							System.out.println(this.vehicle.hashCode()+" vehicle is on my lanes "+vehicle.hashCode());
+							if (this.decision != null){
+								IDirection dir = this.decision.getDirection();
+								//TODO remember each car u saw that can cross your trail and handle that cars position before u evaluate
+								//System.out.println("coming from: ");
+								IDirection from = this.currentJunction.getJunction().comingFrom(this.vehicle.getLane(), vehicle.getLane());
+								IDirection to = vehicle.getSimpleDirection();
+								//System.out.println("d:"+dir.toString()+";f:"+from.toString()+";t:"+to.toString());
+								if (dir.crossesMe(from,to)){
+									this.crossingVehicles.put(waypoint, true);
+									//System.out.println(this.vehicle.hashCode()+" has crossing "+vehicle.hashCode());
+									IPriority priority = new PriorityRight();
+									boolean prio = priority.hasPriority(dir, from, to);
+									//System.out.println(prio);
+									if (prio){
+										System.out.println(vehicle.hashCode()+"has priority over"+this.vehicle.hashCode());
+										float distance = waypoint.getDistance(this.vehicle);
+										if (distance < nextWaypoint){
+											nextWaypoint = distance;
+										}
+										this.crossingVehicles.put(waypoint, true);
+									}else{
+										this.crossingVehicles.put(waypoint, false);
+									}
+								}
+								break;
+							}
 						}
 					}
 				}
 			}
-			if (nextWayPoint < securityDistance()){
+			if (nextWaypoint < securityDistance() && nextWaypoint < nextWaypointOld){
 				junctionActivator.setValue(
 						this.calculateVehicleActivator(
-						securityDistance(),
-						nextWayPoint,
-						this.vehicle.getSpeed()
-					)
+								securityDistance(),
+								nextWaypoint,
+								this.vehicle.getSpeed()
+						)
 				);
+				nextWaypointOld = nextWaypoint;
 			}
 		}
 		
@@ -353,6 +381,8 @@ public class Animus implements IObserver {
 			if (this.currentJunction != null) {
 				this.currentJunction = null;
 				this.vehicle.notify("signal off");
+				this.crossingVehicles = new HashMap<VehicleWayPoint,Boolean>();
+				this.nextWaypointOld = Float.MAX_VALUE;
 			}
 		}
 	}
@@ -383,7 +413,6 @@ public class Animus implements IObserver {
 				}
 				VehicleDimension otherDim = waypoint.getVehicle().getDimension();
 				if (distance < myDim.getBoundingRadius()+otherDim.getBoundingRadius()){
-					
 					detectCollison(waypoint);
 				}
 			}

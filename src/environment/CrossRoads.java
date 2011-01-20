@@ -94,13 +94,22 @@ public class CrossRoads implements IJunction {
 	private IDirection getDirectionForDecision (ILane coming,ILane going){
 		IVector incomingStart = coming.getLastILaneSegment().getStartPoint();
 		IVector incomingEnd = coming.getLastILaneSegment().getEndPoint();
-		IVector end = going.getStartPosition();
-		IVector turnDirection = end.sub(incomingEnd);
+		IVector goingStart = going.getFirstILaneSegment().getStartPoint();
+		IVector goingEnd = going.getLastILaneSegment().getEndPoint();
+		IVector turnDirection;
+		if (goingStart.sub(incomingEnd).norm()<goingEnd.sub(incomingEnd).norm()){
+			turnDirection = going.getFirstILaneSegment().getEndPoint().sub(goingStart);
+		}else{
+			turnDirection = going.getLastILaneSegment().getStartPoint().sub(goingEnd);
+		}
 		IVector incomingDirection = incomingEnd.sub(incomingStart);
+		//System.out.println("in:"+incomingDirection.getAngle()+";out:"+turnDirection.getAngle());
+		//float angle = incomingDirection.getAngle()-turnDirection.getAngle();
 		float angle = incomingDirection.getAngle()-turnDirection.getAngle();
 		if (angle < 0){
 			angle += 2*Math.PI;
 		}
+		//System.out.println("angle:"+(angle/Math.PI)*180);
 		if (angle <= Math.PI/8 || angle >= 15*Math.PI/8){
 			return new StraightDirection();
 		}else if (angle < 15*Math.PI/8 && angle > Math.PI){
@@ -298,8 +307,109 @@ public class CrossRoads implements IJunction {
 	 */
 
 	@Override
-	public IDirection comingFrom(ILane actualLane, ILane otherLane) {
-		return this.getDirectionForDecision(actualLane, otherLane);
+	public IDirection comingFrom(ILane incoming, ILane going) {
+		IVector incomingStart = incoming.getFirstILaneSegment().getStartPoint();
+		IVector incomingEnd = incoming.getLastILaneSegment().getEndPoint();
+		IVector goingStart = going.getFirstILaneSegment().getStartPoint();
+		IVector goingEnd = going.getLastILaneSegment().getEndPoint();
+		float endEnd = goingEnd.sub(incomingEnd).norm();
+		float endStart = goingEnd.sub(incomingStart).norm();
+		float startEnd = goingStart.sub(incomingEnd).norm();
+		float startStart = goingStart.sub(incomingStart).norm();
+		IVector goingDirection;
+		IVector incomingDirection;
+		//System.out.println("eE:"+endEnd+";eS:"+endStart+";sE:"+startEnd+";sS:"+startStart);
+		if (endEnd < endStart){
+			if (endEnd < startEnd){
+				if (endEnd < startStart){
+					goingDirection = going.getLastILaneSegment().getEndPoint().sub(
+						going.getLastILaneSegment().getStartPoint()
+					);
+					incomingDirection = incoming.getLastILaneSegment().getStartPoint().sub(
+						incoming.getLastILaneSegment().getEndPoint()
+					);
+					//System.out.println("eE is smallest");
+				}else{
+					goingDirection = going.getFirstILaneSegment().getEndPoint().sub(
+						going.getFirstILaneSegment().getStartPoint()
+					);
+					incomingDirection = incoming.getFirstILaneSegment().getStartPoint().sub(
+						incoming.getFirstILaneSegment().getEndPoint()
+					);
+					//System.out.println("sS is smallest");
+				}
+			}else{
+				if (startEnd < startStart){
+					goingDirection = going.getFirstILaneSegment().getEndPoint().sub(
+							going.getFirstILaneSegment().getStartPoint()
+						);
+						incomingDirection = incoming.getLastILaneSegment().getStartPoint().sub(
+							incoming.getLastILaneSegment().getEndPoint()
+						);
+						//System.out.println("sE is smallest"); 
+				}else{
+					goingDirection = going.getFirstILaneSegment().getEndPoint().sub(
+						going.getFirstILaneSegment().getStartPoint()
+					);
+					incomingDirection = incoming.getFirstILaneSegment().getStartPoint().sub(
+						incoming.getFirstILaneSegment().getEndPoint()
+					);
+					//System.out.println("sS is smallest");
+				}
+			}
+		}else{
+			if (endStart < startEnd){
+				if (endStart < startStart){
+					goingDirection = going.getLastILaneSegment().getEndPoint().sub(
+						going.getLastILaneSegment().getStartPoint()
+					);
+					incomingDirection = incoming.getFirstILaneSegment().getStartPoint().sub(
+						incoming.getFirstILaneSegment().getEndPoint()
+					);
+					//System.out.println("eS is smallest");
+				}else{
+					goingDirection = going.getFirstILaneSegment().getEndPoint().sub(
+						going.getFirstILaneSegment().getStartPoint()
+					);
+					incomingDirection = incoming.getFirstILaneSegment().getStartPoint().sub(
+						incoming.getFirstILaneSegment().getEndPoint()
+					);
+					//System.out.println("sS is smallest");
+				}
+			}else{
+				if (startEnd < startStart){
+					goingDirection = going.getFirstILaneSegment().getEndPoint().sub(
+						going.getFirstILaneSegment().getStartPoint()
+					);
+					incomingDirection = incoming.getLastILaneSegment().getStartPoint().sub(
+						incoming.getLastILaneSegment().getEndPoint()
+					);
+					//System.out.println("sE is smallest");
+				}else{
+					goingDirection = going.getFirstILaneSegment().getEndPoint().sub(
+						going.getFirstILaneSegment().getStartPoint()
+					);
+					incomingDirection = incoming.getFirstILaneSegment().getStartPoint().sub(
+						incoming.getFirstILaneSegment().getEndPoint()
+					);
+					//System.out.println("sS is smallest");
+				}
+			}
+		}
+		//System.out.println("in:"+incomingDirection.getAngle()+";out:"+goingDirection.getAngle());
+		//float angle = incomingDirection.getAngle()-turnDirection.getAngle();
+		float angle = incomingDirection.getAngle()-goingDirection.getAngle();
+		if (angle < 0){
+			angle += 2*Math.PI;
+		}
+		//System.out.println("angle:"+(angle/Math.PI)*180);
+		if (angle <= Math.PI/8 || angle >= 15*Math.PI/8){
+			return new StraightDirection();
+		}else if (angle < 15*Math.PI/8 && angle > Math.PI){
+			return new RightDirection();
+		}else{
+			return new LeftDirection();
+		}
 	}
 	
 	/**
