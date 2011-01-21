@@ -16,6 +16,7 @@ public abstract class UIAdapter<E> implements IUIAdapter<E> {
 		}
 	}
 
+	@Override
 	public E getMainObject() {
 		return this.mainObject;
 	}

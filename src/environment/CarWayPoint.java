@@ -30,6 +30,7 @@ public class CarWayPoint extends VehicleWayPoint {
 	 * {@inheritDoc}
 	 * @throws Exception 
 	 */
+	@Override
 	public IUIAdapterWayPoint<?> 
 		visitUIFactory(float scale, IVector offsetVector) throws Exception {
 		return UIElementFactory.getUIElement(this, scale, offsetVector);

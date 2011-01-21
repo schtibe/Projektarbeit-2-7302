@@ -5,10 +5,7 @@ package simulation;
  * 
  * Makes them implement a handle event method according to the given event type
  * 
- * @author user
- * 
- * @param <E>
- *            The type of Event that the target expects
+ * @param <E> The type of Event that the target expects
  */
 public interface IEventTarget<E> {
 	/**

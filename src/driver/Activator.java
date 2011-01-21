@@ -1,7 +1,6 @@
 package driver;
 
 public abstract class Activator implements IActivator {
-	
 	private float amount;
 	
 	public Activator (float amnt){

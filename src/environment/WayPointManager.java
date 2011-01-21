@@ -73,6 +73,7 @@ public class WayPointManager implements IPlacableManager {
 	 * @param newX
 	 * @param newY
 	 */
+	@Override
 	public boolean move(IMovable movable, float newX, float newY) {
 		// TODO this is a workaround to make development of the rest of the solution go on while we have an issue here
 		// with the move method
@@ -139,6 +140,7 @@ public class WayPointManager implements IPlacableManager {
 	 * @deprecated
 	 */
 	
+	@Deprecated
 	private IVector[] getMinMaxVectors (IVector[] input){
 		IVector min = input[0].clone();
 		IVector max = input[0].clone();
@@ -204,6 +206,7 @@ public class WayPointManager implements IPlacableManager {
 		return this.waypoints;
 	}
 	
+	@Override
 	public List<IPlacable> toList(){
 		return root.toList();
 	}

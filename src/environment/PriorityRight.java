@@ -3,7 +3,6 @@ package environment;
 import driver.IDirection;
 import driver.LeftDirection;
 import driver.RightDirection;
-import driver.StraightDirection;
 
 public class PriorityRight implements IPriority {
 

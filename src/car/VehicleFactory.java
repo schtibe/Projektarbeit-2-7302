@@ -10,11 +10,9 @@ public class VehicleFactory {
 
 	/**
 	 * All the possible vehicle types
-	 * 
 	 */
 	public enum VehicleType {
 		car
-		//, bus
 	}
 
 	/**

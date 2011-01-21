@@ -6,17 +6,19 @@ import java.util.Queue;
 import simulation.IEventTarget;
 import simulation.VehicleEvent;
 
-import common.IObserver;
+import common.IObservable;
 import common.IVector;
 
+import driver.IDirection;
 import driver.IDriverView;
 import environment.ILane;
+import environment.IMovable;
 import environment.Lane;
 
 /**
  * The Vehicle interface
  */
-public interface IVehicle extends IEventTarget<VehicleEvent> {
+public interface IVehicle extends IEventTarget<VehicleEvent>, IObservable {
 
 	/**
 	 * Return the vehicle's dimensions
@@ -42,8 +44,7 @@ public interface IVehicle extends IEventTarget<VehicleEvent> {
 	/**
 	 * Change the speed
 	 * 
-	 * @param The
-	 *            acceleration
+	 * @param The acceleration
 	 */
 	public abstract void accelerate(float acceleration);
 
@@ -92,9 +93,6 @@ public interface IVehicle extends IEventTarget<VehicleEvent> {
 	 */
 	public abstract float getDrivenLaneDistance();
 
-	/**
-	 * Handle an Event, please implement in subclasses
-	 */
 	@Override
 	public abstract void handleEvent(VehicleEvent event);
 
@@ -115,25 +113,42 @@ public interface IVehicle extends IEventTarget<VehicleEvent> {
 	/**
 	 * Set a list of lanes to the queue
 	 * 
-	 * @param list
-	 *            of lanes
+	 * @param list of lanes
 	 */
 	void setLanes(List<ILane> lane);
-
-	/**
-	 * Set the animus
-	 * 
-	 * This was necessary, so the vehicle drive's around quickly. This is more a
-	 * quick workaround, it should be solved in a better way, so the vehicle
-	 * doesn't know the animus.
-	 * 
-	 * @param animus
-	 */
-	//public void setAnimus(Animus animus);
 	
+	/**
+	 * Indicate whether the vehicle is frozen or not
+	 * @return
+	 */
 	boolean isFreezed();
 	
+	/**
+	 * Remove the way point
+	 */
 	void removeWaypoint();
 	
-	public void register(IObserver obs);
+	/**
+	 * Create a way point from this vehicle
+	 */
+	public void createWayPoint();
+	
+	/**
+	 * Return the way point of this vehicle
+	 * 
+	 * @return way point
+	 */
+	public abstract IMovable getWayPoint();
+	
+	/**
+	 * Set the direction object
+	 * @param dir Direction object
+	 */
+	public void setSimpleDirection(IDirection dir);
+	
+	/**
+	 * Get the saved direction
+	 * @return Direction
+	 */
+	public IDirection getSimpleDirection();
 }

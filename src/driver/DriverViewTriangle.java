@@ -6,6 +6,9 @@ import common.LinearCombination;
 import common.Rectangle;
 import common.Vector;
 
+/**
+ * The driver view shaped as a triangle
+ */
 public class DriverViewTriangle implements IDriverView {
 	/**
 	 * The properties of the view
@@ -63,56 +66,36 @@ public class DriverViewTriangle implements IDriverView {
 		this.angle = angle;
 		this.distance = distance;
 	}
-	/**
-	 * sets the angle 
-	 */
+
 	@Override
 	public void setAngle (float value){
 		this.angle = value;
 		this.boundaryCalculated = false;
 	}
-	
-	/**
-	 * sets the distance
-	 */
-	
+
 	@Override
 	public void setDistance (float value){
 		this.distance = value;
 		this.boundaryCalculated = false;
 	}
 	
-	/**
-	 * sets the direction vector
-	 */
 	
 	@Override
 	public void setDirection (IVector value){
 		this.direction = value;
 		this.boundaryCalculated = false;
 	}
-	
-	/**
-	 * sets the position
-	 */
-	
+
 	@Override
 	public void setPosition (IVector value){
 		this.position = value;
 	}
 	
-	/**
-	 * get the angle
-	 */
-	
+
 	@Override
 	public float getAngle (){
 		return this.angle;
 	}
-	
-	/**
-	 * get the distance
-	 */
 	
 	@Override
 	public float getDistance (){
@@ -120,52 +103,31 @@ public class DriverViewTriangle implements IDriverView {
 		
 	}
 	
-	/**
-	 * get the position
-	 */
-	
 	@Override
 	public IVector getPosition (){
 		return this.position;
 	}
-	
-	/**
-	 * get the direction vector
-	 */
 	
 	@Override
 	public IVector getDirection (){
 		return this.direction;
 	}
 	
-	/**
-	 * returns a clone of the actual DriverView
-	 */
-	
 	@Override
 	public IDriverView clone (){
 		return new DriverViewTriangle(this.direction,this.position,this.angle,this.distance);
 	}
 	
-	/**
-	 * to string
-	 */
 	@Override
 	public String toString(){
 		return new String("position: "+this.position.toString()+", direction: "+this.direction.toString()+", distance: "+this.distance);
 	}
 
-	/**
-	 * Check whether the way point lies in this area
-	 * @param position
-	 * @return
-	 */
+
+	@Override
 	public boolean checkWayPoint(IVector position) {
-	//	System.out.println("Calculating constants");
 		IVector a = getABoundary();
-
 		IVector b = getBBoundary();
-
 		float boundaryRatio =  b.norm() /  a.norm();
 
 		LinearCombination result = Vector.getLinearCombination(this.position, a, b, position);
@@ -192,8 +154,6 @@ public class DriverViewTriangle implements IDriverView {
 	
 	/**
 	 * calculates the boundaries of our view
-	 * 
-	 * @TODO The distance is wrong
 	 */
 	private void calculateBoundaries() {
 		if(boundaryCalculated){
@@ -209,9 +169,7 @@ public class DriverViewTriangle implements IDriverView {
 	}
 
 	@Override
-	public IRectangle getBoundingBox() {
-		// @TODO implement in corresponding DriverView instance
-		
+	public IRectangle getBoundingBox() {		
 		IVector[] points = new IVector[2];
 		
 		points[0] = this.position.add(getCBoundary());
@@ -240,48 +198,6 @@ public class DriverViewTriangle implements IDriverView {
 			}
 		}
 		return new Rectangle (new Vector(new float[]{minX,minY}), new Vector(new float[]{maxX,maxY}));
-		
-		//old stuff
-		
-		/*
-		float halfViewAngle = (view.getAngle()/2);
-		
-		IVector upperBound = (view.getDirection().rotate(halfViewAngle)).normalize().multiply(view.getDistance());//.add(view.getPosition());
-		IVector lowerBound = (view.getDirection().rotate(-halfViewAngle)).normalize().multiply(view.getDistance());//.add(view.getPosition());
-
-		upperBound = upperBound.add(view.getPosition());
-		lowerBound = lowerBound.add(view.getPosition());
-
-		IVector[] xtremes = getMinMaxVectors(new IVector[]{view.getPosition(),upperBound,lowerBound});
-		IVector min = xtremes[0];
-		IVector max = xtremes[1];//.sub(min);
-		
-		//min max stuff
-		/*
-		IVector min = input[0].clone();
-		IVector max = input[0].clone();
-		for (IVector vec : input){
-			float minX = min.getComponent(0);
-			float minY = min.getComponent(1);
-			float maxX = max.getComponent(0);
-			float maxY = max.getComponent(1);
-			if (vec.getComponent(0) < minX){
-				minX = vec.getComponent(0);
-			}
-			if (vec.getComponent(1)<minY){
-				minY = vec.getComponent(1);
-			}
-			min = new Vector (new float[]{minX,minY});
-			if (vec.getComponent(0) > maxX){
-				maxX = vec.getComponent(0);
-			}
-			if (vec.getComponent(1) > maxY){
-				maxY = vec.getComponent(1);
-			}
-			max = new Vector(new float[]{maxX,maxY});
-		}
-		return new IVector[]{min,max};
-		*/
 	}
 	
 }

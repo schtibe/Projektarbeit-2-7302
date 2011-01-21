@@ -1,12 +1,11 @@
 package driver;
 
-import environment.IPriority;
 
 /**
+ * Going left
+ * 
  * to whom it may concern: sorry or the instanceofs :(
- *
  */
-
 public class LeftDirection implements IDirection {
 
 	/**
@@ -26,7 +25,6 @@ public class LeftDirection implements IDirection {
 	/**
 	 * used negative logic to minimize implementation effort
 	 */
-	
 	private boolean comingFromLeft(IDirection goingTo){
 		if (goingTo instanceof RightDirection){
 			return false;
@@ -48,23 +46,8 @@ public class LeftDirection implements IDirection {
 		return true;
 	}
 	
+	@Override
 	public String toString (){
 		return "left";
 	}
-
-	@Override
-	public void evaluateDir(IPriority priority) {
-		priority.handleDir(this);
-	}
-
-	@Override
-	public void evaluateFrom(IPriority priority) {
-		priority.handleFrom(this);
-	}
-
-	@Override
-	public void evaluateTo(IPriority priority) {
-		priority.handleTo(this);
-	}
-
 }

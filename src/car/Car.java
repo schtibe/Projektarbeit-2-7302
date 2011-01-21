@@ -11,11 +11,13 @@ import environment.WayPointManager;
 
 /**
  * The first implemented vehicle
- * 
  */
 public class Car extends Vehicle {
 
-	long lastStep;
+	/**
+	 * Remember the last time step
+	 */
+	protected long lastStep;
 
 	/**
 	 * The maximal acceleration of the car
@@ -45,10 +47,8 @@ public class Car extends Vehicle {
 	/**
 	 * Initialise the car's variables
 	 * 
-	 * @param lane
-	 *            The lane to put the car on
-	 * @param drivenLaneDistance
-	 *            The distance on the lane to put the car on
+	 * @param lane The lane to put the car on
+	 * @param drivenLaneDistance The distance on the lane to put the car on
 	 */
 	public Car(ILane lane, float drivenLaneDistance)
 			throws IllegalArgumentException {
@@ -60,9 +60,6 @@ public class Car extends Vehicle {
 				.getScale());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void adjustSpeed(float timestep) throws CarCannotReverseException {
 		this.speed += this.acceleration * (timestep / 1000) * 3.6;
@@ -71,11 +68,6 @@ public class Car extends Vehicle {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @param VehilceEvent
-	 */
 	@Override
 	public void handleEvent(VehicleEvent event) {
 		if (!freezed) {
@@ -89,9 +81,6 @@ public class Car extends Vehicle {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void createWayPoint() {
 		this.wayPoint = new CarWayPoint(this);
@@ -103,17 +92,10 @@ public class Car extends Vehicle {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected float maxAcceleration() {
 		return this.maxAcceleration;
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 
 	@Override
 	protected float maxDeceleration() {

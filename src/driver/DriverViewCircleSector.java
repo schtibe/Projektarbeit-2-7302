@@ -5,6 +5,9 @@ import common.IVector;
 import common.Rectangle;
 import common.Vector;
 
+/**
+ * The driver view shaped as a pacman
+ */
 public class DriverViewCircleSector implements IDriverView {
 	/**
 	 * The properties of the view
@@ -33,7 +36,6 @@ public class DriverViewCircleSector implements IDriverView {
 	 * @param angle
 	 * @param distance
 	 */
-	
 	public DriverViewCircleSector(float angle, float distance){
 		this.angle = angle;
 		this.radius = distance;
@@ -46,7 +48,6 @@ public class DriverViewCircleSector implements IDriverView {
 	 * @param angle
 	 * @param distance
 	 */
-	
 	private DriverViewCircleSector(IVector direction, IVector position, float angle, float distance){
 		this.direction = direction;
 		this.position = position;

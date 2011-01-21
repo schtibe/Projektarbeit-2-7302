@@ -20,7 +20,7 @@ public class VehicleDimension {
 	private float radius;
 	
 	/**
-	 * Initialize the vehicle
+	 * Initialise the vehicle
 	 * @param width
 	 * @param length
 	 */
@@ -68,7 +68,6 @@ public class VehicleDimension {
 	 * Get the bounding circle radius
 	 * @return the bounding circles radius value
 	 */
-	
 	public float getBoundingRadius (){
 		return radius;
 	}
@@ -76,8 +75,7 @@ public class VehicleDimension {
 	/**
 	 * update the radius after change to width or height
 	 */
-	
 	private void updateBoundingRadius(){
-		radius = (float)Math.sqrt((double)(length*length+width*width));
+		radius = (float)Math.sqrt((length*length+width*width));
 	}
 }

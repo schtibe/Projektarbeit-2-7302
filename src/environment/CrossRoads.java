@@ -11,7 +11,6 @@ import simulation.builder.LaneBuilder;
 import common.IVector;
 import common.Vector;
 
-import driver.IDecision;
 import driver.IDirection;
 import driver.LeftDirection;
 import driver.RightDirection;

@@ -62,6 +62,7 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 		}
 	}
 
+	@Override
 	public float getPositionOnLane(int mouseX, int mouseY) {
 		List<Path> paths = this.getLaneSegmentPaths();
 		
@@ -95,6 +96,7 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 	 * Return paths objects of the lane segments
 	 * @return
 	 */
+	@Override
 	public List<Path> getLaneSegmentPaths() {
 		List<Path> paths = new ArrayList<Path>();
 		

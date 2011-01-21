@@ -13,6 +13,7 @@ public abstract class MovingWayPoint extends WayPoint implements IMovable {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public float getXPos() {
 		return this.position.getComponent(0);
 	}
@@ -20,6 +21,7 @@ public abstract class MovingWayPoint extends WayPoint implements IMovable {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public float getYPos() {
 		return this.position.getComponent(1);
 	}
@@ -28,6 +30,7 @@ public abstract class MovingWayPoint extends WayPoint implements IMovable {
 	 * Update the position
 	 * @param pos
 	 */
+	@Override
 	public void updatePosition(IVector pos) {
 		this.position = pos;
 	}
@@ -38,6 +41,7 @@ public abstract class MovingWayPoint extends WayPoint implements IMovable {
 		return "type: moving\ncoordinates: "+this.position.toString();
 	}
 	
+	@Override
 	public IVector getPosition() {
 		return this.position;
 	}

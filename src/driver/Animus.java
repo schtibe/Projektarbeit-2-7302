@@ -34,8 +34,10 @@ import environment.SpeedWayPoint;
 import environment.VehicleWayPoint;
 import environment.WayPointManager;
 
+/**
+ * The brain of the driver
+ */
 public class Animus implements IObserver {
-	
 	/**
 	 * instance variables
 	 */
@@ -56,7 +58,7 @@ public class Animus implements IObserver {
 	protected JunctionWayPoint currentJunction = null;
 	
 	/**
-	 * Indicated whether a vehicle has been seen or not
+	 * Indicate whether a vehicle has been seen or not
 	 */
 	protected boolean noVehicles;
 	
@@ -78,9 +80,13 @@ public class Animus implements IObserver {
 	}
 	
 	/**
-	 * method that simulates the drivers mind
+	 * Method that simulates the drivers mind
+	 * 
+	 * This method is the heart of the project. It collects the way points
+	 * of the driver view and processes them, takes the decision.
 	 * @param vehicle
 	 * @param event
+	 * @TODO refactor if you dare ;)
 	 * @throws Exception
 	 */
 	public void assessSituation (DriverEvent event) throws Exception{
@@ -187,10 +193,10 @@ public class Animus implements IObserver {
 		nearestVehicleDistanceOld = nearestVehicleDistance;
 		
 		float acceleration = 0;
-		float speedAssessed = assessSpeeds(this.vehicle.getSpeed(),(float)targetSpeed);
+		float speedAssessed = assessSpeeds(this.vehicle.getSpeed(),targetSpeed);
 		
 		// calculate the acceleration depending on the activators
-		if (this.vehicle.getSpeed() > (float)targetSpeed) {
+		if (this.vehicle.getSpeed() > targetSpeed) {
 			acceleration = generateAcceleration(
 					new DecelerationActivator(speedAssessed), 
 					vehicleActivator, 
@@ -214,9 +220,10 @@ public class Animus implements IObserver {
 
 	/**
 	 * Returns whether the speed should be changed to achieve the target speed
+	 * 
 	 * @param vehicle
 	 * @param target
-	 * @return
+	 * @return Decision about changing the speed
 	 */
 	private float assessSpeeds(float vehicle, float target) {
 		float percentage = Math.abs((vehicle/target)-1f);
@@ -234,10 +241,11 @@ public class Animus implements IObserver {
 
 	/**
 	 * Bring the activators together
+	 * 
 	 * @param speedActivator
 	 * @param vehicleActivator
 	 * @param junctionActivator
-	 * @return
+	 * @return The calculated acceleration
 	 */
 	private float generateAcceleration(DecelerationActivator speedActivator,
 			DecelerationActivator vehicleActivator,
@@ -251,10 +259,11 @@ public class Animus implements IObserver {
 	
 	/**
 	 * Bring the activators together
+	 * 
 	 * @param speedActivator
 	 * @param vehicleActivator
 	 * @param junctionActivator
-	 * @return
+	 * @return The calculated acceleration
 	 */
 	private float generateAcceleration(AccelerationActivator speedActivator,
 			DecelerationActivator vehicleActivator,
@@ -271,7 +280,7 @@ public class Animus implements IObserver {
 	 * 
 	 * @param vehicleDistance The distance to the next vehicle
 	 * @param speed The current speed
-	 * @return
+	 * @return The calculated activator value
 	 */
 	private float calculateVehicleActivator(
 			float securityDistance,
@@ -296,27 +305,28 @@ public class Animus implements IObserver {
 	}
 
 	/**
+	 * Calculate the acceleration from the activators
 	 * 
-	 * @param vehicle
-	 * @param junction
-	 * @param speed
-	 * @return
+	 * @param vehicle The activator value from the vehicle way points
+	 * @param junction The activator value from the junction way points
+	 * @param speed The activator value from the speed way points
+	 * @return The resulting acceleration
 	 */
-	private float calculateAcceleration (float vehicle, float junction, float speed){
+	private float calculateAcceleration (float vehicle, float junction, float speed) {
 		GlobalConstants constants = GlobalConstants.getInstance();
 		float acceleration;
 		float n;
 		float weightN = constants.getJunctionWaypointInfluence()+constants.getVehicleWaypointInfluence();
 		if (vehicle == 0 || junction == 0){
 			n = vehicle+junction;
-		}else{
+		} else {
 			n = (vehicle*constants.getVehicleWaypointInfluence()+junction*constants.getJunctionWaypointInfluence())/
 			(weightN); 
 		}
 		
-		if (n == 0 || speed == 0){
+		if (n == 0 || speed == 0) {
 			acceleration = n+speed;
-		}else{
+		} else {
 			acceleration = (n*weightN+speed*constants.getSpeedWaypointInfluence())/(weightN+constants.getSpeedWaypointInfluence());
 		}
 		
@@ -448,11 +458,13 @@ public class Animus implements IObserver {
 	}
 
 	/**
-	 * @param length
-	 * @param width
-	 * @param corner
-	 * @param center
-	 * @return
+	 * Check if a rectangle intersects
+	 * 
+	 * @param length The length of the rectangle to check
+	 * @param width The width of the rectangle to check
+	 * @param corner The bottom left (?) corner of the rectangle
+	 * @param center The center
+	 * @return Wheter the rectangle intersect
 	 */
 	private boolean checkInside(IVector length, IVector width,
 			IVector corner, IVector center) {
@@ -479,7 +491,7 @@ public class Animus implements IObserver {
 	
 	/**
 	 * get a reference on this physics object
-	 * @return
+	 * @return The driver physics
 	 */
 	public Physics getPhysics() {
 		return this.physics;
@@ -487,23 +499,24 @@ public class Animus implements IObserver {
 	
 	/**
 	 * get a reference on this character project
-	 * @return
+	 * @return The driver's character
 	 */
 	public Character getCharacter() {
 		return this.character;
 	}
 	
 	/**
+	 * Check if a junction way point has already been seen
+	 * 
 	 * Do not use this for other way points than junction way points
 	 * checks if a way point is important for this lane
 	 * Only be interested in junction way points that lie on the
 	 * current lane.
-	 * @param vehicle
-	 * @param waypoint
-	 * @return
+	 * 
+	 * @param vehicle The vehicle for having the lanes
+	 * @param waypoint The waypoint to check
 	 */
 	protected boolean checkWayPoint(IVehicle vehicle, IWayPoint waypoint)  {
-		/*for (ILane lane: vehicle.getLanes()) {*/
 			if (vehicle.getLanes().peek() == waypoint.getLane()) { // only use the current lane
 				// test if it's already seen
 				boolean seen = false;
@@ -518,12 +531,11 @@ public class Animus implements IObserver {
 					return true;
 				}
 			}
-		//}
 		return false;
 	}
 	
 	/**
-	 * Remove the way points not on the lane
+	 * Remove the way points that are not on the lane
 	 */
 	private void laneChange(ILane lastLane) {
 		for (IWayPoint wp: this.seenWayPoints) {
@@ -542,11 +554,19 @@ public class Animus implements IObserver {
 		}
 	}
 
+	/**
+	 * Set the vehicle of the driver 
+	 * @param vehicle
+	 */
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
 		this.vehicle.register (this);
 	}
 
+	/**
+	 * Set the decision a driver takes near a junction
+	 * @param junctionDecision
+	 */
 	public void setDecision(IJunctionDecision junctionDecision) {
 		this.decision = junctionDecision;
 		this.vehicle.setSimpleDirection(this.decision.getDirection());
