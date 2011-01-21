@@ -8,7 +8,6 @@ import java.util.concurrent.ArrayBlockingQueue;
 import simulation.VehicleEvent;
 
 import common.GlobalConstants;
-import common.IObservable;
 import common.IObserver;
 import common.IVector;
 import common.Vector;
@@ -27,20 +26,17 @@ import environment.WayPointManager;
  * This class contains all the needed information and methods for a vehicle.
  * 
  */
-public abstract class Vehicle implements IVehicle, IObservable {
+public abstract class Vehicle implements IVehicle {
 
 	/**
 	 * List of Observers, that get notified when a change occurs
 	 */
-
 	private List<IObserver> observers;
 
-	protected boolean freezed;
-	
 	/**
-	 * This is more like a temporary hack
+	 * Indicate that the vehicle has crashed
 	 */
-	// protected Animus animus;
+	protected boolean freezed;
 
 	/**
 	 * The way point that belongs to this vehicle
@@ -121,8 +117,7 @@ public abstract class Vehicle implements IVehicle, IObservable {
 	/**
 	 * Construct
 	 * 
-	 * @param lane
-	 *            The lane the vehicle is on
+	 * @param lane The lane the vehicle is on
 	 */
 	public Vehicle(ILane lane) throws IllegalArgumentException {
 		if (lane == null) {
@@ -137,10 +132,8 @@ public abstract class Vehicle implements IVehicle, IObservable {
 	 * 
 	 * Create a car and position it on a lane
 	 * 
-	 * @param lane
-	 *            The lane the car is on
-	 * @param drivenLaneDistance
-	 *            The position on the lane
+	 * @param lane The lane the car is on
+	 * @param drivenLaneDistance The position on the lane
 	 */
 	public Vehicle(ILane lane, float drivenLaneDistance)
 			throws IllegalArgumentException {
@@ -152,7 +145,7 @@ public abstract class Vehicle implements IVehicle, IObservable {
 	}
 
 	/**
-	 * Initialize all needed variables
+	 * Initialise all needed variables
 	 * 
 	 * @param lane
 	 * @param drivenLaneDistance
@@ -173,13 +166,12 @@ public abstract class Vehicle implements IVehicle, IObservable {
 		this.initializeDirection();
 		this.createWayPoint();
 
-		//this.driverView = new DriverViewTriangle(this.direction.normalize(),this.position);
 		this.driverView = new DriverViewCircleSector(this.direction.normalize(),
 				this.position);
 	}
 
 	/**
-	 * Set the direction upon initialization
+	 * Set the direction upon initialisation
 	 */
 	private void initializeDirection() {
 		this.direction = this.lanes.peek().getFirstILaneSegment().getEndPoint()
@@ -191,8 +183,8 @@ public abstract class Vehicle implements IVehicle, IObservable {
 	/**
 	 * Calculate the real acceleration of the vehicle
 	 * 
-	 * @param acceleration
-	 * @return
+	 * @param Acceleration to calculate
+	 * @return Resulting acceleration
 	 */
 	protected float calculateAcceleration(float acceleration) {
 		if (acceleration > 0) {
@@ -205,20 +197,17 @@ public abstract class Vehicle implements IVehicle, IObservable {
 	/**
 	 * Return the maximal acceleration
 	 * 
-	 * @return
+	 * @return Maximal acceleration
 	 */
 	protected abstract float maxAcceleration();
 
 	/**
 	 * Return the maximal deceleration
 	 * 
-	 * @return
+	 * @returnm Maximal deceleration
 	 */
 	protected abstract float maxDeceleration();
 
-	/**
-	 * Set the acceleration of the vehicle
-	 */
 	@Override
 	public void accelerate(float acceleration) {
 		this.acceleration = this.calculateAcceleration(acceleration);
@@ -323,6 +312,7 @@ public abstract class Vehicle implements IVehicle, IObservable {
 	 * Handle an event
 	 * 
 	 * @see car.IVehicle#handleEvent(simulation.IEvent)
+	 * @param VehicleEvent The event to handle
 	 */
 	@Override
 	public abstract void handleEvent(VehicleEvent event);
@@ -352,14 +342,7 @@ public abstract class Vehicle implements IVehicle, IObservable {
 		return this.driverView;
 	}
 
-	/*
-	 * @Override public void setAnimus(Animus animus) { this.animus = animus; }
-	 */
-	/**
-	 * Create a way point from this vehicle
-	 */
-	public abstract void createWayPoint();
-
+	@Override
 	public void register(IObserver obs) {
 		if (observers == null) {
 			observers = new ArrayList<IObserver>();
@@ -367,36 +350,45 @@ public abstract class Vehicle implements IVehicle, IObservable {
 		observers.add(obs);
 	}
 
+	@Override
 	public void remove(IObserver obs) {
 		observers.remove(obs);
 	}
 
+	@Override
 	public void notify(String msg) {
 		for (IObserver obs : observers) {
 			obs.update(msg);
 		}
 	}
 
-	public abstract IMovable getWayPoint();
-
+	/**
+	 * Freeze a vehicle
+	 * 
+	 * This is used when a vehicle crashes.s
+	 */
 	public void freeze() {
 		freezed = true;
 		speed = 0;
 		acceleration = 0;
 	}
 	
+	@Override
 	public boolean isFreezed(){
 		return freezed;
 	}
 	
+	@Override
 	public void removeWaypoint(){
 		this.wayPoint = null;
 	}
 	
+	@Override
 	public void setSimpleDirection(IDirection dir){
 		this.dir = dir;
 	}
 	
+	@Override
 	public IDirection getSimpleDirection(){
 		return this.dir;
 	}

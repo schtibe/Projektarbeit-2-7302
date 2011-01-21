@@ -1,10 +1,10 @@
 package driver;
 
-import environment.IPriority;
 /**
+ * Going straight
+ * 
  * to whom it may concern: sorry for the instanceofs 8(
  */
-
 public class StraightDirection implements IDirection {
 
 	@Override
@@ -28,22 +28,8 @@ public class StraightDirection implements IDirection {
 		return false;
 	}
 	
+	@Override
 	public String toString (){
 		return "straight";
-	}
-	
-	@Override
-	public void evaluateDir(IPriority priority) {
-		priority.handleDir(this);
-	}
-
-	@Override
-	public void evaluateFrom(IPriority priority) {
-		priority.handleFrom(this);
-	}
-
-	@Override
-	public void evaluateTo(IPriority priority) {
-		priority.handleTo(this);
 	}
 }

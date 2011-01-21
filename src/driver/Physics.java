@@ -4,8 +4,9 @@ import java.util.List;
 
 import common.GlobalConstants;
 
-//import common.IVector;
-
+/**
+ * The physics properties of a driver
+ */
 public class Physics {
 	
 	private float sight;
@@ -15,10 +16,10 @@ public class Physics {
 	
 	/**
 	 * constructor for physics object
-	 * @param sight
-	 * @param fov
-	 * @param interval
-	 * @param drugs
+	 * @param sight How far the driver can see
+	 * @param fov The angle of the view
+	 * @param interval The interval to assess the situation
+	 * @param drugs Drugs that are taken
 	 */
 	public Physics (float sight, float fov, int interval, List<Drug> drugs){
 		this.sight = sight * GlobalConstants.getInstance().getScale();
@@ -33,9 +34,9 @@ public class Physics {
 	}
 	
 	/**
-	 * extends the driver view by it's physics components
+	 * extends the driver view by its physics components
 	 * @param view
-	 * @return
+	 * @return The adjusted view
 	 */
 	public IDriverView getView(IDriverView view){
 		view.setAngle(this.fieldOfView); 
@@ -45,7 +46,7 @@ public class Physics {
 	
 	/**
 	 * returns the interval value
-	 * @return
+	 * @return Interval
 	 */
 	public int getUpdateInterval (){
 		return this.updateInterval;

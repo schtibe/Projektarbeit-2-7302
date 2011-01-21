@@ -3,7 +3,6 @@ package common;
 import org.newdawn.slick.Color;
 
 public final class GlobalConstants {
-
 	/**
 	 * singleton instance
 	 */
@@ -28,7 +27,7 @@ public final class GlobalConstants {
 		return instance;
 	}
 
-	/*
+	/**
 	 * The scale of the world
 	 */
 	private float scale;
@@ -51,7 +50,7 @@ public final class GlobalConstants {
 		this.scale = scale;
 	}
 
-	/*
+	/**
 	 * Time factor
 	 */
 	private double timeFactor;
@@ -74,7 +73,7 @@ public final class GlobalConstants {
 		this.timeFactor = timeFactor;
 	}
 
-	/*
+	/**
 	 * Initial time stamp
 	 */
 	private long initialTimestamp;
@@ -111,7 +110,7 @@ public final class GlobalConstants {
 		return this.streetXMLSchema;
 	}
 
-	/*
+	/**
 	 * The world boundaries
 	 */
 	private IVector[] boundaries;
@@ -134,7 +133,7 @@ public final class GlobalConstants {
 		return this.boundaries;
 	}
 
-	/*
+	/**
 	 * border around the drawn streets
 	 */
 	public IVector getBorder() {
@@ -153,7 +152,6 @@ public final class GlobalConstants {
 	 * 
 	 * @return a colour obviously
 	 */
-
 	public Color getBackgroundColor() {
 		return new Color(100, 100, 100);
 	}
@@ -187,35 +185,49 @@ public final class GlobalConstants {
 	/**
 	 * Defines which character trait has how much influence on the alteration of perceived values
 	 */
-	
 	public float getRiskynessInfluence (){
 		return 0.2f;
 	}
 	
+	/**
+	 * Get the influence value of the temperament
+	 * @return
+	 */
 	public float getTemperamentInfluence (){
 		return 0.2f;
 	}
 	
 	/**
-	 * the sum of the 3 influences hereafter has always to be 1.0
+	 * Get the vehicle way point influence
 	 */
-	
 	public float getVehicleWaypointInfluence (){
 		return 0.6f;
 	}
 	
+	/**
+	 * Get the junction way point influence
+	 */
 	public float getJunctionWaypointInfluence(){
 		return 0.2f;
 	}
 	
+	/**
+	 * Get the speed way point influence
+	 */
 	public float getSpeedWaypointInfluence(){
 		return 0.2f;
 	}
 	
+	/**
+	 * Get the speed perception threshold
+	 */
 	public float getSpeedPerceptionThreshold(){
 		return 0.05f;
 	}
 	
+	/**
+	 * Get the acceleration threshold
+	 */
 	public float getAccelerationThreshold(){
 		return 0.15f;
 	}

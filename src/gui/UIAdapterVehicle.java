@@ -226,6 +226,7 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle>
 	}
 
 	
+	@Override
 	public void update(String message) {
 		if (message.compareTo("signal right") == 0)  {
 			this.turnSignal = gui.UIAdapterVehicle.turnSignalType.right;

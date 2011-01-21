@@ -1,9 +1,7 @@
 package environment;
 
 import java.util.List;
-import java.util.Set;
 
-import driver.IDecision;
 import driver.IDirection;
 
 public interface IJunction extends ITrafficCarrier{

@@ -3,6 +3,9 @@ package driver;
 import common.IRectangle;
 import common.IVector;
 
+/**
+ * The interface for driver views
+ */
 public interface IDriverView {
 
 	/**
@@ -31,40 +34,41 @@ public interface IDriverView {
 
 	/**
 	 * Get the angle
-	 * @return
+	 * @return The angle
 	 */
 	public abstract float getAngle();
 
 	/**
 	 * get the distance
-	 * @return
+	 * @return Distance
 	 */
 	public abstract float getDistance();
 
 	/**
 	 * Get the position
-	 * @return
+	 * @return Position
 	 */
 	public abstract IVector getPosition();
 
 	/**
 	 * Get the direction vector
-	 * @return
+	 * @return Direction
 	 */
 	public abstract IVector getDirection();
 	
 	/**
 	 * Returns a clone of the actual DriverView
-	 * @return
+	 * @return The clone
 	 */
 	public abstract IDriverView clone();
 
+	@Override
 	public String toString();
 	
 	/**
 	 * Check whether the way point lies in this area
 	 * @param position
-	 * @return
+	 * @return Wheter it lies in the arey
 	 */
 	public boolean checkWayPoint(IVector position);
 	

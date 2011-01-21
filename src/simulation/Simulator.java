@@ -61,6 +61,7 @@ public class Simulator implements IEventTarget<CrashEvent> {
 		}
 	}
 	
+	@Override
 	public synchronized void handleEvent(CrashEvent event){
 		System.out.println("a crash occured");
 		for (Vehicle vehicle:event.getVehicles()){

@@ -1,7 +1,8 @@
 package common;
 
-// implementation of a 2D Vector
-
+/**
+ * implementation of a 2D Vector
+ */
 public class Vector implements IVector {
 
 	/**
@@ -20,8 +21,7 @@ public class Vector implements IVector {
 	private float length;
 
 	/**
-	 * @param array
-	 *            of floats, the vectors components
+	 * @param array of floats, the vectors components
 	 */
 	public Vector(float[] components) {
 		if (components != null) {
@@ -48,11 +48,6 @@ public class Vector implements IVector {
 		}
 	}
 
-	/**
-	 * @param the
-	 *            vector to be added to this vector
-	 * @return a vector as a result of the operation
-	 */
 	@Override
 	public Vector add(IVector vector) {
 		return new Vector(new float[] { components[0] + vector.getComponent(0),
@@ -60,9 +55,7 @@ public class Vector implements IVector {
 	}
 
 	/**
-	 * @param the
-	 *            vector to calculate the crossproduct with this vector
-	 * @return a vector as a result of the operation
+	 * {@inheritDoc}
 	 * 
 	 *         the cross product of 2 2d vectors is usually (0,0,z) the
 	 *         corresponding 2d vector is (0,0) hence the function will always
@@ -73,10 +66,6 @@ public class Vector implements IVector {
 		return new Vector(new float[] { 0, 0 });
 	}
 
-	/**
-	 * @param the vector to calculate the dotproduct with this vector
-	 * @return a float as a result of the operation
-	 */
 	@Override
 	public float dot(IVector vector) {
 		float scalar = 0;
@@ -86,11 +75,7 @@ public class Vector implements IVector {
 		return scalar;
 	}
 
-	/**
-	 * @param index
-	 *            of a component of the vector
-	 * @return the components value
-	 */
+
 	@Override
 	public float getComponent(int index) {
 		if (index >= this.components.length) {
@@ -100,9 +85,6 @@ public class Vector implements IVector {
 		}
 	}
 
-	/**
-	 * @return the length of the vector
-	 */
 	@Override
 	public float norm() {
 		if (!lengthCalculated) {
@@ -115,20 +97,12 @@ public class Vector implements IVector {
 		return this.length;
 	}
 
-	/**
-	 * @param the
-	 *            vector to be subtracted from this vector
-	 * @return a vector as a result of the operation
-	 */
 	@Override
 	public Vector sub(IVector vector) {
 		return new Vector(new float[] { components[0] - vector.getComponent(0),
 				components[1] - vector.getComponent(1) });
 	}
 
-	/**
-	 * @return a vector of the same direction with the length 1
-	 */
 	@Override
 	public Vector normalize() {
 		float[] newComponents = new float[this.components.length];
@@ -138,19 +112,11 @@ public class Vector implements IVector {
 		return new Vector(newComponents);
 	}
 
-	/**
-	 * @return a clone of this vector
-	 */
 	@Override
 	public Vector clone() {
 		return new Vector(this.components);
 	}
 
-	/**
-	 * @param factor
-	 *            to multiply this vector with
-	 * @return a scaled copy of the actual vector
-	 */
 	@Override
 	public Vector multiply(float factor) {
 		float[] newComponents = new float[this.components.length];
@@ -160,19 +126,11 @@ public class Vector implements IVector {
 		return new Vector(newComponents);
 	}
 
-	/**
-	 * Print the coordinates of the vector
-	 */
 	@Override
 	public String toString() {
 		return "x: " + this.components[0] + ", y: " + this.components[1];
 	}
 
-	/**
-	 * @param an
-	 *            angle in the radiant notation [0,2*PI]
-	 * @return a vector rotated by the input angle
-	 */
 	@Override
 	public Vector rotate(float angle) {
 		float newAngle = this.getAngle() + angle;
@@ -183,7 +141,7 @@ public class Vector implements IVector {
 
 	/**
 	 * Return the angle to the X axis 
-	 * @return an angle in radiant
+
 	 */
 	@Override
 	public float getAngle() {
@@ -217,6 +175,15 @@ public class Vector implements IVector {
 		}
 	}
 	
+	/**
+	 * Return the result of a linear combination
+	 * 
+	 * @param center 
+	 * @param directionA
+	 * @param directionB
+	 * @param point
+	 * @return The result of the linear combination
+	 */
 	public static LinearCombination getLinearCombination (IVector center, IVector directionA, IVector directionB, IVector point){
 		IVector position = point.sub(center);	
 		float denominator = 
@@ -230,6 +197,7 @@ public class Vector implements IVector {
 		float mu = (directionA.getComponent(0) * position.getComponent(1)
 				- directionA.getComponent(1) * position.getComponent(0)) /
 				denominator;
+		
 		return new LinearCombination (mu, lambda);
 	}
 }

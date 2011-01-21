@@ -26,6 +26,7 @@
     </target>
     <target name="clean">
         <delete dir="bin"/>
+        <delete dir="doc/javadoc"/>
     </target>
     <target depends="clean" name="cleanall"/>
     <target depends="build-subprojects,build-project" name="build"/>
@@ -66,5 +67,10 @@
             <classpath refid="Projekt2.classpath"/>
             <jvmarg value="-Djava.library.path=lib/slick/native/linux"/>
         </java>
+    </target>
+	<target name="javadoc">
+        <mkdir dir="doc/javadoc/"/>
+        <javadoc sourcepath="src" linksource="true" destdir="doc/javadoc/">
+         </javadoc>
     </target>
 </project>

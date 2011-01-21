@@ -6,6 +6,7 @@ package simulation;
  * This class is currently not in use
  * @deprecated
  */
+@Deprecated
 public class SimulatorEvent extends Event<SimulatorEvent> {
 	/**
 	 * Initialize

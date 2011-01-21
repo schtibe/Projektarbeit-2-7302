@@ -48,6 +48,7 @@ public abstract class StaticWayPoint extends WayPoint {
 		return this.position.getComponent(1);
 	}
 	
+	@Override
 	public IVector getPosition() {
 		return this.position;
 	}

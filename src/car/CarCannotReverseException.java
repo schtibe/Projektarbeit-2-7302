@@ -1,5 +1,8 @@
 package car;
 
+/**
+ * Indicate that a car cannot reverse
+ */
 public class CarCannotReverseException extends Exception {
 
 	/**
