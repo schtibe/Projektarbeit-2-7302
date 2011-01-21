@@ -1,7 +1,21 @@
 
 \section{Abstract}
 
-This document describes the work in the module \emph{Projektarbeit 2 (7308)}
+This document describes our work in the module \emph{Projektarbeit 2 (7308)}
 at the Berne university of applied science. We chose to continue our traffic simulation
- which we started in the module \emph{Projektarbeit 1}. The goal
-was to develop an event driven multiagent simulation which allows virtual cars to drive around on their own.
+ which we started in the module \emph{Projektarbeit 1}. The goal was to develop an event 
+driven multiagent simulation which allows virtual cars to drive around independently and 
+to react to the traffic situations autonomously. Autonomy and idependence were only 
+possible when the vehicles or more precisely the vehicles drivers would perceive the 
+environment on their own. We therefore built a world which consists of objects, that 
+are easy to perceive and represent different real world aspects: the waypoints. Thus 
+the world now consists of the following items:
+\beign{itemize}
+\item Road, a road has one or many lanes in one or two directions
+\item Junction, a junction connects roads
+\item Vehicle, a vehicle is operated by a driver which has a consciousness, the Animus
+\end{itemize}
+All of these are represented by waypoints which are processable by the Animus. 
+As one of our main goals was to keep everything as generic as possible to open the 
+simulation to a broad range of usages we decided to make cuts in the graphical 
+representation in favour of the more complex world design.
