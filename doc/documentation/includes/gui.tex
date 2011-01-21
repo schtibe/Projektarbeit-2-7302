@@ -22,3 +22,21 @@ in an XML file. \\
 \noindent An important thing to note is that the GUI calls the update routines of the
 simulation. This is documented in more details in section \ref{sec:process}.
 
+\subsection{Bézier Curves}
+
+The Slick library comes with a routine to draw first grade Bézier curves.
+Unfortunately this algorithm drew very edged curves which did not correspond
+with the curves of the simulation. Therefore we had to draw the paths with
+our own Bézier algorithm.
+
+\subsection{Options}
+
+We added some options to the simulation GUI:
+
+\begin{description}
+
+\item[FPS] Show the frame rate per second
+\item[Grid] Show a grid of 100x100 units to be able to estimate distances for debugging
+\item[DriverView] Toggle the display of the driver views
+
+\end{description}
