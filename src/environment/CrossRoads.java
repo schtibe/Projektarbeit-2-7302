@@ -133,7 +133,7 @@ public class CrossRoads implements IJunction {
 	 * @param builder
 	 * @param start
 	 * @param outLane
-	 * @return
+	 * @return the list of the lanes in the junction
 	 * @throws Exception
 	 * @throws InvalidXMLException
 	 */
@@ -187,9 +187,12 @@ public class CrossRoads implements IJunction {
 	}
 
 	/**
-	 * @return Boolean[] , true means the startPoint of the Road with index i is to be 
-	 * connected to the cross roads, false means the same for the endPoint
+	 * true means the startPoint of the Road with index i is to be connected to the cross roads, 
+	 * false means the same for the endPoint
+	 * @return Boolean[]
+	 * 
 	 */
+	
 	private Boolean[] findPointsInCrossroad(Object[] roadsAsArray) throws Exception{
 		if (roadsAsArray.length > 1 || roadsAsArray.length > 4) {
 			Boolean[] output = new Boolean[roadsAsArray.length];
@@ -224,10 +227,11 @@ public class CrossRoads implements IJunction {
 	}
 	
 	/**
-	 * @param toEnd: length to a neighbouring endPoint,
-	 * toStart: length to a neighbouring startPoint
+	 * @param length to a neighbouring endPoint,
+	 * @param length to a neighbouring startPoint
 	 * @return true if toStart is larger than toEnd
 	 */
+	
 	private Boolean endOrStart(float toEnd, float toStart){
 		if (toEnd < toStart){
 			return false;
@@ -237,9 +241,13 @@ public class CrossRoads implements IJunction {
 	}
 	
 	/**
-	 * @param Road roadOne, Road roadTwo
-	 * @return Boolean[] following the specification given at the method findPointsInCrossroad 
+	 * finds the first two points of a crossroad according to the provided roads
+	 * @param roadOne
+	 * @param roadTwo
+	 * @param ouput, contains the values accoridng to spec in findPointsInCrossroad
+	 * @TODO beautify: better return an array than fill it in the function
 	 */
+	
 	private void firstTwoPointsInCrossroad(IRoad roadOne, IRoad roadTwo,Boolean[] output) {
 		//Boolean[] output = new Boolean[2];
 		float endToEnd = roadOne.getEndPoint().sub(roadTwo.getEndPoint()).norm();
@@ -293,17 +301,10 @@ public class CrossRoads implements IJunction {
 		return new ArrayList<ILane>();
 	}
 
-	/**
-	 * returns the cross roads lanes
-	 */
 	@Override
 	public List<ILane> getRightLanes() {
 		return this.junctionLanes;
 	}
-
-	/**
-	 * 
-	 */
 
 	@Override
 	public IDirection comingFrom(ILane incoming, ILane going) {
@@ -411,10 +412,7 @@ public class CrossRoads implements IJunction {
 		}
 	}
 	
-	/**
-	 * 
-	 */
-	
+
 	@Override
 	public List<ILane> getRelevantLanes(ILane actualLane) {
 		Set<ILane> relevant = new HashSet();

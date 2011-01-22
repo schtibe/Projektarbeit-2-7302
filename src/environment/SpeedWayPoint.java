@@ -10,6 +10,13 @@ import driver.Animus;
 public class SpeedWayPoint extends SignWayPoint {
 	int speedLimit;
 	
+	/**
+	 * Construct
+	 * @param lane
+	 * @param speedLimit
+	 * @param position
+	 */
+	
 	public SpeedWayPoint(ILane lane, int speedLimit, IVector position) {
 		super(lane, position);
 		this.speedLimit = speedLimit;
@@ -23,19 +30,11 @@ public class SpeedWayPoint extends SignWayPoint {
 		return this.speedLimit;
 	}
 
-	/**
-	 * visitor method 
-	 */
 	@Override
 	public void visitHandleWayPoint(Animus animus) {
 		animus.handleWayPoint(this);
 	}
 
-	
-	/**
-	 * {@inheritDoc}
-	 * @throws Exception 
-	 */
 	@Override
 	public IUIAdapterWayPoint<SpeedWayPoint> visitUIFactory(float scale, IVector offsetVector) throws Exception {
 		return UIElementFactory.getUIElement(this, scale, offsetVector);

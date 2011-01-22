@@ -52,9 +52,6 @@ public class WayPointManager implements IPlacableManager {
 		WayPointManager.instance = null;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void add(IPlacable placable){
 		if (this.root != null){
@@ -67,12 +64,6 @@ public class WayPointManager implements IPlacableManager {
 	}
 
 
-	/**
-	 * {@inheritDoc}
-	 * @param movable
-	 * @param newX
-	 * @param newY
-	 */
 	@Override
 	public boolean move(IMovable movable, float newX, float newY) {
 		// TODO this is a workaround to make development of the rest of the solution go on while we have an issue here
@@ -88,9 +79,6 @@ public class WayPointManager implements IPlacableManager {
 		return true;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void remove(IPlacable placable) throws Exception{
 		root.remove(placable);

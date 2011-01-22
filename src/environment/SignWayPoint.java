@@ -9,6 +9,12 @@ public abstract class SignWayPoint extends StaticWayPoint {
 	 */
 	private float laneSegmentPosition;
 	
+	/**
+	 * Construct
+	 * @param lane
+	 * @param position
+	 */
+	
 	public SignWayPoint(ILane lane, IVector position) {
 		super(lane, position);
 	}
@@ -24,7 +30,7 @@ public abstract class SignWayPoint extends StaticWayPoint {
 	/**
 	 * compares two sign way points
 	 * @param arg0
-	 * @return
+	 * @return 0 if equal a number else
 	 */
 	public int compareTo(SignWayPoint arg0) {
 		if (arg0.getLanePosition() == this.laneSegmentPosition) {

@@ -41,6 +41,11 @@ public class JunctionWayPoint extends StaticWayPoint {
 	* the value of 0.8 indicates that you see the junction as early as you have passed 79% percent of the lanes length
 	* before the junction.
 	*/
+	
+	/**
+	 * defines the actual position of the waypoint on the lane
+	 */
+	
 	protected void setPos() {
 		try {
 			this.position = this.lane.getPositionOnLane((this.lane.getLength()*0.8f));
@@ -54,10 +59,6 @@ public class JunctionWayPoint extends StaticWayPoint {
 		animus.handleWayPoint(this);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * @throws Exception 
-	 */
 	@Override
 	public IUIAdapterWayPoint<?> visitUIFactory(
 			float scale,

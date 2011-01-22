@@ -53,9 +53,7 @@ public class Gaia implements IGaia {
 		return Gaia.instance;
 	}
 	
-	/**
-	 * destroy the singleton instance
-	 */
+
 	@Override
 	public void destroy() {
 		Gaia.instance = null;
@@ -107,14 +105,10 @@ public class Gaia implements IGaia {
 		return Gaia.vehicles;
 	}
 	
-	/*
+	/**
 	 * The way points
 	 */
 	private static List<IWayPoint> waypoints;
-	
-	/**
-	 * get a list of all the way points
-	*/ 
 	
 	@Override
 	public List<IWayPoint> getWayPoints() {
@@ -161,10 +155,6 @@ public class Gaia implements IGaia {
 		this.setWayPoints(WayPointManager.getInstance().getWayPoints());
 	}
 
-	/**
-	 * get a list of all traffic carriers
-	 */
-	
 	@Override
 	public List<ITrafficCarrier> getTrafficCarriers() {
 		List<ITrafficCarrier> everything = new ArrayList<ITrafficCarrier>();
@@ -173,17 +163,6 @@ public class Gaia implements IGaia {
 		return everything;
 	}
 	
-	/**
-	 * Add a road user to the simulation
-	 * 
-	 * Create a new car and a driver with the given properties
-	 * and put the whole thing into action
-	 * @param vehicleType The type of the vehicle
-	 * @param lane The lane to put the vehicle on
-	 * @param character The character properties of the driver
-	 * @param physics The physics of the driver
-	 * @throws Exception
-	 */
 	@Override
 	public IVehicle addRoadUser(
 			VehicleFactory.VehicleType vehicleType, 
@@ -197,18 +176,7 @@ public class Gaia implements IGaia {
 		return vehicle;
 	}
 	
-	/**
-	 * Add a road user to the simulation
-	 * 
-	 * Create a new car and a driver with the given properties
-	 * and put the whole thing into action
-	 * @param vehicleType The type of the vehicle
-	 * @param drivenLaneDistance The distance on the lane the vehicle has already driven
-	 * @param lane The lane to put the vehicle on
-	 * @param character The character properties of the driver
-	 * @param physics The physics of the driver
-	 * @throws Exception
-	 */
+
 	@Override
 	public IVehicle addRoadUser(
 			VehicleFactory.VehicleType vehicleType, 
@@ -243,10 +211,6 @@ public class Gaia implements IGaia {
 		);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * @throws CarCannotReverseException 
-	 */
 	@Override
 	public void updateVehicles(float timestep) throws CarCannotReverseException {
 		

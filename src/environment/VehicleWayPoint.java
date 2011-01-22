@@ -17,17 +17,16 @@ public abstract class VehicleWayPoint extends MovingWayPoint {
 		this.vehicle = vehicle;
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * Return the lane the vehicle is currently on
-	 * @return Current lane
-	 */
 	@Override
 	public ILane getLane() {
 		return this.vehicle.getLane();
 	}
-
+	
+	/**
+	 * get the vehicle for this waypoint
+	 * @return the vehicle for this waypoint
+	 */
+	
 	public Vehicle getVehicle (){
 		return this.vehicle;
 	}

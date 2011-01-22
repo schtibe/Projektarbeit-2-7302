@@ -25,11 +25,6 @@ public class LaneSegmentQuadratic extends LaneSegment<ILaneSegmentLinear>
 		this.length = calculateLength();
 	}
 	
-	/**
-	 * Calculate the length of the curve
-	 * 
-	 * @return float
-	 */
 	@Override
 	protected float calculateLength() {
 		double ax = startPoint.getComponent(0) - 2*bendPoint.getComponent(0) + endPoint.getComponent(0);
@@ -57,7 +52,7 @@ public class LaneSegmentQuadratic extends LaneSegment<ILaneSegmentLinear>
 	/**
 	 * Return the bend point
 	 * 
-	 * @return
+	 * @return IVector to th ebendPoint
 	 */
 	public IVector getBendPoint() {
 		return this.bendPoint;

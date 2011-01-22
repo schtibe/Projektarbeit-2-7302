@@ -4,6 +4,10 @@ import driver.IDirection;
 import driver.LeftDirection;
 import driver.RightDirection;
 
+/**
+ * forgive me the instanceof thing
+*/
+
 public class PriorityRight implements IPriority {
 
 	private static int LEFT = -1;
@@ -12,9 +16,7 @@ public class PriorityRight implements IPriority {
 	
 	private int from,to,dir;
 	
-	/**
-	 * forgive me the instanceof thing
-	 */
+
 	@Override
 	public boolean hasPriority(IDirection dir, IDirection from, IDirection to) {
 		this.dir = directionToInteger(dir);
@@ -45,6 +47,11 @@ public class PriorityRight implements IPriority {
 	@Override
 	public void handleTo(IDirection dir) {
 	}
+	
+	/**
+	 * core method, assesses the actual situation and returns true if from has priority
+	 * @return true if from has priority
+	 */
 	
 	private boolean assessPriority (){
 		System.out.println("dir:"+dir+";from:"+from+";to:"+to);

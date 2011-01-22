@@ -34,34 +34,22 @@ public abstract class LaneSegment<E> implements ILaneSegment<E> {
 	 * @see Lane#getLengthBeforeSegment
 	 */
 	protected float distanceOnLane;
-	
-	/**
-	 * {@inheritDoc}
-	 */
+
 	@Override
 	public IVector getStartPoint() {
 		return startPoint;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public IVector getEndPoint() {
 		return endPoint;
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public float getDistanceOnLane() {
 		return distanceOnLane;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void setDistanceOnLane(float distanceOnLane) {
 		this.distanceOnLane = distanceOnLane;
@@ -112,63 +100,38 @@ public abstract class LaneSegment<E> implements ILaneSegment<E> {
 		float yPos = point.getComponent(1)-startPoint.getComponent(1);
 		return new Vector(new float[]{xPos,yPos});
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
+
 	@Override
 	public void setNextLaneSegment(E laneSegment) {
 		this.nextLaneSegment = laneSegment;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public float getLength() {
 		return this.length;
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public E getNextLaneSegment() {
 		return this.nextLaneSegment;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public abstract IVector getVehiclePosition(float segmentLength);
 	
-	/**
-	 *
-	 * {@inheritDoc}
-	 */
 	@Override
 	public abstract IVector[] getBezierPoints();
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int getId() {
 		return id;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void setId(int id) {
 		this.id = id;
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String toString() {
 		String ret = "LaneSegment id: " + this.id + "\n";
@@ -177,9 +140,6 @@ public abstract class LaneSegment<E> implements ILaneSegment<E> {
 		return ret;
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public List<SignWayPoint> getAllWayPoints() {
 		return this.wayPoints;

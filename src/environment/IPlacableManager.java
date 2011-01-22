@@ -28,6 +28,11 @@ public interface IPlacableManager {
 	 */
 	
 	public boolean move(IMovable movable,float newX, float newY);
+	 
+	/**
+	 * a list of the placables
+	 * @return a list of the placables
+	 */
 	
 	public List<IPlacable> toList();
 }

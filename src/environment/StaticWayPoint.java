@@ -15,6 +15,12 @@ public abstract class StaticWayPoint extends WayPoint {
 	 */
 	protected ILane lane;
 	
+	/**
+	 * Construct
+	 * @param lane
+	 * @param position
+	 */
+	
 	public StaticWayPoint(ILane lane, IVector position) {
 		this.lane = lane;
 		this.position = position;

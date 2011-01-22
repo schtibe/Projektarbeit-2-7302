@@ -29,27 +29,18 @@ public class JunctionDecision implements IJunctionDecision {
 		this.direction = direction;
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	
 	@Override
 	public List<ILane> getLanes() {
 		return this.lanes;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	
+
 	@Override
 	public int getID() {
 		return this.id;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	
 	@Override
 	public IJunction getJunction() {

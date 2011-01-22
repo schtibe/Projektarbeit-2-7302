@@ -11,25 +11,18 @@ import driver.Animus;
 public class CarWayPoint extends VehicleWayPoint {
 
 	/**
-	 * Construct with a car
+	 * Construct a CarWayPoint
 	 * @param car
 	 */
 	public CarWayPoint(Car car) {
 		super(car);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void visitHandleWayPoint(Animus animus) {
 		animus.handleWayPoint(this);
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 * @throws Exception 
-	 */
 	@Override
 	public IUIAdapterWayPoint<?> 
 		visitUIFactory(float scale, IVector offsetVector) throws Exception {

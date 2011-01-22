@@ -13,9 +13,24 @@ public interface IPriority {
 	
 	boolean hasPriority (IDirection dir, IDirection from, IDirection to);
 	
+	/**
+	 * call back for visitor on direction
+	 * @param dir
+	 */
+	
 	void handleDir (IDirection dir);
 	
+	/**
+	 * call back for visitor on direction
+	 * @param dir
+	 */
+	
 	void handleFrom (IDirection dir);
+	
+	/**
+	 * call back for visitor on direction
+	 * @param dir
+	 */
 	
 	void handleTo (IDirection dir);
 }

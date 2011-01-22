@@ -230,10 +230,6 @@ public class Lane implements ILane {
 		return this.startPosition.clone();
 	}
 
-	/**
-	 * returns the start segment
-	 * @return ILaneSegment<?>
-	 */
 	@Override
 	public ILaneSegment<?> getFirstILaneSegment() {
 		return this.startSegment;
@@ -256,18 +252,12 @@ public class Lane implements ILane {
 		return this.endSegment;
 	}
 
-	/**
-	 * setter for this lanes junction
-	 */
 	@Override
 	public void setJunction(IJunction junction) {
 		this.junction = junction;
 	}
 
-	/**
-	 * getter for this lanes junction
-	 * @return IJunction 
-	 */	@Override
+	@Override
 	public IJunction getJunction() {
 		return this.junction;
 	}
