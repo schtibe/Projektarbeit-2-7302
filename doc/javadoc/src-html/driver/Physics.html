@@ -1,0 +1,120 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package driver;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import java.util.List;<a name="line.3"></a>
+<FONT color="green">004</FONT>    <a name="line.4"></a>
+<FONT color="green">005</FONT>    import common.GlobalConstants;<a name="line.5"></a>
+<FONT color="green">006</FONT>    <a name="line.6"></a>
+<FONT color="green">007</FONT>    /**<a name="line.7"></a>
+<FONT color="green">008</FONT>     * The physics properties of a driver<a name="line.8"></a>
+<FONT color="green">009</FONT>     */<a name="line.9"></a>
+<FONT color="green">010</FONT>    public class Physics {<a name="line.10"></a>
+<FONT color="green">011</FONT>            <a name="line.11"></a>
+<FONT color="green">012</FONT>            private float sight;<a name="line.12"></a>
+<FONT color="green">013</FONT>            private float fieldOfView;<a name="line.13"></a>
+<FONT color="green">014</FONT>            private int updateInterval;<a name="line.14"></a>
+<FONT color="green">015</FONT>            private List&lt;Drug&gt; drugs;<a name="line.15"></a>
+<FONT color="green">016</FONT>            <a name="line.16"></a>
+<FONT color="green">017</FONT>            /**<a name="line.17"></a>
+<FONT color="green">018</FONT>             * constructor for physics object<a name="line.18"></a>
+<FONT color="green">019</FONT>             * @param sight How far the driver can see<a name="line.19"></a>
+<FONT color="green">020</FONT>             * @param fov The angle of the view<a name="line.20"></a>
+<FONT color="green">021</FONT>             * @param interval The interval to assess the situation<a name="line.21"></a>
+<FONT color="green">022</FONT>             * @param drugs Drugs that are taken<a name="line.22"></a>
+<FONT color="green">023</FONT>             */<a name="line.23"></a>
+<FONT color="green">024</FONT>            public Physics (float sight, float fov, int interval, List&lt;Drug&gt; drugs){<a name="line.24"></a>
+<FONT color="green">025</FONT>                    this.sight = sight * GlobalConstants.getInstance().getScale();<a name="line.25"></a>
+<FONT color="green">026</FONT>                    this.fieldOfView = fov;<a name="line.26"></a>
+<FONT color="green">027</FONT>                    this.updateInterval = interval;<a name="line.27"></a>
+<FONT color="green">028</FONT>                    this.drugs = drugs;<a name="line.28"></a>
+<FONT color="green">029</FONT>                    for (Drug drug : this.drugs){<a name="line.29"></a>
+<FONT color="green">030</FONT>                            this.sight += drug.sightEffects();<a name="line.30"></a>
+<FONT color="green">031</FONT>                            this.fieldOfView += drug.fieldOfViewEffects();<a name="line.31"></a>
+<FONT color="green">032</FONT>                            this.updateInterval += drug.intervalEffects();<a name="line.32"></a>
+<FONT color="green">033</FONT>                    }<a name="line.33"></a>
+<FONT color="green">034</FONT>            }<a name="line.34"></a>
+<FONT color="green">035</FONT>            <a name="line.35"></a>
+<FONT color="green">036</FONT>            /**<a name="line.36"></a>
+<FONT color="green">037</FONT>             * extends the driver view by its physics components<a name="line.37"></a>
+<FONT color="green">038</FONT>             * @param view<a name="line.38"></a>
+<FONT color="green">039</FONT>             * @return The adjusted view<a name="line.39"></a>
+<FONT color="green">040</FONT>             */<a name="line.40"></a>
+<FONT color="green">041</FONT>            public IDriverView getView(IDriverView view){<a name="line.41"></a>
+<FONT color="green">042</FONT>                    view.setAngle(this.fieldOfView); <a name="line.42"></a>
+<FONT color="green">043</FONT>                    view.setDistance(this.sight);<a name="line.43"></a>
+<FONT color="green">044</FONT>                    return view;<a name="line.44"></a>
+<FONT color="green">045</FONT>            }<a name="line.45"></a>
+<FONT color="green">046</FONT>            <a name="line.46"></a>
+<FONT color="green">047</FONT>            /**<a name="line.47"></a>
+<FONT color="green">048</FONT>             * returns the interval value<a name="line.48"></a>
+<FONT color="green">049</FONT>             * @return Interval<a name="line.49"></a>
+<FONT color="green">050</FONT>             */<a name="line.50"></a>
+<FONT color="green">051</FONT>            public int getUpdateInterval (){<a name="line.51"></a>
+<FONT color="green">052</FONT>                    return this.updateInterval;<a name="line.52"></a>
+<FONT color="green">053</FONT>            }<a name="line.53"></a>
+<FONT color="green">054</FONT>    }<a name="line.54"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

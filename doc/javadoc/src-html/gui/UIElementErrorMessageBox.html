@@ -1,0 +1,127 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package gui;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import de.lessvoid.nifty.Nifty;<a name="line.3"></a>
+<FONT color="green">004</FONT>    import de.lessvoid.nifty.controls.dynamic.CustomControlCreator;<a name="line.4"></a>
+<FONT color="green">005</FONT>    import de.lessvoid.nifty.controls.dynamic.LabelCreator;<a name="line.5"></a>
+<FONT color="green">006</FONT>    import de.lessvoid.nifty.controls.dynamic.PanelCreator;<a name="line.6"></a>
+<FONT color="green">007</FONT>    import de.lessvoid.nifty.effects.EffectEventId;<a name="line.7"></a>
+<FONT color="green">008</FONT>    import de.lessvoid.nifty.elements.Element;<a name="line.8"></a>
+<FONT color="green">009</FONT>    <a name="line.9"></a>
+<FONT color="green">010</FONT>    /**<a name="line.10"></a>
+<FONT color="green">011</FONT>     * A small error dialog using nifty<a name="line.11"></a>
+<FONT color="green">012</FONT>     */<a name="line.12"></a>
+<FONT color="green">013</FONT>    public class UIElementErrorMessageBox {<a name="line.13"></a>
+<FONT color="green">014</FONT>            public static void create(Nifty nifty, Element show, Element hide, String errorMessage) {               <a name="line.14"></a>
+<FONT color="green">015</FONT>                    //Red error panel<a name="line.15"></a>
+<FONT color="green">016</FONT>                    PanelCreator errorPanel = new PanelCreator("errorPanelID");<a name="line.16"></a>
+<FONT color="green">017</FONT>                    errorPanel.setChildLayout("vertical");<a name="line.17"></a>
+<FONT color="green">018</FONT>                    errorPanel.setStyle("nifty-panel-red");<a name="line.18"></a>
+<FONT color="green">019</FONT>                    errorPanel.setVAlign("center");<a name="line.19"></a>
+<FONT color="green">020</FONT>                    errorPanel.setAlign("center");<a name="line.20"></a>
+<FONT color="green">021</FONT>                    errorPanel.setHeight("150px");<a name="line.21"></a>
+<FONT color="green">022</FONT>                    errorPanel.setWidth("400px");<a name="line.22"></a>
+<FONT color="green">023</FONT>                    errorPanel.setVisible("true");<a name="line.23"></a>
+<FONT color="green">024</FONT>                    Element Element1 = errorPanel.create(nifty,  nifty.getCurrentScreen(), show);<a name="line.24"></a>
+<FONT color="green">025</FONT>    <a name="line.25"></a>
+<FONT color="green">026</FONT>                    //Error label<a name="line.26"></a>
+<FONT color="green">027</FONT>                LabelCreator errorLabel = new LabelCreator("errorLabelID","Error");<a name="line.27"></a>
+<FONT color="green">028</FONT>                errorLabel.setAlign("center");<a name="line.28"></a>
+<FONT color="green">029</FONT>                errorLabel.setVAlign("center");<a name="line.29"></a>
+<FONT color="green">030</FONT>                errorLabel.setStyle("nifty-label");<a name="line.30"></a>
+<FONT color="green">031</FONT>               <a name="line.31"></a>
+<FONT color="green">032</FONT>                errorLabel.create(nifty, nifty.getCurrentScreen(), nifty.getCurrentScreen().findElementByName("errorPanelID"));<a name="line.32"></a>
+<FONT color="green">033</FONT>                <a name="line.33"></a>
+<FONT color="green">034</FONT>                    //Error message<a name="line.34"></a>
+<FONT color="green">035</FONT>                LabelCreator errorMessageLabel = new LabelCreator("errorMessageID",errorMessage);<a name="line.35"></a>
+<FONT color="green">036</FONT>                errorMessageLabel.setAlign("center");<a name="line.36"></a>
+<FONT color="green">037</FONT>                errorMessageLabel.setVAlign("center");<a name="line.37"></a>
+<FONT color="green">038</FONT>                errorMessageLabel.setStyle("nifty-label");<a name="line.38"></a>
+<FONT color="green">039</FONT>                errorMessageLabel.create(nifty, nifty.getCurrentScreen(), nifty.getCurrentScreen().findElementByName("errorPanelID"));<a name="line.39"></a>
+<FONT color="green">040</FONT>                <a name="line.40"></a>
+<FONT color="green">041</FONT>                //Error button<a name="line.41"></a>
+<FONT color="green">042</FONT>                CustomControlCreator errorButton = new CustomControlCreator("errorButton","button");<a name="line.42"></a>
+<FONT color="green">043</FONT>                errorButton.setAlign("center");<a name="line.43"></a>
+<FONT color="green">044</FONT>                errorButton.setVAlign("center");<a name="line.44"></a>
+<FONT color="green">045</FONT>                errorButton.set("label", "exit");<a name="line.45"></a>
+<FONT color="green">046</FONT>                errorButton.setInteractOnClick("quit()");<a name="line.46"></a>
+<FONT color="green">047</FONT>                errorButton.create(nifty, nifty.getCurrentScreen(), nifty.getCurrentScreen().findElementByName("errorPanelID"));<a name="line.47"></a>
+<FONT color="green">048</FONT>                <a name="line.48"></a>
+<FONT color="green">049</FONT>                    //Hide GUI<a name="line.49"></a>
+<FONT color="green">050</FONT>                    //hide.disable();<a name="line.50"></a>
+<FONT color="green">051</FONT>                hide.startEffect(EffectEventId.onCustom);<a name="line.51"></a>
+<FONT color="green">052</FONT>                /*<a name="line.52"></a>
+<FONT color="green">053</FONT>                for(Element e1 : hide.getElements()) {<a name="line.53"></a>
+<FONT color="green">054</FONT>                    //e1.setFocusable(false);<a name="line.54"></a>
+<FONT color="green">055</FONT>                    //e1.setVisible(false);<a name="line.55"></a>
+<FONT color="green">056</FONT>                    //e1.disable();<a name="line.56"></a>
+<FONT color="green">057</FONT>                }<a name="line.57"></a>
+<FONT color="green">058</FONT>                */<a name="line.58"></a>
+<FONT color="green">059</FONT>                    Element1.setVisibleToMouseEvents(true);<a name="line.59"></a>
+<FONT color="green">060</FONT>            }<a name="line.60"></a>
+<FONT color="green">061</FONT>    }<a name="line.61"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>
