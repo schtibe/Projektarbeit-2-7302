@@ -16,8 +16,8 @@ public class GUISimulationMenu extends StateBasedGame {
 	@Override
 	public void initStatesList(final GameContainer container)
 			throws SlickException {
-		// addState(new GameStateMainMenu()); //0
-		addState(new GameStateResolution()); // 1
+		addState(new GameStateMainMenu()); //0
+		//addState(new GameStateResolution()); // 1
 		addState(new GameStateChangeMap()); // 2
 		addState(new GameStateSimRun()); // 3
 	}

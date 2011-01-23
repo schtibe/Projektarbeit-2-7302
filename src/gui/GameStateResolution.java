@@ -26,6 +26,7 @@ import de.lessvoid.nifty.tools.TimeProvider;
 
 /**
  * Game state to alter the resolution
+ * @deprecated This is currently not used
  */
 public class GameStateResolution extends BasicGameState implements ScreenController {
   public static final int ID = 1;

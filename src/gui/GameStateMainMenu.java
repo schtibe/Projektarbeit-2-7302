@@ -26,8 +26,7 @@ import de.lessvoid.nifty.tools.TimeProvider;
 
 /**
  * A game state to represent the main menu
- * 
- * @deprecated This is currently not used
+ *
  */
 public class GameStateMainMenu extends BasicGameState implements
 		ScreenController {
