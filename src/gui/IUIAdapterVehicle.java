@@ -22,5 +22,9 @@ public interface IUIAdapterVehicle<E> extends IUIAdapter<E> {
 	@Override
 	public String toString();
 
+	/**
+	 * Draw the object
+	 * @param g The draw utility
+	 */
 	public void draw(Graphics g);
 }

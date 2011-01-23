@@ -20,7 +20,8 @@ import environment.SpeedWayPoint;
 public class UIElementFactory {
 
 	/**
-	 * generates a new IUIAdapterTrafficCarrier 
+	 * Generates a new IUIAdapterTrafficCarrier
+	 *  
 	 * @param road
 	 * @param scale
 	 * @return a new IUIAdapterTrafficCarrier
@@ -43,7 +44,7 @@ public class UIElementFactory {
 	
 	/**
 	 * Generates a new IUIAdapterGAIA
-	 * b
+	 *
 	 * @param GAIA
 	 * @param xMax
 	 * @param yMax
@@ -113,6 +114,7 @@ public class UIElementFactory {
 	}
 	
 	/**
+	 * 
 	 * 
 	 * @param wayPoint
 	 * @param scale

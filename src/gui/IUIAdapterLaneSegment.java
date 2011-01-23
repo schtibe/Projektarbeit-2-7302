@@ -1,7 +1,6 @@
 package gui;
 
 import java.util.List;
-
 import common.IVector;
 
 /**

@@ -1,6 +1,6 @@
 package gui;
 
-/*
+/**
  * Holds information which are relevant for the gui
  */
 public class GameCache {
@@ -13,14 +13,15 @@ public class GameCache {
         }
         return instance;
     }
-	/*
+	
+	/**
 	 * stores one gaia
 	 */
 	public void setGAIA(IUIAdapterGAIA<?> GAIA) {
 		this.GAIA = GAIA;
 	}
 	
-	/*
+	/**
 	 * Get the gaia adapter
 	 */
 	public IUIAdapterGAIA<?> getGAIA() {

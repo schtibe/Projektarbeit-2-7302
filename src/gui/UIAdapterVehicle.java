@@ -114,9 +114,6 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle>
 		this.boundingBox.setCenterY(this.mainObject.getPosition().getComponent(1) * scale + offsetVector.getComponent(1));
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Shape getBoundingBox() {
 		this.update();
@@ -225,7 +222,6 @@ public class UIAdapterVehicle extends UIAdapter<IVehicle>
 		return path;
 	}
 
-	
 	@Override
 	public void update(String message) {
 		if (message.compareTo("signal right") == 0)  {

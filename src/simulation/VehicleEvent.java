@@ -10,19 +10,19 @@ public class VehicleEvent extends Event<VehicleEvent> {
 	private float targetAcceleration = 0;
 
 	/**
-	 * Initialize
-	 * @param timestamp
-	 * @param target
+	 * Initialise
+	 * @param timestamp The time the event occurred
+	 * @param target The target of the event
 	 */
 	public VehicleEvent(long timestamp, IEventTarget<VehicleEvent> target) {
 		super(timestamp, target);
 	}
 
 	/**
-	 * Initialize
-	 * @param timestamp
-	 * @param target
-	 * @param targetAcceleration
+	 * Initialise
+	 * @param timestamp The time the event occurred
+	 * @param target The target of the event
+	 * @param targetAcceleration The target acceleration the car should use
 	 */
 	public VehicleEvent(long timestamp, IEventTarget<VehicleEvent> target,
 			float targetAcceleration) {
@@ -50,9 +50,6 @@ public class VehicleEvent extends Event<VehicleEvent> {
 		return this.targetAcceleration;
 	}
 
-	/**
-	 * Visitor to handle the event
-	 */
 	@Override
 	public void handleEvent() throws Exception {
 		this.target.handleEvent(this);

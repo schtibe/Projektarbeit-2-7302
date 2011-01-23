@@ -16,14 +16,8 @@ public class GUISimulation extends StateBasedGame {
 
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
-		//this.addState(new GameStateMenu());
-		//this.addState(new GameStateLoad());
 		this.addState(new GameStateSimRun());
-		container.setTargetFrameRate(31);
-		//Renderer.setLineStripRenderer(Renderer.QUAD_BASED_LINE_STRIP_RENDERER); 
-	    //Renderer.getLineStripRenderer().setLineCaps(true);
-		
-	    
+		container.setTargetFrameRate(31);  
 	}
 	
 	 public static void main(String[] argv) {  

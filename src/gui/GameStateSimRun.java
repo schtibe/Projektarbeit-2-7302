@@ -148,7 +148,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 	/**
 	 * Draws the vehicles
 	 * 
-	 * @param g
+	 * @param g The draw utility
 	 */
 	private void drawVehicles(Graphics g) {
 		for (IUIAdapterVehicle<?> vehicle : GameCache.getInstance()
@@ -161,7 +161,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 	/**
 	 * Draws the traffic carriers
 	 * 
-	 * @param g
+	 * @param g The draw utility
 	 */
 	private void drawTrafficCarriers(Graphics g) { 
 		for (IUIAdapterTrafficCarrier<?> road : GameCache.getInstance()
@@ -175,7 +175,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 	/**
 	 * Draw the Grid if wanted
 	 * 
-	 * @param g
+	 * @param g The draw utility
 	 */
 	private void drawGrid(Graphics g) {
 		g.setLineWidth(1);
@@ -189,7 +189,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 	/**
 	 * Draw the way points
 	 * 
-	 * @param g
+	 * @param g The draw utility
 	 */
 	private void drawWaypoints(Graphics g) {
 		for(IUIAdapterWayPoint<?> wayPoint : GameCache.getInstance().getGAIA().getWaypoints()) {
@@ -287,21 +287,33 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 	@Override
 	public void onStartScreen() { }
 
+	/**
+	 * Restart the simulation
+	 */
 	public void restartSimulation() {
 		this.game.enterState(3);
 	}
 
+	/**
+	 * Bye bye
+	 */
 	public void exit() {
 		simulationStarted = false;
 		GameCache.getInstance().getGAIA().destroy(); // destroying the gaia
 		game.enterState(0);
 	}
 
-	public void showGrid() {
+	/**
+	 * Toggle the grid
+	 */
+	public void toggleGrid() {
 		this.isGridEnabled = !this.isGridEnabled;
 	}
 
-	public void showFPS() {
+	/**
+	 * Toggle the FPS
+	 */
+	public void toggleFPS() {
 		this.container.setShowFPS(!this.container.isShowingFPS());
 	}
 	

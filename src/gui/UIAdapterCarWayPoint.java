@@ -11,8 +11,7 @@ import common.IVector;
 import environment.CarWayPoint;
 
 /**
- * Since we dont want to draw this stuff, we don't implement the methods
- *
+ * The adapter for a car
  */
 public class UIAdapterCarWayPoint extends UIAdapter<CarWayPoint> implements IUIAdapterCarWayPoint {
 

@@ -2,12 +2,15 @@ package simulation;
 
 import car.Vehicle;
 
+/**
+ * Event that indicates a crash
+ */
 public class CrashEvent extends Event<CrashEvent> {
 	
 	Vehicle[] vehicles;
 	
 	/**
-	 * Initialize
+	 * Initialise
 	 * 
 	 * @param timestamp
 	 * @param target
@@ -17,14 +20,15 @@ public class CrashEvent extends Event<CrashEvent> {
 		vehicles = new Vehicle[]{one,other};
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void handleEvent() throws Exception {
 		this.target.handleEvent(this);
 	}
 	
+	/**
+	 * Return the vehicles that have crashed
+	 * @return Crashed vehicles
+	 */
 	public Vehicle[] getVehicles(){
 		return vehicles;
 	}

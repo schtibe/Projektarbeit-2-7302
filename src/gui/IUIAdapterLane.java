@@ -3,9 +3,7 @@ package gui;
 import java.util.List;
 
 import org.newdawn.slick.geom.Path;
-
 import common.IVector;
-
 import environment.ILane;
 
 /**
@@ -40,7 +38,7 @@ public interface IUIAdapterLane<E> extends IUIAdapter<E>, IUIAdapterDrawable {
 	
 	/**
 	 * Move the object to this pos
-	 * @pos the new position of this object
+	 * @param pos the new position of this object
 	 */
 	public abstract void move(IVector pos);
 	
@@ -62,11 +60,15 @@ public interface IUIAdapterLane<E> extends IUIAdapter<E>, IUIAdapterDrawable {
 	
 	/**
 	 * Return the position on the lane
-	 * @param mouseX
-	 * @param mouseY
-	 * @return
+	 * @param mouseX The x position of the mouse
+	 * @param mouseY The y position of the mouse
+	 * @return Position on lane
 	 */
 	public float getPositionOnLane(int mouseX, int mouseY);
 	
+	/**
+	 * REturn the paths of the lane segments
+	 * @return Lane segment paths
+	 */
 	public List<Path> getLaneSegmentPaths();
 }

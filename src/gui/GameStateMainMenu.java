@@ -26,6 +26,8 @@ import de.lessvoid.nifty.tools.TimeProvider;
 
 /**
  * A game state to represent the main menu
+ * 
+ * @deprecated This is currently not used
  */
 public class GameStateMainMenu extends BasicGameState implements
 		ScreenController {
@@ -40,17 +42,11 @@ public class GameStateMainMenu extends BasicGameState implements
 	private StateBasedGame game;
 	private Element errorBox;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int getID() {
 		return ID;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
@@ -141,6 +137,9 @@ public class GameStateMainMenu extends BasicGameState implements
 	public void onStartScreen() {
 	}
 
+	/**
+	 * Quit
+	 */
 	public void quit() {
 		nifty.getCurrentScreen().endScreen(new EndNotify() {
 			@Override
@@ -150,26 +149,27 @@ public class GameStateMainMenu extends BasicGameState implements
 		});
 	}
 
+	/**
+	 * Start the simulation
+	 * @throws SlickException
+	 */
 	public void startSimulation() throws SlickException {
-		// nifty.getCurrentScreen().endScreen(new EndNotify() {
-		// public void perform() {
 		game.enterState(3);
-		// }
-		// });
 	}
 
+	/**
+	 * Apply the choice of resolution
+	 */
 	public void startChangeResolution() {
 		this.errorBox.startEffect(EffectEventId.onCustom);
 		UIElementErrorMessageBox.create(nifty, getElement("errorLayer"),
 				getElement("mainPanel"), "help!");
 	}
 
+	/**
+	 * 
+	 */
 	public void startChangeMap() {
-		// nifty.getCurrentScreen().endScreen(new EndNotify() {
-
-		// public void perform() {
 		game.enterState(2);
-		// }
-		// });
 	}
 }

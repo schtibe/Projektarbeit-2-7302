@@ -92,10 +92,6 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 		}
 	}
 
-	/**
-	 * Return paths objects of the lane segments
-	 * @return
-	 */
 	@Override
 	public List<Path> getLaneSegmentPaths() {
 		List<Path> paths = new ArrayList<Path>();
@@ -145,27 +141,18 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 		return this.gPath;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void setScale(float scale) throws Exception {
 		this.scale = scale;
 		this.gPath = null; // reset the path
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void move(IVector pos) {
 		this.gPath.setX(pos.getComponent(0));
 		this.gPath.setY(pos.getComponent(1));
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public ILane getOriginalLane() {
 		return this.mainObject;
@@ -175,7 +162,6 @@ public class UIAdapterLane extends UIAdapter<ILane> implements IUIAdapterLane<IL
 	public boolean vehiclePlacable() {
 		return this.mainObject.vehiclePlacable();
 	}
-
 	
 	@Override
 	public void draw(Graphics g, TrueTypeFont ttf) {

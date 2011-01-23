@@ -1,5 +1,8 @@
 package gui;
 
+/**
+ * Some properties for the gui
+ */
 public class GUIConstants {
 	
 	/**

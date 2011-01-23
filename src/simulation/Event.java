@@ -8,7 +8,7 @@ package simulation;
  */
 public abstract class Event<E> implements IEvent {
 	/**
-	 * The timestamp of the event
+	 * The time stamp of the event
 	 */
 	protected long timestamp;
 
@@ -18,7 +18,7 @@ public abstract class Event<E> implements IEvent {
 	protected IEventTarget<E> target;
 
 	/**
-	 * Initialize
+	 * Initialise
 	 * 
 	 * @param timestamp
 	 * @param target
@@ -28,35 +28,22 @@ public abstract class Event<E> implements IEvent {
 		this.target = target;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public long getTimeStamp() {
 		return this.timestamp;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
+
 	@Override
 	public IEventTarget<E> getTarget() {
 		return this.target;
 	}
 
-	/**
-	 * Comparator
-	 * 
-	 * @return comparison result
-	 */
 	@Override
 	public int compareTo(IEvent arg0) {
 		return (int) (this.timestamp - arg0.getTimeStamp());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public abstract void handleEvent() throws Exception;
 }

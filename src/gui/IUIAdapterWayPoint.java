@@ -21,5 +21,9 @@ public interface IUIAdapterWayPoint<E> extends IUIAdapterDrawable {
 	@Override
 	public String toString();
 
+	/**
+	 * Whether this should be drawn
+	 * @return Draw or not
+	 */
 	boolean doDraw();
 }

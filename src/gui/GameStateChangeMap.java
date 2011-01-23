@@ -42,17 +42,11 @@ public class GameStateChangeMap extends BasicGameState implements
 	private DropDownControl mapDropDownControl;
 	private StateBasedGame game;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int getID() {
 		return ID;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
@@ -74,7 +68,7 @@ public class GameStateChangeMap extends BasicGameState implements
 		this.generateGUI();
 	}
 
-	/*
+	/**
 	 * generates the GUI out of the xml file
 	 */
 	private void generateGUI() {
@@ -103,9 +97,6 @@ public class GameStateChangeMap extends BasicGameState implements
 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) {
 		SlickCallable.enterSafeBlock();
@@ -113,9 +104,6 @@ public class GameStateChangeMap extends BasicGameState implements
 		SlickCallable.leaveSafeBlock();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) {
 		if (this.startSimulation) {
@@ -179,12 +167,17 @@ public class GameStateChangeMap extends BasicGameState implements
 	public void onStartScreen() {
 	}
 
+	/**
+	 * Quit the game
+	 */
 	public void quit() {
-
 		game.enterState(0);
 
 	}
 
+	/**
+	 * Apply the choice of map
+	 */
 	public void apply() {
 		GlobalConstants.getInstance().setStreetXMLSchema(
 				GlobalConstants.getInstance().getMapRoot() + "/"
@@ -192,6 +185,9 @@ public class GameStateChangeMap extends BasicGameState implements
 		this.quit();
 	}
 
+	/**
+	 * Start the simulation
+	 */
 	public void startSimulation() {
 		this.startSimulation = true;
 	}

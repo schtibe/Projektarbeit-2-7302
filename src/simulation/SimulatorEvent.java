@@ -9,7 +9,7 @@ package simulation;
 @Deprecated
 public class SimulatorEvent extends Event<SimulatorEvent> {
 	/**
-	 * Initialize
+	 * Initialise
 	 * 
 	 * @param timestamp
 	 * @param target

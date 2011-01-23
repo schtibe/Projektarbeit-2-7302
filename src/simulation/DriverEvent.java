@@ -17,7 +17,7 @@ public class DriverEvent extends Event<DriverEvent> {
 	private IJunctionDecision decision = null;
 
 	/**
-	 * Initialize
+	 * Initialise
 	 * 
 	 * @param timestamp
 	 * @param target
@@ -44,9 +44,6 @@ public class DriverEvent extends Event<DriverEvent> {
 		return this.doMonitor;
 	}
 
-	/**
-	 * Visitor for handling events
-	 */
 	@Override
 	public void handleEvent() throws Exception {
 		this.target.handleEvent(this);

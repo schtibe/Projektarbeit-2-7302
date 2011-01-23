@@ -48,7 +48,7 @@ public class UIAdapterJunctionWayPoint extends UIAdapter<IWayPoint> implements I
 	
 	/**
 	 * Draw the string 
-	 * @param ttf
+	 * @param ttf The font tool
 	 */
 	private void drawString(TrueTypeFont ttf) {
 		if (GUIConstants.getInstance().showJunctionWaypointPosition()) {

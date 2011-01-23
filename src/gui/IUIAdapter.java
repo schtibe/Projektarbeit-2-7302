@@ -7,7 +7,7 @@ package gui;
 public interface IUIAdapter<E> {
 	/**
 	 * Return the main object
-	 * @return
+	 * @return The main object
 	 */
 	public E getMainObject();
 	

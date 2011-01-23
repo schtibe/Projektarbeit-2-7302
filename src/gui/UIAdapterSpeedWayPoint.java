@@ -10,6 +10,11 @@ import common.IVector;
 
 import environment.SpeedWayPoint;
 
+/**
+ * The adapter for a speed way point
+ * @author sh
+ *
+ */
 public class UIAdapterSpeedWayPoint extends UIAdapter<SpeedWayPoint> implements IUIAdapterSpeedWayPoint {
 	private Rectangle shape;
 
@@ -41,7 +46,7 @@ public class UIAdapterSpeedWayPoint extends UIAdapter<SpeedWayPoint> implements 
 		return "" + this.mainObject.getSpeedLimit();
 	}
 
-	public void drawString(TrueTypeFont ttf) {
+	private void drawString(TrueTypeFont ttf) {
 		if (GUIConstants.getInstance().showSpeedWaypointPosition()) {
 			ttf.drawString(this.getShape().getCenterX(),
 					   this.getShape().getCenterY(), 

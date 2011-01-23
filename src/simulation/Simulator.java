@@ -19,8 +19,7 @@ public class Simulator implements IEventTarget<CrashEvent> {
 	private static Simulator instance;
 
 	/**
-	 * 
-	 * method to access the singleton instance
+	 * Method to access the singleton instance
 	 * 
 	 * @return singleton instance
 	 */
@@ -35,6 +34,11 @@ public class Simulator implements IEventTarget<CrashEvent> {
 
 	}
 
+	/**
+	 * Start the simulation 
+	 * @param timestamp The starting time
+	 * @param factor The time factor
+	 */
 	public void startSimulation(long timestamp, double factor) {
 		EventQueue.reset();
 		this.startTime = timestamp;
@@ -44,6 +48,11 @@ public class Simulator implements IEventTarget<CrashEvent> {
 		
 	}
 
+	/**
+	 * Indicate an update of the simulation
+	 * @param timestamp The elapsed time
+	 * @throws Exception
+	 */
 	public synchronized void update(long timestamp) throws Exception {
 		float difference = (timestamp - (this.startTime + this.lastIteration)); // Math.round((double)(timestamp-this.startTime)/GlobalConstants.getInstance().getTimeFactor());
 

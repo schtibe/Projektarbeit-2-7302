@@ -30,6 +30,13 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 	protected float scale, xMax, yMax;
 	protected IVector maxPos, minPos, correctionVector;
 	
+	/**
+	 * Do some calculations to project the simulation to the window
+	 * @param mainObject The GAIA
+	 * @param xMax The maximal existing x value
+	 * @param yMax the maximal existing y value
+	 * @throws Exception
+	 */
 	public UIAdapterGAIA(IGaia mainObject, float xMax, float yMax) throws Exception {
 		super(mainObject);
 		
@@ -162,11 +169,7 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 	public List<IUIAdapterTrafficCarrier<?>> getRoads() {
 		return this.trafficCarriers;
 	}
-
-	/**
-	 * Get a list of all IUIAdapterVehicle
-	 * @return a list of all IUIAdapterVehicle
-	 */
+	
 	@Override
 	public List<IUIAdapterVehicle<?>> getVehicles() {
 		return this.vehicles;
@@ -177,9 +180,6 @@ public class UIAdapterGAIA extends UIAdapter<IGaia>
 		return this.scale;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void addVehicle(
 			IUIAdapterLane<?> lane, 

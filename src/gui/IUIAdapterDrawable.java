@@ -5,9 +5,10 @@ import org.newdawn.slick.TrueTypeFont;
 
 public interface IUIAdapterDrawable {
 	/**
-	 * Draw the thing
+	 * Draw the object
 	 * 
-	 * @TODO Probably also put the ttf there
+	 * @param g The graphics utility
+	 * @param ttf The font utility
 	 */
 	public void draw(Graphics g, TrueTypeFont ttf);
 }
