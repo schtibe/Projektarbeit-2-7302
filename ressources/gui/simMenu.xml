@@ -33,12 +33,12 @@
 						<panel id="optionpanel2" width="100%" align="center" valign="top" childLayout="vertical">
 							<control id="showgrid" name="button" label="grid" width="100%"
 								height="20px">
-								<interact onClick="showGrid()" />
+								<interact onClick="toggleGrid()" />
 							</control>
 
 							<control id="showFPS" name="button" label="fps" width="100%"
 								height="20px">
-								<interact onClick="showFPS()" />
+								<interact onClick="toggleFPS()" />
 							</control>
 
 							<control id="showDriverView" name="button" label="DriverView" width="100%"

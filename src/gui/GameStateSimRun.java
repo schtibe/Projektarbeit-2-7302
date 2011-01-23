@@ -307,6 +307,7 @@ public class GameStateSimRun extends BasicGameState implements ScreenController 
 	 * Toggle the grid
 	 */
 	public void toggleGrid() {
+		System.out.println("Toggling grid");
 		this.isGridEnabled = !this.isGridEnabled;
 	}
 
